@@ -7,7 +7,7 @@ package main
 import (
 	"fmt"
 	"html"
-	"strings"
+	"io"
 
 	"github.com/ta2gch/iris/runtime"
 	"github.com/ta2gch/iris/runtime/ilos/instance"
@@ -22,10 +22,13 @@ func (Dom) Write(p []byte) (n int, err error) {
 }
 
 func (dom Dom) Read(p []byte) (n int, err error) {
-	input := strings.Replace(jQuery("#input").Html(), "<br>", " ", -1)
+	input := jQuery("#input").Html()
 	jQuery("#input").SetHtml("")
-	copy(p, input)
-	dom.Write([]byte(input + "\n"))
+	copy(p, jQuery(`<span>`+input+`</span>`).Text())
+	dom.Write([]byte(input))
+	if len(p) == 0 {
+		return 0, io.EOF
+	}
 	return len(p), nil
 }
 

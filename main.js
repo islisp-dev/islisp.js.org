@@ -21483,7 +21483,7 @@ $packages["sort"] = (function() {
 	return $pkg;
 })();
 $packages["strings"] = (function() {
-	var $pkg = {}, $init, errors, js, io, unicode, utf8, Reader, Replacer, replacer, trieNode, genericReplacer, appendSliceWriter, stringWriterIface, stringWriter, singleStringReplacer, byteReplacer, byteStringReplacer, stringFinder, arrayType, ptrType, sliceType, arrayType$1, ptrType$1, ptrType$2, sliceType$1, ptrType$3, ptrType$4, arrayType$2, sliceType$2, sliceType$3, ptrType$6, ptrType$7, ptrType$8, ptrType$9, IndexByte, Index, Count, NewReader, NewReplacer, makeGenericReplacer, getStringWriter, makeSingleStringReplacer, makeStringFinder, longestCommonSuffix, max, explode, Contains, ContainsRune, IndexRune, genSplit, Split, HasPrefix, Map, Repeat, ToUpper, ToLower, Replace;
+	var $pkg = {}, $init, errors, js, io, unicode, utf8, Reader, Replacer, replacer, trieNode, genericReplacer, appendSliceWriter, stringWriterIface, stringWriter, singleStringReplacer, byteReplacer, byteStringReplacer, stringFinder, arrayType, ptrType, sliceType, arrayType$1, ptrType$1, ptrType$2, sliceType$1, ptrType$3, ptrType$4, arrayType$2, sliceType$2, sliceType$3, ptrType$6, ptrType$7, ptrType$8, ptrType$9, IndexByte, Index, Count, NewReader, NewReplacer, makeGenericReplacer, getStringWriter, makeSingleStringReplacer, makeStringFinder, longestCommonSuffix, max, explode, Contains, ContainsRune, IndexRune, genSplit, Split, HasPrefix, Map, Repeat, ToUpper, ToLower;
 	errors = $packages["errors"];
 	js = $packages["github.com/gopherjs/gopherjs/js"];
 	io = $packages["io"];
@@ -22632,42 +22632,6 @@ $packages["strings"] = (function() {
 		/* */ } return; } if ($f === undefined) { $f = { $blk: ToLower }; } $f.$ptr = $ptr; $f._r = _r; $f.s = s; $f.$s = $s; $f.$r = $r; return $f;
 	};
 	$pkg.ToLower = ToLower;
-	Replace = function(s, old, new$1, n) {
-		var $ptr, _tuple, i, j, m, n, new$1, old, s, start, t, w, wid;
-		if (old === new$1 || (n === 0)) {
-			return s;
-		}
-		m = Count(s, old);
-		if (m === 0) {
-			return s;
-		} else if (n < 0 || m < n) {
-			n = m;
-		}
-		t = $makeSlice(sliceType, (s.length + ($imul(n, ((new$1.length - old.length >> 0)))) >> 0));
-		w = 0;
-		start = 0;
-		i = 0;
-		while (true) {
-			if (!(i < n)) { break; }
-			j = start;
-			if (old.length === 0) {
-				if (i > 0) {
-					_tuple = utf8.DecodeRuneInString($substring(s, start));
-					wid = _tuple[1];
-					j = j + (wid) >> 0;
-				}
-			} else {
-				j = j + (Index($substring(s, start), old)) >> 0;
-			}
-			w = w + ($copyString($subslice(t, w), $substring(s, start, j))) >> 0;
-			w = w + ($copyString($subslice(t, w), new$1)) >> 0;
-			start = j + old.length >> 0;
-			i = i + (1) >> 0;
-		}
-		w = w + ($copyString($subslice(t, w), $substring(s, start))) >> 0;
-		return ($bytesToString($subslice(t, 0, w)));
-	};
-	$pkg.Replace = Replace;
 	ptrType$6.methods = [{prop: "Len", name: "Len", pkg: "", typ: $funcType([], [$Int], false)}, {prop: "Size", name: "Size", pkg: "", typ: $funcType([], [$Int64], false)}, {prop: "Read", name: "Read", pkg: "", typ: $funcType([sliceType], [$Int, $error], false)}, {prop: "ReadAt", name: "ReadAt", pkg: "", typ: $funcType([sliceType, $Int64], [$Int, $error], false)}, {prop: "ReadByte", name: "ReadByte", pkg: "", typ: $funcType([], [$Uint8, $error], false)}, {prop: "UnreadByte", name: "UnreadByte", pkg: "", typ: $funcType([], [$error], false)}, {prop: "ReadRune", name: "ReadRune", pkg: "", typ: $funcType([], [$Int32, $Int, $error], false)}, {prop: "UnreadRune", name: "UnreadRune", pkg: "", typ: $funcType([], [$error], false)}, {prop: "Seek", name: "Seek", pkg: "", typ: $funcType([$Int64, $Int], [$Int64, $error], false)}, {prop: "WriteTo", name: "WriteTo", pkg: "", typ: $funcType([io.Writer], [$Int64, $error], false)}, {prop: "Reset", name: "Reset", pkg: "", typ: $funcType([$String], [], false)}];
 	ptrType$7.methods = [{prop: "Replace", name: "Replace", pkg: "", typ: $funcType([$String], [$String], false)}, {prop: "WriteString", name: "WriteString", pkg: "", typ: $funcType([io.Writer, $String], [$Int, $error], false)}];
 	ptrType$2.methods = [{prop: "add", name: "add", pkg: "strings", typ: $funcType([$String, $String, $Int, ptrType$8], [], false)}];
@@ -31894,7 +31858,7 @@ $packages["github.com/ta2gch/iris/reader/tokenizer"] = (function() {
 		if (atEOF) {
 			advance = data.$length;
 			token = data;
-			err = $ifaceNil;
+			err = io.EOF;
 			$s = -1; return [advance, token, err];
 		}
 		_r = re.FindIndex(data); /* */ $s = 1; case 1: if($c) { $c = false; _r = _r.$blk(); } if (_r && _r.$blk !== undefined) { break s; }
@@ -31905,9 +31869,6 @@ $packages["github.com/ta2gch/iris/reader/tokenizer"] = (function() {
 			err = $ifaceNil;
 			$s = -1; return [advance, token, err];
 		}
-		advance = data.$length;
-		token = data;
-		err = io.EOF;
 		$s = -1; return [advance, token, err];
 		/* */ } return; } if ($f === undefined) { $f = { $blk: splitter }; } $f.$ptr = $ptr; $f._r = _r; $f.advance = advance; $f.atEOF = atEOF; $f.data = data; $f.err = err; $f.loc = loc; $f.token = token; $f.$s = $s; $f.$r = $r; return $f;
 	};
@@ -40526,13 +40487,13 @@ $packages["html"] = (function() {
 	return $pkg;
 })();
 $packages["main"] = (function() {
-	var $pkg = {}, $init, fmt, runtime, instance, jquery, html, strings, Dom, sliceType, sliceType$1, funcType, sliceType$2, jQuery, main;
+	var $pkg = {}, $init, fmt, runtime, instance, jquery, html, io, Dom, sliceType, sliceType$1, funcType, sliceType$2, jQuery, main;
 	fmt = $packages["fmt"];
 	runtime = $packages["github.com/ta2gch/iris/runtime"];
 	instance = $packages["github.com/ta2gch/iris/runtime/ilos/instance"];
 	jquery = $packages["github.com/ta2gch/jquery"];
 	html = $packages["html"];
-	strings = $packages["strings"];
+	io = $packages["io"];
 	Dom = $pkg.Dom = $newType(0, $kindStruct, "main.Dom", true, "main", true, function() {
 		this.$val = this;
 		if (arguments.length === 0) {
@@ -40560,27 +40521,35 @@ $packages["main"] = (function() {
 	};
 	Dom.prototype.Write = function(p) { return this.$val.Write(p); };
 	Dom.ptr.prototype.Read = function(p) {
-		var $ptr, _r, _r$1, _r$2, _r$3, _r$4, _r$5, _tmp, _tmp$1, dom, err, input, n, p, $s, $r;
-		/* */ $s = 0; var $f, $c = false; if (this !== undefined && this.$blk !== undefined) { $f = this; $c = true; $ptr = $f.$ptr; _r = $f._r; _r$1 = $f._r$1; _r$2 = $f._r$2; _r$3 = $f._r$3; _r$4 = $f._r$4; _r$5 = $f._r$5; _tmp = $f._tmp; _tmp$1 = $f._tmp$1; dom = $f.dom; err = $f.err; input = $f.input; n = $f.n; p = $f.p; $s = $f.$s; $r = $f.$r; } s: while (true) { switch ($s) { case 0:
+		var $ptr, _r, _r$1, _r$2, _r$3, _r$4, _r$5, _r$6, _tmp, _tmp$1, _tmp$2, _tmp$3, dom, err, input, n, p, $s, $r;
+		/* */ $s = 0; var $f, $c = false; if (this !== undefined && this.$blk !== undefined) { $f = this; $c = true; $ptr = $f.$ptr; _r = $f._r; _r$1 = $f._r$1; _r$2 = $f._r$2; _r$3 = $f._r$3; _r$4 = $f._r$4; _r$5 = $f._r$5; _r$6 = $f._r$6; _tmp = $f._tmp; _tmp$1 = $f._tmp$1; _tmp$2 = $f._tmp$2; _tmp$3 = $f._tmp$3; dom = $f.dom; err = $f.err; input = $f.input; n = $f.n; p = $f.p; $s = $f.$s; $r = $f.$r; } s: while (true) { switch ($s) { case 0:
 		n = 0;
 		err = $ifaceNil;
 		dom = this;
 		_r = jQuery(new sliceType([new $String("#input")])); /* */ $s = 1; case 1: if($c) { $c = false; _r = _r.$blk(); } if (_r && _r.$blk !== undefined) { break s; }
 		_r$1 = $clone(_r, jquery.JQuery).Html(); /* */ $s = 2; case 2: if($c) { $c = false; _r$1 = _r$1.$blk(); } if (_r$1 && _r$1.$blk !== undefined) { break s; }
-		_r$2 = strings.Replace(_r$1, "<br>", " ", -1); /* */ $s = 3; case 3: if($c) { $c = false; _r$2 = _r$2.$blk(); } if (_r$2 && _r$2.$blk !== undefined) { break s; }
-		input = _r$2;
-		_r$3 = jQuery(new sliceType([new $String("#input")])); /* */ $s = 4; case 4: if($c) { $c = false; _r$3 = _r$3.$blk(); } if (_r$3 && _r$3.$blk !== undefined) { break s; }
-		_r$4 = $clone(_r$3, jquery.JQuery).SetHtml(new $String("")); /* */ $s = 5; case 5: if($c) { $c = false; _r$4 = _r$4.$blk(); } if (_r$4 && _r$4.$blk !== undefined) { break s; }
-		_r$4;
-		$copyString(p, input);
-		_r$5 = $clone(dom, Dom).Write((new sliceType$1($stringToBytes(input + "\n")))); /* */ $s = 6; case 6: if($c) { $c = false; _r$5 = _r$5.$blk(); } if (_r$5 && _r$5.$blk !== undefined) { break s; }
-		_r$5;
-		_tmp = p.$length;
-		_tmp$1 = $ifaceNil;
-		n = _tmp;
-		err = _tmp$1;
+		input = _r$1;
+		_r$2 = jQuery(new sliceType([new $String("#input")])); /* */ $s = 3; case 3: if($c) { $c = false; _r$2 = _r$2.$blk(); } if (_r$2 && _r$2.$blk !== undefined) { break s; }
+		_r$3 = $clone(_r$2, jquery.JQuery).SetHtml(new $String("")); /* */ $s = 4; case 4: if($c) { $c = false; _r$3 = _r$3.$blk(); } if (_r$3 && _r$3.$blk !== undefined) { break s; }
+		_r$3;
+		_r$4 = jQuery(new sliceType([new $String("<span>" + input + "</span>")])); /* */ $s = 5; case 5: if($c) { $c = false; _r$4 = _r$4.$blk(); } if (_r$4 && _r$4.$blk !== undefined) { break s; }
+		_r$5 = $clone(_r$4, jquery.JQuery).Text(); /* */ $s = 6; case 6: if($c) { $c = false; _r$5 = _r$5.$blk(); } if (_r$5 && _r$5.$blk !== undefined) { break s; }
+		$copyString(p, _r$5);
+		_r$6 = $clone(dom, Dom).Write((new sliceType$1($stringToBytes(input)))); /* */ $s = 7; case 7: if($c) { $c = false; _r$6 = _r$6.$blk(); } if (_r$6 && _r$6.$blk !== undefined) { break s; }
+		_r$6;
+		if (p.$length === 0) {
+			_tmp = 0;
+			_tmp$1 = io.EOF;
+			n = _tmp;
+			err = _tmp$1;
+			$s = -1; return [n, err];
+		}
+		_tmp$2 = p.$length;
+		_tmp$3 = $ifaceNil;
+		n = _tmp$2;
+		err = _tmp$3;
 		$s = -1; return [n, err];
-		/* */ } return; } if ($f === undefined) { $f = { $blk: Dom.ptr.prototype.Read }; } $f.$ptr = $ptr; $f._r = _r; $f._r$1 = _r$1; $f._r$2 = _r$2; $f._r$3 = _r$3; $f._r$4 = _r$4; $f._r$5 = _r$5; $f._tmp = _tmp; $f._tmp$1 = _tmp$1; $f.dom = dom; $f.err = err; $f.input = input; $f.n = n; $f.p = p; $f.$s = $s; $f.$r = $r; return $f;
+		/* */ } return; } if ($f === undefined) { $f = { $blk: Dom.ptr.prototype.Read }; } $f.$ptr = $ptr; $f._r = _r; $f._r$1 = _r$1; $f._r$2 = _r$2; $f._r$3 = _r$3; $f._r$4 = _r$4; $f._r$5 = _r$5; $f._r$6 = _r$6; $f._tmp = _tmp; $f._tmp$1 = _tmp$1; $f._tmp$2 = _tmp$2; $f._tmp$3 = _tmp$3; $f.dom = dom; $f.err = err; $f.input = input; $f.n = n; $f.p = p; $f.$s = $s; $f.$r = $r; return $f;
 	};
 	Dom.prototype.Read = function(p) { return this.$val.Read(p); };
 	main = function() {
@@ -40660,7 +40629,7 @@ $packages["main"] = (function() {
 		$r = instance.$init(); /* */ $s = 3; case 3: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
 		$r = jquery.$init(); /* */ $s = 4; case 4: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
 		$r = html.$init(); /* */ $s = 5; case 5: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = strings.$init(); /* */ $s = 6; case 6: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = io.$init(); /* */ $s = 6; case 6: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
 		jQuery = jquery.NewJQuery;
 		/* */ if ($pkg === $mainPkg) { $s = 7; continue; }
 		/* */ $s = 8; continue;
