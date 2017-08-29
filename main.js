@@ -40487,13 +40487,14 @@ $packages["html"] = (function() {
 	return $pkg;
 })();
 $packages["main"] = (function() {
-	var $pkg = {}, $init, fmt, runtime, instance, jquery, html, io, Dom, sliceType, sliceType$1, funcType, sliceType$2, jQuery, main;
+	var $pkg = {}, $init, fmt, runtime, instance, jquery, html, io, strings, Dom, sliceType, sliceType$1, funcType, sliceType$2, jQuery, main;
 	fmt = $packages["fmt"];
 	runtime = $packages["github.com/ta2gch/iris/runtime"];
 	instance = $packages["github.com/ta2gch/iris/runtime/ilos/instance"];
 	jquery = $packages["github.com/ta2gch/jquery"];
 	html = $packages["html"];
 	io = $packages["io"];
+	strings = $packages["strings"];
 	Dom = $pkg.Dom = $newType(0, $kindStruct, "main.Dom", true, "main", true, function() {
 		this.$val = this;
 		if (arguments.length === 0) {
@@ -40521,8 +40522,8 @@ $packages["main"] = (function() {
 	};
 	Dom.prototype.Write = function(p) { return this.$val.Write(p); };
 	Dom.ptr.prototype.Read = function(p) {
-		var $ptr, _r, _r$1, _r$2, _r$3, _r$4, _r$5, _r$6, _tmp, _tmp$1, _tmp$2, _tmp$3, dom, err, input, n, p, $s, $r;
-		/* */ $s = 0; var $f, $c = false; if (this !== undefined && this.$blk !== undefined) { $f = this; $c = true; $ptr = $f.$ptr; _r = $f._r; _r$1 = $f._r$1; _r$2 = $f._r$2; _r$3 = $f._r$3; _r$4 = $f._r$4; _r$5 = $f._r$5; _r$6 = $f._r$6; _tmp = $f._tmp; _tmp$1 = $f._tmp$1; _tmp$2 = $f._tmp$2; _tmp$3 = $f._tmp$3; dom = $f.dom; err = $f.err; input = $f.input; n = $f.n; p = $f.p; $s = $f.$s; $r = $f.$r; } s: while (true) { switch ($s) { case 0:
+		var $ptr, _r, _r$1, _r$2, _r$3, _r$4, _r$5, _r$6, _r$7, _tmp, _tmp$1, _tmp$2, _tmp$3, dom, err, input, n, p, $s, $r;
+		/* */ $s = 0; var $f, $c = false; if (this !== undefined && this.$blk !== undefined) { $f = this; $c = true; $ptr = $f.$ptr; _r = $f._r; _r$1 = $f._r$1; _r$2 = $f._r$2; _r$3 = $f._r$3; _r$4 = $f._r$4; _r$5 = $f._r$5; _r$6 = $f._r$6; _r$7 = $f._r$7; _tmp = $f._tmp; _tmp$1 = $f._tmp$1; _tmp$2 = $f._tmp$2; _tmp$3 = $f._tmp$3; dom = $f.dom; err = $f.err; input = $f.input; n = $f.n; p = $f.p; $s = $f.$s; $r = $f.$r; } s: while (true) { switch ($s) { case 0:
 		n = 0;
 		err = $ifaceNil;
 		dom = this;
@@ -40535,8 +40536,17 @@ $packages["main"] = (function() {
 		_r$4 = jQuery(new sliceType([new $String("<span>" + input + "</span>")])); /* */ $s = 5; case 5: if($c) { $c = false; _r$4 = _r$4.$blk(); } if (_r$4 && _r$4.$blk !== undefined) { break s; }
 		_r$5 = $clone(_r$4, jquery.JQuery).Text(); /* */ $s = 6; case 6: if($c) { $c = false; _r$5 = _r$5.$blk(); } if (_r$5 && _r$5.$blk !== undefined) { break s; }
 		$copyString(p, _r$5);
-		_r$6 = $clone(dom, Dom).Write((new sliceType$1($stringToBytes(input)))); /* */ $s = 7; case 7: if($c) { $c = false; _r$6 = _r$6.$blk(); } if (_r$6 && _r$6.$blk !== undefined) { break s; }
-		_r$6;
+		console.log(input);
+		/* */ if (!strings.Contains(input, "<br>")) { $s = 7; continue; }
+		/* */ $s = 8; continue;
+		/* if (!strings.Contains(input, "<br>")) { */ case 7:
+			_r$6 = $clone(dom, Dom).Write((new sliceType$1($stringToBytes(input + "<br>")))); /* */ $s = 10; case 10: if($c) { $c = false; _r$6 = _r$6.$blk(); } if (_r$6 && _r$6.$blk !== undefined) { break s; }
+			_r$6;
+			$s = 9; continue;
+		/* } else { */ case 8:
+			_r$7 = $clone(dom, Dom).Write((new sliceType$1($stringToBytes(input)))); /* */ $s = 11; case 11: if($c) { $c = false; _r$7 = _r$7.$blk(); } if (_r$7 && _r$7.$blk !== undefined) { break s; }
+			_r$7;
+		/* } */ case 9:
 		if (p.$length === 0) {
 			_tmp = 0;
 			_tmp$1 = io.EOF;
@@ -40549,7 +40559,7 @@ $packages["main"] = (function() {
 		n = _tmp$2;
 		err = _tmp$3;
 		$s = -1; return [n, err];
-		/* */ } return; } if ($f === undefined) { $f = { $blk: Dom.ptr.prototype.Read }; } $f.$ptr = $ptr; $f._r = _r; $f._r$1 = _r$1; $f._r$2 = _r$2; $f._r$3 = _r$3; $f._r$4 = _r$4; $f._r$5 = _r$5; $f._r$6 = _r$6; $f._tmp = _tmp; $f._tmp$1 = _tmp$1; $f._tmp$2 = _tmp$2; $f._tmp$3 = _tmp$3; $f.dom = dom; $f.err = err; $f.input = input; $f.n = n; $f.p = p; $f.$s = $s; $f.$r = $r; return $f;
+		/* */ } return; } if ($f === undefined) { $f = { $blk: Dom.ptr.prototype.Read }; } $f.$ptr = $ptr; $f._r = _r; $f._r$1 = _r$1; $f._r$2 = _r$2; $f._r$3 = _r$3; $f._r$4 = _r$4; $f._r$5 = _r$5; $f._r$6 = _r$6; $f._r$7 = _r$7; $f._tmp = _tmp; $f._tmp$1 = _tmp$1; $f._tmp$2 = _tmp$2; $f._tmp$3 = _tmp$3; $f.dom = dom; $f.err = err; $f.input = input; $f.n = n; $f.p = p; $f.$s = $s; $f.$r = $r; return $f;
 	};
 	Dom.prototype.Read = function(p) { return this.$val.Read(p); };
 	main = function() {
@@ -40630,13 +40640,14 @@ $packages["main"] = (function() {
 		$r = jquery.$init(); /* */ $s = 4; case 4: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
 		$r = html.$init(); /* */ $s = 5; case 5: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
 		$r = io.$init(); /* */ $s = 6; case 6: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = strings.$init(); /* */ $s = 7; case 7: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
 		jQuery = jquery.NewJQuery;
-		/* */ if ($pkg === $mainPkg) { $s = 7; continue; }
-		/* */ $s = 8; continue;
-		/* if ($pkg === $mainPkg) { */ case 7:
-			$r = main(); /* */ $s = 9; case 9: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		/* */ if ($pkg === $mainPkg) { $s = 8; continue; }
+		/* */ $s = 9; continue;
+		/* if ($pkg === $mainPkg) { */ case 8:
+			$r = main(); /* */ $s = 10; case 10: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
 			$mainFinished = true;
-		/* } */ case 8:
+		/* } */ case 9:
 		/* */ } return; } if ($f === undefined) { $f = { $blk: $init }; } $f.$s = $s; $f.$r = $r; return $f;
 	};
 	$pkg.$init = $init;

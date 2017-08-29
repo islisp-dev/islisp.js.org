@@ -8,6 +8,7 @@ import (
 	"fmt"
 	"html"
 	"io"
+	"strings"
 
 	"github.com/ta2gch/iris/runtime"
 	"github.com/ta2gch/iris/runtime/ilos/instance"
@@ -25,7 +26,12 @@ func (dom Dom) Read(p []byte) (n int, err error) {
 	input := jQuery("#input").Html()
 	jQuery("#input").SetHtml("")
 	copy(p, jQuery(`<span>`+input+`</span>`).Text())
-	dom.Write([]byte(input))
+	println(input)
+	if !strings.Contains(input, "<br>") {
+		dom.Write([]byte(input + "<br>"))
+	} else {
+		dom.Write([]byte(input))
+	}
 	if len(p) == 0 {
 		return 0, io.EOF
 	}
