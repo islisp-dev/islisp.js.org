@@ -15970,7 +15970,7 @@ $packages["reflect"] = (function() {
 	return $pkg;
 })();
 $packages["fmt"] = (function() {
-	var $pkg = {}, $init, errors, io, math, os, reflect, strconv, sync, utf8, fmtFlags, fmt, State, Formatter, Stringer, GoStringer, buffer, pp, scanError, ss, ssave, sliceType, ptrType, ptrType$1, arrayType, arrayType$1, sliceType$1, sliceType$2, ptrType$2, ptrType$5, ptrType$25, funcType, ppFree, byteType, space, ssFree, complexError, boolError, newPrinter, Fprintf, Sprintf, Errorf, Fprint, Sprint, Fprintln, getField, tooLarge, parsenum, intFromArg, parseArgNumber, isSpace, notSpace, indexRune;
+	var $pkg = {}, $init, errors, io, math, os, reflect, strconv, sync, utf8, fmtFlags, fmt, State, Formatter, Stringer, GoStringer, buffer, pp, scanError, ss, ssave, sliceType, ptrType, ptrType$1, arrayType, arrayType$1, sliceType$1, sliceType$2, ptrType$2, ptrType$5, ptrType$25, funcType, ppFree, byteType, space, ssFree, complexError, boolError, newPrinter, Fprintf, Sprintf, Errorf, Fprint, Print, Sprint, Fprintln, getField, tooLarge, parsenum, intFromArg, parseArgNumber, isSpace, notSpace, indexRune;
 	errors = $packages["errors"];
 	io = $packages["io"];
 	math = $packages["math"];
@@ -16674,6 +16674,19 @@ $packages["fmt"] = (function() {
 		/* */ } return; } if ($f === undefined) { $f = { $blk: Fprint }; } $f.$ptr = $ptr; $f._r = _r; $f._r$1 = _r$1; $f._tuple = _tuple; $f.a = a; $f.err = err; $f.n = n; $f.p = p; $f.w = w; $f.x = x; $f.$s = $s; $f.$r = $r; return $f;
 	};
 	$pkg.Fprint = Fprint;
+	Print = function(a) {
+		var $ptr, _r, _tuple, a, err, n, $s, $r;
+		/* */ $s = 0; var $f, $c = false; if (this !== undefined && this.$blk !== undefined) { $f = this; $c = true; $ptr = $f.$ptr; _r = $f._r; _tuple = $f._tuple; a = $f.a; err = $f.err; n = $f.n; $s = $f.$s; $r = $f.$r; } s: while (true) { switch ($s) { case 0:
+		n = 0;
+		err = $ifaceNil;
+		_r = Fprint(os.Stdout, a); /* */ $s = 1; case 1: if($c) { $c = false; _r = _r.$blk(); } if (_r && _r.$blk !== undefined) { break s; }
+		_tuple = _r;
+		n = _tuple[0];
+		err = _tuple[1];
+		$s = -1; return [n, err];
+		/* */ } return; } if ($f === undefined) { $f = { $blk: Print }; } $f.$ptr = $ptr; $f._r = _r; $f._tuple = _tuple; $f.a = a; $f.err = err; $f.n = n; $f.$s = $s; $f.$r = $r; return $f;
+	};
+	$pkg.Print = Print;
 	Sprint = function(a) {
 		var $ptr, _r, a, p, s, $s, $r;
 		/* */ $s = 0; var $f, $c = false; if (this !== undefined && this.$blk !== undefined) { $f = this; $c = true; $ptr = $f.$ptr; _r = $f._r; a = $f.a; p = $f.p; s = $f.s; $s = $f.$s; $r = $f.$r; } s: while (true) { switch ($s) { case 0:
@@ -30844,8 +30857,8 @@ $packages["github.com/ta2gch/iris/runtime/ilos/instance"] = (function() {
 		/* */ if ($interfaceIsEqual(f.methodCombination, NewSymbol("NIL"))) { $s = 16; continue; }
 		/* */ $s = 17; continue;
 		/* if ($interfaceIsEqual(f.methodCombination, NewSymbol("NIL"))) { */ case 16:
-			callNextMethod[0] = $throwNilPointerError;
-			callNextMethod[0] = (function(after, arguments$1, around, before, callNextMethod, callNextMethod$1, callNextMethod$2, index, index$1, methods, nextMethodPisNil, nextMethodPisT, parameters) { return function $b(e$1) {
+			callNextMethod$2[0] = $throwNilPointerError;
+			callNextMethod$2[0] = (function(after, arguments$1, around, before, callNextMethod, callNextMethod$1, callNextMethod$2, index, index$1, methods, nextMethodPisNil, nextMethodPisT, parameters) { return function $b(e$1) {
 				var $ptr, _r$4, _tuple, depth, e$1, index$2, $s, $r;
 				/* */ $s = 0; var $f, $c = false; if (this !== undefined && this.$blk !== undefined) { $f = this; $c = true; $ptr = $f.$ptr; _r$4 = $f._r$4; _tuple = $f._tuple; depth = $f.depth; e$1 = $f.e$1; index$2 = $f.index$2; $s = $f.$s; $r = $f.$r; } s: while (true) { switch ($s) { case 0:
 				_tuple = e$1.DynamicVariable.Get(NewSymbol("IRIS/DEPTH"));
@@ -30854,7 +30867,7 @@ $packages["github.com/ta2gch/iris/runtime/ilos/instance"] = (function() {
 				e$1.DynamicVariable.Define(NewSymbol("IRIS/DEPTH"), NewInteger(index$2));
 				e$1.Function.Define(NewSymbol("NEXT-METHOD-P"), NewFunction(NewSymbol("NEXT-METHOD-P"), nextMethodPisNil[0]));
 				if (((($assertType(depth, Integer) >> 0)) + 1 >> 0) < methods[0].$length) {
-					e$1.Function.Define(NewSymbol("CALL-NEXT-METHOD"), NewFunction(NewSymbol("CALL-NEXT-METHOD"), new funcType(callNextMethod[0])));
+					e$1.Function.Define(NewSymbol("CALL-NEXT-METHOD"), NewFunction(NewSymbol("CALL-NEXT-METHOD"), new funcType(callNextMethod$2[0])));
 					e$1.Function.Define(NewSymbol("NEXT-METHOD-P"), NewFunction(NewSymbol("NEXT-METHOD-P"), nextMethodPisT[0]));
 				}
 				_r$4 = $clone(((index$2 < 0 || index$2 >= methods[0].$length) ? ($throwRuntimeError("index out of range"), undefined) : methods[0].$array[methods[0].$offset + index$2]).function$2, Function).Apply($clone(e$1, env.Environment), arguments$1[0]); /* */ $s = 1; case 1: if($c) { $c = false; _r$4 = _r$4.$blk(); } if (_r$4 && _r$4.$blk !== undefined) { break s; }
@@ -30865,7 +30878,7 @@ $packages["github.com/ta2gch/iris/runtime/ilos/instance"] = (function() {
 			e.Function.Define(NewSymbol("NEXT-METHOD-P"), NewFunction(NewSymbol("NEXT-METHOD-P"), nextMethodPisNil[0]));
 			if (1 < methods[0].$length) {
 				e.Function.Define(NewSymbol("NEXT-METHOD-P"), NewFunction(NewSymbol("NEXT-METHOD-P"), nextMethodPisT[0]));
-				e.Function.Define(NewSymbol("CALL-NEXT-METHOD"), NewFunction(NewSymbol("CALL-NEXT-METHOD"), new funcType(callNextMethod[0])));
+				e.Function.Define(NewSymbol("CALL-NEXT-METHOD"), NewFunction(NewSymbol("CALL-NEXT-METHOD"), new funcType(callNextMethod$2[0])));
 			}
 			_r$4 = $clone((0 >= methods[0].$length ? ($throwRuntimeError("index out of range"), undefined) : methods[0].$array[methods[0].$offset + 0]).function$2, Function).Apply($clone(e, env.Environment), arguments$1[0]); /* */ $s = 18; case 18: if($c) { $c = false; _r$4 = _r$4.$blk(); } if (_r$4 && _r$4.$blk !== undefined) { break s; }
 			$s = -1; return _r$4;
@@ -30876,12 +30889,12 @@ $packages["github.com/ta2gch/iris/runtime/ilos/instance"] = (function() {
 		}; })(after, arguments$1, around, before, callNextMethod, callNextMethod$1, callNextMethod$2, index, index$1, methods, nextMethodPisNil, nextMethodPisT, parameters);
 		width = methods[0].$length;
 		_r$5 = sort.Search(width, test$1); /* */ $s = 19; case 19: if($c) { $c = false; _r$5 = _r$5.$blk(); } if (_r$5 && _r$5.$blk !== undefined) { break s; }
-		index$1[0] = _r$5;
-		/* */ if (index$1[0] < width) { $s = 20; continue; }
+		index[0] = _r$5;
+		/* */ if (index[0] < width) { $s = 20; continue; }
 		/* */ $s = 21; continue;
-		/* if (index$1[0] < width) { */ case 20:
-			callNextMethod$1[0] = $throwNilPointerError;
-			callNextMethod$1[0] = (function(after, arguments$1, around, before, callNextMethod, callNextMethod$1, callNextMethod$2, index, index$1, methods, nextMethodPisNil, nextMethodPisT, parameters) { return function $b(e$1) {
+		/* if (index[0] < width) { */ case 20:
+			callNextMethod[0] = $throwNilPointerError;
+			callNextMethod[0] = (function(after, arguments$1, around, before, callNextMethod, callNextMethod$1, callNextMethod$2, index, index$1, methods, nextMethodPisNil, nextMethodPisT, parameters) { return function $b(e$1) {
 				var $ptr, _i$2, _i$3, _r$10, _r$11, _r$12, _r$6, _r$7, _r$8, _r$9, _ref$2, _ref$3, _tuple, _tuple$1, _tuple$2, _tuple$3, callNextMethod$3, depth, e$1, err, err$1, err$2, i$1, index$2, index$3, method$2, method$3, ret, test$2, test$3, test$4, width$1, width$2, width$3, x, $s, $r;
 				/* */ $s = 0; var $f, $c = false; if (this !== undefined && this.$blk !== undefined) { $f = this; $c = true; $ptr = $f.$ptr; _i$2 = $f._i$2; _i$3 = $f._i$3; _r$10 = $f._r$10; _r$11 = $f._r$11; _r$12 = $f._r$12; _r$6 = $f._r$6; _r$7 = $f._r$7; _r$8 = $f._r$8; _r$9 = $f._r$9; _ref$2 = $f._ref$2; _ref$3 = $f._ref$3; _tuple = $f._tuple; _tuple$1 = $f._tuple$1; _tuple$2 = $f._tuple$2; _tuple$3 = $f._tuple$3; callNextMethod$3 = $f.callNextMethod$3; depth = $f.depth; e$1 = $f.e$1; err = $f.err; err$1 = $f.err$1; err$2 = $f.err$2; i$1 = $f.i$1; index$2 = $f.index$2; index$3 = $f.index$3; method$2 = $f.method$2; method$3 = $f.method$3; ret = $f.ret; test$2 = $f.test$2; test$3 = $f.test$3; test$4 = $f.test$4; width$1 = $f.width$1; width$2 = $f.width$2; width$3 = $f.width$3; x = $f.x; $s = $f.$s; $r = $f.$r; } s: while (true) { switch ($s) { case 0:
 				callNextMethod$3 = [callNextMethod$3];
@@ -30910,7 +30923,7 @@ $packages["github.com/ta2gch/iris/runtime/ilos/instance"] = (function() {
 						/* */ $s = 6; continue;
 						/* if (_r$6 < width$1) { */ case 5:
 							e$1.Function.Define(NewSymbol("NEXT-METHOD-P"), nextMethodPisT[0]);
-							e$1.Function.Define(NewSymbol("CALL-NEXT-METHOD"), NewFunction(NewSymbol("CALL-NEXT-METHOD"), new funcType(callNextMethod$1[0])));
+							e$1.Function.Define(NewSymbol("CALL-NEXT-METHOD"), NewFunction(NewSymbol("CALL-NEXT-METHOD"), new funcType(callNextMethod[0])));
 						/* } */ case 6:
 						_r$7 = $clone((x = (($assertType(depth, Integer) >> 0)), ((x < 0 || x >= methods[0].$length) ? ($throwRuntimeError("index out of range"), undefined) : methods[0].$array[methods[0].$offset + x])).function$2, Function).Apply($clone(e$1, env.Environment), arguments$1[0]); /* */ $s = 8; case 8: if($c) { $c = false; _r$7 = _r$7.$blk(); } if (_r$7 && _r$7.$blk !== undefined) { break s; }
 						$s = -1; return _r$7;
@@ -31014,25 +31027,25 @@ $packages["github.com/ta2gch/iris/runtime/ilos/instance"] = (function() {
 				$s = -1; return [ret, err$1];
 				/* */ } return; } if ($f === undefined) { $f = { $blk: $b }; } $f.$ptr = $ptr; $f._i$2 = _i$2; $f._i$3 = _i$3; $f._r$10 = _r$10; $f._r$11 = _r$11; $f._r$12 = _r$12; $f._r$6 = _r$6; $f._r$7 = _r$7; $f._r$8 = _r$8; $f._r$9 = _r$9; $f._ref$2 = _ref$2; $f._ref$3 = _ref$3; $f._tuple = _tuple; $f._tuple$1 = _tuple$1; $f._tuple$2 = _tuple$2; $f._tuple$3 = _tuple$3; $f.callNextMethod$3 = callNextMethod$3; $f.depth = depth; $f.e$1 = e$1; $f.err = err; $f.err$1 = err$1; $f.err$2 = err$2; $f.i$1 = i$1; $f.index$2 = index$2; $f.index$3 = index$3; $f.method$2 = method$2; $f.method$3 = method$3; $f.ret = ret; $f.test$2 = test$2; $f.test$3 = test$3; $f.test$4 = test$4; $f.width$1 = width$1; $f.width$2 = width$2; $f.width$3 = width$3; $f.x = x; $f.$s = $s; $f.$r = $r; return $f;
 			}; })(after, arguments$1, around, before, callNextMethod, callNextMethod$1, callNextMethod$2, index, index$1, methods, nextMethodPisNil, nextMethodPisT, parameters);
-			e.DynamicVariable.Define(NewSymbol("IRIS/DEPTH"), NewInteger(index$1[0]));
+			e.DynamicVariable.Define(NewSymbol("IRIS/DEPTH"), NewInteger(index[0]));
 			e.Function.Define(NewSymbol("NEXT-METHOD-P"), nextMethodPisNil[0]);
 			test$2 = (function(after, arguments$1, around, before, callNextMethod, callNextMethod$1, callNextMethod$2, index, index$1, methods, nextMethodPisNil, nextMethodPisT, parameters) { return function(i$1) {
 				var $ptr, i$1, x;
-				return $interfaceIsEqual((x = (index$1[0] + i$1 >> 0) + 1 >> 0, ((x < 0 || x >= methods[0].$length) ? ($throwRuntimeError("index out of range"), undefined) : methods[0].$array[methods[0].$offset + x])).qualifier, $ifaceNil);
+				return $interfaceIsEqual((x = (index[0] + i$1 >> 0) + 1 >> 0, ((x < 0 || x >= methods[0].$length) ? ($throwRuntimeError("index out of range"), undefined) : methods[0].$array[methods[0].$offset + x])).qualifier, $ifaceNil);
 			}; })(after, arguments$1, around, before, callNextMethod, callNextMethod$1, callNextMethod$2, index, index$1, methods, nextMethodPisNil, nextMethodPisT, parameters);
-			width$1 = (methods[0].$length - index$1[0] >> 0) - 1 >> 0;
+			width$1 = (methods[0].$length - index[0] >> 0) - 1 >> 0;
 			_r$6 = sort.Search(width$1, test$2); /* */ $s = 24; case 24: if($c) { $c = false; _r$6 = _r$6.$blk(); } if (_r$6 && _r$6.$blk !== undefined) { break s; }
 			/* */ if (_r$6 < width$1) { $s = 22; continue; }
 			/* */ $s = 23; continue;
 			/* if (_r$6 < width$1) { */ case 22:
 				e.Function.Define(NewSymbol("NEXT-METHOD-P"), nextMethodPisT[0]);
-				e.Function.Define(NewSymbol("CALL-NEXT-METHOD"), NewFunction(NewSymbol("CALL-NEXT-METHOD"), new funcType(callNextMethod$1[0])));
+				e.Function.Define(NewSymbol("CALL-NEXT-METHOD"), NewFunction(NewSymbol("CALL-NEXT-METHOD"), new funcType(callNextMethod[0])));
 			/* } */ case 23:
-			_r$7 = $clone(((index$1[0] < 0 || index$1[0] >= methods[0].$length) ? ($throwRuntimeError("index out of range"), undefined) : methods[0].$array[methods[0].$offset + index$1[0]]).function$2, Function).Apply($clone(e, env.Environment), arguments$1[0]); /* */ $s = 25; case 25: if($c) { $c = false; _r$7 = _r$7.$blk(); } if (_r$7 && _r$7.$blk !== undefined) { break s; }
+			_r$7 = $clone(((index[0] < 0 || index[0] >= methods[0].$length) ? ($throwRuntimeError("index out of range"), undefined) : methods[0].$array[methods[0].$offset + index[0]]).function$2, Function).Apply($clone(e, env.Environment), arguments$1[0]); /* */ $s = 25; case 25: if($c) { $c = false; _r$7 = _r$7.$blk(); } if (_r$7 && _r$7.$blk !== undefined) { break s; }
 			$s = -1; return _r$7;
 		/* } */ case 21:
-		callNextMethod$2[0] = $throwNilPointerError;
-		callNextMethod$2[0] = (function(after, arguments$1, around, before, callNextMethod, callNextMethod$1, callNextMethod$2, index, index$1, methods, nextMethodPisNil, nextMethodPisT, parameters) { return function $b(e$1) {
+		callNextMethod$1[0] = $throwNilPointerError;
+		callNextMethod$1[0] = (function(after, arguments$1, around, before, callNextMethod, callNextMethod$1, callNextMethod$2, index, index$1, methods, nextMethodPisNil, nextMethodPisT, parameters) { return function $b(e$1) {
 			var $ptr, _r$10, _r$8, _r$9, _tuple, depth, e$1, index$2, test$3, test$4, width$2, width$3, x, $s, $r;
 			/* */ $s = 0; var $f, $c = false; if (this !== undefined && this.$blk !== undefined) { $f = this; $c = true; $ptr = $f.$ptr; _r$10 = $f._r$10; _r$8 = $f._r$8; _r$9 = $f._r$9; _tuple = $f._tuple; depth = $f.depth; e$1 = $f.e$1; index$2 = $f.index$2; test$3 = $f.test$3; test$4 = $f.test$4; width$2 = $f.width$2; width$3 = $f.width$3; x = $f.x; $s = $f.$s; $r = $f.$r; } s: while (true) { switch ($s) { case 0:
 			index$2 = [index$2];
@@ -31058,7 +31071,7 @@ $packages["github.com/ta2gch/iris/runtime/ilos/instance"] = (function() {
 			/* */ $s = 3; continue;
 			/* if (_r$9 < width$3) { */ case 2:
 				e$1.Function.Define(NewSymbol("NEXT-METHOD-P"), nextMethodPisT[0]);
-				e$1.Function.Define(NewSymbol("CALL-NEXT-METHOD"), NewFunction(NewSymbol("CALL-NEXT-METHOD"), new funcType(callNextMethod$2[0])));
+				e$1.Function.Define(NewSymbol("CALL-NEXT-METHOD"), NewFunction(NewSymbol("CALL-NEXT-METHOD"), new funcType(callNextMethod$1[0])));
 			/* } */ case 3:
 			_r$10 = $clone((x = (($assertType(depth, Integer) >> 0)), ((x < 0 || x >= methods[0].$length) ? ($throwRuntimeError("index out of range"), undefined) : methods[0].$array[methods[0].$offset + x])).function$2, Function).Apply($clone(e$1, env.Environment), arguments$1[0]); /* */ $s = 5; case 5: if($c) { $c = false; _r$10 = _r$10.$blk(); } if (_r$10 && _r$10.$blk !== undefined) { break s; }
 			$s = -1; return _r$10;
@@ -31081,7 +31094,7 @@ $packages["github.com/ta2gch/iris/runtime/ilos/instance"] = (function() {
 			/* } */ case 29:
 			_i$2++;
 		/* } */ $s = 26; continue; case 27:
-		index[0] = 0;
+		index$1[0] = 0;
 		test$3 = (function(after, arguments$1, around, before, callNextMethod, callNextMethod$1, callNextMethod$2, index, index$1, methods, nextMethodPisNil, nextMethodPisT, parameters) { return function(i$1) {
 			var $ptr, i$1;
 			return $interfaceIsEqual(((i$1 < 0 || i$1 >= methods[0].$length) ? ($throwRuntimeError("index out of range"), undefined) : methods[0].$array[methods[0].$offset + i$1]).qualifier, $ifaceNil);
@@ -31099,17 +31112,17 @@ $packages["github.com/ta2gch/iris/runtime/ilos/instance"] = (function() {
 		e.Function.Define(NewSymbol("NEXT-METHOD-P"), nextMethodPisNil[0]);
 		test$4 = (function(after, arguments$1, around, before, callNextMethod, callNextMethod$1, callNextMethod$2, index, index$1, methods, nextMethodPisNil, nextMethodPisT, parameters) { return function(i$1) {
 			var $ptr, i$1, x;
-			return $interfaceIsEqual((x = (index[0] + i$1 >> 0) + 1 >> 0, ((x < 0 || x >= methods[0].$length) ? ($throwRuntimeError("index out of range"), undefined) : methods[0].$array[methods[0].$offset + x])).qualifier, $ifaceNil);
+			return $interfaceIsEqual((x = (index$1[0] + i$1 >> 0) + 1 >> 0, ((x < 0 || x >= methods[0].$length) ? ($throwRuntimeError("index out of range"), undefined) : methods[0].$array[methods[0].$offset + x])).qualifier, $ifaceNil);
 		}; })(after, arguments$1, around, before, callNextMethod, callNextMethod$1, callNextMethod$2, index, index$1, methods, nextMethodPisNil, nextMethodPisT, parameters);
-		width$3 = (methods[0].$length - index[0] >> 0) - 1 >> 0;
+		width$3 = (methods[0].$length - index$1[0] >> 0) - 1 >> 0;
 		_r$11 = sort.Search(width$3, test$4); /* */ $s = 37; case 37: if($c) { $c = false; _r$11 = _r$11.$blk(); } if (_r$11 && _r$11.$blk !== undefined) { break s; }
 		/* */ if (_r$11 < width$3) { $s = 35; continue; }
 		/* */ $s = 36; continue;
 		/* if (_r$11 < width$3) { */ case 35:
 			e.Function.Define(NewSymbol("NEXT-METHOD-P"), nextMethodPisT[0]);
-			e.Function.Define(NewSymbol("CALL-NEXT-METHOD"), NewFunction(NewSymbol("CALL-NEXT-METHOD"), new funcType(callNextMethod$2[0])));
+			e.Function.Define(NewSymbol("CALL-NEXT-METHOD"), NewFunction(NewSymbol("CALL-NEXT-METHOD"), new funcType(callNextMethod$1[0])));
 		/* } */ case 36:
-		_r$12 = $clone(((index[0] < 0 || index[0] >= methods[0].$length) ? ($throwRuntimeError("index out of range"), undefined) : methods[0].$array[methods[0].$offset + index[0]]).function$2, Function).Apply($clone(e, env.Environment), arguments$1[0]); /* */ $s = 38; case 38: if($c) { $c = false; _r$12 = _r$12.$blk(); } if (_r$12 && _r$12.$blk !== undefined) { break s; }
+		_r$12 = $clone(((index$1[0] < 0 || index$1[0] >= methods[0].$length) ? ($throwRuntimeError("index out of range"), undefined) : methods[0].$array[methods[0].$offset + index$1[0]]).function$2, Function).Apply($clone(e, env.Environment), arguments$1[0]); /* */ $s = 38; case 38: if($c) { $c = false; _r$12 = _r$12.$blk(); } if (_r$12 && _r$12.$blk !== undefined) { break s; }
 		_tuple$1 = _r$12;
 		ret = _tuple$1[0];
 		err$1 = _tuple$1[1];
@@ -31224,7 +31237,7 @@ $packages["github.com/ta2gch/iris/runtime/ilos/instance"] = (function() {
 				/* */ if (ok$2) { $s = 28; continue; }
 				/* */ $s = 29; continue;
 				/* if (ok$2) { */ case 28:
-					_r$13 = $assertType(form, Applicable).Apply($clone(e, env.Environment), new sliceType$1([])); /* */ $s = 30; case 30: if($c) { $c = false; _r$13 = _r$13.$blk(); } if (_r$13 && _r$13.$blk !== undefined) { break s; }
+					_r$13 = $assertType(form, Applicable).Apply($clone(e.NewDynamic(), env.Environment), new sliceType$1([])); /* */ $s = 30; case 30: if($c) { $c = false; _r$13 = _r$13.$blk(); } if (_r$13 && _r$13.$blk !== undefined) { break s; }
 					_tuple$3 = _r$13;
 					value = _tuple$3[0];
 					_arg$5 = slotName$1;
@@ -33382,7 +33395,7 @@ $packages["testing"] = (function() {
 	return $pkg;
 })();
 $packages["github.com/ta2gch/iris/runtime"] = (function() {
-	var $pkg = {}, $init, bufio, bytes, fmt, parser, tokenizer, env, ilos, class$1, instance, math, os, reflect, regexp, runtime, strings, testing, sliceType, sliceType$1, ptrType, sliceType$2, sliceType$3, ptrType$1, funcType, funcType$1, funcType$2, funcType$3, funcType$4, funcType$5, funcType$6, funcType$7, funcType$8, funcType$9, funcType$10, ptrType$2, sliceType$4, arrayType, ptrType$3, uidsrc, BasicArrayP, BasicArrayStarP, GeneralArrayStarP, CreateArray, Aref, Garef, SetAref, SetGaref, Characterp, CharEqual, CharNotEqual, CharGreaterThan, CharGreaterThanOrEqual, CharLessThan, CharLessThanOrEqual, ClassOf, Instancep, Subclassp, Class, SignalCondition, Cerror, Error, ReportCondition, ConditionContinuable, ContinueCondition, WithHandler, If, Cond, Case, CaseUsing, Consp, Cons, Car, Cdr, SetCar, SetCdr, Quote, checkSuperClass, Defclass, Create, InitializeObject, Defconstant, Defglobal, Defdynamic, Defun, Dynamic, SetDynamic, DynamicLet, isComparable, Eq, Eql, Equal, evalArguments, evalLambda, evalSpecial, evalMacro, evalFunction, evalCons, evalVariable, Eval, Floatp, Float, Floor, Ceiling, Truncate, Round, Functionp, Function, Lambda, Labels, Flet, Apply, Funcall, Defmethod, Defgeneric, convInt, Integerp, Div, Mod, Gcd, Lcm, Isqrt, While, For, Listp, CreateList, List, Reverse, Nreverse, Append, Member, Mapcar, Mapc, Mapcan, Maplist, Mapl, Mapcon, Assoc, Not, And, Or, Defmacro, Quasiquote, expand, checkLambdaList, newNamedFunction, Block, ReturnFrom, Catch, Throw, Tagbody, Go, UnwindProtect, Null, Numberp, ParseNumber, NumberEqual, NumberGreaterThan, NumberGreaterThanOrEqual, NumberLessThan, NumberLessThanOrEqual, Add, Multiply, Substruct, Quotient, Max, Min, Abs, Exp, Log, Expt, Sqrt, Sin, Cos, Tan, Atan, Atan2, Sinh, Cosh, Tanh, Atanh, init, Length, Elt, SetElt, Subseq, MapInto, Progn, Streamp, OpenStreamP, InputStreamP, OutputStreamP, StandardInput, StandardOutput, ErrorOutput, WithStandardInput, WithStandardOutput, WithErrorOutput, OpenInputFile, OpenOutputFile, OpenIoFile, WithOpenInputFile, WithOpenOutputFile, Close, CreateStringInputStream, CreateStringOutputStream, GetOutputStreamString, Read, ReadChar, ReadLine, StreamReadyP, Format, Stringp, CreateString, StringEqual, StringNotEqual, StringGreaterThan, StringGreaterThanOrEqual, CharIndex, StringIndex, StringAppend, Symbolp, Property, SetProperty, RemoveProperty, Gensym, convFloat64, ensure, genUID, func2symbol, Setq, Setf, Let, LetStar, BasicVectorP, GeneralVectorP, CreateVector, Vector;
+	var $pkg = {}, $init, bufio, bytes, fmt, parser, tokenizer, env, ilos, class$1, instance, math, os, reflect, regexp, runtime, strings, testing, sliceType, sliceType$1, sliceType$2, ptrType, sliceType$3, ptrType$1, funcType, funcType$1, funcType$2, funcType$3, funcType$4, funcType$5, funcType$6, funcType$7, funcType$8, funcType$9, funcType$10, ptrType$2, sliceType$4, arrayType, ptrType$3, uidsrc, BasicArrayP, BasicArrayStarP, GeneralArrayStarP, CreateArray, Aref, Garef, SetAref, SetGaref, Characterp, CharEqual, CharNotEqual, CharGreaterThan, CharGreaterThanOrEqual, CharLessThan, CharLessThanOrEqual, ClassOf, Instancep, Subclassp, Class, checkSuperClass, Defclass, Create, InitializeObject, Defmethod, Defgeneric, SignalCondition, Cerror, Error, ReportCondition, ConditionContinuable, ContinueCondition, WithHandler, If, Cond, Case, CaseUsing, Consp, Cons, Car, Cdr, SetCar, SetCdr, Quote, Defconstant, Defglobal, Defdynamic, Defun, Dynamic, SetDynamic, DynamicLet, isComparable, Eq, Eql, Equal, evalArguments, evalLambda, evalSpecial, evalMacro, evalFunction, evalCons, evalVariable, Eval, Floatp, Float, Floor, Ceiling, Truncate, Round, Functionp, Function, Lambda, Labels, Flet, Apply, Funcall, convInt, Integerp, Div, Mod, Gcd, Lcm, Isqrt, While, For, Listp, CreateList, List, Reverse, Nreverse, Append, Member, Mapcar, Mapc, Mapcan, Maplist, Mapl, Mapcon, Assoc, Null, Not, And, Or, Defmacro, Quasiquote, expand, checkLambdaList, newNamedFunction, Block, ReturnFrom, Catch, Throw, Tagbody, Go, UnwindProtect, Numberp, ParseNumber, NumberEqual, NumberGreaterThan, NumberGreaterThanOrEqual, NumberLessThan, NumberLessThanOrEqual, Add, Multiply, Substruct, Quotient, Max, Min, Abs, Exp, Log, Expt, Sqrt, Sin, Cos, Tan, Atan, Atan2, Sinh, Cosh, Tanh, Atanh, defspecial2, defun2, defglobal, init, Length, Elt, SetElt, Subseq, MapInto, Progn, Streamp, OpenStreamP, InputStreamP, OutputStreamP, StandardInput, StandardOutput, ErrorOutput, WithStandardInput, WithStandardOutput, WithErrorOutput, OpenInputFile, OpenOutputFile, OpenIoFile, WithOpenInputFile, WithOpenOutputFile, Close, CreateStringInputStream, CreateStringOutputStream, GetOutputStreamString, Read, ReadChar, ReadLine, StreamReadyP, Format, Stringp, CreateString, StringEqual, StringNotEqual, StringGreaterThan, StringGreaterThanOrEqual, CharIndex, StringIndex, StringAppend, Symbolp, Property, SetProperty, RemoveProperty, Gensym, convFloat64, ensure, genUID, func2symbol, Setq, Setf, Let, LetStar, BasicVectorP, GeneralVectorP, CreateVector, Vector;
 	bufio = $packages["bufio"];
 	bytes = $packages["bytes"];
 	fmt = $packages["fmt"];
@@ -33401,8 +33414,8 @@ $packages["github.com/ta2gch/iris/runtime"] = (function() {
 	testing = $packages["testing"];
 	sliceType = $sliceType(ilos.Instance);
 	sliceType$1 = $sliceType(instance.GeneralArrayStar);
-	ptrType = $ptrType(instance.Cons);
 	sliceType$2 = $sliceType(ilos.Class);
+	ptrType = $ptrType(instance.Cons);
 	sliceType$3 = $sliceType($emptyInterface);
 	ptrType$1 = $ptrType(instance.GenericFunction);
 	funcType = $funcType([env.Environment, ilos.Instance], [ilos.Instance, ilos.Instance], false);
@@ -33873,432 +33886,6 @@ $packages["github.com/ta2gch/iris/runtime"] = (function() {
 		/* */ } return; } if ($f === undefined) { $f = { $blk: Class }; } $f.$ptr = $ptr; $f._r = _r; $f._tuple = _tuple; $f.className = className; $f.e = e; $f.ok = ok; $f.v = v; $f.$s = $s; $f.$r = $r; return $f;
 	};
 	$pkg.Class = Class;
-	SignalCondition = function(e, condition, continuable) {
-		var $ptr, _r, _r$1, _r$2, _r$3, _r$4, _tuple, _tuple$1, c, condition, continuable, e, err, o, $s, $r;
-		/* */ $s = 0; var $f, $c = false; if (this !== undefined && this.$blk !== undefined) { $f = this; $c = true; $ptr = $f.$ptr; _r = $f._r; _r$1 = $f._r$1; _r$2 = $f._r$2; _r$3 = $f._r$3; _r$4 = $f._r$4; _tuple = $f._tuple; _tuple$1 = $f._tuple$1; c = $f.c; condition = $f.condition; continuable = $f.continuable; e = $f.e; err = $f.err; o = $f.o; $s = $f.$s; $r = $f.$r; } s: while (true) { switch ($s) { case 0:
-		_r = ensure(class$1.SeriousCondition, new sliceType([condition])); /* */ $s = 1; case 1: if($c) { $c = false; _r = _r.$blk(); } if (_r && _r.$blk !== undefined) { break s; }
-		err = _r;
-		if (!($interfaceIsEqual(err, $ifaceNil))) {
-			$s = -1; return [$ifaceNil, err];
-		}
-		_r$1 = $clone($assertType(condition, instance.Instance), instance.Instance).SetSlotValue(instance.NewSymbol("IRIS.CONTINUABLE"), continuable, class$1.SeriousCondition); /* */ $s = 2; case 2: if($c) { $c = false; _r$1 = _r$1.$blk(); } if (_r$1 && _r$1.$blk !== undefined) { break s; }
-		_r$1;
-		_r$2 = $assertType(e.Handler, instance.Applicable).Apply($clone(e, env.Environment), new sliceType([condition])); /* */ $s = 3; case 3: if($c) { $c = false; _r$2 = _r$2.$blk(); } if (_r$2 && _r$2.$blk !== undefined) { break s; }
-		_tuple = _r$2;
-		c = _tuple[1];
-		_r$3 = ilos.InstanceOf(class$1.Continue, c); /* */ $s = 6; case 6: if($c) { $c = false; _r$3 = _r$3.$blk(); } if (_r$3 && _r$3.$blk !== undefined) { break s; }
-		/* */ if (_r$3) { $s = 4; continue; }
-		/* */ $s = 5; continue;
-		/* if (_r$3) { */ case 4:
-			_r$4 = $clone($assertType(c, instance.Instance), instance.Instance).GetSlotValue(instance.NewSymbol("IRIS.OBJECT"), class$1.Continue); /* */ $s = 7; case 7: if($c) { $c = false; _r$4 = _r$4.$blk(); } if (_r$4 && _r$4.$blk !== undefined) { break s; }
-			_tuple$1 = _r$4;
-			o = _tuple$1[0];
-			$s = -1; return [o, $ifaceNil];
-		/* } */ case 5:
-		$s = -1; return [$ifaceNil, c];
-		/* */ } return; } if ($f === undefined) { $f = { $blk: SignalCondition }; } $f.$ptr = $ptr; $f._r = _r; $f._r$1 = _r$1; $f._r$2 = _r$2; $f._r$3 = _r$3; $f._r$4 = _r$4; $f._tuple = _tuple; $f._tuple$1 = _tuple$1; $f.c = c; $f.condition = condition; $f.continuable = continuable; $f.e = e; $f.err = err; $f.o = o; $f.$s = $s; $f.$r = $r; return $f;
-	};
-	$pkg.SignalCondition = SignalCondition;
-	Cerror = function(e, continueString, errorString, objs) {
-		var $ptr, _r, _r$1, _r$2, _r$3, _tuple, _tuple$1, _tuple$2, _tuple$3, arguments$1, condition, continuable, continueString, e, err, err$1, errorString, objs, ss, $s, $r;
-		/* */ $s = 0; var $f, $c = false; if (this !== undefined && this.$blk !== undefined) { $f = this; $c = true; $ptr = $f.$ptr; _r = $f._r; _r$1 = $f._r$1; _r$2 = $f._r$2; _r$3 = $f._r$3; _tuple = $f._tuple; _tuple$1 = $f._tuple$1; _tuple$2 = $f._tuple$2; _tuple$3 = $f._tuple$3; arguments$1 = $f.arguments$1; condition = $f.condition; continuable = $f.continuable; continueString = $f.continueString; e = $f.e; err = $f.err; err$1 = $f.err$1; errorString = $f.errorString; objs = $f.objs; ss = $f.ss; $s = $f.$s; $r = $f.$r; } s: while (true) { switch ($s) { case 0:
-		_tuple = List($clone(e, env.Environment), objs);
-		arguments$1 = _tuple[0];
-		err = _tuple[1];
-		if (!($interfaceIsEqual(err, $ifaceNil))) {
-			$s = -1; return [$ifaceNil, err];
-		}
-		_r = instance.Create($clone(e, env.Environment), class$1.SimpleError, new sliceType([instance.NewSymbol("FORMAT-STRING"), errorString, instance.NewSymbol("FORAMT-OBJECTS"), arguments$1])); /* */ $s = 1; case 1: if($c) { $c = false; _r = _r.$blk(); } if (_r && _r.$blk !== undefined) { break s; }
-		condition = _r;
-		_tuple$1 = CreateStringOutputStream($clone(e, env.Environment));
-		ss = _tuple$1[0];
-		err = _tuple$1[1];
-		if (!($interfaceIsEqual(err, $ifaceNil))) {
-			$s = -1; return [$ifaceNil, err];
-		}
-		_r$1 = Format($clone(e, env.Environment), ss, continueString, objs); /* */ $s = 2; case 2: if($c) { $c = false; _r$1 = _r$1.$blk(); } if (_r$1 && _r$1.$blk !== undefined) { break s; }
-		_tuple$2 = _r$1;
-		err$1 = _tuple$2[1];
-		if (!($interfaceIsEqual(err$1, $ifaceNil))) {
-			$s = -1; return [$ifaceNil, err$1];
-		}
-		_r$2 = GetOutputStreamString($clone(e, env.Environment), ss); /* */ $s = 3; case 3: if($c) { $c = false; _r$2 = _r$2.$blk(); } if (_r$2 && _r$2.$blk !== undefined) { break s; }
-		_tuple$3 = _r$2;
-		continuable = _tuple$3[0];
-		err = _tuple$3[1];
-		if (!($interfaceIsEqual(err, $ifaceNil))) {
-			$s = -1; return [$ifaceNil, err];
-		}
-		_r$3 = SignalCondition($clone(e, env.Environment), condition, continuable); /* */ $s = 4; case 4: if($c) { $c = false; _r$3 = _r$3.$blk(); } if (_r$3 && _r$3.$blk !== undefined) { break s; }
-		$s = -1; return _r$3;
-		/* */ } return; } if ($f === undefined) { $f = { $blk: Cerror }; } $f.$ptr = $ptr; $f._r = _r; $f._r$1 = _r$1; $f._r$2 = _r$2; $f._r$3 = _r$3; $f._tuple = _tuple; $f._tuple$1 = _tuple$1; $f._tuple$2 = _tuple$2; $f._tuple$3 = _tuple$3; $f.arguments$1 = arguments$1; $f.condition = condition; $f.continuable = continuable; $f.continueString = continueString; $f.e = e; $f.err = err; $f.err$1 = err$1; $f.errorString = errorString; $f.objs = objs; $f.ss = ss; $f.$s = $s; $f.$r = $r; return $f;
-	};
-	$pkg.Cerror = Cerror;
-	Error = function(e, continueString, errorString, objs) {
-		var $ptr, _r, _r$1, _tuple, arguments$1, condition, continueString, e, err, errorString, objs, $s, $r;
-		/* */ $s = 0; var $f, $c = false; if (this !== undefined && this.$blk !== undefined) { $f = this; $c = true; $ptr = $f.$ptr; _r = $f._r; _r$1 = $f._r$1; _tuple = $f._tuple; arguments$1 = $f.arguments$1; condition = $f.condition; continueString = $f.continueString; e = $f.e; err = $f.err; errorString = $f.errorString; objs = $f.objs; $s = $f.$s; $r = $f.$r; } s: while (true) { switch ($s) { case 0:
-		_tuple = List($clone(e, env.Environment), objs);
-		arguments$1 = _tuple[0];
-		err = _tuple[1];
-		if (!($interfaceIsEqual(err, $ifaceNil))) {
-			$s = -1; return [$ifaceNil, err];
-		}
-		_r = instance.Create($clone(e, env.Environment), class$1.SimpleError, new sliceType([instance.NewSymbol("FORMAT-STRING"), errorString, instance.NewSymbol("FORAMT-OBJECTS"), arguments$1])); /* */ $s = 1; case 1: if($c) { $c = false; _r = _r.$blk(); } if (_r && _r.$blk !== undefined) { break s; }
-		condition = _r;
-		_r$1 = SignalCondition($clone(e, env.Environment), condition, $pkg.Nil); /* */ $s = 2; case 2: if($c) { $c = false; _r$1 = _r$1.$blk(); } if (_r$1 && _r$1.$blk !== undefined) { break s; }
-		$s = -1; return _r$1;
-		/* */ } return; } if ($f === undefined) { $f = { $blk: Error }; } $f.$ptr = $ptr; $f._r = _r; $f._r$1 = _r$1; $f._tuple = _tuple; $f.arguments$1 = arguments$1; $f.condition = condition; $f.continueString = continueString; $f.e = e; $f.err = err; $f.errorString = errorString; $f.objs = objs; $f.$s = $s; $f.$r = $r; return $f;
-	};
-	$pkg.Error = Error;
-	ReportCondition = function(e, condition, stream) {
-		var $ptr, _r, condition, e, stream, $s, $r;
-		/* */ $s = 0; var $f, $c = false; if (this !== undefined && this.$blk !== undefined) { $f = this; $c = true; $ptr = $f.$ptr; _r = $f._r; condition = $f.condition; e = $f.e; stream = $f.stream; $s = $f.$s; $r = $f.$r; } s: while (true) { switch ($s) { case 0:
-		_r = Format($clone(e, env.Environment), e.StandardOutput, instance.NewString("~A"), new sliceType([condition])); /* */ $s = 1; case 1: if($c) { $c = false; _r = _r.$blk(); } if (_r && _r.$blk !== undefined) { break s; }
-		$s = -1; return _r;
-		/* */ } return; } if ($f === undefined) { $f = { $blk: ReportCondition }; } $f.$ptr = $ptr; $f._r = _r; $f.condition = condition; $f.e = e; $f.stream = stream; $f.$s = $s; $f.$r = $r; return $f;
-	};
-	$pkg.ReportCondition = ReportCondition;
-	ConditionContinuable = function(e, condition) {
-		var $ptr, _r, _tuple, condition, continuable, e, ok, $s, $r;
-		/* */ $s = 0; var $f, $c = false; if (this !== undefined && this.$blk !== undefined) { $f = this; $c = true; $ptr = $f.$ptr; _r = $f._r; _tuple = $f._tuple; condition = $f.condition; continuable = $f.continuable; e = $f.e; ok = $f.ok; $s = $f.$s; $r = $f.$r; } s: while (true) { switch ($s) { case 0:
-		_r = $clone($assertType(condition, instance.Instance), instance.Instance).GetSlotValue(instance.NewSymbol("IRIS.CONTINUABLE"), class$1.SeriousCondition); /* */ $s = 1; case 1: if($c) { $c = false; _r = _r.$blk(); } if (_r && _r.$blk !== undefined) { break s; }
-		_tuple = _r;
-		continuable = _tuple[0];
-		ok = _tuple[1];
-		if (ok) {
-			$s = -1; return [continuable, $ifaceNil];
-		}
-		$s = -1; return [$pkg.Nil, $ifaceNil];
-		/* */ } return; } if ($f === undefined) { $f = { $blk: ConditionContinuable }; } $f.$ptr = $ptr; $f._r = _r; $f._tuple = _tuple; $f.condition = condition; $f.continuable = continuable; $f.e = e; $f.ok = ok; $f.$s = $s; $f.$r = $r; return $f;
-	};
-	$pkg.ConditionContinuable = ConditionContinuable;
-	ContinueCondition = function(e, condition, value) {
-		var $ptr, _r, _r$1, _r$2, _r$3, _r$4, _tuple, b, condition, e, ok, value, $s, $r;
-		/* */ $s = 0; var $f, $c = false; if (this !== undefined && this.$blk !== undefined) { $f = this; $c = true; $ptr = $f.$ptr; _r = $f._r; _r$1 = $f._r$1; _r$2 = $f._r$2; _r$3 = $f._r$3; _r$4 = $f._r$4; _tuple = $f._tuple; b = $f.b; condition = $f.condition; e = $f.e; ok = $f.ok; value = $f.value; $s = $f.$s; $r = $f.$r; } s: while (true) { switch ($s) { case 0:
-		_r = $clone($assertType(condition, instance.Instance), instance.Instance).GetSlotValue(instance.NewSymbol("IRIS.CONTINUABLE"), class$1.SeriousCondition); /* */ $s = 1; case 1: if($c) { $c = false; _r = _r.$blk(); } if (_r && _r.$blk !== undefined) { break s; }
-		_tuple = _r;
-		b = _tuple[0];
-		ok = _tuple[1];
-		/* */ if (!ok || $interfaceIsEqual(b, $pkg.Nil)) { $s = 2; continue; }
-		/* */ $s = 3; continue;
-		/* if (!ok || $interfaceIsEqual(b, $pkg.Nil)) { */ case 2:
-			_r$1 = instance.Create($clone(e, env.Environment), class$1.ProgramError, new sliceType([])); /* */ $s = 4; case 4: if($c) { $c = false; _r$1 = _r$1.$blk(); } if (_r$1 && _r$1.$blk !== undefined) { break s; }
-			$s = -1; return [$ifaceNil, _r$1];
-		/* } */ case 3:
-		/* */ if (value.$length === 1) { $s = 5; continue; }
-		/* */ $s = 6; continue;
-		/* if (value.$length === 1) { */ case 5:
-			_r$2 = instance.Create($clone(e, env.Environment), class$1.Continue, new sliceType([instance.NewSymbol("IRIS.OBJECT"), (0 >= value.$length ? ($throwRuntimeError("index out of range"), undefined) : value.$array[value.$offset + 0])])); /* */ $s = 7; case 7: if($c) { $c = false; _r$2 = _r$2.$blk(); } if (_r$2 && _r$2.$blk !== undefined) { break s; }
-			$s = -1; return [$ifaceNil, _r$2];
-		/* } */ case 6:
-		/* */ if (value.$length === 0) { $s = 8; continue; }
-		/* */ $s = 9; continue;
-		/* if (value.$length === 0) { */ case 8:
-			_r$3 = instance.Create($clone(e, env.Environment), class$1.Continue, new sliceType([instance.NewSymbol("IRIS.OBJECT"), $pkg.Nil])); /* */ $s = 10; case 10: if($c) { $c = false; _r$3 = _r$3.$blk(); } if (_r$3 && _r$3.$blk !== undefined) { break s; }
-			$s = -1; return [$ifaceNil, _r$3];
-		/* } */ case 9:
-		_r$4 = instance.Create($clone(e, env.Environment), class$1.ProgramError, new sliceType([])); /* */ $s = 11; case 11: if($c) { $c = false; _r$4 = _r$4.$blk(); } if (_r$4 && _r$4.$blk !== undefined) { break s; }
-		$s = -1; return [$ifaceNil, _r$4];
-		/* */ } return; } if ($f === undefined) { $f = { $blk: ContinueCondition }; } $f.$ptr = $ptr; $f._r = _r; $f._r$1 = _r$1; $f._r$2 = _r$2; $f._r$3 = _r$3; $f._r$4 = _r$4; $f._tuple = _tuple; $f.b = b; $f.condition = condition; $f.e = e; $f.ok = ok; $f.value = value; $f.$s = $s; $f.$r = $r; return $f;
-	};
-	$pkg.ContinueCondition = ContinueCondition;
-	WithHandler = function(e, handler, forms) {
-		var $ptr, _r, _r$1, _tuple, _tuple$1, e, err, forms, fun, handler, ret, $s, $r;
-		/* */ $s = 0; var $f, $c = false; if (this !== undefined && this.$blk !== undefined) { $f = this; $c = true; $ptr = $f.$ptr; _r = $f._r; _r$1 = $f._r$1; _tuple = $f._tuple; _tuple$1 = $f._tuple$1; e = $f.e; err = $f.err; forms = $f.forms; fun = $f.fun; handler = $f.handler; ret = $f.ret; $s = $f.$s; $r = $f.$r; } s: while (true) { switch ($s) { case 0:
-		_r = Eval($clone(e, env.Environment), handler); /* */ $s = 1; case 1: if($c) { $c = false; _r = _r.$blk(); } if (_r && _r.$blk !== undefined) { break s; }
-		_tuple = _r;
-		fun = _tuple[0];
-		err = _tuple[1];
-		if (!($interfaceIsEqual(err, $ifaceNil))) {
-			$s = -1; return [$ifaceNil, err];
-		}
-		e.Handler = fun;
-		_r$1 = Progn($clone(e, env.Environment), forms); /* */ $s = 2; case 2: if($c) { $c = false; _r$1 = _r$1.$blk(); } if (_r$1 && _r$1.$blk !== undefined) { break s; }
-		_tuple$1 = _r$1;
-		ret = _tuple$1[0];
-		err = _tuple$1[1];
-		if (!($interfaceIsEqual(err, $ifaceNil))) {
-			$s = -1; return [$ifaceNil, err];
-		}
-		$s = -1; return [ret, err];
-		/* */ } return; } if ($f === undefined) { $f = { $blk: WithHandler }; } $f.$ptr = $ptr; $f._r = _r; $f._r$1 = _r$1; $f._tuple = _tuple; $f._tuple$1 = _tuple$1; $f.e = e; $f.err = err; $f.forms = forms; $f.fun = fun; $f.handler = handler; $f.ret = ret; $f.$s = $s; $f.$r = $r; return $f;
-	};
-	$pkg.WithHandler = WithHandler;
-	If = function(e, testForm, thenForm, elseForm) {
-		var $ptr, _r, _r$1, _r$2, _r$3, _tuple, e, elseForm, err, testForm, tf, thenForm, $s, $r;
-		/* */ $s = 0; var $f, $c = false; if (this !== undefined && this.$blk !== undefined) { $f = this; $c = true; $ptr = $f.$ptr; _r = $f._r; _r$1 = $f._r$1; _r$2 = $f._r$2; _r$3 = $f._r$3; _tuple = $f._tuple; e = $f.e; elseForm = $f.elseForm; err = $f.err; testForm = $f.testForm; tf = $f.tf; thenForm = $f.thenForm; $s = $f.$s; $r = $f.$r; } s: while (true) { switch ($s) { case 0:
-		_r = Eval($clone(e, env.Environment), testForm); /* */ $s = 1; case 1: if($c) { $c = false; _r = _r.$blk(); } if (_r && _r.$blk !== undefined) { break s; }
-		_tuple = _r;
-		tf = _tuple[0];
-		err = _tuple[1];
-		if (!($interfaceIsEqual(err, $ifaceNil))) {
-			$s = -1; return [$ifaceNil, err];
-		}
-		/* */ if ($interfaceIsEqual(tf, $pkg.T)) { $s = 2; continue; }
-		/* */ $s = 3; continue;
-		/* if ($interfaceIsEqual(tf, $pkg.T)) { */ case 2:
-			_r$1 = Eval($clone(e, env.Environment), thenForm); /* */ $s = 4; case 4: if($c) { $c = false; _r$1 = _r$1.$blk(); } if (_r$1 && _r$1.$blk !== undefined) { break s; }
-			$s = -1; return _r$1;
-		/* } */ case 3:
-		/* */ if (elseForm.$length > 1) { $s = 5; continue; }
-		/* */ $s = 6; continue;
-		/* if (elseForm.$length > 1) { */ case 5:
-			_r$2 = instance.NewArityError(); /* */ $s = 7; case 7: if($c) { $c = false; _r$2 = _r$2.$blk(); } if (_r$2 && _r$2.$blk !== undefined) { break s; }
-			$s = -1; return [$ifaceNil, _r$2];
-		/* } */ case 6:
-		if (elseForm.$length === 0) {
-			$s = -1; return [$pkg.Nil, $ifaceNil];
-		}
-		_r$3 = Eval($clone(e, env.Environment), (0 >= elseForm.$length ? ($throwRuntimeError("index out of range"), undefined) : elseForm.$array[elseForm.$offset + 0])); /* */ $s = 8; case 8: if($c) { $c = false; _r$3 = _r$3.$blk(); } if (_r$3 && _r$3.$blk !== undefined) { break s; }
-		$s = -1; return _r$3;
-		/* */ } return; } if ($f === undefined) { $f = { $blk: If }; } $f.$ptr = $ptr; $f._r = _r; $f._r$1 = _r$1; $f._r$2 = _r$2; $f._r$3 = _r$3; $f._tuple = _tuple; $f.e = e; $f.elseForm = elseForm; $f.err = err; $f.testForm = testForm; $f.tf = tf; $f.thenForm = thenForm; $f.$s = $s; $f.$r = $r; return $f;
-	};
-	$pkg.If = If;
-	Cond = function(e, testFrom) {
-		var $ptr, _i, _r, _r$1, _r$2, _r$3, _r$4, _ref, _tuple, e, err, err$1, ret, s, testFrom, tf, $s, $r;
-		/* */ $s = 0; var $f, $c = false; if (this !== undefined && this.$blk !== undefined) { $f = this; $c = true; $ptr = $f.$ptr; _i = $f._i; _r = $f._r; _r$1 = $f._r$1; _r$2 = $f._r$2; _r$3 = $f._r$3; _r$4 = $f._r$4; _ref = $f._ref; _tuple = $f._tuple; e = $f.e; err = $f.err; err$1 = $f.err$1; ret = $f.ret; s = $f.s; testFrom = $f.testFrom; tf = $f.tf; $s = $f.$s; $r = $f.$r; } s: while (true) { switch ($s) { case 0:
-		_ref = testFrom;
-		_i = 0;
-		/* while (true) { */ case 1:
-			/* if (!(_i < _ref.$length)) { break; } */ if(!(_i < _ref.$length)) { $s = 2; continue; }
-			tf = ((_i < 0 || _i >= _ref.$length) ? ($throwRuntimeError("index out of range"), undefined) : _ref.$array[_ref.$offset + _i]);
-			_r = ensure(class$1.List, new sliceType([tf])); /* */ $s = 3; case 3: if($c) { $c = false; _r = _r.$blk(); } if (_r && _r.$blk !== undefined) { break s; }
-			err = _r;
-			if (!($interfaceIsEqual(err, $ifaceNil))) {
-				$s = -1; return [$ifaceNil, err];
-			}
-			_r$1 = $assertType(tf, instance.List).Slice(); /* */ $s = 4; case 4: if($c) { $c = false; _r$1 = _r$1.$blk(); } if (_r$1 && _r$1.$blk !== undefined) { break s; }
-			s = _r$1;
-			/* */ if (s.$length === 0) { $s = 5; continue; }
-			/* */ $s = 6; continue;
-			/* if (s.$length === 0) { */ case 5:
-				_r$2 = instance.NewArityError(); /* */ $s = 7; case 7: if($c) { $c = false; _r$2 = _r$2.$blk(); } if (_r$2 && _r$2.$blk !== undefined) { break s; }
-				$s = -1; return [$ifaceNil, _r$2];
-			/* } */ case 6:
-			_r$3 = Eval($clone(e, env.Environment), (0 >= s.$length ? ($throwRuntimeError("index out of range"), undefined) : s.$array[s.$offset + 0])); /* */ $s = 8; case 8: if($c) { $c = false; _r$3 = _r$3.$blk(); } if (_r$3 && _r$3.$blk !== undefined) { break s; }
-			_tuple = _r$3;
-			ret = _tuple[0];
-			err$1 = _tuple[1];
-			if (!($interfaceIsEqual(err$1, $ifaceNil))) {
-				$s = -1; return [$ifaceNil, err$1];
-			}
-			/* */ if ($interfaceIsEqual(ret, $pkg.T)) { $s = 9; continue; }
-			/* */ $s = 10; continue;
-			/* if ($interfaceIsEqual(ret, $pkg.T)) { */ case 9:
-				_r$4 = Progn($clone(e, env.Environment), $subslice(s, 1)); /* */ $s = 11; case 11: if($c) { $c = false; _r$4 = _r$4.$blk(); } if (_r$4 && _r$4.$blk !== undefined) { break s; }
-				$s = -1; return _r$4;
-			/* } */ case 10:
-			_i++;
-		/* } */ $s = 1; continue; case 2:
-		$s = -1; return [$pkg.Nil, $ifaceNil];
-		/* */ } return; } if ($f === undefined) { $f = { $blk: Cond }; } $f.$ptr = $ptr; $f._i = _i; $f._r = _r; $f._r$1 = _r$1; $f._r$2 = _r$2; $f._r$3 = _r$3; $f._r$4 = _r$4; $f._ref = _ref; $f._tuple = _tuple; $f.e = e; $f.err = err; $f.err$1 = err$1; $f.ret = ret; $f.s = s; $f.testFrom = testFrom; $f.tf = tf; $f.$s = $s; $f.$r = $r; return $f;
-	};
-	$pkg.Cond = Cond;
-	Case = function(e, key, pattern) {
-		var $ptr, _i, _i$1, _r, _r$1, _r$2, _r$3, _r$4, _r$5, _r$6, _r$7, _ref, _ref$1, _tuple, e, err, err$1, err$2, form, idx, k, key, pat, pattern, $s, $r;
-		/* */ $s = 0; var $f, $c = false; if (this !== undefined && this.$blk !== undefined) { $f = this; $c = true; $ptr = $f.$ptr; _i = $f._i; _i$1 = $f._i$1; _r = $f._r; _r$1 = $f._r$1; _r$2 = $f._r$2; _r$3 = $f._r$3; _r$4 = $f._r$4; _r$5 = $f._r$5; _r$6 = $f._r$6; _r$7 = $f._r$7; _ref = $f._ref; _ref$1 = $f._ref$1; _tuple = $f._tuple; e = $f.e; err = $f.err; err$1 = $f.err$1; err$2 = $f.err$2; form = $f.form; idx = $f.idx; k = $f.k; key = $f.key; pat = $f.pat; pattern = $f.pattern; $s = $f.$s; $r = $f.$r; } s: while (true) { switch ($s) { case 0:
-		_r = Eval($clone(e, env.Environment), key); /* */ $s = 1; case 1: if($c) { $c = false; _r = _r.$blk(); } if (_r && _r.$blk !== undefined) { break s; }
-		_tuple = _r;
-		key = _tuple[0];
-		err = _tuple[1];
-		if (!($interfaceIsEqual(err, $ifaceNil))) {
-			$s = -1; return [$ifaceNil, err];
-		}
-		_ref = pattern;
-		_i = 0;
-		/* while (true) { */ case 2:
-			/* if (!(_i < _ref.$length)) { break; } */ if(!(_i < _ref.$length)) { $s = 3; continue; }
-			idx = _i;
-			pat = ((_i < 0 || _i >= _ref.$length) ? ($throwRuntimeError("index out of range"), undefined) : _ref.$array[_ref.$offset + _i]);
-			_r$1 = ensure(class$1.List, new sliceType([pat])); /* */ $s = 4; case 4: if($c) { $c = false; _r$1 = _r$1.$blk(); } if (_r$1 && _r$1.$blk !== undefined) { break s; }
-			err$1 = _r$1;
-			if (!($interfaceIsEqual(err$1, $ifaceNil))) {
-				$s = -1; return [$ifaceNil, err$1];
-			}
-			_r$2 = $assertType(pat, instance.List).Slice(); /* */ $s = 5; case 5: if($c) { $c = false; _r$2 = _r$2.$blk(); } if (_r$2 && _r$2.$blk !== undefined) { break s; }
-			form = _r$2;
-			/* */ if (form.$length < 1) { $s = 6; continue; }
-			/* */ $s = 7; continue;
-			/* if (form.$length < 1) { */ case 6:
-				_r$3 = instance.NewArityError(); /* */ $s = 8; case 8: if($c) { $c = false; _r$3 = _r$3.$blk(); } if (_r$3 && _r$3.$blk !== undefined) { break s; }
-				$s = -1; return [$ifaceNil, _r$3];
-			/* } */ case 7:
-			/* */ if ((idx === (pattern.$length - 1 >> 0)) && $interfaceIsEqual((0 >= form.$length ? ($throwRuntimeError("index out of range"), undefined) : form.$array[form.$offset + 0]), $pkg.T)) { $s = 9; continue; }
-			/* */ $s = 10; continue;
-			/* if ((idx === (pattern.$length - 1 >> 0)) && $interfaceIsEqual((0 >= form.$length ? ($throwRuntimeError("index out of range"), undefined) : form.$array[form.$offset + 0]), $pkg.T)) { */ case 9:
-				_r$4 = Progn($clone(e, env.Environment), $subslice(form, 1)); /* */ $s = 11; case 11: if($c) { $c = false; _r$4 = _r$4.$blk(); } if (_r$4 && _r$4.$blk !== undefined) { break s; }
-				$s = -1; return _r$4;
-			/* } */ case 10:
-			_r$5 = ensure(class$1.List, new sliceType([(0 >= form.$length ? ($throwRuntimeError("index out of range"), undefined) : form.$array[form.$offset + 0])])); /* */ $s = 12; case 12: if($c) { $c = false; _r$5 = _r$5.$blk(); } if (_r$5 && _r$5.$blk !== undefined) { break s; }
-			err$2 = _r$5;
-			if (!($interfaceIsEqual(err$2, $ifaceNil))) {
-				$s = -1; return [$ifaceNil, err$2];
-			}
-			_r$6 = $assertType((0 >= form.$length ? ($throwRuntimeError("index out of range"), undefined) : form.$array[form.$offset + 0]), instance.List).Slice(); /* */ $s = 13; case 13: if($c) { $c = false; _r$6 = _r$6.$blk(); } if (_r$6 && _r$6.$blk !== undefined) { break s; }
-			_ref$1 = _r$6;
-			_i$1 = 0;
-			/* while (true) { */ case 14:
-				/* if (!(_i$1 < _ref$1.$length)) { break; } */ if(!(_i$1 < _ref$1.$length)) { $s = 15; continue; }
-				k = ((_i$1 < 0 || _i$1 >= _ref$1.$length) ? ($throwRuntimeError("index out of range"), undefined) : _ref$1.$array[_ref$1.$offset + _i$1]);
-				/* */ if ($interfaceIsEqual(k, key)) { $s = 16; continue; }
-				/* */ $s = 17; continue;
-				/* if ($interfaceIsEqual(k, key)) { */ case 16:
-					_r$7 = Progn($clone(e, env.Environment), $subslice(form, 1)); /* */ $s = 18; case 18: if($c) { $c = false; _r$7 = _r$7.$blk(); } if (_r$7 && _r$7.$blk !== undefined) { break s; }
-					$s = -1; return _r$7;
-				/* } */ case 17:
-				_i$1++;
-			/* } */ $s = 14; continue; case 15:
-			_i++;
-		/* } */ $s = 2; continue; case 3:
-		$s = -1; return [$pkg.Nil, $ifaceNil];
-		/* */ } return; } if ($f === undefined) { $f = { $blk: Case }; } $f.$ptr = $ptr; $f._i = _i; $f._i$1 = _i$1; $f._r = _r; $f._r$1 = _r$1; $f._r$2 = _r$2; $f._r$3 = _r$3; $f._r$4 = _r$4; $f._r$5 = _r$5; $f._r$6 = _r$6; $f._r$7 = _r$7; $f._ref = _ref; $f._ref$1 = _ref$1; $f._tuple = _tuple; $f.e = e; $f.err = err; $f.err$1 = err$1; $f.err$2 = err$2; $f.form = form; $f.idx = idx; $f.k = k; $f.key = key; $f.pat = pat; $f.pattern = pattern; $f.$s = $s; $f.$r = $r; return $f;
-	};
-	$pkg.Case = Case;
-	CaseUsing = function(e, key, pred, pattern) {
-		var $ptr, _i, _i$1, _r, _r$1, _r$2, _r$3, _r$4, _r$5, _r$6, _r$7, _r$8, _r$9, _ref, _ref$1, _tuple, _tuple$1, e, err, err$1, err$2, err$3, err$4, form, idx, k, key, pat, pattern, pred, ret, $s, $r;
-		/* */ $s = 0; var $f, $c = false; if (this !== undefined && this.$blk !== undefined) { $f = this; $c = true; $ptr = $f.$ptr; _i = $f._i; _i$1 = $f._i$1; _r = $f._r; _r$1 = $f._r$1; _r$2 = $f._r$2; _r$3 = $f._r$3; _r$4 = $f._r$4; _r$5 = $f._r$5; _r$6 = $f._r$6; _r$7 = $f._r$7; _r$8 = $f._r$8; _r$9 = $f._r$9; _ref = $f._ref; _ref$1 = $f._ref$1; _tuple = $f._tuple; _tuple$1 = $f._tuple$1; e = $f.e; err = $f.err; err$1 = $f.err$1; err$2 = $f.err$2; err$3 = $f.err$3; err$4 = $f.err$4; form = $f.form; idx = $f.idx; k = $f.k; key = $f.key; pat = $f.pat; pattern = $f.pattern; pred = $f.pred; ret = $f.ret; $s = $f.$s; $r = $f.$r; } s: while (true) { switch ($s) { case 0:
-		_r = Eval($clone(e, env.Environment), key); /* */ $s = 1; case 1: if($c) { $c = false; _r = _r.$blk(); } if (_r && _r.$blk !== undefined) { break s; }
-		_tuple = _r;
-		key = _tuple[0];
-		err = _tuple[1];
-		if (!($interfaceIsEqual(err, $ifaceNil))) {
-			$s = -1; return [$ifaceNil, err];
-		}
-		_r$1 = ensure(class$1.Function, new sliceType([pred])); /* */ $s = 2; case 2: if($c) { $c = false; _r$1 = _r$1.$blk(); } if (_r$1 && _r$1.$blk !== undefined) { break s; }
-		err$1 = _r$1;
-		if (!($interfaceIsEqual(err$1, $ifaceNil))) {
-			$s = -1; return [$ifaceNil, err$1];
-		}
-		_ref = pattern;
-		_i = 0;
-		/* while (true) { */ case 3:
-			/* if (!(_i < _ref.$length)) { break; } */ if(!(_i < _ref.$length)) { $s = 4; continue; }
-			idx = _i;
-			pat = ((_i < 0 || _i >= _ref.$length) ? ($throwRuntimeError("index out of range"), undefined) : _ref.$array[_ref.$offset + _i]);
-			_r$2 = ensure(class$1.List, new sliceType([pat])); /* */ $s = 5; case 5: if($c) { $c = false; _r$2 = _r$2.$blk(); } if (_r$2 && _r$2.$blk !== undefined) { break s; }
-			err$2 = _r$2;
-			if (!($interfaceIsEqual(err$2, $ifaceNil))) {
-				$s = -1; return [$ifaceNil, err$2];
-			}
-			_r$3 = $assertType(pat, instance.List).Slice(); /* */ $s = 6; case 6: if($c) { $c = false; _r$3 = _r$3.$blk(); } if (_r$3 && _r$3.$blk !== undefined) { break s; }
-			form = _r$3;
-			/* */ if (form.$length < 1) { $s = 7; continue; }
-			/* */ $s = 8; continue;
-			/* if (form.$length < 1) { */ case 7:
-				_r$4 = instance.NewArityError(); /* */ $s = 9; case 9: if($c) { $c = false; _r$4 = _r$4.$blk(); } if (_r$4 && _r$4.$blk !== undefined) { break s; }
-				$s = -1; return [$ifaceNil, _r$4];
-			/* } */ case 8:
-			/* */ if ((idx === (pattern.$length - 1 >> 0)) && $interfaceIsEqual((0 >= form.$length ? ($throwRuntimeError("index out of range"), undefined) : form.$array[form.$offset + 0]), $pkg.T)) { $s = 10; continue; }
-			/* */ $s = 11; continue;
-			/* if ((idx === (pattern.$length - 1 >> 0)) && $interfaceIsEqual((0 >= form.$length ? ($throwRuntimeError("index out of range"), undefined) : form.$array[form.$offset + 0]), $pkg.T)) { */ case 10:
-				_r$5 = Progn($clone(e, env.Environment), $subslice(form, 1)); /* */ $s = 12; case 12: if($c) { $c = false; _r$5 = _r$5.$blk(); } if (_r$5 && _r$5.$blk !== undefined) { break s; }
-				$s = -1; return _r$5;
-			/* } */ case 11:
-			_r$6 = ensure(class$1.List, new sliceType([(0 >= form.$length ? ($throwRuntimeError("index out of range"), undefined) : form.$array[form.$offset + 0])])); /* */ $s = 13; case 13: if($c) { $c = false; _r$6 = _r$6.$blk(); } if (_r$6 && _r$6.$blk !== undefined) { break s; }
-			err$3 = _r$6;
-			if (!($interfaceIsEqual(err$3, $ifaceNil))) {
-				$s = -1; return [$ifaceNil, err$3];
-			}
-			_r$7 = $assertType((0 >= form.$length ? ($throwRuntimeError("index out of range"), undefined) : form.$array[form.$offset + 0]), instance.List).Slice(); /* */ $s = 14; case 14: if($c) { $c = false; _r$7 = _r$7.$blk(); } if (_r$7 && _r$7.$blk !== undefined) { break s; }
-			_ref$1 = _r$7;
-			_i$1 = 0;
-			/* while (true) { */ case 15:
-				/* if (!(_i$1 < _ref$1.$length)) { break; } */ if(!(_i$1 < _ref$1.$length)) { $s = 16; continue; }
-				k = ((_i$1 < 0 || _i$1 >= _ref$1.$length) ? ($throwRuntimeError("index out of range"), undefined) : _ref$1.$array[_ref$1.$offset + _i$1]);
-				_r$8 = $assertType(pred, instance.Applicable).Apply($clone(e, env.Environment), new sliceType([k, key])); /* */ $s = 17; case 17: if($c) { $c = false; _r$8 = _r$8.$blk(); } if (_r$8 && _r$8.$blk !== undefined) { break s; }
-				_tuple$1 = _r$8;
-				ret = _tuple$1[0];
-				err$4 = _tuple$1[1];
-				if (!($interfaceIsEqual(err$4, $ifaceNil))) {
-					$s = -1; return [$ifaceNil, err$4];
-				}
-				/* */ if (!($interfaceIsEqual(ret, $pkg.Nil))) { $s = 18; continue; }
-				/* */ $s = 19; continue;
-				/* if (!($interfaceIsEqual(ret, $pkg.Nil))) { */ case 18:
-					_r$9 = Progn($clone(e, env.Environment), $subslice(form, 1)); /* */ $s = 20; case 20: if($c) { $c = false; _r$9 = _r$9.$blk(); } if (_r$9 && _r$9.$blk !== undefined) { break s; }
-					$s = -1; return _r$9;
-				/* } */ case 19:
-				_i$1++;
-			/* } */ $s = 15; continue; case 16:
-			_i++;
-		/* } */ $s = 3; continue; case 4:
-		$s = -1; return [$pkg.Nil, $ifaceNil];
-		/* */ } return; } if ($f === undefined) { $f = { $blk: CaseUsing }; } $f.$ptr = $ptr; $f._i = _i; $f._i$1 = _i$1; $f._r = _r; $f._r$1 = _r$1; $f._r$2 = _r$2; $f._r$3 = _r$3; $f._r$4 = _r$4; $f._r$5 = _r$5; $f._r$6 = _r$6; $f._r$7 = _r$7; $f._r$8 = _r$8; $f._r$9 = _r$9; $f._ref = _ref; $f._ref$1 = _ref$1; $f._tuple = _tuple; $f._tuple$1 = _tuple$1; $f.e = e; $f.err = err; $f.err$1 = err$1; $f.err$2 = err$2; $f.err$3 = err$3; $f.err$4 = err$4; $f.form = form; $f.idx = idx; $f.k = k; $f.key = key; $f.pat = pat; $f.pattern = pattern; $f.pred = pred; $f.ret = ret; $f.$s = $s; $f.$r = $r; return $f;
-	};
-	$pkg.CaseUsing = CaseUsing;
-	Consp = function(e, obj) {
-		var $ptr, _r, e, obj, $s, $r;
-		/* */ $s = 0; var $f, $c = false; if (this !== undefined && this.$blk !== undefined) { $f = this; $c = true; $ptr = $f.$ptr; _r = $f._r; e = $f.e; obj = $f.obj; $s = $f.$s; $r = $f.$r; } s: while (true) { switch ($s) { case 0:
-		_r = ilos.InstanceOf(class$1.Cons, obj); /* */ $s = 3; case 3: if($c) { $c = false; _r = _r.$blk(); } if (_r && _r.$blk !== undefined) { break s; }
-		/* */ if (_r) { $s = 1; continue; }
-		/* */ $s = 2; continue;
-		/* if (_r) { */ case 1:
-			$s = -1; return [$pkg.T, $ifaceNil];
-		/* } */ case 2:
-		$s = -1; return [$pkg.Nil, $ifaceNil];
-		/* */ } return; } if ($f === undefined) { $f = { $blk: Consp }; } $f.$ptr = $ptr; $f._r = _r; $f.e = e; $f.obj = obj; $f.$s = $s; $f.$r = $r; return $f;
-	};
-	$pkg.Consp = Consp;
-	Cons = function(e, obj1, obj2) {
-		var $ptr, e, obj1, obj2;
-		return [instance.NewCons(obj1, obj2), $ifaceNil];
-	};
-	$pkg.Cons = Cons;
-	Car = function(e, cons) {
-		var $ptr, _r, cons, e, err, $s, $r;
-		/* */ $s = 0; var $f, $c = false; if (this !== undefined && this.$blk !== undefined) { $f = this; $c = true; $ptr = $f.$ptr; _r = $f._r; cons = $f.cons; e = $f.e; err = $f.err; $s = $f.$s; $r = $f.$r; } s: while (true) { switch ($s) { case 0:
-		_r = ensure(class$1.Cons, new sliceType([cons])); /* */ $s = 1; case 1: if($c) { $c = false; _r = _r.$blk(); } if (_r && _r.$blk !== undefined) { break s; }
-		err = _r;
-		if (!($interfaceIsEqual(err, $ifaceNil))) {
-			$s = -1; return [$ifaceNil, err];
-		}
-		$s = -1; return [$assertType(cons, ptrType).Car, $ifaceNil];
-		/* */ } return; } if ($f === undefined) { $f = { $blk: Car }; } $f.$ptr = $ptr; $f._r = _r; $f.cons = cons; $f.e = e; $f.err = err; $f.$s = $s; $f.$r = $r; return $f;
-	};
-	$pkg.Car = Car;
-	Cdr = function(e, cons) {
-		var $ptr, _r, cons, e, err, $s, $r;
-		/* */ $s = 0; var $f, $c = false; if (this !== undefined && this.$blk !== undefined) { $f = this; $c = true; $ptr = $f.$ptr; _r = $f._r; cons = $f.cons; e = $f.e; err = $f.err; $s = $f.$s; $r = $f.$r; } s: while (true) { switch ($s) { case 0:
-		_r = ensure(class$1.Cons, new sliceType([cons])); /* */ $s = 1; case 1: if($c) { $c = false; _r = _r.$blk(); } if (_r && _r.$blk !== undefined) { break s; }
-		err = _r;
-		if (!($interfaceIsEqual(err, $ifaceNil))) {
-			$s = -1; return [$ifaceNil, err];
-		}
-		$s = -1; return [$assertType(cons, ptrType).Cdr, $ifaceNil];
-		/* */ } return; } if ($f === undefined) { $f = { $blk: Cdr }; } $f.$ptr = $ptr; $f._r = _r; $f.cons = cons; $f.e = e; $f.err = err; $f.$s = $s; $f.$r = $r; return $f;
-	};
-	$pkg.Cdr = Cdr;
-	SetCar = function(e, obj, cons) {
-		var $ptr, _r, cons, e, err, obj, $s, $r;
-		/* */ $s = 0; var $f, $c = false; if (this !== undefined && this.$blk !== undefined) { $f = this; $c = true; $ptr = $f.$ptr; _r = $f._r; cons = $f.cons; e = $f.e; err = $f.err; obj = $f.obj; $s = $f.$s; $r = $f.$r; } s: while (true) { switch ($s) { case 0:
-		_r = ensure(class$1.Cons, new sliceType([cons])); /* */ $s = 1; case 1: if($c) { $c = false; _r = _r.$blk(); } if (_r && _r.$blk !== undefined) { break s; }
-		err = _r;
-		if (!($interfaceIsEqual(err, $ifaceNil))) {
-			$s = -1; return [$ifaceNil, err];
-		}
-		$assertType(cons, ptrType).Car = obj;
-		$s = -1; return [obj, $ifaceNil];
-		/* */ } return; } if ($f === undefined) { $f = { $blk: SetCar }; } $f.$ptr = $ptr; $f._r = _r; $f.cons = cons; $f.e = e; $f.err = err; $f.obj = obj; $f.$s = $s; $f.$r = $r; return $f;
-	};
-	$pkg.SetCar = SetCar;
-	SetCdr = function(e, obj, cons) {
-		var $ptr, _r, cons, e, err, obj, $s, $r;
-		/* */ $s = 0; var $f, $c = false; if (this !== undefined && this.$blk !== undefined) { $f = this; $c = true; $ptr = $f.$ptr; _r = $f._r; cons = $f.cons; e = $f.e; err = $f.err; obj = $f.obj; $s = $f.$s; $r = $f.$r; } s: while (true) { switch ($s) { case 0:
-		_r = ensure(class$1.Cons, new sliceType([cons])); /* */ $s = 1; case 1: if($c) { $c = false; _r = _r.$blk(); } if (_r && _r.$blk !== undefined) { break s; }
-		err = _r;
-		if (!($interfaceIsEqual(err, $ifaceNil))) {
-			$s = -1; return [$ifaceNil, err];
-		}
-		$assertType(cons, ptrType).Cdr = obj;
-		$s = -1; return [obj, $ifaceNil];
-		/* */ } return; } if ($f === undefined) { $f = { $blk: SetCdr }; } $f.$ptr = $ptr; $f._r = _r; $f.cons = cons; $f.e = e; $f.err = err; $f.obj = obj; $f.$s = $s; $f.$r = $r; return $f;
-	};
-	$pkg.SetCdr = SetCdr;
-	Quote = function(e, obj) {
-		var $ptr, e, obj;
-		return [obj, $ifaceNil];
-	};
-	$pkg.Quote = Quote;
 	checkSuperClass = function(a, b) {
 		var $ptr, _i, _i$1, _r, _r$1, _r$2, _r$3, _r$4, _r$5, _r$6, _r$7, _ref, _ref$1, _v, _v$1, a, b, c, c$1, $s, $r;
 		/* */ $s = 0; var $f, $c = false; if (this !== undefined && this.$blk !== undefined) { $f = this; $c = true; $ptr = $f.$ptr; _i = $f._i; _i$1 = $f._i$1; _r = $f._r; _r$1 = $f._r$1; _r$2 = $f._r$2; _r$3 = $f._r$3; _r$4 = $f._r$4; _r$5 = $f._r$5; _r$6 = $f._r$6; _r$7 = $f._r$7; _ref = $f._ref; _ref$1 = $f._ref$1; _v = $f._v; _v$1 = $f._v$1; a = $f.a; b = $f.b; c = $f.c; c$1 = $f.c$1; $s = $f.$s; $r = $f.$r; } s: while (true) { switch ($s) { case 0:
@@ -34677,6 +34264,586 @@ $packages["github.com/ta2gch/iris/runtime"] = (function() {
 		/* */ } return; } if ($f === undefined) { $f = { $blk: InitializeObject }; } $f.$ptr = $ptr; $f._r = _r; $f._r$1 = _r$1; $f.e = e; $f.err = err; $f.inits = inits; $f.object = object; $f.$s = $s; $f.$r = $r; return $f;
 	};
 	$pkg.InitializeObject = InitializeObject;
+	Defmethod = function(e, arguments$1) {
+		var $ptr, _i, _i$1, _r, _r$1, _r$10, _r$11, _r$12, _r$13, _r$2, _r$3, _r$4, _r$5, _r$6, _r$7, _r$8, _r$9, _ref, _ref$1, _tuple, _tuple$1, _tuple$2, _tuple$3, arguments$1, class$2, classList, e, err, fun, gen, i, lambdaList, name, ok, ok$1, parameterList, pp, pp$1, qualifier, x, x$1, x$2, $s, $r;
+		/* */ $s = 0; var $f, $c = false; if (this !== undefined && this.$blk !== undefined) { $f = this; $c = true; $ptr = $f.$ptr; _i = $f._i; _i$1 = $f._i$1; _r = $f._r; _r$1 = $f._r$1; _r$10 = $f._r$10; _r$11 = $f._r$11; _r$12 = $f._r$12; _r$13 = $f._r$13; _r$2 = $f._r$2; _r$3 = $f._r$3; _r$4 = $f._r$4; _r$5 = $f._r$5; _r$6 = $f._r$6; _r$7 = $f._r$7; _r$8 = $f._r$8; _r$9 = $f._r$9; _ref = $f._ref; _ref$1 = $f._ref$1; _tuple = $f._tuple; _tuple$1 = $f._tuple$1; _tuple$2 = $f._tuple$2; _tuple$3 = $f._tuple$3; arguments$1 = $f.arguments$1; class$2 = $f.class$2; classList = $f.classList; e = $f.e; err = $f.err; fun = $f.fun; gen = $f.gen; i = $f.i; lambdaList = $f.lambdaList; name = $f.name; ok = $f.ok; ok$1 = $f.ok$1; parameterList = $f.parameterList; pp = $f.pp; pp$1 = $f.pp$1; qualifier = $f.qualifier; x = $f.x; x$1 = $f.x$1; x$2 = $f.x$2; $s = $f.$s; $r = $f.$r; } s: while (true) { switch ($s) { case 0:
+		/* */ if (arguments$1.$length < 2) { $s = 1; continue; }
+		/* */ $s = 2; continue;
+		/* if (arguments$1.$length < 2) { */ case 1:
+			_r = instance.NewArityError(); /* */ $s = 3; case 3: if($c) { $c = false; _r = _r.$blk(); } if (_r && _r.$blk !== undefined) { break s; }
+			$s = -1; return [$ifaceNil, _r];
+		/* } */ case 2:
+		name = (0 >= arguments$1.$length ? ($throwRuntimeError("index out of range"), undefined) : arguments$1.$array[arguments$1.$offset + 0]);
+		qualifier = $ifaceNil;
+		i = 0;
+		if ($interfaceIsEqual((1 >= arguments$1.$length ? ($throwRuntimeError("index out of range"), undefined) : arguments$1.$array[arguments$1.$offset + 1]), instance.NewSymbol(":AROUND")) || $interfaceIsEqual((1 >= arguments$1.$length ? ($throwRuntimeError("index out of range"), undefined) : arguments$1.$array[arguments$1.$offset + 1]), instance.NewSymbol(":BEFORE")) || $interfaceIsEqual((1 >= arguments$1.$length ? ($throwRuntimeError("index out of range"), undefined) : arguments$1.$array[arguments$1.$offset + 1]), instance.NewSymbol(":AFTER"))) {
+			qualifier = (1 >= arguments$1.$length ? ($throwRuntimeError("index out of range"), undefined) : arguments$1.$array[arguments$1.$offset + 1]);
+			i = i + (1) >> 0;
+		}
+		parameterList = new sliceType([]);
+		_r$1 = $assertType((x = i + 1 >> 0, ((x < 0 || x >= arguments$1.$length) ? ($throwRuntimeError("index out of range"), undefined) : arguments$1.$array[arguments$1.$offset + x])), instance.List).Slice(); /* */ $s = 4; case 4: if($c) { $c = false; _r$1 = _r$1.$blk(); } if (_r$1 && _r$1.$blk !== undefined) { break s; }
+		_ref = _r$1;
+		_i = 0;
+		/* while (true) { */ case 5:
+			/* if (!(_i < _ref.$length)) { break; } */ if(!(_i < _ref.$length)) { $s = 6; continue; }
+			pp = ((_i < 0 || _i >= _ref.$length) ? ($throwRuntimeError("index out of range"), undefined) : _ref.$array[_ref.$offset + _i]);
+			_r$2 = ilos.InstanceOf(class$1.Symbol, pp); /* */ $s = 10; case 10: if($c) { $c = false; _r$2 = _r$2.$blk(); } if (_r$2 && _r$2.$blk !== undefined) { break s; }
+			/* */ if (_r$2) { $s = 7; continue; }
+			/* */ $s = 8; continue;
+			/* if (_r$2) { */ case 7:
+				parameterList = $append(parameterList, pp);
+				$s = 9; continue;
+			/* } else { */ case 8:
+				_r$3 = $assertType(pp, instance.List).Nth(0); /* */ $s = 11; case 11: if($c) { $c = false; _r$3 = _r$3.$blk(); } if (_r$3 && _r$3.$blk !== undefined) { break s; }
+				parameterList = $append(parameterList, _r$3);
+			/* } */ case 9:
+			_i++;
+		/* } */ $s = 5; continue; case 6:
+		_tuple = List($clone(e, env.Environment), parameterList);
+		lambdaList = _tuple[0];
+		err = _tuple[1];
+		if (!($interfaceIsEqual(err, $ifaceNil))) {
+			$s = -1; return [$ifaceNil, err];
+		}
+		classList = new sliceType$2([]);
+		_r$4 = $assertType((x$1 = i + 1 >> 0, ((x$1 < 0 || x$1 >= arguments$1.$length) ? ($throwRuntimeError("index out of range"), undefined) : arguments$1.$array[arguments$1.$offset + x$1])), instance.List).Slice(); /* */ $s = 12; case 12: if($c) { $c = false; _r$4 = _r$4.$blk(); } if (_r$4 && _r$4.$blk !== undefined) { break s; }
+		_ref$1 = _r$4;
+		_i$1 = 0;
+		/* while (true) { */ case 13:
+			/* if (!(_i$1 < _ref$1.$length)) { break; } */ if(!(_i$1 < _ref$1.$length)) { $s = 14; continue; }
+			pp$1 = ((_i$1 < 0 || _i$1 >= _ref$1.$length) ? ($throwRuntimeError("index out of range"), undefined) : _ref$1.$array[_ref$1.$offset + _i$1]);
+			if ($interfaceIsEqual(pp$1, instance.NewSymbol(":REST")) && $interfaceIsEqual(pp$1, instance.NewSymbol("&REST"))) {
+				/* break; */ $s = 14; continue;
+			}
+			_r$5 = ilos.InstanceOf(class$1.Symbol, pp$1); /* */ $s = 18; case 18: if($c) { $c = false; _r$5 = _r$5.$blk(); } if (_r$5 && _r$5.$blk !== undefined) { break s; }
+			/* */ if (_r$5) { $s = 15; continue; }
+			/* */ $s = 16; continue;
+			/* if (_r$5) { */ case 15:
+				classList = $append(classList, (x$2 = class$1.Object, new x$2.constructor.elem(x$2)));
+				$s = 17; continue;
+			/* } else { */ case 16:
+				_r$6 = $assertType(pp$1, instance.List).Nth(1); /* */ $s = 19; case 19: if($c) { $c = false; _r$6 = _r$6.$blk(); } if (_r$6 && _r$6.$blk !== undefined) { break s; }
+				_r$7 = $subslice(e.Class, 0, 1).Get(_r$6); /* */ $s = 20; case 20: if($c) { $c = false; _r$7 = _r$7.$blk(); } if (_r$7 && _r$7.$blk !== undefined) { break s; }
+				_tuple$1 = _r$7;
+				class$2 = _tuple$1[0];
+				ok = _tuple$1[1];
+				/* */ if (!ok) { $s = 21; continue; }
+				/* */ $s = 22; continue;
+				/* if (!ok) { */ case 21:
+					_r$8 = $assertType(pp$1, instance.List).Nth(1); /* */ $s = 23; case 23: if($c) { $c = false; _r$8 = _r$8.$blk(); } if (_r$8 && _r$8.$blk !== undefined) { break s; }
+					_r$9 = instance.NewUndefinedClass(_r$8); /* */ $s = 24; case 24: if($c) { $c = false; _r$9 = _r$9.$blk(); } if (_r$9 && _r$9.$blk !== undefined) { break s; }
+					$s = -1; return [$ifaceNil, _r$9];
+				/* } */ case 22:
+				classList = $append(classList, $assertType(class$2, ilos.Class));
+			/* } */ case 17:
+			_i$1++;
+		/* } */ $s = 13; continue; case 14:
+		_r$10 = newNamedFunction($clone(e, env.Environment), name, lambdaList, $subslice(arguments$1, (i + 2 >> 0))); /* */ $s = 25; case 25: if($c) { $c = false; _r$10 = _r$10.$blk(); } if (_r$10 && _r$10.$blk !== undefined) { break s; }
+		_tuple$2 = _r$10;
+		fun = _tuple$2[0];
+		err = _tuple$2[1];
+		if (!($interfaceIsEqual(err, $ifaceNil))) {
+			$s = -1; return [$ifaceNil, err];
+		}
+		_tuple$3 = $subslice(e.Function, 0, 1).Get(name);
+		gen = _tuple$3[0];
+		ok$1 = _tuple$3[1];
+		/* */ if (!ok$1) { $s = 26; continue; }
+		/* */ $s = 27; continue;
+		/* if (!ok$1) { */ case 26:
+			_r$11 = instance.NewUndefinedFunction(name); /* */ $s = 28; case 28: if($c) { $c = false; _r$11 = _r$11.$blk(); } if (_r$11 && _r$11.$blk !== undefined) { break s; }
+			$s = -1; return [$ifaceNil, _r$11];
+		/* } */ case 27:
+		_r$12 = $assertType(gen, ptrType$1).AddMethod(qualifier, lambdaList, classList, fun); /* */ $s = 31; case 31: if($c) { $c = false; _r$12 = _r$12.$blk(); } if (_r$12 && _r$12.$blk !== undefined) { break s; }
+		/* */ if (!_r$12) { $s = 29; continue; }
+		/* */ $s = 30; continue;
+		/* if (!_r$12) { */ case 29:
+			_r$13 = instance.NewUndefinedFunction(name); /* */ $s = 32; case 32: if($c) { $c = false; _r$13 = _r$13.$blk(); } if (_r$13 && _r$13.$blk !== undefined) { break s; }
+			$s = -1; return [$ifaceNil, _r$13];
+		/* } */ case 30:
+		$s = -1; return [name, $ifaceNil];
+		/* */ } return; } if ($f === undefined) { $f = { $blk: Defmethod }; } $f.$ptr = $ptr; $f._i = _i; $f._i$1 = _i$1; $f._r = _r; $f._r$1 = _r$1; $f._r$10 = _r$10; $f._r$11 = _r$11; $f._r$12 = _r$12; $f._r$13 = _r$13; $f._r$2 = _r$2; $f._r$3 = _r$3; $f._r$4 = _r$4; $f._r$5 = _r$5; $f._r$6 = _r$6; $f._r$7 = _r$7; $f._r$8 = _r$8; $f._r$9 = _r$9; $f._ref = _ref; $f._ref$1 = _ref$1; $f._tuple = _tuple; $f._tuple$1 = _tuple$1; $f._tuple$2 = _tuple$2; $f._tuple$3 = _tuple$3; $f.arguments$1 = arguments$1; $f.class$2 = class$2; $f.classList = classList; $f.e = e; $f.err = err; $f.fun = fun; $f.gen = gen; $f.i = i; $f.lambdaList = lambdaList; $f.name = name; $f.ok = ok; $f.ok$1 = ok$1; $f.parameterList = parameterList; $f.pp = pp; $f.pp$1 = pp$1; $f.qualifier = qualifier; $f.x = x; $f.x$1 = x$1; $f.x$2 = x$2; $f.$s = $s; $f.$r = $r; return $f;
+	};
+	$pkg.Defmethod = Defmethod;
+	Defgeneric = function(e, funcSpec, lambdaList, optionsOrMethodDescs) {
+		var $ptr, _1, _arg, _arg$1, _i, _r, _r$1, _r$2, _r$3, _r$4, _r$5, _r$6, _r$7, _r$8, _ref, _tuple, class$2, e, forms, funcSpec, genericFunctionClass, lambdaList, methodCombination, ok, optionOrMethodDesc, optionsOrMethodDescs, $s, $r;
+		/* */ $s = 0; var $f, $c = false; if (this !== undefined && this.$blk !== undefined) { $f = this; $c = true; $ptr = $f.$ptr; _1 = $f._1; _arg = $f._arg; _arg$1 = $f._arg$1; _i = $f._i; _r = $f._r; _r$1 = $f._r$1; _r$2 = $f._r$2; _r$3 = $f._r$3; _r$4 = $f._r$4; _r$5 = $f._r$5; _r$6 = $f._r$6; _r$7 = $f._r$7; _r$8 = $f._r$8; _ref = $f._ref; _tuple = $f._tuple; class$2 = $f.class$2; e = $f.e; forms = $f.forms; funcSpec = $f.funcSpec; genericFunctionClass = $f.genericFunctionClass; lambdaList = $f.lambdaList; methodCombination = $f.methodCombination; ok = $f.ok; optionOrMethodDesc = $f.optionOrMethodDesc; optionsOrMethodDescs = $f.optionsOrMethodDescs; $s = $f.$s; $r = $f.$r; } s: while (true) { switch ($s) { case 0:
+		methodCombination = $ifaceNil;
+		genericFunctionClass = class$1.StandardGenericFunction;
+		forms = new sliceType([]);
+		_ref = optionsOrMethodDescs;
+		_i = 0;
+		/* while (true) { */ case 1:
+			/* if (!(_i < _ref.$length)) { break; } */ if(!(_i < _ref.$length)) { $s = 2; continue; }
+			optionOrMethodDesc = ((_i < 0 || _i >= _ref.$length) ? ($throwRuntimeError("index out of range"), undefined) : _ref.$array[_ref.$offset + _i]);
+				_r = $assertType(optionOrMethodDesc, instance.List).Nth(0); /* */ $s = 4; case 4: if($c) { $c = false; _r = _r.$blk(); } if (_r && _r.$blk !== undefined) { break s; }
+				_1 = _r;
+				/* */ if ($interfaceIsEqual(_1, (instance.NewSymbol(":METHOD-COMBINATION")))) { $s = 5; continue; }
+				/* */ if ($interfaceIsEqual(_1, (instance.NewSymbol(":GENERIC-FUNCTION-CLASS")))) { $s = 6; continue; }
+				/* */ if ($interfaceIsEqual(_1, (instance.NewSymbol(":METHOD")))) { $s = 7; continue; }
+				/* */ $s = 8; continue;
+				/* if ($interfaceIsEqual(_1, (instance.NewSymbol(":METHOD-COMBINATION")))) { */ case 5:
+					_r$1 = $assertType(optionOrMethodDesc, instance.List).Nth(1); /* */ $s = 9; case 9: if($c) { $c = false; _r$1 = _r$1.$blk(); } if (_r$1 && _r$1.$blk !== undefined) { break s; }
+					methodCombination = _r$1;
+					$s = 8; continue;
+				/* } else if ($interfaceIsEqual(_1, (instance.NewSymbol(":GENERIC-FUNCTION-CLASS")))) { */ case 6:
+					_r$2 = $assertType(optionOrMethodDesc, instance.List).Nth(1); /* */ $s = 10; case 10: if($c) { $c = false; _r$2 = _r$2.$blk(); } if (_r$2 && _r$2.$blk !== undefined) { break s; }
+					_r$3 = $subslice(e.Class, 0, 1).Get(_r$2); /* */ $s = 11; case 11: if($c) { $c = false; _r$3 = _r$3.$blk(); } if (_r$3 && _r$3.$blk !== undefined) { break s; }
+					_tuple = _r$3;
+					class$2 = _tuple[0];
+					ok = _tuple[1];
+					/* */ if (!ok) { $s = 12; continue; }
+					/* */ $s = 13; continue;
+					/* if (!ok) { */ case 12:
+						_r$4 = $assertType(optionOrMethodDesc, instance.List).Nth(1); /* */ $s = 14; case 14: if($c) { $c = false; _r$4 = _r$4.$blk(); } if (_r$4 && _r$4.$blk !== undefined) { break s; }
+						_r$5 = instance.NewUndefinedClass(_r$4); /* */ $s = 15; case 15: if($c) { $c = false; _r$5 = _r$5.$blk(); } if (_r$5 && _r$5.$blk !== undefined) { break s; }
+						$s = -1; return [$ifaceNil, _r$5];
+					/* } */ case 13:
+					genericFunctionClass = $assertType(class$2, ilos.Class);
+					$s = 8; continue;
+				/* } else if ($interfaceIsEqual(_1, (instance.NewSymbol(":METHOD")))) { */ case 7:
+					_arg = instance.NewSymbol("DEFMETHOD");
+					_r$6 = $assertType(optionOrMethodDesc, instance.List).NthCdr(1); /* */ $s = 16; case 16: if($c) { $c = false; _r$6 = _r$6.$blk(); } if (_r$6 && _r$6.$blk !== undefined) { break s; }
+					_arg$1 = _r$6;
+					_r$7 = instance.NewCons(_arg, _arg$1); /* */ $s = 17; case 17: if($c) { $c = false; _r$7 = _r$7.$blk(); } if (_r$7 && _r$7.$blk !== undefined) { break s; }
+					forms = $append(forms, _r$7);
+				/* } */ case 8:
+			case 3:
+			_i++;
+		/* } */ $s = 1; continue; case 2:
+		$subslice(e.Function, 0, 1).Define(funcSpec, instance.NewGenericFunction(funcSpec, lambdaList, methodCombination, genericFunctionClass));
+		_r$8 = Progn($clone(e, env.Environment), forms); /* */ $s = 18; case 18: if($c) { $c = false; _r$8 = _r$8.$blk(); } if (_r$8 && _r$8.$blk !== undefined) { break s; }
+		_r$8;
+		$s = -1; return [funcSpec, $ifaceNil];
+		/* */ } return; } if ($f === undefined) { $f = { $blk: Defgeneric }; } $f.$ptr = $ptr; $f._1 = _1; $f._arg = _arg; $f._arg$1 = _arg$1; $f._i = _i; $f._r = _r; $f._r$1 = _r$1; $f._r$2 = _r$2; $f._r$3 = _r$3; $f._r$4 = _r$4; $f._r$5 = _r$5; $f._r$6 = _r$6; $f._r$7 = _r$7; $f._r$8 = _r$8; $f._ref = _ref; $f._tuple = _tuple; $f.class$2 = class$2; $f.e = e; $f.forms = forms; $f.funcSpec = funcSpec; $f.genericFunctionClass = genericFunctionClass; $f.lambdaList = lambdaList; $f.methodCombination = methodCombination; $f.ok = ok; $f.optionOrMethodDesc = optionOrMethodDesc; $f.optionsOrMethodDescs = optionsOrMethodDescs; $f.$s = $s; $f.$r = $r; return $f;
+	};
+	$pkg.Defgeneric = Defgeneric;
+	SignalCondition = function(e, condition, continuable) {
+		var $ptr, _r, _r$1, _r$2, _r$3, _r$4, _tuple, _tuple$1, c, condition, continuable, e, err, o, $s, $r;
+		/* */ $s = 0; var $f, $c = false; if (this !== undefined && this.$blk !== undefined) { $f = this; $c = true; $ptr = $f.$ptr; _r = $f._r; _r$1 = $f._r$1; _r$2 = $f._r$2; _r$3 = $f._r$3; _r$4 = $f._r$4; _tuple = $f._tuple; _tuple$1 = $f._tuple$1; c = $f.c; condition = $f.condition; continuable = $f.continuable; e = $f.e; err = $f.err; o = $f.o; $s = $f.$s; $r = $f.$r; } s: while (true) { switch ($s) { case 0:
+		_r = ensure(class$1.SeriousCondition, new sliceType([condition])); /* */ $s = 1; case 1: if($c) { $c = false; _r = _r.$blk(); } if (_r && _r.$blk !== undefined) { break s; }
+		err = _r;
+		if (!($interfaceIsEqual(err, $ifaceNil))) {
+			$s = -1; return [$ifaceNil, err];
+		}
+		_r$1 = $clone($assertType(condition, instance.Instance), instance.Instance).SetSlotValue(instance.NewSymbol("IRIS.CONTINUABLE"), continuable, class$1.SeriousCondition); /* */ $s = 2; case 2: if($c) { $c = false; _r$1 = _r$1.$blk(); } if (_r$1 && _r$1.$blk !== undefined) { break s; }
+		_r$1;
+		_r$2 = $assertType(e.Handler, instance.Applicable).Apply($clone(e, env.Environment), new sliceType([condition])); /* */ $s = 3; case 3: if($c) { $c = false; _r$2 = _r$2.$blk(); } if (_r$2 && _r$2.$blk !== undefined) { break s; }
+		_tuple = _r$2;
+		c = _tuple[1];
+		_r$3 = ilos.InstanceOf(class$1.Continue, c); /* */ $s = 6; case 6: if($c) { $c = false; _r$3 = _r$3.$blk(); } if (_r$3 && _r$3.$blk !== undefined) { break s; }
+		/* */ if (_r$3) { $s = 4; continue; }
+		/* */ $s = 5; continue;
+		/* if (_r$3) { */ case 4:
+			_r$4 = $clone($assertType(c, instance.Instance), instance.Instance).GetSlotValue(instance.NewSymbol("IRIS.OBJECT"), class$1.Continue); /* */ $s = 7; case 7: if($c) { $c = false; _r$4 = _r$4.$blk(); } if (_r$4 && _r$4.$blk !== undefined) { break s; }
+			_tuple$1 = _r$4;
+			o = _tuple$1[0];
+			$s = -1; return [o, $ifaceNil];
+		/* } */ case 5:
+		$s = -1; return [$ifaceNil, c];
+		/* */ } return; } if ($f === undefined) { $f = { $blk: SignalCondition }; } $f.$ptr = $ptr; $f._r = _r; $f._r$1 = _r$1; $f._r$2 = _r$2; $f._r$3 = _r$3; $f._r$4 = _r$4; $f._tuple = _tuple; $f._tuple$1 = _tuple$1; $f.c = c; $f.condition = condition; $f.continuable = continuable; $f.e = e; $f.err = err; $f.o = o; $f.$s = $s; $f.$r = $r; return $f;
+	};
+	$pkg.SignalCondition = SignalCondition;
+	Cerror = function(e, continueString, errorString, objs) {
+		var $ptr, _r, _r$1, _r$2, _r$3, _tuple, _tuple$1, _tuple$2, _tuple$3, arguments$1, condition, continuable, continueString, e, err, err$1, errorString, objs, ss, $s, $r;
+		/* */ $s = 0; var $f, $c = false; if (this !== undefined && this.$blk !== undefined) { $f = this; $c = true; $ptr = $f.$ptr; _r = $f._r; _r$1 = $f._r$1; _r$2 = $f._r$2; _r$3 = $f._r$3; _tuple = $f._tuple; _tuple$1 = $f._tuple$1; _tuple$2 = $f._tuple$2; _tuple$3 = $f._tuple$3; arguments$1 = $f.arguments$1; condition = $f.condition; continuable = $f.continuable; continueString = $f.continueString; e = $f.e; err = $f.err; err$1 = $f.err$1; errorString = $f.errorString; objs = $f.objs; ss = $f.ss; $s = $f.$s; $r = $f.$r; } s: while (true) { switch ($s) { case 0:
+		_tuple = List($clone(e, env.Environment), objs);
+		arguments$1 = _tuple[0];
+		err = _tuple[1];
+		if (!($interfaceIsEqual(err, $ifaceNil))) {
+			$s = -1; return [$ifaceNil, err];
+		}
+		_r = instance.Create($clone(e, env.Environment), class$1.SimpleError, new sliceType([instance.NewSymbol("FORMAT-STRING"), errorString, instance.NewSymbol("FORAMT-OBJECTS"), arguments$1])); /* */ $s = 1; case 1: if($c) { $c = false; _r = _r.$blk(); } if (_r && _r.$blk !== undefined) { break s; }
+		condition = _r;
+		_tuple$1 = CreateStringOutputStream($clone(e, env.Environment));
+		ss = _tuple$1[0];
+		err = _tuple$1[1];
+		if (!($interfaceIsEqual(err, $ifaceNil))) {
+			$s = -1; return [$ifaceNil, err];
+		}
+		_r$1 = Format($clone(e, env.Environment), ss, continueString, objs); /* */ $s = 2; case 2: if($c) { $c = false; _r$1 = _r$1.$blk(); } if (_r$1 && _r$1.$blk !== undefined) { break s; }
+		_tuple$2 = _r$1;
+		err$1 = _tuple$2[1];
+		if (!($interfaceIsEqual(err$1, $ifaceNil))) {
+			$s = -1; return [$ifaceNil, err$1];
+		}
+		_r$2 = GetOutputStreamString($clone(e, env.Environment), ss); /* */ $s = 3; case 3: if($c) { $c = false; _r$2 = _r$2.$blk(); } if (_r$2 && _r$2.$blk !== undefined) { break s; }
+		_tuple$3 = _r$2;
+		continuable = _tuple$3[0];
+		err = _tuple$3[1];
+		if (!($interfaceIsEqual(err, $ifaceNil))) {
+			$s = -1; return [$ifaceNil, err];
+		}
+		_r$3 = SignalCondition($clone(e, env.Environment), condition, continuable); /* */ $s = 4; case 4: if($c) { $c = false; _r$3 = _r$3.$blk(); } if (_r$3 && _r$3.$blk !== undefined) { break s; }
+		$s = -1; return _r$3;
+		/* */ } return; } if ($f === undefined) { $f = { $blk: Cerror }; } $f.$ptr = $ptr; $f._r = _r; $f._r$1 = _r$1; $f._r$2 = _r$2; $f._r$3 = _r$3; $f._tuple = _tuple; $f._tuple$1 = _tuple$1; $f._tuple$2 = _tuple$2; $f._tuple$3 = _tuple$3; $f.arguments$1 = arguments$1; $f.condition = condition; $f.continuable = continuable; $f.continueString = continueString; $f.e = e; $f.err = err; $f.err$1 = err$1; $f.errorString = errorString; $f.objs = objs; $f.ss = ss; $f.$s = $s; $f.$r = $r; return $f;
+	};
+	$pkg.Cerror = Cerror;
+	Error = function(e, continueString, errorString, objs) {
+		var $ptr, _r, _r$1, _tuple, arguments$1, condition, continueString, e, err, errorString, objs, $s, $r;
+		/* */ $s = 0; var $f, $c = false; if (this !== undefined && this.$blk !== undefined) { $f = this; $c = true; $ptr = $f.$ptr; _r = $f._r; _r$1 = $f._r$1; _tuple = $f._tuple; arguments$1 = $f.arguments$1; condition = $f.condition; continueString = $f.continueString; e = $f.e; err = $f.err; errorString = $f.errorString; objs = $f.objs; $s = $f.$s; $r = $f.$r; } s: while (true) { switch ($s) { case 0:
+		_tuple = List($clone(e, env.Environment), objs);
+		arguments$1 = _tuple[0];
+		err = _tuple[1];
+		if (!($interfaceIsEqual(err, $ifaceNil))) {
+			$s = -1; return [$ifaceNil, err];
+		}
+		_r = instance.Create($clone(e, env.Environment), class$1.SimpleError, new sliceType([instance.NewSymbol("FORMAT-STRING"), errorString, instance.NewSymbol("FORAMT-OBJECTS"), arguments$1])); /* */ $s = 1; case 1: if($c) { $c = false; _r = _r.$blk(); } if (_r && _r.$blk !== undefined) { break s; }
+		condition = _r;
+		_r$1 = SignalCondition($clone(e, env.Environment), condition, $pkg.Nil); /* */ $s = 2; case 2: if($c) { $c = false; _r$1 = _r$1.$blk(); } if (_r$1 && _r$1.$blk !== undefined) { break s; }
+		$s = -1; return _r$1;
+		/* */ } return; } if ($f === undefined) { $f = { $blk: Error }; } $f.$ptr = $ptr; $f._r = _r; $f._r$1 = _r$1; $f._tuple = _tuple; $f.arguments$1 = arguments$1; $f.condition = condition; $f.continueString = continueString; $f.e = e; $f.err = err; $f.errorString = errorString; $f.objs = objs; $f.$s = $s; $f.$r = $r; return $f;
+	};
+	$pkg.Error = Error;
+	ReportCondition = function(e, condition, stream) {
+		var $ptr, _r, condition, e, stream, $s, $r;
+		/* */ $s = 0; var $f, $c = false; if (this !== undefined && this.$blk !== undefined) { $f = this; $c = true; $ptr = $f.$ptr; _r = $f._r; condition = $f.condition; e = $f.e; stream = $f.stream; $s = $f.$s; $r = $f.$r; } s: while (true) { switch ($s) { case 0:
+		_r = Format($clone(e, env.Environment), e.StandardOutput, instance.NewString("~A"), new sliceType([condition])); /* */ $s = 1; case 1: if($c) { $c = false; _r = _r.$blk(); } if (_r && _r.$blk !== undefined) { break s; }
+		$s = -1; return _r;
+		/* */ } return; } if ($f === undefined) { $f = { $blk: ReportCondition }; } $f.$ptr = $ptr; $f._r = _r; $f.condition = condition; $f.e = e; $f.stream = stream; $f.$s = $s; $f.$r = $r; return $f;
+	};
+	$pkg.ReportCondition = ReportCondition;
+	ConditionContinuable = function(e, condition) {
+		var $ptr, _r, _tuple, condition, continuable, e, ok, $s, $r;
+		/* */ $s = 0; var $f, $c = false; if (this !== undefined && this.$blk !== undefined) { $f = this; $c = true; $ptr = $f.$ptr; _r = $f._r; _tuple = $f._tuple; condition = $f.condition; continuable = $f.continuable; e = $f.e; ok = $f.ok; $s = $f.$s; $r = $f.$r; } s: while (true) { switch ($s) { case 0:
+		_r = $clone($assertType(condition, instance.Instance), instance.Instance).GetSlotValue(instance.NewSymbol("IRIS.CONTINUABLE"), class$1.SeriousCondition); /* */ $s = 1; case 1: if($c) { $c = false; _r = _r.$blk(); } if (_r && _r.$blk !== undefined) { break s; }
+		_tuple = _r;
+		continuable = _tuple[0];
+		ok = _tuple[1];
+		if (ok) {
+			$s = -1; return [continuable, $ifaceNil];
+		}
+		$s = -1; return [$pkg.Nil, $ifaceNil];
+		/* */ } return; } if ($f === undefined) { $f = { $blk: ConditionContinuable }; } $f.$ptr = $ptr; $f._r = _r; $f._tuple = _tuple; $f.condition = condition; $f.continuable = continuable; $f.e = e; $f.ok = ok; $f.$s = $s; $f.$r = $r; return $f;
+	};
+	$pkg.ConditionContinuable = ConditionContinuable;
+	ContinueCondition = function(e, condition, value) {
+		var $ptr, _r, _r$1, _r$2, _r$3, _r$4, _tuple, b, condition, e, ok, value, $s, $r;
+		/* */ $s = 0; var $f, $c = false; if (this !== undefined && this.$blk !== undefined) { $f = this; $c = true; $ptr = $f.$ptr; _r = $f._r; _r$1 = $f._r$1; _r$2 = $f._r$2; _r$3 = $f._r$3; _r$4 = $f._r$4; _tuple = $f._tuple; b = $f.b; condition = $f.condition; e = $f.e; ok = $f.ok; value = $f.value; $s = $f.$s; $r = $f.$r; } s: while (true) { switch ($s) { case 0:
+		_r = $clone($assertType(condition, instance.Instance), instance.Instance).GetSlotValue(instance.NewSymbol("IRIS.CONTINUABLE"), class$1.SeriousCondition); /* */ $s = 1; case 1: if($c) { $c = false; _r = _r.$blk(); } if (_r && _r.$blk !== undefined) { break s; }
+		_tuple = _r;
+		b = _tuple[0];
+		ok = _tuple[1];
+		/* */ if (!ok || $interfaceIsEqual(b, $pkg.Nil)) { $s = 2; continue; }
+		/* */ $s = 3; continue;
+		/* if (!ok || $interfaceIsEqual(b, $pkg.Nil)) { */ case 2:
+			_r$1 = instance.Create($clone(e, env.Environment), class$1.ProgramError, new sliceType([])); /* */ $s = 4; case 4: if($c) { $c = false; _r$1 = _r$1.$blk(); } if (_r$1 && _r$1.$blk !== undefined) { break s; }
+			$s = -1; return [$ifaceNil, _r$1];
+		/* } */ case 3:
+		/* */ if (value.$length === 1) { $s = 5; continue; }
+		/* */ $s = 6; continue;
+		/* if (value.$length === 1) { */ case 5:
+			_r$2 = instance.Create($clone(e, env.Environment), class$1.Continue, new sliceType([instance.NewSymbol("IRIS.OBJECT"), (0 >= value.$length ? ($throwRuntimeError("index out of range"), undefined) : value.$array[value.$offset + 0])])); /* */ $s = 7; case 7: if($c) { $c = false; _r$2 = _r$2.$blk(); } if (_r$2 && _r$2.$blk !== undefined) { break s; }
+			$s = -1; return [$ifaceNil, _r$2];
+		/* } */ case 6:
+		/* */ if (value.$length === 0) { $s = 8; continue; }
+		/* */ $s = 9; continue;
+		/* if (value.$length === 0) { */ case 8:
+			_r$3 = instance.Create($clone(e, env.Environment), class$1.Continue, new sliceType([instance.NewSymbol("IRIS.OBJECT"), $pkg.Nil])); /* */ $s = 10; case 10: if($c) { $c = false; _r$3 = _r$3.$blk(); } if (_r$3 && _r$3.$blk !== undefined) { break s; }
+			$s = -1; return [$ifaceNil, _r$3];
+		/* } */ case 9:
+		_r$4 = instance.Create($clone(e, env.Environment), class$1.ProgramError, new sliceType([])); /* */ $s = 11; case 11: if($c) { $c = false; _r$4 = _r$4.$blk(); } if (_r$4 && _r$4.$blk !== undefined) { break s; }
+		$s = -1; return [$ifaceNil, _r$4];
+		/* */ } return; } if ($f === undefined) { $f = { $blk: ContinueCondition }; } $f.$ptr = $ptr; $f._r = _r; $f._r$1 = _r$1; $f._r$2 = _r$2; $f._r$3 = _r$3; $f._r$4 = _r$4; $f._tuple = _tuple; $f.b = b; $f.condition = condition; $f.e = e; $f.ok = ok; $f.value = value; $f.$s = $s; $f.$r = $r; return $f;
+	};
+	$pkg.ContinueCondition = ContinueCondition;
+	WithHandler = function(e, handler, forms) {
+		var $ptr, _r, _r$1, _tuple, _tuple$1, e, err, forms, fun, handler, ret, $s, $r;
+		/* */ $s = 0; var $f, $c = false; if (this !== undefined && this.$blk !== undefined) { $f = this; $c = true; $ptr = $f.$ptr; _r = $f._r; _r$1 = $f._r$1; _tuple = $f._tuple; _tuple$1 = $f._tuple$1; e = $f.e; err = $f.err; forms = $f.forms; fun = $f.fun; handler = $f.handler; ret = $f.ret; $s = $f.$s; $r = $f.$r; } s: while (true) { switch ($s) { case 0:
+		_r = Eval($clone(e, env.Environment), handler); /* */ $s = 1; case 1: if($c) { $c = false; _r = _r.$blk(); } if (_r && _r.$blk !== undefined) { break s; }
+		_tuple = _r;
+		fun = _tuple[0];
+		err = _tuple[1];
+		if (!($interfaceIsEqual(err, $ifaceNil))) {
+			$s = -1; return [$ifaceNil, err];
+		}
+		e.Handler = fun;
+		_r$1 = Progn($clone(e, env.Environment), forms); /* */ $s = 2; case 2: if($c) { $c = false; _r$1 = _r$1.$blk(); } if (_r$1 && _r$1.$blk !== undefined) { break s; }
+		_tuple$1 = _r$1;
+		ret = _tuple$1[0];
+		err = _tuple$1[1];
+		if (!($interfaceIsEqual(err, $ifaceNil))) {
+			$s = -1; return [$ifaceNil, err];
+		}
+		$s = -1; return [ret, err];
+		/* */ } return; } if ($f === undefined) { $f = { $blk: WithHandler }; } $f.$ptr = $ptr; $f._r = _r; $f._r$1 = _r$1; $f._tuple = _tuple; $f._tuple$1 = _tuple$1; $f.e = e; $f.err = err; $f.forms = forms; $f.fun = fun; $f.handler = handler; $f.ret = ret; $f.$s = $s; $f.$r = $r; return $f;
+	};
+	$pkg.WithHandler = WithHandler;
+	If = function(e, testForm, thenForm, elseForm) {
+		var $ptr, _r, _r$1, _r$2, _r$3, _tuple, e, elseForm, err, testForm, tf, thenForm, $s, $r;
+		/* */ $s = 0; var $f, $c = false; if (this !== undefined && this.$blk !== undefined) { $f = this; $c = true; $ptr = $f.$ptr; _r = $f._r; _r$1 = $f._r$1; _r$2 = $f._r$2; _r$3 = $f._r$3; _tuple = $f._tuple; e = $f.e; elseForm = $f.elseForm; err = $f.err; testForm = $f.testForm; tf = $f.tf; thenForm = $f.thenForm; $s = $f.$s; $r = $f.$r; } s: while (true) { switch ($s) { case 0:
+		_r = Eval($clone(e, env.Environment), testForm); /* */ $s = 1; case 1: if($c) { $c = false; _r = _r.$blk(); } if (_r && _r.$blk !== undefined) { break s; }
+		_tuple = _r;
+		tf = _tuple[0];
+		err = _tuple[1];
+		if (!($interfaceIsEqual(err, $ifaceNil))) {
+			$s = -1; return [$ifaceNil, err];
+		}
+		/* */ if ($interfaceIsEqual(tf, $pkg.T)) { $s = 2; continue; }
+		/* */ $s = 3; continue;
+		/* if ($interfaceIsEqual(tf, $pkg.T)) { */ case 2:
+			_r$1 = Eval($clone(e, env.Environment), thenForm); /* */ $s = 4; case 4: if($c) { $c = false; _r$1 = _r$1.$blk(); } if (_r$1 && _r$1.$blk !== undefined) { break s; }
+			$s = -1; return _r$1;
+		/* } */ case 3:
+		/* */ if (elseForm.$length > 1) { $s = 5; continue; }
+		/* */ $s = 6; continue;
+		/* if (elseForm.$length > 1) { */ case 5:
+			_r$2 = instance.NewArityError(); /* */ $s = 7; case 7: if($c) { $c = false; _r$2 = _r$2.$blk(); } if (_r$2 && _r$2.$blk !== undefined) { break s; }
+			$s = -1; return [$ifaceNil, _r$2];
+		/* } */ case 6:
+		if (elseForm.$length === 0) {
+			$s = -1; return [$pkg.Nil, $ifaceNil];
+		}
+		_r$3 = Eval($clone(e, env.Environment), (0 >= elseForm.$length ? ($throwRuntimeError("index out of range"), undefined) : elseForm.$array[elseForm.$offset + 0])); /* */ $s = 8; case 8: if($c) { $c = false; _r$3 = _r$3.$blk(); } if (_r$3 && _r$3.$blk !== undefined) { break s; }
+		$s = -1; return _r$3;
+		/* */ } return; } if ($f === undefined) { $f = { $blk: If }; } $f.$ptr = $ptr; $f._r = _r; $f._r$1 = _r$1; $f._r$2 = _r$2; $f._r$3 = _r$3; $f._tuple = _tuple; $f.e = e; $f.elseForm = elseForm; $f.err = err; $f.testForm = testForm; $f.tf = tf; $f.thenForm = thenForm; $f.$s = $s; $f.$r = $r; return $f;
+	};
+	$pkg.If = If;
+	Cond = function(e, testFrom) {
+		var $ptr, _i, _r, _r$1, _r$2, _r$3, _r$4, _ref, _tuple, e, err, err$1, ret, s, testFrom, tf, $s, $r;
+		/* */ $s = 0; var $f, $c = false; if (this !== undefined && this.$blk !== undefined) { $f = this; $c = true; $ptr = $f.$ptr; _i = $f._i; _r = $f._r; _r$1 = $f._r$1; _r$2 = $f._r$2; _r$3 = $f._r$3; _r$4 = $f._r$4; _ref = $f._ref; _tuple = $f._tuple; e = $f.e; err = $f.err; err$1 = $f.err$1; ret = $f.ret; s = $f.s; testFrom = $f.testFrom; tf = $f.tf; $s = $f.$s; $r = $f.$r; } s: while (true) { switch ($s) { case 0:
+		_ref = testFrom;
+		_i = 0;
+		/* while (true) { */ case 1:
+			/* if (!(_i < _ref.$length)) { break; } */ if(!(_i < _ref.$length)) { $s = 2; continue; }
+			tf = ((_i < 0 || _i >= _ref.$length) ? ($throwRuntimeError("index out of range"), undefined) : _ref.$array[_ref.$offset + _i]);
+			_r = ensure(class$1.List, new sliceType([tf])); /* */ $s = 3; case 3: if($c) { $c = false; _r = _r.$blk(); } if (_r && _r.$blk !== undefined) { break s; }
+			err = _r;
+			if (!($interfaceIsEqual(err, $ifaceNil))) {
+				$s = -1; return [$ifaceNil, err];
+			}
+			_r$1 = $assertType(tf, instance.List).Slice(); /* */ $s = 4; case 4: if($c) { $c = false; _r$1 = _r$1.$blk(); } if (_r$1 && _r$1.$blk !== undefined) { break s; }
+			s = _r$1;
+			/* */ if (s.$length === 0) { $s = 5; continue; }
+			/* */ $s = 6; continue;
+			/* if (s.$length === 0) { */ case 5:
+				_r$2 = instance.NewArityError(); /* */ $s = 7; case 7: if($c) { $c = false; _r$2 = _r$2.$blk(); } if (_r$2 && _r$2.$blk !== undefined) { break s; }
+				$s = -1; return [$ifaceNil, _r$2];
+			/* } */ case 6:
+			_r$3 = Eval($clone(e, env.Environment), (0 >= s.$length ? ($throwRuntimeError("index out of range"), undefined) : s.$array[s.$offset + 0])); /* */ $s = 8; case 8: if($c) { $c = false; _r$3 = _r$3.$blk(); } if (_r$3 && _r$3.$blk !== undefined) { break s; }
+			_tuple = _r$3;
+			ret = _tuple[0];
+			err$1 = _tuple[1];
+			if (!($interfaceIsEqual(err$1, $ifaceNil))) {
+				$s = -1; return [$ifaceNil, err$1];
+			}
+			/* */ if ($interfaceIsEqual(ret, $pkg.T)) { $s = 9; continue; }
+			/* */ $s = 10; continue;
+			/* if ($interfaceIsEqual(ret, $pkg.T)) { */ case 9:
+				_r$4 = Progn($clone(e, env.Environment), $subslice(s, 1)); /* */ $s = 11; case 11: if($c) { $c = false; _r$4 = _r$4.$blk(); } if (_r$4 && _r$4.$blk !== undefined) { break s; }
+				$s = -1; return _r$4;
+			/* } */ case 10:
+			_i++;
+		/* } */ $s = 1; continue; case 2:
+		$s = -1; return [$pkg.Nil, $ifaceNil];
+		/* */ } return; } if ($f === undefined) { $f = { $blk: Cond }; } $f.$ptr = $ptr; $f._i = _i; $f._r = _r; $f._r$1 = _r$1; $f._r$2 = _r$2; $f._r$3 = _r$3; $f._r$4 = _r$4; $f._ref = _ref; $f._tuple = _tuple; $f.e = e; $f.err = err; $f.err$1 = err$1; $f.ret = ret; $f.s = s; $f.testFrom = testFrom; $f.tf = tf; $f.$s = $s; $f.$r = $r; return $f;
+	};
+	$pkg.Cond = Cond;
+	Case = function(e, key, pattern) {
+		var $ptr, _i, _i$1, _r, _r$1, _r$2, _r$3, _r$4, _r$5, _r$6, _r$7, _ref, _ref$1, _tuple, e, err, err$1, err$2, form, idx, k, key, pat, pattern, $s, $r;
+		/* */ $s = 0; var $f, $c = false; if (this !== undefined && this.$blk !== undefined) { $f = this; $c = true; $ptr = $f.$ptr; _i = $f._i; _i$1 = $f._i$1; _r = $f._r; _r$1 = $f._r$1; _r$2 = $f._r$2; _r$3 = $f._r$3; _r$4 = $f._r$4; _r$5 = $f._r$5; _r$6 = $f._r$6; _r$7 = $f._r$7; _ref = $f._ref; _ref$1 = $f._ref$1; _tuple = $f._tuple; e = $f.e; err = $f.err; err$1 = $f.err$1; err$2 = $f.err$2; form = $f.form; idx = $f.idx; k = $f.k; key = $f.key; pat = $f.pat; pattern = $f.pattern; $s = $f.$s; $r = $f.$r; } s: while (true) { switch ($s) { case 0:
+		_r = Eval($clone(e, env.Environment), key); /* */ $s = 1; case 1: if($c) { $c = false; _r = _r.$blk(); } if (_r && _r.$blk !== undefined) { break s; }
+		_tuple = _r;
+		key = _tuple[0];
+		err = _tuple[1];
+		if (!($interfaceIsEqual(err, $ifaceNil))) {
+			$s = -1; return [$ifaceNil, err];
+		}
+		_ref = pattern;
+		_i = 0;
+		/* while (true) { */ case 2:
+			/* if (!(_i < _ref.$length)) { break; } */ if(!(_i < _ref.$length)) { $s = 3; continue; }
+			idx = _i;
+			pat = ((_i < 0 || _i >= _ref.$length) ? ($throwRuntimeError("index out of range"), undefined) : _ref.$array[_ref.$offset + _i]);
+			_r$1 = ensure(class$1.List, new sliceType([pat])); /* */ $s = 4; case 4: if($c) { $c = false; _r$1 = _r$1.$blk(); } if (_r$1 && _r$1.$blk !== undefined) { break s; }
+			err$1 = _r$1;
+			if (!($interfaceIsEqual(err$1, $ifaceNil))) {
+				$s = -1; return [$ifaceNil, err$1];
+			}
+			_r$2 = $assertType(pat, instance.List).Slice(); /* */ $s = 5; case 5: if($c) { $c = false; _r$2 = _r$2.$blk(); } if (_r$2 && _r$2.$blk !== undefined) { break s; }
+			form = _r$2;
+			/* */ if (form.$length < 1) { $s = 6; continue; }
+			/* */ $s = 7; continue;
+			/* if (form.$length < 1) { */ case 6:
+				_r$3 = instance.NewArityError(); /* */ $s = 8; case 8: if($c) { $c = false; _r$3 = _r$3.$blk(); } if (_r$3 && _r$3.$blk !== undefined) { break s; }
+				$s = -1; return [$ifaceNil, _r$3];
+			/* } */ case 7:
+			/* */ if ((idx === (pattern.$length - 1 >> 0)) && $interfaceIsEqual((0 >= form.$length ? ($throwRuntimeError("index out of range"), undefined) : form.$array[form.$offset + 0]), $pkg.T)) { $s = 9; continue; }
+			/* */ $s = 10; continue;
+			/* if ((idx === (pattern.$length - 1 >> 0)) && $interfaceIsEqual((0 >= form.$length ? ($throwRuntimeError("index out of range"), undefined) : form.$array[form.$offset + 0]), $pkg.T)) { */ case 9:
+				_r$4 = Progn($clone(e, env.Environment), $subslice(form, 1)); /* */ $s = 11; case 11: if($c) { $c = false; _r$4 = _r$4.$blk(); } if (_r$4 && _r$4.$blk !== undefined) { break s; }
+				$s = -1; return _r$4;
+			/* } */ case 10:
+			_r$5 = ensure(class$1.List, new sliceType([(0 >= form.$length ? ($throwRuntimeError("index out of range"), undefined) : form.$array[form.$offset + 0])])); /* */ $s = 12; case 12: if($c) { $c = false; _r$5 = _r$5.$blk(); } if (_r$5 && _r$5.$blk !== undefined) { break s; }
+			err$2 = _r$5;
+			if (!($interfaceIsEqual(err$2, $ifaceNil))) {
+				$s = -1; return [$ifaceNil, err$2];
+			}
+			_r$6 = $assertType((0 >= form.$length ? ($throwRuntimeError("index out of range"), undefined) : form.$array[form.$offset + 0]), instance.List).Slice(); /* */ $s = 13; case 13: if($c) { $c = false; _r$6 = _r$6.$blk(); } if (_r$6 && _r$6.$blk !== undefined) { break s; }
+			_ref$1 = _r$6;
+			_i$1 = 0;
+			/* while (true) { */ case 14:
+				/* if (!(_i$1 < _ref$1.$length)) { break; } */ if(!(_i$1 < _ref$1.$length)) { $s = 15; continue; }
+				k = ((_i$1 < 0 || _i$1 >= _ref$1.$length) ? ($throwRuntimeError("index out of range"), undefined) : _ref$1.$array[_ref$1.$offset + _i$1]);
+				/* */ if ($interfaceIsEqual(k, key)) { $s = 16; continue; }
+				/* */ $s = 17; continue;
+				/* if ($interfaceIsEqual(k, key)) { */ case 16:
+					_r$7 = Progn($clone(e, env.Environment), $subslice(form, 1)); /* */ $s = 18; case 18: if($c) { $c = false; _r$7 = _r$7.$blk(); } if (_r$7 && _r$7.$blk !== undefined) { break s; }
+					$s = -1; return _r$7;
+				/* } */ case 17:
+				_i$1++;
+			/* } */ $s = 14; continue; case 15:
+			_i++;
+		/* } */ $s = 2; continue; case 3:
+		$s = -1; return [$pkg.Nil, $ifaceNil];
+		/* */ } return; } if ($f === undefined) { $f = { $blk: Case }; } $f.$ptr = $ptr; $f._i = _i; $f._i$1 = _i$1; $f._r = _r; $f._r$1 = _r$1; $f._r$2 = _r$2; $f._r$3 = _r$3; $f._r$4 = _r$4; $f._r$5 = _r$5; $f._r$6 = _r$6; $f._r$7 = _r$7; $f._ref = _ref; $f._ref$1 = _ref$1; $f._tuple = _tuple; $f.e = e; $f.err = err; $f.err$1 = err$1; $f.err$2 = err$2; $f.form = form; $f.idx = idx; $f.k = k; $f.key = key; $f.pat = pat; $f.pattern = pattern; $f.$s = $s; $f.$r = $r; return $f;
+	};
+	$pkg.Case = Case;
+	CaseUsing = function(e, key, pred, pattern) {
+		var $ptr, _i, _i$1, _r, _r$1, _r$2, _r$3, _r$4, _r$5, _r$6, _r$7, _r$8, _r$9, _ref, _ref$1, _tuple, _tuple$1, e, err, err$1, err$2, err$3, err$4, form, idx, k, key, pat, pattern, pred, ret, $s, $r;
+		/* */ $s = 0; var $f, $c = false; if (this !== undefined && this.$blk !== undefined) { $f = this; $c = true; $ptr = $f.$ptr; _i = $f._i; _i$1 = $f._i$1; _r = $f._r; _r$1 = $f._r$1; _r$2 = $f._r$2; _r$3 = $f._r$3; _r$4 = $f._r$4; _r$5 = $f._r$5; _r$6 = $f._r$6; _r$7 = $f._r$7; _r$8 = $f._r$8; _r$9 = $f._r$9; _ref = $f._ref; _ref$1 = $f._ref$1; _tuple = $f._tuple; _tuple$1 = $f._tuple$1; e = $f.e; err = $f.err; err$1 = $f.err$1; err$2 = $f.err$2; err$3 = $f.err$3; err$4 = $f.err$4; form = $f.form; idx = $f.idx; k = $f.k; key = $f.key; pat = $f.pat; pattern = $f.pattern; pred = $f.pred; ret = $f.ret; $s = $f.$s; $r = $f.$r; } s: while (true) { switch ($s) { case 0:
+		_r = Eval($clone(e, env.Environment), key); /* */ $s = 1; case 1: if($c) { $c = false; _r = _r.$blk(); } if (_r && _r.$blk !== undefined) { break s; }
+		_tuple = _r;
+		key = _tuple[0];
+		err = _tuple[1];
+		if (!($interfaceIsEqual(err, $ifaceNil))) {
+			$s = -1; return [$ifaceNil, err];
+		}
+		_r$1 = ensure(class$1.Function, new sliceType([pred])); /* */ $s = 2; case 2: if($c) { $c = false; _r$1 = _r$1.$blk(); } if (_r$1 && _r$1.$blk !== undefined) { break s; }
+		err$1 = _r$1;
+		if (!($interfaceIsEqual(err$1, $ifaceNil))) {
+			$s = -1; return [$ifaceNil, err$1];
+		}
+		_ref = pattern;
+		_i = 0;
+		/* while (true) { */ case 3:
+			/* if (!(_i < _ref.$length)) { break; } */ if(!(_i < _ref.$length)) { $s = 4; continue; }
+			idx = _i;
+			pat = ((_i < 0 || _i >= _ref.$length) ? ($throwRuntimeError("index out of range"), undefined) : _ref.$array[_ref.$offset + _i]);
+			_r$2 = ensure(class$1.List, new sliceType([pat])); /* */ $s = 5; case 5: if($c) { $c = false; _r$2 = _r$2.$blk(); } if (_r$2 && _r$2.$blk !== undefined) { break s; }
+			err$2 = _r$2;
+			if (!($interfaceIsEqual(err$2, $ifaceNil))) {
+				$s = -1; return [$ifaceNil, err$2];
+			}
+			_r$3 = $assertType(pat, instance.List).Slice(); /* */ $s = 6; case 6: if($c) { $c = false; _r$3 = _r$3.$blk(); } if (_r$3 && _r$3.$blk !== undefined) { break s; }
+			form = _r$3;
+			/* */ if (form.$length < 1) { $s = 7; continue; }
+			/* */ $s = 8; continue;
+			/* if (form.$length < 1) { */ case 7:
+				_r$4 = instance.NewArityError(); /* */ $s = 9; case 9: if($c) { $c = false; _r$4 = _r$4.$blk(); } if (_r$4 && _r$4.$blk !== undefined) { break s; }
+				$s = -1; return [$ifaceNil, _r$4];
+			/* } */ case 8:
+			/* */ if ((idx === (pattern.$length - 1 >> 0)) && $interfaceIsEqual((0 >= form.$length ? ($throwRuntimeError("index out of range"), undefined) : form.$array[form.$offset + 0]), $pkg.T)) { $s = 10; continue; }
+			/* */ $s = 11; continue;
+			/* if ((idx === (pattern.$length - 1 >> 0)) && $interfaceIsEqual((0 >= form.$length ? ($throwRuntimeError("index out of range"), undefined) : form.$array[form.$offset + 0]), $pkg.T)) { */ case 10:
+				_r$5 = Progn($clone(e, env.Environment), $subslice(form, 1)); /* */ $s = 12; case 12: if($c) { $c = false; _r$5 = _r$5.$blk(); } if (_r$5 && _r$5.$blk !== undefined) { break s; }
+				$s = -1; return _r$5;
+			/* } */ case 11:
+			_r$6 = ensure(class$1.List, new sliceType([(0 >= form.$length ? ($throwRuntimeError("index out of range"), undefined) : form.$array[form.$offset + 0])])); /* */ $s = 13; case 13: if($c) { $c = false; _r$6 = _r$6.$blk(); } if (_r$6 && _r$6.$blk !== undefined) { break s; }
+			err$3 = _r$6;
+			if (!($interfaceIsEqual(err$3, $ifaceNil))) {
+				$s = -1; return [$ifaceNil, err$3];
+			}
+			_r$7 = $assertType((0 >= form.$length ? ($throwRuntimeError("index out of range"), undefined) : form.$array[form.$offset + 0]), instance.List).Slice(); /* */ $s = 14; case 14: if($c) { $c = false; _r$7 = _r$7.$blk(); } if (_r$7 && _r$7.$blk !== undefined) { break s; }
+			_ref$1 = _r$7;
+			_i$1 = 0;
+			/* while (true) { */ case 15:
+				/* if (!(_i$1 < _ref$1.$length)) { break; } */ if(!(_i$1 < _ref$1.$length)) { $s = 16; continue; }
+				k = ((_i$1 < 0 || _i$1 >= _ref$1.$length) ? ($throwRuntimeError("index out of range"), undefined) : _ref$1.$array[_ref$1.$offset + _i$1]);
+				_r$8 = $assertType(pred, instance.Applicable).Apply($clone(e.NewDynamic(), env.Environment), new sliceType([k, key])); /* */ $s = 17; case 17: if($c) { $c = false; _r$8 = _r$8.$blk(); } if (_r$8 && _r$8.$blk !== undefined) { break s; }
+				_tuple$1 = _r$8;
+				ret = _tuple$1[0];
+				err$4 = _tuple$1[1];
+				if (!($interfaceIsEqual(err$4, $ifaceNil))) {
+					$s = -1; return [$ifaceNil, err$4];
+				}
+				/* */ if (!($interfaceIsEqual(ret, $pkg.Nil))) { $s = 18; continue; }
+				/* */ $s = 19; continue;
+				/* if (!($interfaceIsEqual(ret, $pkg.Nil))) { */ case 18:
+					_r$9 = Progn($clone(e, env.Environment), $subslice(form, 1)); /* */ $s = 20; case 20: if($c) { $c = false; _r$9 = _r$9.$blk(); } if (_r$9 && _r$9.$blk !== undefined) { break s; }
+					$s = -1; return _r$9;
+				/* } */ case 19:
+				_i$1++;
+			/* } */ $s = 15; continue; case 16:
+			_i++;
+		/* } */ $s = 3; continue; case 4:
+		$s = -1; return [$pkg.Nil, $ifaceNil];
+		/* */ } return; } if ($f === undefined) { $f = { $blk: CaseUsing }; } $f.$ptr = $ptr; $f._i = _i; $f._i$1 = _i$1; $f._r = _r; $f._r$1 = _r$1; $f._r$2 = _r$2; $f._r$3 = _r$3; $f._r$4 = _r$4; $f._r$5 = _r$5; $f._r$6 = _r$6; $f._r$7 = _r$7; $f._r$8 = _r$8; $f._r$9 = _r$9; $f._ref = _ref; $f._ref$1 = _ref$1; $f._tuple = _tuple; $f._tuple$1 = _tuple$1; $f.e = e; $f.err = err; $f.err$1 = err$1; $f.err$2 = err$2; $f.err$3 = err$3; $f.err$4 = err$4; $f.form = form; $f.idx = idx; $f.k = k; $f.key = key; $f.pat = pat; $f.pattern = pattern; $f.pred = pred; $f.ret = ret; $f.$s = $s; $f.$r = $r; return $f;
+	};
+	$pkg.CaseUsing = CaseUsing;
+	Consp = function(e, obj) {
+		var $ptr, _r, e, obj, $s, $r;
+		/* */ $s = 0; var $f, $c = false; if (this !== undefined && this.$blk !== undefined) { $f = this; $c = true; $ptr = $f.$ptr; _r = $f._r; e = $f.e; obj = $f.obj; $s = $f.$s; $r = $f.$r; } s: while (true) { switch ($s) { case 0:
+		_r = ilos.InstanceOf(class$1.Cons, obj); /* */ $s = 3; case 3: if($c) { $c = false; _r = _r.$blk(); } if (_r && _r.$blk !== undefined) { break s; }
+		/* */ if (_r) { $s = 1; continue; }
+		/* */ $s = 2; continue;
+		/* if (_r) { */ case 1:
+			$s = -1; return [$pkg.T, $ifaceNil];
+		/* } */ case 2:
+		$s = -1; return [$pkg.Nil, $ifaceNil];
+		/* */ } return; } if ($f === undefined) { $f = { $blk: Consp }; } $f.$ptr = $ptr; $f._r = _r; $f.e = e; $f.obj = obj; $f.$s = $s; $f.$r = $r; return $f;
+	};
+	$pkg.Consp = Consp;
+	Cons = function(e, obj1, obj2) {
+		var $ptr, e, obj1, obj2;
+		return [instance.NewCons(obj1, obj2), $ifaceNil];
+	};
+	$pkg.Cons = Cons;
+	Car = function(e, cons) {
+		var $ptr, _r, cons, e, err, $s, $r;
+		/* */ $s = 0; var $f, $c = false; if (this !== undefined && this.$blk !== undefined) { $f = this; $c = true; $ptr = $f.$ptr; _r = $f._r; cons = $f.cons; e = $f.e; err = $f.err; $s = $f.$s; $r = $f.$r; } s: while (true) { switch ($s) { case 0:
+		_r = ensure(class$1.Cons, new sliceType([cons])); /* */ $s = 1; case 1: if($c) { $c = false; _r = _r.$blk(); } if (_r && _r.$blk !== undefined) { break s; }
+		err = _r;
+		if (!($interfaceIsEqual(err, $ifaceNil))) {
+			$s = -1; return [$ifaceNil, err];
+		}
+		$s = -1; return [$assertType(cons, ptrType).Car, $ifaceNil];
+		/* */ } return; } if ($f === undefined) { $f = { $blk: Car }; } $f.$ptr = $ptr; $f._r = _r; $f.cons = cons; $f.e = e; $f.err = err; $f.$s = $s; $f.$r = $r; return $f;
+	};
+	$pkg.Car = Car;
+	Cdr = function(e, cons) {
+		var $ptr, _r, cons, e, err, $s, $r;
+		/* */ $s = 0; var $f, $c = false; if (this !== undefined && this.$blk !== undefined) { $f = this; $c = true; $ptr = $f.$ptr; _r = $f._r; cons = $f.cons; e = $f.e; err = $f.err; $s = $f.$s; $r = $f.$r; } s: while (true) { switch ($s) { case 0:
+		_r = ensure(class$1.Cons, new sliceType([cons])); /* */ $s = 1; case 1: if($c) { $c = false; _r = _r.$blk(); } if (_r && _r.$blk !== undefined) { break s; }
+		err = _r;
+		if (!($interfaceIsEqual(err, $ifaceNil))) {
+			$s = -1; return [$ifaceNil, err];
+		}
+		$s = -1; return [$assertType(cons, ptrType).Cdr, $ifaceNil];
+		/* */ } return; } if ($f === undefined) { $f = { $blk: Cdr }; } $f.$ptr = $ptr; $f._r = _r; $f.cons = cons; $f.e = e; $f.err = err; $f.$s = $s; $f.$r = $r; return $f;
+	};
+	$pkg.Cdr = Cdr;
+	SetCar = function(e, obj, cons) {
+		var $ptr, _r, cons, e, err, obj, $s, $r;
+		/* */ $s = 0; var $f, $c = false; if (this !== undefined && this.$blk !== undefined) { $f = this; $c = true; $ptr = $f.$ptr; _r = $f._r; cons = $f.cons; e = $f.e; err = $f.err; obj = $f.obj; $s = $f.$s; $r = $f.$r; } s: while (true) { switch ($s) { case 0:
+		_r = ensure(class$1.Cons, new sliceType([cons])); /* */ $s = 1; case 1: if($c) { $c = false; _r = _r.$blk(); } if (_r && _r.$blk !== undefined) { break s; }
+		err = _r;
+		if (!($interfaceIsEqual(err, $ifaceNil))) {
+			$s = -1; return [$ifaceNil, err];
+		}
+		$assertType(cons, ptrType).Car = obj;
+		$s = -1; return [obj, $ifaceNil];
+		/* */ } return; } if ($f === undefined) { $f = { $blk: SetCar }; } $f.$ptr = $ptr; $f._r = _r; $f.cons = cons; $f.e = e; $f.err = err; $f.obj = obj; $f.$s = $s; $f.$r = $r; return $f;
+	};
+	$pkg.SetCar = SetCar;
+	SetCdr = function(e, obj, cons) {
+		var $ptr, _r, cons, e, err, obj, $s, $r;
+		/* */ $s = 0; var $f, $c = false; if (this !== undefined && this.$blk !== undefined) { $f = this; $c = true; $ptr = $f.$ptr; _r = $f._r; cons = $f.cons; e = $f.e; err = $f.err; obj = $f.obj; $s = $f.$s; $r = $f.$r; } s: while (true) { switch ($s) { case 0:
+		_r = ensure(class$1.Cons, new sliceType([cons])); /* */ $s = 1; case 1: if($c) { $c = false; _r = _r.$blk(); } if (_r && _r.$blk !== undefined) { break s; }
+		err = _r;
+		if (!($interfaceIsEqual(err, $ifaceNil))) {
+			$s = -1; return [$ifaceNil, err];
+		}
+		$assertType(cons, ptrType).Cdr = obj;
+		$s = -1; return [obj, $ifaceNil];
+		/* */ } return; } if ($f === undefined) { $f = { $blk: SetCdr }; } $f.$ptr = $ptr; $f._r = _r; $f.cons = cons; $f.e = e; $f.err = err; $f.obj = obj; $f.$s = $s; $f.$r = $r; return $f;
+	};
+	$pkg.SetCdr = SetCdr;
+	Quote = function(e, obj) {
+		var $ptr, e, obj;
+		return [obj, $ifaceNil];
+	};
+	$pkg.Quote = Quote;
 	Defconstant = function(e, name, form) {
 		var $ptr, _r, _r$1, _r$2, _tuple, _tuple$1, e, err, err$1, form, name, ok, ret, $s, $r;
 		/* */ $s = 0; var $f, $c = false; if (this !== undefined && this.$blk !== undefined) { $f = this; $c = true; $ptr = $f.$ptr; _r = $f._r; _r$1 = $f._r$1; _r$2 = $f._r$2; _tuple = $f._tuple; _tuple$1 = $f._tuple$1; e = $f.e; err = $f.err; err$1 = $f.err$1; form = $f.form; name = $f.name; ok = $f.ok; ret = $f.ret; $s = $f.$s; $r = $f.$r; } s: while (true) { switch ($s) { case 0:
@@ -35539,160 +35706,6 @@ $packages["github.com/ta2gch/iris/runtime"] = (function() {
 		/* */ } return; } if ($f === undefined) { $f = { $blk: Funcall }; } $f.$ptr = $ptr; $f._r = _r; $f.e = e; $f.function$1 = function$1; $f.obj = obj; $f.$s = $s; $f.$r = $r; return $f;
 	};
 	$pkg.Funcall = Funcall;
-	Defmethod = function(e, arguments$1) {
-		var $ptr, _i, _i$1, _r, _r$1, _r$10, _r$11, _r$12, _r$13, _r$2, _r$3, _r$4, _r$5, _r$6, _r$7, _r$8, _r$9, _ref, _ref$1, _tuple, _tuple$1, _tuple$2, _tuple$3, arguments$1, class$2, classList, e, err, fun, gen, i, lambdaList, name, ok, ok$1, parameterList, pp, pp$1, qualifier, x, x$1, x$2, $s, $r;
-		/* */ $s = 0; var $f, $c = false; if (this !== undefined && this.$blk !== undefined) { $f = this; $c = true; $ptr = $f.$ptr; _i = $f._i; _i$1 = $f._i$1; _r = $f._r; _r$1 = $f._r$1; _r$10 = $f._r$10; _r$11 = $f._r$11; _r$12 = $f._r$12; _r$13 = $f._r$13; _r$2 = $f._r$2; _r$3 = $f._r$3; _r$4 = $f._r$4; _r$5 = $f._r$5; _r$6 = $f._r$6; _r$7 = $f._r$7; _r$8 = $f._r$8; _r$9 = $f._r$9; _ref = $f._ref; _ref$1 = $f._ref$1; _tuple = $f._tuple; _tuple$1 = $f._tuple$1; _tuple$2 = $f._tuple$2; _tuple$3 = $f._tuple$3; arguments$1 = $f.arguments$1; class$2 = $f.class$2; classList = $f.classList; e = $f.e; err = $f.err; fun = $f.fun; gen = $f.gen; i = $f.i; lambdaList = $f.lambdaList; name = $f.name; ok = $f.ok; ok$1 = $f.ok$1; parameterList = $f.parameterList; pp = $f.pp; pp$1 = $f.pp$1; qualifier = $f.qualifier; x = $f.x; x$1 = $f.x$1; x$2 = $f.x$2; $s = $f.$s; $r = $f.$r; } s: while (true) { switch ($s) { case 0:
-		/* */ if (arguments$1.$length < 2) { $s = 1; continue; }
-		/* */ $s = 2; continue;
-		/* if (arguments$1.$length < 2) { */ case 1:
-			_r = instance.NewArityError(); /* */ $s = 3; case 3: if($c) { $c = false; _r = _r.$blk(); } if (_r && _r.$blk !== undefined) { break s; }
-			$s = -1; return [$ifaceNil, _r];
-		/* } */ case 2:
-		name = (0 >= arguments$1.$length ? ($throwRuntimeError("index out of range"), undefined) : arguments$1.$array[arguments$1.$offset + 0]);
-		qualifier = $ifaceNil;
-		i = 0;
-		if ($interfaceIsEqual((1 >= arguments$1.$length ? ($throwRuntimeError("index out of range"), undefined) : arguments$1.$array[arguments$1.$offset + 1]), instance.NewSymbol(":AROUND")) || $interfaceIsEqual((1 >= arguments$1.$length ? ($throwRuntimeError("index out of range"), undefined) : arguments$1.$array[arguments$1.$offset + 1]), instance.NewSymbol(":BEFORE")) || $interfaceIsEqual((1 >= arguments$1.$length ? ($throwRuntimeError("index out of range"), undefined) : arguments$1.$array[arguments$1.$offset + 1]), instance.NewSymbol(":AFTER"))) {
-			qualifier = (1 >= arguments$1.$length ? ($throwRuntimeError("index out of range"), undefined) : arguments$1.$array[arguments$1.$offset + 1]);
-			i = i + (1) >> 0;
-		}
-		parameterList = new sliceType([]);
-		_r$1 = $assertType((x = i + 1 >> 0, ((x < 0 || x >= arguments$1.$length) ? ($throwRuntimeError("index out of range"), undefined) : arguments$1.$array[arguments$1.$offset + x])), instance.List).Slice(); /* */ $s = 4; case 4: if($c) { $c = false; _r$1 = _r$1.$blk(); } if (_r$1 && _r$1.$blk !== undefined) { break s; }
-		_ref = _r$1;
-		_i = 0;
-		/* while (true) { */ case 5:
-			/* if (!(_i < _ref.$length)) { break; } */ if(!(_i < _ref.$length)) { $s = 6; continue; }
-			pp = ((_i < 0 || _i >= _ref.$length) ? ($throwRuntimeError("index out of range"), undefined) : _ref.$array[_ref.$offset + _i]);
-			_r$2 = ilos.InstanceOf(class$1.Symbol, pp); /* */ $s = 10; case 10: if($c) { $c = false; _r$2 = _r$2.$blk(); } if (_r$2 && _r$2.$blk !== undefined) { break s; }
-			/* */ if (_r$2) { $s = 7; continue; }
-			/* */ $s = 8; continue;
-			/* if (_r$2) { */ case 7:
-				parameterList = $append(parameterList, pp);
-				$s = 9; continue;
-			/* } else { */ case 8:
-				_r$3 = $assertType(pp, instance.List).Nth(0); /* */ $s = 11; case 11: if($c) { $c = false; _r$3 = _r$3.$blk(); } if (_r$3 && _r$3.$blk !== undefined) { break s; }
-				parameterList = $append(parameterList, _r$3);
-			/* } */ case 9:
-			_i++;
-		/* } */ $s = 5; continue; case 6:
-		_tuple = List($clone(e, env.Environment), parameterList);
-		lambdaList = _tuple[0];
-		err = _tuple[1];
-		if (!($interfaceIsEqual(err, $ifaceNil))) {
-			$s = -1; return [$ifaceNil, err];
-		}
-		classList = new sliceType$2([]);
-		_r$4 = $assertType((x$1 = i + 1 >> 0, ((x$1 < 0 || x$1 >= arguments$1.$length) ? ($throwRuntimeError("index out of range"), undefined) : arguments$1.$array[arguments$1.$offset + x$1])), instance.List).Slice(); /* */ $s = 12; case 12: if($c) { $c = false; _r$4 = _r$4.$blk(); } if (_r$4 && _r$4.$blk !== undefined) { break s; }
-		_ref$1 = _r$4;
-		_i$1 = 0;
-		/* while (true) { */ case 13:
-			/* if (!(_i$1 < _ref$1.$length)) { break; } */ if(!(_i$1 < _ref$1.$length)) { $s = 14; continue; }
-			pp$1 = ((_i$1 < 0 || _i$1 >= _ref$1.$length) ? ($throwRuntimeError("index out of range"), undefined) : _ref$1.$array[_ref$1.$offset + _i$1]);
-			if ($interfaceIsEqual(pp$1, instance.NewSymbol(":REST")) && $interfaceIsEqual(pp$1, instance.NewSymbol("&REST"))) {
-				/* break; */ $s = 14; continue;
-			}
-			_r$5 = ilos.InstanceOf(class$1.Symbol, pp$1); /* */ $s = 18; case 18: if($c) { $c = false; _r$5 = _r$5.$blk(); } if (_r$5 && _r$5.$blk !== undefined) { break s; }
-			/* */ if (_r$5) { $s = 15; continue; }
-			/* */ $s = 16; continue;
-			/* if (_r$5) { */ case 15:
-				classList = $append(classList, (x$2 = class$1.Object, new x$2.constructor.elem(x$2)));
-				$s = 17; continue;
-			/* } else { */ case 16:
-				_r$6 = $assertType(pp$1, instance.List).Nth(1); /* */ $s = 19; case 19: if($c) { $c = false; _r$6 = _r$6.$blk(); } if (_r$6 && _r$6.$blk !== undefined) { break s; }
-				_r$7 = $subslice(e.Class, 0, 1).Get(_r$6); /* */ $s = 20; case 20: if($c) { $c = false; _r$7 = _r$7.$blk(); } if (_r$7 && _r$7.$blk !== undefined) { break s; }
-				_tuple$1 = _r$7;
-				class$2 = _tuple$1[0];
-				ok = _tuple$1[1];
-				/* */ if (!ok) { $s = 21; continue; }
-				/* */ $s = 22; continue;
-				/* if (!ok) { */ case 21:
-					_r$8 = $assertType(pp$1, instance.List).Nth(1); /* */ $s = 23; case 23: if($c) { $c = false; _r$8 = _r$8.$blk(); } if (_r$8 && _r$8.$blk !== undefined) { break s; }
-					_r$9 = instance.NewUndefinedClass(_r$8); /* */ $s = 24; case 24: if($c) { $c = false; _r$9 = _r$9.$blk(); } if (_r$9 && _r$9.$blk !== undefined) { break s; }
-					$s = -1; return [$ifaceNil, _r$9];
-				/* } */ case 22:
-				classList = $append(classList, $assertType(class$2, ilos.Class));
-			/* } */ case 17:
-			_i$1++;
-		/* } */ $s = 13; continue; case 14:
-		_r$10 = newNamedFunction($clone(e, env.Environment), name, lambdaList, $subslice(arguments$1, (i + 2 >> 0))); /* */ $s = 25; case 25: if($c) { $c = false; _r$10 = _r$10.$blk(); } if (_r$10 && _r$10.$blk !== undefined) { break s; }
-		_tuple$2 = _r$10;
-		fun = _tuple$2[0];
-		err = _tuple$2[1];
-		if (!($interfaceIsEqual(err, $ifaceNil))) {
-			$s = -1; return [$ifaceNil, err];
-		}
-		_tuple$3 = $subslice(e.Function, 0, 1).Get(name);
-		gen = _tuple$3[0];
-		ok$1 = _tuple$3[1];
-		/* */ if (!ok$1) { $s = 26; continue; }
-		/* */ $s = 27; continue;
-		/* if (!ok$1) { */ case 26:
-			_r$11 = instance.NewUndefinedFunction(name); /* */ $s = 28; case 28: if($c) { $c = false; _r$11 = _r$11.$blk(); } if (_r$11 && _r$11.$blk !== undefined) { break s; }
-			$s = -1; return [$ifaceNil, _r$11];
-		/* } */ case 27:
-		_r$12 = $assertType(gen, ptrType$1).AddMethod(qualifier, lambdaList, classList, fun); /* */ $s = 31; case 31: if($c) { $c = false; _r$12 = _r$12.$blk(); } if (_r$12 && _r$12.$blk !== undefined) { break s; }
-		/* */ if (!_r$12) { $s = 29; continue; }
-		/* */ $s = 30; continue;
-		/* if (!_r$12) { */ case 29:
-			_r$13 = instance.NewUndefinedFunction(name); /* */ $s = 32; case 32: if($c) { $c = false; _r$13 = _r$13.$blk(); } if (_r$13 && _r$13.$blk !== undefined) { break s; }
-			$s = -1; return [$ifaceNil, _r$13];
-		/* } */ case 30:
-		$s = -1; return [name, $ifaceNil];
-		/* */ } return; } if ($f === undefined) { $f = { $blk: Defmethod }; } $f.$ptr = $ptr; $f._i = _i; $f._i$1 = _i$1; $f._r = _r; $f._r$1 = _r$1; $f._r$10 = _r$10; $f._r$11 = _r$11; $f._r$12 = _r$12; $f._r$13 = _r$13; $f._r$2 = _r$2; $f._r$3 = _r$3; $f._r$4 = _r$4; $f._r$5 = _r$5; $f._r$6 = _r$6; $f._r$7 = _r$7; $f._r$8 = _r$8; $f._r$9 = _r$9; $f._ref = _ref; $f._ref$1 = _ref$1; $f._tuple = _tuple; $f._tuple$1 = _tuple$1; $f._tuple$2 = _tuple$2; $f._tuple$3 = _tuple$3; $f.arguments$1 = arguments$1; $f.class$2 = class$2; $f.classList = classList; $f.e = e; $f.err = err; $f.fun = fun; $f.gen = gen; $f.i = i; $f.lambdaList = lambdaList; $f.name = name; $f.ok = ok; $f.ok$1 = ok$1; $f.parameterList = parameterList; $f.pp = pp; $f.pp$1 = pp$1; $f.qualifier = qualifier; $f.x = x; $f.x$1 = x$1; $f.x$2 = x$2; $f.$s = $s; $f.$r = $r; return $f;
-	};
-	$pkg.Defmethod = Defmethod;
-	Defgeneric = function(e, funcSpec, lambdaList, optionsOrMethodDescs) {
-		var $ptr, _1, _arg, _arg$1, _i, _r, _r$1, _r$2, _r$3, _r$4, _r$5, _r$6, _r$7, _r$8, _ref, _tuple, class$2, e, forms, funcSpec, genericFunctionClass, lambdaList, methodCombination, ok, optionOrMethodDesc, optionsOrMethodDescs, $s, $r;
-		/* */ $s = 0; var $f, $c = false; if (this !== undefined && this.$blk !== undefined) { $f = this; $c = true; $ptr = $f.$ptr; _1 = $f._1; _arg = $f._arg; _arg$1 = $f._arg$1; _i = $f._i; _r = $f._r; _r$1 = $f._r$1; _r$2 = $f._r$2; _r$3 = $f._r$3; _r$4 = $f._r$4; _r$5 = $f._r$5; _r$6 = $f._r$6; _r$7 = $f._r$7; _r$8 = $f._r$8; _ref = $f._ref; _tuple = $f._tuple; class$2 = $f.class$2; e = $f.e; forms = $f.forms; funcSpec = $f.funcSpec; genericFunctionClass = $f.genericFunctionClass; lambdaList = $f.lambdaList; methodCombination = $f.methodCombination; ok = $f.ok; optionOrMethodDesc = $f.optionOrMethodDesc; optionsOrMethodDescs = $f.optionsOrMethodDescs; $s = $f.$s; $r = $f.$r; } s: while (true) { switch ($s) { case 0:
-		methodCombination = $ifaceNil;
-		genericFunctionClass = class$1.StandardGenericFunction;
-		forms = new sliceType([]);
-		_ref = optionsOrMethodDescs;
-		_i = 0;
-		/* while (true) { */ case 1:
-			/* if (!(_i < _ref.$length)) { break; } */ if(!(_i < _ref.$length)) { $s = 2; continue; }
-			optionOrMethodDesc = ((_i < 0 || _i >= _ref.$length) ? ($throwRuntimeError("index out of range"), undefined) : _ref.$array[_ref.$offset + _i]);
-				_r = $assertType(optionOrMethodDesc, instance.List).Nth(0); /* */ $s = 4; case 4: if($c) { $c = false; _r = _r.$blk(); } if (_r && _r.$blk !== undefined) { break s; }
-				_1 = _r;
-				/* */ if ($interfaceIsEqual(_1, (instance.NewSymbol(":METHOD-COMBINATION")))) { $s = 5; continue; }
-				/* */ if ($interfaceIsEqual(_1, (instance.NewSymbol(":GENERIC-FUNCTION-CLASS")))) { $s = 6; continue; }
-				/* */ if ($interfaceIsEqual(_1, (instance.NewSymbol(":METHOD")))) { $s = 7; continue; }
-				/* */ $s = 8; continue;
-				/* if ($interfaceIsEqual(_1, (instance.NewSymbol(":METHOD-COMBINATION")))) { */ case 5:
-					_r$1 = $assertType(optionOrMethodDesc, instance.List).Nth(1); /* */ $s = 9; case 9: if($c) { $c = false; _r$1 = _r$1.$blk(); } if (_r$1 && _r$1.$blk !== undefined) { break s; }
-					methodCombination = _r$1;
-					$s = 8; continue;
-				/* } else if ($interfaceIsEqual(_1, (instance.NewSymbol(":GENERIC-FUNCTION-CLASS")))) { */ case 6:
-					_r$2 = $assertType(optionOrMethodDesc, instance.List).Nth(1); /* */ $s = 10; case 10: if($c) { $c = false; _r$2 = _r$2.$blk(); } if (_r$2 && _r$2.$blk !== undefined) { break s; }
-					_r$3 = $subslice(e.Class, 0, 1).Get(_r$2); /* */ $s = 11; case 11: if($c) { $c = false; _r$3 = _r$3.$blk(); } if (_r$3 && _r$3.$blk !== undefined) { break s; }
-					_tuple = _r$3;
-					class$2 = _tuple[0];
-					ok = _tuple[1];
-					/* */ if (!ok) { $s = 12; continue; }
-					/* */ $s = 13; continue;
-					/* if (!ok) { */ case 12:
-						_r$4 = $assertType(optionOrMethodDesc, instance.List).Nth(1); /* */ $s = 14; case 14: if($c) { $c = false; _r$4 = _r$4.$blk(); } if (_r$4 && _r$4.$blk !== undefined) { break s; }
-						_r$5 = instance.NewUndefinedClass(_r$4); /* */ $s = 15; case 15: if($c) { $c = false; _r$5 = _r$5.$blk(); } if (_r$5 && _r$5.$blk !== undefined) { break s; }
-						$s = -1; return [$ifaceNil, _r$5];
-					/* } */ case 13:
-					genericFunctionClass = $assertType(class$2, ilos.Class);
-					$s = 8; continue;
-				/* } else if ($interfaceIsEqual(_1, (instance.NewSymbol(":METHOD")))) { */ case 7:
-					_arg = instance.NewSymbol("DEFMETHOD");
-					_r$6 = $assertType(optionOrMethodDesc, instance.List).NthCdr(1); /* */ $s = 16; case 16: if($c) { $c = false; _r$6 = _r$6.$blk(); } if (_r$6 && _r$6.$blk !== undefined) { break s; }
-					_arg$1 = _r$6;
-					_r$7 = instance.NewCons(_arg, _arg$1); /* */ $s = 17; case 17: if($c) { $c = false; _r$7 = _r$7.$blk(); } if (_r$7 && _r$7.$blk !== undefined) { break s; }
-					forms = $append(forms, _r$7);
-				/* } */ case 8:
-			case 3:
-			_i++;
-		/* } */ $s = 1; continue; case 2:
-		$subslice(e.Function, 0, 1).Define(funcSpec, instance.NewGenericFunction(funcSpec, lambdaList, methodCombination, genericFunctionClass));
-		_r$8 = Progn($clone(e, env.Environment), forms); /* */ $s = 18; case 18: if($c) { $c = false; _r$8 = _r$8.$blk(); } if (_r$8 && _r$8.$blk !== undefined) { break s; }
-		_r$8;
-		$s = -1; return [funcSpec, $ifaceNil];
-		/* */ } return; } if ($f === undefined) { $f = { $blk: Defgeneric }; } $f.$ptr = $ptr; $f._1 = _1; $f._arg = _arg; $f._arg$1 = _arg$1; $f._i = _i; $f._r = _r; $f._r$1 = _r$1; $f._r$2 = _r$2; $f._r$3 = _r$3; $f._r$4 = _r$4; $f._r$5 = _r$5; $f._r$6 = _r$6; $f._r$7 = _r$7; $f._r$8 = _r$8; $f._ref = _ref; $f._tuple = _tuple; $f.class$2 = class$2; $f.e = e; $f.forms = forms; $f.funcSpec = funcSpec; $f.genericFunctionClass = genericFunctionClass; $f.lambdaList = lambdaList; $f.methodCombination = methodCombination; $f.ok = ok; $f.optionOrMethodDesc = optionOrMethodDesc; $f.optionsOrMethodDescs = optionsOrMethodDescs; $f.$s = $s; $f.$r = $r; return $f;
-	};
-	$pkg.Defgeneric = Defgeneric;
 	convInt = function(z) {
 		var $ptr, _r, err, z, $s, $r;
 		/* */ $s = 0; var $f, $c = false; if (this !== undefined && this.$blk !== undefined) { $f = this; $c = true; $ptr = $f.$ptr; _r = $f._r; err = $f.err; z = $f.z; $s = $f.$s; $r = $f.$r; } s: while (true) { switch ($s) { case 0:
@@ -36233,7 +36246,7 @@ $packages["github.com/ta2gch/iris/runtime"] = (function() {
 				((j < 0 || j >= arguments$1.$length) ? ($throwRuntimeError("index out of range"), undefined) : arguments$1.$array[arguments$1.$offset + j] = _r$4);
 				_i$1++;
 			/* } */ $s = 9; continue; case 10:
-			_r$5 = $assertType(function$1, instance.Applicable).Apply($clone(e, env.Environment), arguments$1); /* */ $s = 12; case 12: if($c) { $c = false; _r$5 = _r$5.$blk(); } if (_r$5 && _r$5.$blk !== undefined) { break s; }
+			_r$5 = $assertType(function$1, instance.Applicable).Apply($clone(e.NewDynamic(), env.Environment), arguments$1); /* */ $s = 12; case 12: if($c) { $c = false; _r$5 = _r$5.$blk(); } if (_r$5 && _r$5.$blk !== undefined) { break s; }
 			_tuple = _r$5;
 			ret = _tuple[0];
 			err$2 = _tuple[1];
@@ -36288,7 +36301,7 @@ $packages["github.com/ta2gch/iris/runtime"] = (function() {
 				((j < 0 || j >= arguments$1.$length) ? ($throwRuntimeError("index out of range"), undefined) : arguments$1.$array[arguments$1.$offset + j] = _r$4);
 				_i$1++;
 			/* } */ $s = 9; continue; case 10:
-			_r$5 = $assertType(function$1, instance.Applicable).Apply($clone(e, env.Environment), arguments$1); /* */ $s = 12; case 12: if($c) { $c = false; _r$5 = _r$5.$blk(); } if (_r$5 && _r$5.$blk !== undefined) { break s; }
+			_r$5 = $assertType(function$1, instance.Applicable).Apply($clone(e.NewDynamic(), env.Environment), arguments$1); /* */ $s = 12; case 12: if($c) { $c = false; _r$5 = _r$5.$blk(); } if (_r$5 && _r$5.$blk !== undefined) { break s; }
 			_tuple = _r$5;
 			err$2 = _tuple[1];
 			if (!($interfaceIsEqual(err$2, $ifaceNil))) {
@@ -36342,7 +36355,7 @@ $packages["github.com/ta2gch/iris/runtime"] = (function() {
 				((j < 0 || j >= arguments$1.$length) ? ($throwRuntimeError("index out of range"), undefined) : arguments$1.$array[arguments$1.$offset + j] = _r$4);
 				_i$1++;
 			/* } */ $s = 9; continue; case 10:
-			_r$5 = $assertType(function$1, instance.Applicable).Apply($clone(e, env.Environment), arguments$1); /* */ $s = 12; case 12: if($c) { $c = false; _r$5 = _r$5.$blk(); } if (_r$5 && _r$5.$blk !== undefined) { break s; }
+			_r$5 = $assertType(function$1, instance.Applicable).Apply($clone(e.NewDynamic(), env.Environment), arguments$1); /* */ $s = 12; case 12: if($c) { $c = false; _r$5 = _r$5.$blk(); } if (_r$5 && _r$5.$blk !== undefined) { break s; }
 			_tuple = _r$5;
 			ret = _tuple[0];
 			err$2 = _tuple[1];
@@ -36399,7 +36412,7 @@ $packages["github.com/ta2gch/iris/runtime"] = (function() {
 				((j < 0 || j >= arguments$1.$length) ? ($throwRuntimeError("index out of range"), undefined) : arguments$1.$array[arguments$1.$offset + j] = _r$4);
 				_i$1++;
 			/* } */ $s = 9; continue; case 10:
-			_r$5 = $assertType(function$1, instance.Applicable).Apply($clone(e, env.Environment), arguments$1); /* */ $s = 12; case 12: if($c) { $c = false; _r$5 = _r$5.$blk(); } if (_r$5 && _r$5.$blk !== undefined) { break s; }
+			_r$5 = $assertType(function$1, instance.Applicable).Apply($clone(e.NewDynamic(), env.Environment), arguments$1); /* */ $s = 12; case 12: if($c) { $c = false; _r$5 = _r$5.$blk(); } if (_r$5 && _r$5.$blk !== undefined) { break s; }
 			_tuple = _r$5;
 			ret = _tuple[0];
 			err$2 = _tuple[1];
@@ -36454,7 +36467,7 @@ $packages["github.com/ta2gch/iris/runtime"] = (function() {
 				((j < 0 || j >= arguments$1.$length) ? ($throwRuntimeError("index out of range"), undefined) : arguments$1.$array[arguments$1.$offset + j] = _r$4);
 				_i$1++;
 			/* } */ $s = 9; continue; case 10:
-			_r$5 = $assertType(function$1, instance.Applicable).Apply($clone(e, env.Environment), arguments$1); /* */ $s = 12; case 12: if($c) { $c = false; _r$5 = _r$5.$blk(); } if (_r$5 && _r$5.$blk !== undefined) { break s; }
+			_r$5 = $assertType(function$1, instance.Applicable).Apply($clone(e.NewDynamic(), env.Environment), arguments$1); /* */ $s = 12; case 12: if($c) { $c = false; _r$5 = _r$5.$blk(); } if (_r$5 && _r$5.$blk !== undefined) { break s; }
 			_tuple = _r$5;
 			err$2 = _tuple[1];
 			if (!($interfaceIsEqual(err$2, $ifaceNil))) {
@@ -36508,7 +36521,7 @@ $packages["github.com/ta2gch/iris/runtime"] = (function() {
 				((j < 0 || j >= arguments$1.$length) ? ($throwRuntimeError("index out of range"), undefined) : arguments$1.$array[arguments$1.$offset + j] = _r$4);
 				_i$1++;
 			/* } */ $s = 9; continue; case 10:
-			_r$5 = $assertType(function$1, instance.Applicable).Apply($clone(e, env.Environment), arguments$1); /* */ $s = 12; case 12: if($c) { $c = false; _r$5 = _r$5.$blk(); } if (_r$5 && _r$5.$blk !== undefined) { break s; }
+			_r$5 = $assertType(function$1, instance.Applicable).Apply($clone(e.NewDynamic(), env.Environment), arguments$1); /* */ $s = 12; case 12: if($c) { $c = false; _r$5 = _r$5.$blk(); } if (_r$5 && _r$5.$blk !== undefined) { break s; }
 			_tuple = _r$5;
 			ret = _tuple[0];
 			err$2 = _tuple[1];
@@ -36551,6 +36564,14 @@ $packages["github.com/ta2gch/iris/runtime"] = (function() {
 		/* */ } return; } if ($f === undefined) { $f = { $blk: Assoc }; } $f.$ptr = $ptr; $f._i = _i; $f._r = _r; $f._r$1 = _r$1; $f._r$2 = _r$2; $f._ref = _ref; $f.associationList = associationList; $f.e = e; $f.err = err; $f.err$1 = err$1; $f.obj = obj; $f.pair = pair; $f.$s = $s; $f.$r = $r; return $f;
 	};
 	$pkg.Assoc = Assoc;
+	Null = function(e, obj) {
+		var $ptr, e, obj;
+		if ($interfaceIsEqual(obj, $pkg.Nil)) {
+			return [$pkg.T, $ifaceNil];
+		}
+		return [$pkg.Nil, $ifaceNil];
+	};
+	$pkg.Null = Null;
 	Not = function(e, obj) {
 		var $ptr, e, obj;
 		if ($interfaceIsEqual(obj, $pkg.Nil)) {
@@ -36936,8 +36957,8 @@ $packages["github.com/ta2gch/iris/runtime"] = (function() {
 			_i++;
 		/* } */ $s = 4; continue; case 5:
 		$s = -1; return [instance.NewFunction(new instance.Symbol($assertType(functionName, instance.Symbol)), new funcType$2((function(forms, lexical, parameters, variadic) { return function $b(e$1, arguments$1) {
-			var $ptr, _i$1, _r$3, _r$4, _r$5, _r$6, _ref$1, _tuple, arguments$1, e$1, err$2, idx, key, key$1, value, value$1, x, $s, $r;
-			/* */ $s = 0; var $f, $c = false; if (this !== undefined && this.$blk !== undefined) { $f = this; $c = true; $ptr = $f.$ptr; _i$1 = $f._i$1; _r$3 = $f._r$3; _r$4 = $f._r$4; _r$5 = $f._r$5; _r$6 = $f._r$6; _ref$1 = $f._ref$1; _tuple = $f._tuple; arguments$1 = $f.arguments$1; e$1 = $f.e$1; err$2 = $f.err$2; idx = $f.idx; key = $f.key; key$1 = $f.key$1; value = $f.value; value$1 = $f.value$1; x = $f.x; $s = $f.$s; $r = $f.$r; } s: while (true) { switch ($s) { case 0:
+			var $ptr, _i$1, _r$3, _r$4, _r$5, _r$6, _r$7, _ref$1, _tuple, arguments$1, e$1, err$2, idx, key, key$1, value, value$1, x, $s, $r;
+			/* */ $s = 0; var $f, $c = false; if (this !== undefined && this.$blk !== undefined) { $f = this; $c = true; $ptr = $f.$ptr; _i$1 = $f._i$1; _r$3 = $f._r$3; _r$4 = $f._r$4; _r$5 = $f._r$5; _r$6 = $f._r$6; _r$7 = $f._r$7; _ref$1 = $f._ref$1; _tuple = $f._tuple; arguments$1 = $f.arguments$1; e$1 = $f.e$1; err$2 = $f.err$2; idx = $f.idx; key = $f.key; key$1 = $f.key$1; value = $f.value; value$1 = $f.value$1; x = $f.x; $s = $f.$s; $r = $f.$r; } s: while (true) { switch ($s) { case 0:
 			e$1.MergeLexical($clone(lexical[0], env.Environment));
 			/* */ if ((variadic[0] && (parameters[0].$length - 2 >> 0) > arguments$1.$length) || (!variadic[0] && !((parameters[0].$length === arguments$1.$length)))) { $s = 1; continue; }
 			/* */ $s = 2; continue;
@@ -36973,14 +36994,16 @@ $packages["github.com/ta2gch/iris/runtime"] = (function() {
 				/* */ if (!e$1.Variable.Define(key, value$1)) { $s = 11; continue; }
 				/* */ $s = 12; continue;
 				/* if (!e$1.Variable.Define(key, value$1)) { */ case 11:
-					_r$5 = instance.NewImmutableBinding(); /* */ $s = 13; case 13: if($c) { $c = false; _r$5 = _r$5.$blk(); } if (_r$5 && _r$5.$blk !== undefined) { break s; }
-					$s = -1; return [$ifaceNil, _r$5];
+					_r$5 = fmt.Print(new sliceType$3([key, value$1])); /* */ $s = 13; case 13: if($c) { $c = false; _r$5 = _r$5.$blk(); } if (_r$5 && _r$5.$blk !== undefined) { break s; }
+					_r$5;
+					_r$6 = instance.NewImmutableBinding(); /* */ $s = 14; case 14: if($c) { $c = false; _r$6 = _r$6.$blk(); } if (_r$6 && _r$6.$blk !== undefined) { break s; }
+					$s = -1; return [$ifaceNil, _r$6];
 				/* } */ case 12:
 				_i$1++;
 			/* } */ $s = 4; continue; case 5:
-			_r$6 = Progn($clone(e$1, env.Environment), forms[0]); /* */ $s = 14; case 14: if($c) { $c = false; _r$6 = _r$6.$blk(); } if (_r$6 && _r$6.$blk !== undefined) { break s; }
-			$s = -1; return _r$6;
-			/* */ } return; } if ($f === undefined) { $f = { $blk: $b }; } $f.$ptr = $ptr; $f._i$1 = _i$1; $f._r$3 = _r$3; $f._r$4 = _r$4; $f._r$5 = _r$5; $f._r$6 = _r$6; $f._ref$1 = _ref$1; $f._tuple = _tuple; $f.arguments$1 = arguments$1; $f.e$1 = e$1; $f.err$2 = err$2; $f.idx = idx; $f.key = key; $f.key$1 = key$1; $f.value = value; $f.value$1 = value$1; $f.x = x; $f.$s = $s; $f.$r = $r; return $f;
+			_r$7 = Progn($clone(e$1, env.Environment), forms[0]); /* */ $s = 15; case 15: if($c) { $c = false; _r$7 = _r$7.$blk(); } if (_r$7 && _r$7.$blk !== undefined) { break s; }
+			$s = -1; return _r$7;
+			/* */ } return; } if ($f === undefined) { $f = { $blk: $b }; } $f.$ptr = $ptr; $f._i$1 = _i$1; $f._r$3 = _r$3; $f._r$4 = _r$4; $f._r$5 = _r$5; $f._r$6 = _r$6; $f._r$7 = _r$7; $f._ref$1 = _ref$1; $f._tuple = _tuple; $f.arguments$1 = arguments$1; $f.e$1 = e$1; $f.err$2 = err$2; $f.idx = idx; $f.key = key; $f.key$1 = key$1; $f.value = value; $f.value$1 = value$1; $f.x = x; $f.$s = $s; $f.$r = $r; return $f;
 		}; })(forms, lexical, parameters, variadic))), $ifaceNil];
 		/* */ } return; } if ($f === undefined) { $f = { $blk: newNamedFunction }; } $f.$ptr = $ptr; $f._i = _i; $f._r = _r; $f._r$1 = _r$1; $f._r$2 = _r$2; $f._ref = _ref; $f.cadr = cadr; $f.e = e; $f.err = err; $f.err$1 = err$1; $f.forms = forms; $f.functionName = functionName; $f.lambdaList = lambdaList; $f.lexical = lexical; $f.parameters = parameters; $f.variadic = variadic; $f.$s = $s; $f.$r = $r; return $f;
 	};
@@ -37344,14 +37367,6 @@ $packages["github.com/ta2gch/iris/runtime"] = (function() {
 		/* */ } return; } if ($f === undefined) { $f = { $blk: UnwindProtect }; } $f.$ptr = $ptr; $f._r = _r; $f._r$1 = _r$1; $f._r$2 = _r$2; $f._r$3 = _r$3; $f._tuple = _tuple; $f._tuple$1 = _tuple$1; $f.cleanupForms = cleanupForms; $f.e = e; $f.err1 = err1; $f.err2 = err2; $f.form = form; $f.ret1 = ret1; $f.ret2 = ret2; $f.$s = $s; $f.$r = $r; return $f;
 	};
 	$pkg.UnwindProtect = UnwindProtect;
-	Null = function(e, obj) {
-		var $ptr, e, obj;
-		if ($interfaceIsEqual(obj, $pkg.Nil)) {
-			return [$pkg.T, $ifaceNil];
-		}
-		return [$pkg.Nil, $ifaceNil];
-	};
-	$pkg.Null = Null;
 	Numberp = function(e, obj) {
 		var $ptr, _r, e, obj, $s, $r;
 		/* */ $s = 0; var $f, $c = false; if (this !== undefined && this.$blk !== undefined) { $f = this; $c = true; $ptr = $f.$ptr; _r = $f._r; e = $f.e; obj = $f.obj; $s = $f.$s; $r = $f.$r; } s: while (true) { switch ($s) { case 0:
@@ -38013,53 +38028,53 @@ $packages["github.com/ta2gch/iris/runtime"] = (function() {
 		/* */ } return; } if ($f === undefined) { $f = { $blk: Atanh }; } $f.$ptr = $ptr; $f._r = _r; $f._r$1 = _r$1; $f._tuple = _tuple; $f.a = a; $f.e = e; $f.err = err; $f.x = x; $f.$s = $s; $f.$r = $r; return $f;
 	};
 	$pkg.Atanh = Atanh;
+	defspecial2 = function(name, function$1) {
+		var $ptr, _arg, _arg$1, _r, _r$1, _r$2, _r$3, _r$4, _r$5, function$1, name, symbol, $s, $r;
+		/* */ $s = 0; var $f, $c = false; if (this !== undefined && this.$blk !== undefined) { $f = this; $c = true; $ptr = $f.$ptr; _arg = $f._arg; _arg$1 = $f._arg$1; _r = $f._r; _r$1 = $f._r$1; _r$2 = $f._r$2; _r$3 = $f._r$3; _r$4 = $f._r$4; _r$5 = $f._r$5; function$1 = $f.function$1; name = $f.name; symbol = $f.symbol; $s = $f.$s; $r = $f.$r; } s: while (true) { switch ($s) { case 0:
+		_r = regexp.MustCompile("(.)([A-Z])"); /* */ $s = 1; case 1: if($c) { $c = false; _r = _r.$blk(); } if (_r && _r.$blk !== undefined) { break s; }
+		_r$1 = _r.ReplaceAllString(name, "$1-$2"); /* */ $s = 2; case 2: if($c) { $c = false; _r$1 = _r$1.$blk(); } if (_r$1 && _r$1.$blk !== undefined) { break s; }
+		name = _r$1;
+		_r$2 = strings.ToUpper(name); /* */ $s = 3; case 3: if($c) { $c = false; _r$2 = _r$2.$blk(); } if (_r$2 && _r$2.$blk !== undefined) { break s; }
+		name = _r$2;
+		symbol = instance.NewSymbol(name);
+		_arg = symbol;
+		_r$3 = func2symbol(function$1); /* */ $s = 4; case 4: if($c) { $c = false; _r$3 = _r$3.$blk(); } if (_r$3 && _r$3.$blk !== undefined) { break s; }
+		_r$4 = instance.NewFunction(_r$3, function$1); /* */ $s = 5; case 5: if($c) { $c = false; _r$4 = _r$4.$blk(); } if (_r$4 && _r$4.$blk !== undefined) { break s; }
+		_arg$1 = _r$4;
+		_r$5 = $pkg.TopLevel.Special.Define(_arg, _arg$1); /* */ $s = 6; case 6: if($c) { $c = false; _r$5 = _r$5.$blk(); } if (_r$5 && _r$5.$blk !== undefined) { break s; }
+		_r$5;
+		$s = -1; return;
+		/* */ } return; } if ($f === undefined) { $f = { $blk: defspecial2 }; } $f.$ptr = $ptr; $f._arg = _arg; $f._arg$1 = _arg$1; $f._r = _r; $f._r$1 = _r$1; $f._r$2 = _r$2; $f._r$3 = _r$3; $f._r$4 = _r$4; $f._r$5 = _r$5; $f.function$1 = function$1; $f.name = name; $f.symbol = symbol; $f.$s = $s; $f.$r = $r; return $f;
+	};
+	defun2 = function(name, function$1) {
+		var $ptr, _r, _r$1, _r$2, function$1, name, symbol, $s, $r;
+		/* */ $s = 0; var $f, $c = false; if (this !== undefined && this.$blk !== undefined) { $f = this; $c = true; $ptr = $f.$ptr; _r = $f._r; _r$1 = $f._r$1; _r$2 = $f._r$2; function$1 = $f.function$1; name = $f.name; symbol = $f.symbol; $s = $f.$s; $r = $f.$r; } s: while (true) { switch ($s) { case 0:
+		_r = regexp.MustCompile("(.)([A-Z])"); /* */ $s = 1; case 1: if($c) { $c = false; _r = _r.$blk(); } if (_r && _r.$blk !== undefined) { break s; }
+		_r$1 = _r.ReplaceAllString(name, "$1-$2"); /* */ $s = 2; case 2: if($c) { $c = false; _r$1 = _r$1.$blk(); } if (_r$1 && _r$1.$blk !== undefined) { break s; }
+		name = _r$1;
+		_r$2 = strings.ToUpper(name); /* */ $s = 3; case 3: if($c) { $c = false; _r$2 = _r$2.$blk(); } if (_r$2 && _r$2.$blk !== undefined) { break s; }
+		name = _r$2;
+		symbol = instance.NewSymbol(name);
+		$pkg.TopLevel.Function.Define(symbol, instance.NewFunction(symbol, function$1));
+		$s = -1; return;
+		/* */ } return; } if ($f === undefined) { $f = { $blk: defun2 }; } $f.$ptr = $ptr; $f._r = _r; $f._r$1 = _r$1; $f._r$2 = _r$2; $f.function$1 = function$1; $f.name = name; $f.symbol = symbol; $f.$s = $s; $f.$r = $r; return $f;
+	};
+	defglobal = function(name, value) {
+		var $ptr, _r, _r$1, _r$2, name, symbol, value, $s, $r;
+		/* */ $s = 0; var $f, $c = false; if (this !== undefined && this.$blk !== undefined) { $f = this; $c = true; $ptr = $f.$ptr; _r = $f._r; _r$1 = $f._r$1; _r$2 = $f._r$2; name = $f.name; symbol = $f.symbol; value = $f.value; $s = $f.$s; $r = $f.$r; } s: while (true) { switch ($s) { case 0:
+		_r = regexp.MustCompile("(.)([A-Z])"); /* */ $s = 1; case 1: if($c) { $c = false; _r = _r.$blk(); } if (_r && _r.$blk !== undefined) { break s; }
+		_r$1 = _r.ReplaceAllString(name, "$1-$2"); /* */ $s = 2; case 2: if($c) { $c = false; _r$1 = _r$1.$blk(); } if (_r$1 && _r$1.$blk !== undefined) { break s; }
+		name = _r$1;
+		_r$2 = strings.ToUpper(name); /* */ $s = 3; case 3: if($c) { $c = false; _r$2 = _r$2.$blk(); } if (_r$2 && _r$2.$blk !== undefined) { break s; }
+		name = _r$2;
+		symbol = instance.NewSymbol(name);
+		$pkg.TopLevel.Variable.Define(symbol, value);
+		$s = -1; return;
+		/* */ } return; } if ($f === undefined) { $f = { $blk: defglobal }; } $f.$ptr = $ptr; $f._r = _r; $f._r$1 = _r$1; $f._r$2 = _r$2; $f.name = name; $f.symbol = symbol; $f.value = value; $f.$s = $s; $f.$r = $r; return $f;
+	};
 	init = function() {
-		var $ptr, defglobal, defspecial2, defun2, $s, $r;
-		/* */ $s = 0; var $f, $c = false; if (this !== undefined && this.$blk !== undefined) { $f = this; $c = true; $ptr = $f.$ptr; defglobal = $f.defglobal; defspecial2 = $f.defspecial2; defun2 = $f.defun2; $s = $f.$s; $r = $f.$r; } s: while (true) { switch ($s) { case 0:
-		defspecial2 = (function $b(name, function$1) {
-			var $ptr, _arg, _arg$1, _r, _r$1, _r$2, _r$3, _r$4, _r$5, function$1, name, symbol, $s, $r;
-			/* */ $s = 0; var $f, $c = false; if (this !== undefined && this.$blk !== undefined) { $f = this; $c = true; $ptr = $f.$ptr; _arg = $f._arg; _arg$1 = $f._arg$1; _r = $f._r; _r$1 = $f._r$1; _r$2 = $f._r$2; _r$3 = $f._r$3; _r$4 = $f._r$4; _r$5 = $f._r$5; function$1 = $f.function$1; name = $f.name; symbol = $f.symbol; $s = $f.$s; $r = $f.$r; } s: while (true) { switch ($s) { case 0:
-			_r = regexp.MustCompile("(.)([A-Z])"); /* */ $s = 1; case 1: if($c) { $c = false; _r = _r.$blk(); } if (_r && _r.$blk !== undefined) { break s; }
-			_r$1 = _r.ReplaceAllString(name, "$1-$2"); /* */ $s = 2; case 2: if($c) { $c = false; _r$1 = _r$1.$blk(); } if (_r$1 && _r$1.$blk !== undefined) { break s; }
-			name = _r$1;
-			_r$2 = strings.ToUpper(name); /* */ $s = 3; case 3: if($c) { $c = false; _r$2 = _r$2.$blk(); } if (_r$2 && _r$2.$blk !== undefined) { break s; }
-			name = _r$2;
-			symbol = instance.NewSymbol(name);
-			_arg = symbol;
-			_r$3 = func2symbol(function$1); /* */ $s = 4; case 4: if($c) { $c = false; _r$3 = _r$3.$blk(); } if (_r$3 && _r$3.$blk !== undefined) { break s; }
-			_r$4 = instance.NewFunction(_r$3, function$1); /* */ $s = 5; case 5: if($c) { $c = false; _r$4 = _r$4.$blk(); } if (_r$4 && _r$4.$blk !== undefined) { break s; }
-			_arg$1 = _r$4;
-			_r$5 = $pkg.TopLevel.Special.Define(_arg, _arg$1); /* */ $s = 6; case 6: if($c) { $c = false; _r$5 = _r$5.$blk(); } if (_r$5 && _r$5.$blk !== undefined) { break s; }
-			_r$5;
-			$s = -1; return;
-			/* */ } return; } if ($f === undefined) { $f = { $blk: $b }; } $f.$ptr = $ptr; $f._arg = _arg; $f._arg$1 = _arg$1; $f._r = _r; $f._r$1 = _r$1; $f._r$2 = _r$2; $f._r$3 = _r$3; $f._r$4 = _r$4; $f._r$5 = _r$5; $f.function$1 = function$1; $f.name = name; $f.symbol = symbol; $f.$s = $s; $f.$r = $r; return $f;
-		});
-		defun2 = (function $b(name, function$1) {
-			var $ptr, _r, _r$1, _r$2, function$1, name, symbol, $s, $r;
-			/* */ $s = 0; var $f, $c = false; if (this !== undefined && this.$blk !== undefined) { $f = this; $c = true; $ptr = $f.$ptr; _r = $f._r; _r$1 = $f._r$1; _r$2 = $f._r$2; function$1 = $f.function$1; name = $f.name; symbol = $f.symbol; $s = $f.$s; $r = $f.$r; } s: while (true) { switch ($s) { case 0:
-			_r = regexp.MustCompile("(.)([A-Z])"); /* */ $s = 1; case 1: if($c) { $c = false; _r = _r.$blk(); } if (_r && _r.$blk !== undefined) { break s; }
-			_r$1 = _r.ReplaceAllString(name, "$1-$2"); /* */ $s = 2; case 2: if($c) { $c = false; _r$1 = _r$1.$blk(); } if (_r$1 && _r$1.$blk !== undefined) { break s; }
-			name = _r$1;
-			_r$2 = strings.ToUpper(name); /* */ $s = 3; case 3: if($c) { $c = false; _r$2 = _r$2.$blk(); } if (_r$2 && _r$2.$blk !== undefined) { break s; }
-			name = _r$2;
-			symbol = instance.NewSymbol(name);
-			$pkg.TopLevel.Function.Define(symbol, instance.NewFunction(symbol, function$1));
-			$s = -1; return;
-			/* */ } return; } if ($f === undefined) { $f = { $blk: $b }; } $f.$ptr = $ptr; $f._r = _r; $f._r$1 = _r$1; $f._r$2 = _r$2; $f.function$1 = function$1; $f.name = name; $f.symbol = symbol; $f.$s = $s; $f.$r = $r; return $f;
-		});
-		defglobal = (function $b(name, value) {
-			var $ptr, _r, _r$1, _r$2, name, symbol, value, $s, $r;
-			/* */ $s = 0; var $f, $c = false; if (this !== undefined && this.$blk !== undefined) { $f = this; $c = true; $ptr = $f.$ptr; _r = $f._r; _r$1 = $f._r$1; _r$2 = $f._r$2; name = $f.name; symbol = $f.symbol; value = $f.value; $s = $f.$s; $r = $f.$r; } s: while (true) { switch ($s) { case 0:
-			_r = regexp.MustCompile("(.)([A-Z])"); /* */ $s = 1; case 1: if($c) { $c = false; _r = _r.$blk(); } if (_r && _r.$blk !== undefined) { break s; }
-			_r$1 = _r.ReplaceAllString(name, "$1-$2"); /* */ $s = 2; case 2: if($c) { $c = false; _r$1 = _r$1.$blk(); } if (_r$1 && _r$1.$blk !== undefined) { break s; }
-			name = _r$1;
-			_r$2 = strings.ToUpper(name); /* */ $s = 3; case 3: if($c) { $c = false; _r$2 = _r$2.$blk(); } if (_r$2 && _r$2.$blk !== undefined) { break s; }
-			name = _r$2;
-			symbol = instance.NewSymbol(name);
-			$pkg.TopLevel.Variable.Define(symbol, value);
-			$s = -1; return;
-			/* */ } return; } if ($f === undefined) { $f = { $blk: $b }; } $f.$ptr = $ptr; $f._r = _r; $f._r$1 = _r$1; $f._r$2 = _r$2; $f.name = name; $f.symbol = symbol; $f.value = value; $f.$s = $s; $f.$r = $r; return $f;
-		});
+		var $ptr, $s, $r;
+		/* */ $s = 0; var $f, $c = false; if (this !== undefined && this.$blk !== undefined) { $f = this; $c = true; $ptr = $f.$ptr; $s = $f.$s; $r = $f.$r; } s: while (true) { switch ($s) { case 0:
 		$r = defglobal("*pi*", new instance.Float(3.141592653589793)); /* */ $s = 1; case 1: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
 		$r = defglobal("*MostPositiveFloat*", $pkg.MostPositiveFloat); /* */ $s = 2; case 2: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
 		$r = defglobal("*MostNegativeFloat*", $pkg.MostNegativeFloat); /* */ $s = 3; case 3: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
@@ -38255,7 +38270,7 @@ $packages["github.com/ta2gch/iris/runtime"] = (function() {
 		$r = defspecial2("WithStandardInput", new funcType$3(WithStandardInput)); /* */ $s = 193; case 193: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
 		$r = defspecial2("WithStandardOutput", new funcType$3(WithStandardOutput)); /* */ $s = 194; case 194: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
 		$s = -1; return;
-		/* */ } return; } if ($f === undefined) { $f = { $blk: init }; } $f.$ptr = $ptr; $f.defglobal = defglobal; $f.defspecial2 = defspecial2; $f.defun2 = defun2; $f.$s = $s; $f.$r = $r; return $f;
+		/* */ } return; } if ($f === undefined) { $f = { $blk: init }; } $f.$ptr = $ptr; $f.$s = $s; $f.$r = $r; return $f;
 	};
 	Length = function(e, sequence) {
 		var $ptr, _r, _r$1, _r$2, _r$3, _r$4, _r$5, e, sequence, x, $s, $r;
@@ -38523,7 +38538,7 @@ $packages["github.com/ta2gch/iris/runtime"] = (function() {
 				}
 				_i$1++;
 			/* } */ $s = 20; continue; case 21:
-			_r$9 = $assertType(function$1, instance.Applicable).Apply($clone(e, env.Environment), arguments$1); /* */ $s = 23; case 23: if($c) { $c = false; _r$9 = _r$9.$blk(); } if (_r$9 && _r$9.$blk !== undefined) { break s; }
+			_r$9 = $assertType(function$1, instance.Applicable).Apply($clone(e.NewDynamic(), env.Environment), arguments$1); /* */ $s = 23; case 23: if($c) { $c = false; _r$9 = _r$9.$blk(); } if (_r$9 && _r$9.$blk !== undefined) { break s; }
 			_tuple$1 = _r$9;
 			ret = _tuple$1[0];
 			err$4 = _tuple$1[1];
