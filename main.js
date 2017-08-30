@@ -33382,7 +33382,7 @@ $packages["testing"] = (function() {
 	return $pkg;
 })();
 $packages["github.com/ta2gch/iris/runtime"] = (function() {
-	var $pkg = {}, $init, bufio, bytes, fmt, parser, tokenizer, env, ilos, class$1, instance, math, os, reflect, regexp, runtime, strings, testing, sliceType, sliceType$1, ptrType, sliceType$2, sliceType$3, ptrType$1, funcType, funcType$1, funcType$2, funcType$3, funcType$4, funcType$5, funcType$6, funcType$7, funcType$8, funcType$9, funcType$10, ptrType$2, sliceType$4, arrayType, ptrType$3, uidsrc, BasicArrayP, BasicArrayStarP, GeneralArrayStarP, CreateArray, Aref, Garef, SetAref, SetGaref, Characterp, CharEqual, CharNotEqual, CharGreaterThan, CharGreaterThanOrEqual, CharLessThan, CharLessThanOrEqual, ClassOf, Instancep, Subclassp, Class, SignalCondition, Cerror, Error, ReportCondition, ConditionContinuable, ContinueCondition, WithHandler, If, Cond, Case, CaseUsing, Consp, Cons, Car, Cdr, SetCar, SetCdr, Quote, checkSuperClass, Defclass, Create, InitializeObject, Defconstant, Defglobal, Defdynamic, Defun, Dynamic, SetDynamic, DynamicLet, isComparable, Eq, Eql, Equal, evalArguments, evalLambda, evalSpecial, evalMacro, evalFunction, evalCons, evalVariable, Eval, Floatp, Float, Floor, Ceiling, Truncate, Round, Functionp, Function, Lambda, Labels, Flet, Apply, Funcall, Defgeneric, convInt, Integerp, Div, Mod, Gcd, Lcm, Isqrt, While, For, Listp, CreateList, List, Reverse, Nreverse, Append, Member, Mapcar, Mapc, Mapcan, Maplist, Mapl, Mapcon, Assoc, Not, And, Or, Defmacro, Quasiquote, expand, checkLambdaList, newNamedFunction, Block, ReturnFrom, Catch, Throw, Tagbody, Go, UnwindProtect, Null, Numberp, ParseNumber, NumberEqual, NumberGreaterThan, NumberGreaterThanOrEqual, NumberLessThan, NumberLessThanOrEqual, Add, Multiply, Substruct, Quotient, Max, Min, Abs, Exp, Log, Expt, Sqrt, Sin, Cos, Tan, Atan, Atan2, Sinh, Cosh, Tanh, Atanh, init, Length, Elt, SetElt, Subseq, MapInto, Progn, Streamp, OpenStreamP, InputStreamP, OutputStreamP, StandardInput, StandardOutput, ErrorOutput, WithStandardInput, WithStandardOutput, WithErrorOutput, OpenInputFile, OpenOutputFile, OpenIoFile, WithOpenInputFile, WithOpenOutputFile, Close, CreateStringInputStream, CreateStringOutputStream, GetOutputStreamString, Read, ReadChar, ReadLine, StreamReadyP, Format, Stringp, CreateString, StringEqual, StringNotEqual, StringGreaterThan, StringGreaterThanOrEqual, CharIndex, StringIndex, StringAppend, Symbolp, Property, SetProperty, RemoveProperty, Gensym, convFloat64, ensure, genUID, func2symbol, Setq, Setf, Let, LetStar, BasicVectorP, GeneralVectorP, CreateVector, Vector;
+	var $pkg = {}, $init, bufio, bytes, fmt, parser, tokenizer, env, ilos, class$1, instance, math, os, reflect, regexp, runtime, strings, testing, sliceType, sliceType$1, ptrType, sliceType$2, sliceType$3, ptrType$1, funcType, funcType$1, funcType$2, funcType$3, funcType$4, funcType$5, funcType$6, funcType$7, funcType$8, funcType$9, funcType$10, ptrType$2, sliceType$4, arrayType, ptrType$3, uidsrc, BasicArrayP, BasicArrayStarP, GeneralArrayStarP, CreateArray, Aref, Garef, SetAref, SetGaref, Characterp, CharEqual, CharNotEqual, CharGreaterThan, CharGreaterThanOrEqual, CharLessThan, CharLessThanOrEqual, ClassOf, Instancep, Subclassp, Class, SignalCondition, Cerror, Error, ReportCondition, ConditionContinuable, ContinueCondition, WithHandler, If, Cond, Case, CaseUsing, Consp, Cons, Car, Cdr, SetCar, SetCdr, Quote, checkSuperClass, Defclass, Create, InitializeObject, Defconstant, Defglobal, Defdynamic, Defun, Dynamic, SetDynamic, DynamicLet, isComparable, Eq, Eql, Equal, evalArguments, evalLambda, evalSpecial, evalMacro, evalFunction, evalCons, evalVariable, Eval, Floatp, Float, Floor, Ceiling, Truncate, Round, Functionp, Function, Lambda, Labels, Flet, Apply, Funcall, Defmethod, Defgeneric, convInt, Integerp, Div, Mod, Gcd, Lcm, Isqrt, While, For, Listp, CreateList, List, Reverse, Nreverse, Append, Member, Mapcar, Mapc, Mapcan, Maplist, Mapl, Mapcon, Assoc, Not, And, Or, Defmacro, Quasiquote, expand, checkLambdaList, newNamedFunction, Block, ReturnFrom, Catch, Throw, Tagbody, Go, UnwindProtect, Null, Numberp, ParseNumber, NumberEqual, NumberGreaterThan, NumberGreaterThanOrEqual, NumberLessThan, NumberLessThanOrEqual, Add, Multiply, Substruct, Quotient, Max, Min, Abs, Exp, Log, Expt, Sqrt, Sin, Cos, Tan, Atan, Atan2, Sinh, Cosh, Tanh, Atanh, init, Length, Elt, SetElt, Subseq, MapInto, Progn, Streamp, OpenStreamP, InputStreamP, OutputStreamP, StandardInput, StandardOutput, ErrorOutput, WithStandardInput, WithStandardOutput, WithErrorOutput, OpenInputFile, OpenOutputFile, OpenIoFile, WithOpenInputFile, WithOpenOutputFile, Close, CreateStringInputStream, CreateStringOutputStream, GetOutputStreamString, Read, ReadChar, ReadLine, StreamReadyP, Format, Stringp, CreateString, StringEqual, StringNotEqual, StringGreaterThan, StringGreaterThanOrEqual, CharIndex, StringIndex, StringAppend, Symbolp, Property, SetProperty, RemoveProperty, Gensym, convFloat64, ensure, genUID, func2symbol, Setq, Setf, Let, LetStar, BasicVectorP, GeneralVectorP, CreateVector, Vector;
 	bufio = $packages["bufio"];
 	bytes = $packages["bytes"];
 	fmt = $packages["fmt"];
@@ -35539,6 +35539,107 @@ $packages["github.com/ta2gch/iris/runtime"] = (function() {
 		/* */ } return; } if ($f === undefined) { $f = { $blk: Funcall }; } $f.$ptr = $ptr; $f._r = _r; $f.e = e; $f.function$1 = function$1; $f.obj = obj; $f.$s = $s; $f.$r = $r; return $f;
 	};
 	$pkg.Funcall = Funcall;
+	Defmethod = function(e, arguments$1) {
+		var $ptr, _i, _i$1, _r, _r$1, _r$10, _r$11, _r$12, _r$13, _r$2, _r$3, _r$4, _r$5, _r$6, _r$7, _r$8, _r$9, _ref, _ref$1, _tuple, _tuple$1, _tuple$2, _tuple$3, arguments$1, class$2, classList, e, err, fun, gen, i, lambdaList, name, ok, ok$1, parameterList, pp, pp$1, qualifier, x, x$1, x$2, $s, $r;
+		/* */ $s = 0; var $f, $c = false; if (this !== undefined && this.$blk !== undefined) { $f = this; $c = true; $ptr = $f.$ptr; _i = $f._i; _i$1 = $f._i$1; _r = $f._r; _r$1 = $f._r$1; _r$10 = $f._r$10; _r$11 = $f._r$11; _r$12 = $f._r$12; _r$13 = $f._r$13; _r$2 = $f._r$2; _r$3 = $f._r$3; _r$4 = $f._r$4; _r$5 = $f._r$5; _r$6 = $f._r$6; _r$7 = $f._r$7; _r$8 = $f._r$8; _r$9 = $f._r$9; _ref = $f._ref; _ref$1 = $f._ref$1; _tuple = $f._tuple; _tuple$1 = $f._tuple$1; _tuple$2 = $f._tuple$2; _tuple$3 = $f._tuple$3; arguments$1 = $f.arguments$1; class$2 = $f.class$2; classList = $f.classList; e = $f.e; err = $f.err; fun = $f.fun; gen = $f.gen; i = $f.i; lambdaList = $f.lambdaList; name = $f.name; ok = $f.ok; ok$1 = $f.ok$1; parameterList = $f.parameterList; pp = $f.pp; pp$1 = $f.pp$1; qualifier = $f.qualifier; x = $f.x; x$1 = $f.x$1; x$2 = $f.x$2; $s = $f.$s; $r = $f.$r; } s: while (true) { switch ($s) { case 0:
+		/* */ if (arguments$1.$length < 2) { $s = 1; continue; }
+		/* */ $s = 2; continue;
+		/* if (arguments$1.$length < 2) { */ case 1:
+			_r = instance.NewArityError(); /* */ $s = 3; case 3: if($c) { $c = false; _r = _r.$blk(); } if (_r && _r.$blk !== undefined) { break s; }
+			$s = -1; return [$ifaceNil, _r];
+		/* } */ case 2:
+		name = (0 >= arguments$1.$length ? ($throwRuntimeError("index out of range"), undefined) : arguments$1.$array[arguments$1.$offset + 0]);
+		qualifier = $ifaceNil;
+		i = 0;
+		if ($interfaceIsEqual((1 >= arguments$1.$length ? ($throwRuntimeError("index out of range"), undefined) : arguments$1.$array[arguments$1.$offset + 1]), instance.NewSymbol(":AROUND")) || $interfaceIsEqual((1 >= arguments$1.$length ? ($throwRuntimeError("index out of range"), undefined) : arguments$1.$array[arguments$1.$offset + 1]), instance.NewSymbol(":BEFORE")) || $interfaceIsEqual((1 >= arguments$1.$length ? ($throwRuntimeError("index out of range"), undefined) : arguments$1.$array[arguments$1.$offset + 1]), instance.NewSymbol(":AFTER"))) {
+			qualifier = (1 >= arguments$1.$length ? ($throwRuntimeError("index out of range"), undefined) : arguments$1.$array[arguments$1.$offset + 1]);
+			i = i + (1) >> 0;
+		}
+		parameterList = new sliceType([]);
+		_r$1 = $assertType((x = i + 1 >> 0, ((x < 0 || x >= arguments$1.$length) ? ($throwRuntimeError("index out of range"), undefined) : arguments$1.$array[arguments$1.$offset + x])), instance.List).Slice(); /* */ $s = 4; case 4: if($c) { $c = false; _r$1 = _r$1.$blk(); } if (_r$1 && _r$1.$blk !== undefined) { break s; }
+		_ref = _r$1;
+		_i = 0;
+		/* while (true) { */ case 5:
+			/* if (!(_i < _ref.$length)) { break; } */ if(!(_i < _ref.$length)) { $s = 6; continue; }
+			pp = ((_i < 0 || _i >= _ref.$length) ? ($throwRuntimeError("index out of range"), undefined) : _ref.$array[_ref.$offset + _i]);
+			_r$2 = ilos.InstanceOf(class$1.Symbol, pp); /* */ $s = 10; case 10: if($c) { $c = false; _r$2 = _r$2.$blk(); } if (_r$2 && _r$2.$blk !== undefined) { break s; }
+			/* */ if (_r$2) { $s = 7; continue; }
+			/* */ $s = 8; continue;
+			/* if (_r$2) { */ case 7:
+				parameterList = $append(parameterList, pp);
+				$s = 9; continue;
+			/* } else { */ case 8:
+				_r$3 = $assertType(pp, instance.List).Nth(0); /* */ $s = 11; case 11: if($c) { $c = false; _r$3 = _r$3.$blk(); } if (_r$3 && _r$3.$blk !== undefined) { break s; }
+				parameterList = $append(parameterList, _r$3);
+			/* } */ case 9:
+			_i++;
+		/* } */ $s = 5; continue; case 6:
+		_tuple = List($clone(e, env.Environment), parameterList);
+		lambdaList = _tuple[0];
+		err = _tuple[1];
+		if (!($interfaceIsEqual(err, $ifaceNil))) {
+			$s = -1; return [$ifaceNil, err];
+		}
+		classList = new sliceType$2([]);
+		_r$4 = $assertType((x$1 = i + 1 >> 0, ((x$1 < 0 || x$1 >= arguments$1.$length) ? ($throwRuntimeError("index out of range"), undefined) : arguments$1.$array[arguments$1.$offset + x$1])), instance.List).Slice(); /* */ $s = 12; case 12: if($c) { $c = false; _r$4 = _r$4.$blk(); } if (_r$4 && _r$4.$blk !== undefined) { break s; }
+		_ref$1 = _r$4;
+		_i$1 = 0;
+		/* while (true) { */ case 13:
+			/* if (!(_i$1 < _ref$1.$length)) { break; } */ if(!(_i$1 < _ref$1.$length)) { $s = 14; continue; }
+			pp$1 = ((_i$1 < 0 || _i$1 >= _ref$1.$length) ? ($throwRuntimeError("index out of range"), undefined) : _ref$1.$array[_ref$1.$offset + _i$1]);
+			if ($interfaceIsEqual(pp$1, instance.NewSymbol(":REST")) && $interfaceIsEqual(pp$1, instance.NewSymbol("&REST"))) {
+				/* break; */ $s = 14; continue;
+			}
+			_r$5 = ilos.InstanceOf(class$1.Symbol, pp$1); /* */ $s = 18; case 18: if($c) { $c = false; _r$5 = _r$5.$blk(); } if (_r$5 && _r$5.$blk !== undefined) { break s; }
+			/* */ if (_r$5) { $s = 15; continue; }
+			/* */ $s = 16; continue;
+			/* if (_r$5) { */ case 15:
+				classList = $append(classList, (x$2 = class$1.Object, new x$2.constructor.elem(x$2)));
+				$s = 17; continue;
+			/* } else { */ case 16:
+				_r$6 = $assertType(pp$1, instance.List).Nth(1); /* */ $s = 19; case 19: if($c) { $c = false; _r$6 = _r$6.$blk(); } if (_r$6 && _r$6.$blk !== undefined) { break s; }
+				_r$7 = $subslice(e.Class, 0, 1).Get(_r$6); /* */ $s = 20; case 20: if($c) { $c = false; _r$7 = _r$7.$blk(); } if (_r$7 && _r$7.$blk !== undefined) { break s; }
+				_tuple$1 = _r$7;
+				class$2 = _tuple$1[0];
+				ok = _tuple$1[1];
+				/* */ if (!ok) { $s = 21; continue; }
+				/* */ $s = 22; continue;
+				/* if (!ok) { */ case 21:
+					_r$8 = $assertType(pp$1, instance.List).Nth(1); /* */ $s = 23; case 23: if($c) { $c = false; _r$8 = _r$8.$blk(); } if (_r$8 && _r$8.$blk !== undefined) { break s; }
+					_r$9 = instance.NewUndefinedClass(_r$8); /* */ $s = 24; case 24: if($c) { $c = false; _r$9 = _r$9.$blk(); } if (_r$9 && _r$9.$blk !== undefined) { break s; }
+					$s = -1; return [$ifaceNil, _r$9];
+				/* } */ case 22:
+				classList = $append(classList, $assertType(class$2, ilos.Class));
+			/* } */ case 17:
+			_i$1++;
+		/* } */ $s = 13; continue; case 14:
+		_r$10 = newNamedFunction($clone(e, env.Environment), name, lambdaList, $subslice(arguments$1, (i + 2 >> 0))); /* */ $s = 25; case 25: if($c) { $c = false; _r$10 = _r$10.$blk(); } if (_r$10 && _r$10.$blk !== undefined) { break s; }
+		_tuple$2 = _r$10;
+		fun = _tuple$2[0];
+		err = _tuple$2[1];
+		if (!($interfaceIsEqual(err, $ifaceNil))) {
+			$s = -1; return [$ifaceNil, err];
+		}
+		_tuple$3 = $subslice(e.Function, 0, 1).Get(name);
+		gen = _tuple$3[0];
+		ok$1 = _tuple$3[1];
+		/* */ if (!ok$1) { $s = 26; continue; }
+		/* */ $s = 27; continue;
+		/* if (!ok$1) { */ case 26:
+			_r$11 = instance.NewUndefinedFunction(name); /* */ $s = 28; case 28: if($c) { $c = false; _r$11 = _r$11.$blk(); } if (_r$11 && _r$11.$blk !== undefined) { break s; }
+			$s = -1; return [$ifaceNil, _r$11];
+		/* } */ case 27:
+		_r$12 = $assertType(gen, ptrType$1).AddMethod(qualifier, lambdaList, classList, fun); /* */ $s = 31; case 31: if($c) { $c = false; _r$12 = _r$12.$blk(); } if (_r$12 && _r$12.$blk !== undefined) { break s; }
+		/* */ if (!_r$12) { $s = 29; continue; }
+		/* */ $s = 30; continue;
+		/* if (!_r$12) { */ case 29:
+			_r$13 = instance.NewUndefinedFunction(name); /* */ $s = 32; case 32: if($c) { $c = false; _r$13 = _r$13.$blk(); } if (_r$13 && _r$13.$blk !== undefined) { break s; }
+			$s = -1; return [$ifaceNil, _r$13];
+		/* } */ case 30:
+		$s = -1; return [name, $ifaceNil];
+		/* */ } return; } if ($f === undefined) { $f = { $blk: Defmethod }; } $f.$ptr = $ptr; $f._i = _i; $f._i$1 = _i$1; $f._r = _r; $f._r$1 = _r$1; $f._r$10 = _r$10; $f._r$11 = _r$11; $f._r$12 = _r$12; $f._r$13 = _r$13; $f._r$2 = _r$2; $f._r$3 = _r$3; $f._r$4 = _r$4; $f._r$5 = _r$5; $f._r$6 = _r$6; $f._r$7 = _r$7; $f._r$8 = _r$8; $f._r$9 = _r$9; $f._ref = _ref; $f._ref$1 = _ref$1; $f._tuple = _tuple; $f._tuple$1 = _tuple$1; $f._tuple$2 = _tuple$2; $f._tuple$3 = _tuple$3; $f.arguments$1 = arguments$1; $f.class$2 = class$2; $f.classList = classList; $f.e = e; $f.err = err; $f.fun = fun; $f.gen = gen; $f.i = i; $f.lambdaList = lambdaList; $f.name = name; $f.ok = ok; $f.ok$1 = ok$1; $f.parameterList = parameterList; $f.pp = pp; $f.pp$1 = pp$1; $f.qualifier = qualifier; $f.x = x; $f.x$1 = x$1; $f.x$2 = x$2; $f.$s = $s; $f.$r = $r; return $f;
+	};
+	$pkg.Defmethod = Defmethod;
 	Defgeneric = function(e, funcSpec, lambdaList, optionsOrMethodDescs) {
 		var $ptr, _1, _arg, _arg$1, _i, _r, _r$1, _r$2, _r$3, _r$4, _r$5, _r$6, _r$7, _r$8, _ref, _tuple, class$2, e, forms, funcSpec, genericFunctionClass, lambdaList, methodCombination, ok, optionOrMethodDesc, optionsOrMethodDescs, $s, $r;
 		/* */ $s = 0; var $f, $c = false; if (this !== undefined && this.$blk !== undefined) { $f = this; $c = true; $ptr = $f.$ptr; _1 = $f._1; _arg = $f._arg; _arg$1 = $f._arg$1; _i = $f._i; _r = $f._r; _r$1 = $f._r$1; _r$2 = $f._r$2; _r$3 = $f._r$3; _r$4 = $f._r$4; _r$5 = $f._r$5; _r$6 = $f._r$6; _r$7 = $f._r$7; _r$8 = $f._r$8; _ref = $f._ref; _tuple = $f._tuple; class$2 = $f.class$2; e = $f.e; forms = $f.forms; funcSpec = $f.funcSpec; genericFunctionClass = $f.genericFunctionClass; lambdaList = $f.lambdaList; methodCombination = $f.methodCombination; ok = $f.ok; optionOrMethodDesc = $f.optionOrMethodDesc; optionsOrMethodDescs = $f.optionsOrMethodDescs; $s = $f.$s; $r = $f.$r; } s: while (true) { switch ($s) { case 0:
@@ -37913,8 +38014,8 @@ $packages["github.com/ta2gch/iris/runtime"] = (function() {
 	};
 	$pkg.Atanh = Atanh;
 	init = function() {
-		var $ptr, defglobal$1, defspecial2, defun2$1, $s, $r;
-		/* */ $s = 0; var $f, $c = false; if (this !== undefined && this.$blk !== undefined) { $f = this; $c = true; $ptr = $f.$ptr; defglobal$1 = $f.defglobal$1; defspecial2 = $f.defspecial2; defun2$1 = $f.defun2$1; $s = $f.$s; $r = $f.$r; } s: while (true) { switch ($s) { case 0:
+		var $ptr, defglobal, defspecial2, defun2, $s, $r;
+		/* */ $s = 0; var $f, $c = false; if (this !== undefined && this.$blk !== undefined) { $f = this; $c = true; $ptr = $f.$ptr; defglobal = $f.defglobal; defspecial2 = $f.defspecial2; defun2 = $f.defun2; $s = $f.$s; $r = $f.$r; } s: while (true) { switch ($s) { case 0:
 		defspecial2 = (function $b(name, function$1) {
 			var $ptr, _arg, _arg$1, _r, _r$1, _r$2, _r$3, _r$4, _r$5, function$1, name, symbol, $s, $r;
 			/* */ $s = 0; var $f, $c = false; if (this !== undefined && this.$blk !== undefined) { $f = this; $c = true; $ptr = $f.$ptr; _arg = $f._arg; _arg$1 = $f._arg$1; _r = $f._r; _r$1 = $f._r$1; _r$2 = $f._r$2; _r$3 = $f._r$3; _r$4 = $f._r$4; _r$5 = $f._r$5; function$1 = $f.function$1; name = $f.name; symbol = $f.symbol; $s = $f.$s; $r = $f.$r; } s: while (true) { switch ($s) { case 0:
@@ -37933,7 +38034,7 @@ $packages["github.com/ta2gch/iris/runtime"] = (function() {
 			$s = -1; return;
 			/* */ } return; } if ($f === undefined) { $f = { $blk: $b }; } $f.$ptr = $ptr; $f._arg = _arg; $f._arg$1 = _arg$1; $f._r = _r; $f._r$1 = _r$1; $f._r$2 = _r$2; $f._r$3 = _r$3; $f._r$4 = _r$4; $f._r$5 = _r$5; $f.function$1 = function$1; $f.name = name; $f.symbol = symbol; $f.$s = $s; $f.$r = $r; return $f;
 		});
-		defun2$1 = (function $b(name, function$1) {
+		defun2 = (function $b(name, function$1) {
 			var $ptr, _r, _r$1, _r$2, function$1, name, symbol, $s, $r;
 			/* */ $s = 0; var $f, $c = false; if (this !== undefined && this.$blk !== undefined) { $f = this; $c = true; $ptr = $f.$ptr; _r = $f._r; _r$1 = $f._r$1; _r$2 = $f._r$2; function$1 = $f.function$1; name = $f.name; symbol = $f.symbol; $s = $f.$s; $r = $f.$r; } s: while (true) { switch ($s) { case 0:
 			_r = regexp.MustCompile("(.)([A-Z])"); /* */ $s = 1; case 1: if($c) { $c = false; _r = _r.$blk(); } if (_r && _r.$blk !== undefined) { break s; }
@@ -37946,7 +38047,7 @@ $packages["github.com/ta2gch/iris/runtime"] = (function() {
 			$s = -1; return;
 			/* */ } return; } if ($f === undefined) { $f = { $blk: $b }; } $f.$ptr = $ptr; $f._r = _r; $f._r$1 = _r$1; $f._r$2 = _r$2; $f.function$1 = function$1; $f.name = name; $f.symbol = symbol; $f.$s = $s; $f.$r = $r; return $f;
 		});
-		defglobal$1 = (function $b(name, value) {
+		defglobal = (function $b(name, value) {
 			var $ptr, _r, _r$1, _r$2, name, symbol, value, $s, $r;
 			/* */ $s = 0; var $f, $c = false; if (this !== undefined && this.$blk !== undefined) { $f = this; $c = true; $ptr = $f.$ptr; _r = $f._r; _r$1 = $f._r$1; _r$2 = $f._r$2; name = $f.name; symbol = $f.symbol; value = $f.value; $s = $f.$s; $r = $f.$r; } s: while (true) { switch ($s) { case 0:
 			_r = regexp.MustCompile("(.)([A-Z])"); /* */ $s = 1; case 1: if($c) { $c = false; _r = _r.$blk(); } if (_r && _r.$blk !== undefined) { break s; }
@@ -37959,201 +38060,202 @@ $packages["github.com/ta2gch/iris/runtime"] = (function() {
 			$s = -1; return;
 			/* */ } return; } if ($f === undefined) { $f = { $blk: $b }; } $f.$ptr = $ptr; $f._r = _r; $f._r$1 = _r$1; $f._r$2 = _r$2; $f.name = name; $f.symbol = symbol; $f.value = value; $f.$s = $s; $f.$r = $r; return $f;
 		});
-		$r = defglobal$1("*pi*", new instance.Float(3.141592653589793)); /* */ $s = 1; case 1: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = defglobal$1("*MostPositiveFloat*", $pkg.MostPositiveFloat); /* */ $s = 2; case 2: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = defglobal$1("*MostNegativeFloat*", $pkg.MostNegativeFloat); /* */ $s = 3; case 3: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = defun2$1("-", new funcType$3(Substruct)); /* */ $s = 4; case 4: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = defun2$1("+", new funcType$2(Add)); /* */ $s = 5; case 5: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = defun2$1("*", new funcType$2(Multiply)); /* */ $s = 6; case 6: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = defun2$1("<", new funcType$1(NumberLessThan)); /* */ $s = 7; case 7: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = defun2$1("<=", new funcType$1(NumberLessThanOrEqual)); /* */ $s = 8; case 8: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = defun2$1("=", new funcType$1(NumberEqual)); /* */ $s = 9; case 9: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = defun2$1(">", new funcType$1(NumberGreaterThan)); /* */ $s = 10; case 10: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = defun2$1(">=", new funcType$1(NumberGreaterThanOrEqual)); /* */ $s = 11; case 11: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = defglobal("*pi*", new instance.Float(3.141592653589793)); /* */ $s = 1; case 1: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = defglobal("*MostPositiveFloat*", $pkg.MostPositiveFloat); /* */ $s = 2; case 2: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = defglobal("*MostNegativeFloat*", $pkg.MostNegativeFloat); /* */ $s = 3; case 3: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = defun2("-", new funcType$3(Substruct)); /* */ $s = 4; case 4: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = defun2("+", new funcType$2(Add)); /* */ $s = 5; case 5: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = defun2("*", new funcType$2(Multiply)); /* */ $s = 6; case 6: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = defun2("<", new funcType$1(NumberLessThan)); /* */ $s = 7; case 7: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = defun2("<=", new funcType$1(NumberLessThanOrEqual)); /* */ $s = 8; case 8: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = defun2("=", new funcType$1(NumberEqual)); /* */ $s = 9; case 9: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = defun2(">", new funcType$1(NumberGreaterThan)); /* */ $s = 10; case 10: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = defun2(">=", new funcType$1(NumberGreaterThanOrEqual)); /* */ $s = 11; case 11: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
 		$r = defspecial2("Quasiquote", new funcType(Quasiquote)); /* */ $s = 12; case 12: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = defun2$1("Abs", new funcType(Abs)); /* */ $s = 13; case 13: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = defun2("Abs", new funcType(Abs)); /* */ $s = 13; case 13: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
 		$r = defspecial2("And", new funcType$2(And)); /* */ $s = 14; case 14: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = defun2$1("Append", new funcType$2(Append)); /* */ $s = 15; case 15: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = defun2$1("Apply", new funcType$3(Apply)); /* */ $s = 16; case 16: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = defun2$1("Aref", new funcType$3(Aref)); /* */ $s = 17; case 17: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = defun2$1("Assoc", new funcType$1(Assoc)); /* */ $s = 18; case 18: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = defun2$1("Atan", new funcType(Atan)); /* */ $s = 19; case 19: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = defun2$1("Atan2", new funcType$1(Atan2)); /* */ $s = 20; case 20: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = defun2$1("Atanh", new funcType(Atanh)); /* */ $s = 21; case 21: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = defun2$1("BasicArray*P", new funcType(BasicArrayStarP)); /* */ $s = 22; case 22: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = defun2$1("BasicArrayP", new funcType(BasicArrayP)); /* */ $s = 23; case 23: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = defun2$1("BasicVectorP", new funcType(BasicVectorP)); /* */ $s = 24; case 24: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = defun2("Append", new funcType$2(Append)); /* */ $s = 15; case 15: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = defun2("Apply", new funcType$3(Apply)); /* */ $s = 16; case 16: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = defun2("Aref", new funcType$3(Aref)); /* */ $s = 17; case 17: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = defun2("Assoc", new funcType$1(Assoc)); /* */ $s = 18; case 18: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = defun2("Atan", new funcType(Atan)); /* */ $s = 19; case 19: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = defun2("Atan2", new funcType$1(Atan2)); /* */ $s = 20; case 20: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = defun2("Atanh", new funcType(Atanh)); /* */ $s = 21; case 21: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = defun2("BasicArray*P", new funcType(BasicArrayStarP)); /* */ $s = 22; case 22: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = defun2("BasicArrayP", new funcType(BasicArrayP)); /* */ $s = 23; case 23: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = defun2("BasicVectorP", new funcType(BasicVectorP)); /* */ $s = 24; case 24: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
 		$r = defspecial2("Block", new funcType$3(Block)); /* */ $s = 25; case 25: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = defun2$1("Car", new funcType(Car)); /* */ $s = 26; case 26: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = defun2("Car", new funcType(Car)); /* */ $s = 26; case 26: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
 		$r = defspecial2("Case", new funcType$3(Case)); /* */ $s = 27; case 27: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
 		$r = defspecial2("CaseUsing", new funcType$4(CaseUsing)); /* */ $s = 28; case 28: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
 		$r = defspecial2("Catch", new funcType$3(Catch)); /* */ $s = 29; case 29: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = defun2$1("Cdr", new funcType(Cdr)); /* */ $s = 30; case 30: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = defun2$1("Ceiling", new funcType(Ceiling)); /* */ $s = 31; case 31: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = defun2$1("Cerror", new funcType$4(Cerror)); /* */ $s = 32; case 32: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = defun2$1("CharIndex", new funcType$4(CharIndex)); /* */ $s = 33; case 33: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = defun2$1("char/=", new funcType$1(CharNotEqual)); /* */ $s = 34; case 34: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = defun2$1("Char<", new funcType$1(CharLessThan)); /* */ $s = 35; case 35: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = defun2$1("Char<=", new funcType$1(CharLessThanOrEqual)); /* */ $s = 36; case 36: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = defun2$1("Char=", new funcType$1(CharEqual)); /* */ $s = 37; case 37: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = defun2$1("Char>", new funcType$1(CharGreaterThan)); /* */ $s = 38; case 38: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = defun2$1("Char>=", new funcType$1(CharGreaterThanOrEqual)); /* */ $s = 39; case 39: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = defun2$1("Characterp", new funcType(Characterp)); /* */ $s = 40; case 40: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = defun2("Cdr", new funcType(Cdr)); /* */ $s = 30; case 30: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = defun2("Ceiling", new funcType(Ceiling)); /* */ $s = 31; case 31: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = defun2("Cerror", new funcType$4(Cerror)); /* */ $s = 32; case 32: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = defun2("CharIndex", new funcType$4(CharIndex)); /* */ $s = 33; case 33: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = defun2("char/=", new funcType$1(CharNotEqual)); /* */ $s = 34; case 34: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = defun2("Char<", new funcType$1(CharLessThan)); /* */ $s = 35; case 35: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = defun2("Char<=", new funcType$1(CharLessThanOrEqual)); /* */ $s = 36; case 36: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = defun2("Char=", new funcType$1(CharEqual)); /* */ $s = 37; case 37: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = defun2("Char>", new funcType$1(CharGreaterThan)); /* */ $s = 38; case 38: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = defun2("Char>=", new funcType$1(CharGreaterThanOrEqual)); /* */ $s = 39; case 39: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = defun2("Characterp", new funcType(Characterp)); /* */ $s = 40; case 40: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
 		$r = defspecial2("Class", new funcType$5(Class)); /* */ $s = 41; case 41: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = defun2$1("ClassOf", new funcType(ClassOf)); /* */ $s = 42; case 42: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = defun2$1("Close", new funcType(Close)); /* */ $s = 43; case 43: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = defun2("ClassOf", new funcType(ClassOf)); /* */ $s = 42; case 42: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = defun2("Close", new funcType(Close)); /* */ $s = 43; case 43: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
 		$r = defspecial2("Cond", new funcType$2(Cond)); /* */ $s = 44; case 44: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = defun2$1("ConditionContinuable", new funcType(ConditionContinuable)); /* */ $s = 45; case 45: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = defun2$1("Cons", new funcType$1(Cons)); /* */ $s = 46; case 46: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = defun2$1("Consp", new funcType(Consp)); /* */ $s = 47; case 47: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = defun2$1("ContinueCondition", new funcType$3(ContinueCondition)); /* */ $s = 48; case 48: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = defun2$1("Cos", new funcType(Cos)); /* */ $s = 49; case 49: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = defun2$1("Cosh", new funcType(Cosh)); /* */ $s = 50; case 50: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = defun2$1("Create", new funcType$3(Create)); /* */ $s = 51; case 51: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = defun2$1("CreateArray", new funcType$3(CreateArray)); /* */ $s = 52; case 52: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = defun2$1("CreateList", new funcType$3(CreateList)); /* */ $s = 53; case 53: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = defun2$1("CreateString", new funcType$3(CreateString)); /* */ $s = 54; case 54: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = defun2$1("CreateStringInputStream", new funcType(CreateStringInputStream)); /* */ $s = 55; case 55: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = defun2$1("CreateStringOutputStream", new funcType$6(CreateStringOutputStream)); /* */ $s = 56; case 56: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = defun2$1("CreateVector", new funcType$3(CreateVector)); /* */ $s = 57; case 57: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = defun2("ConditionContinuable", new funcType(ConditionContinuable)); /* */ $s = 45; case 45: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = defun2("Cons", new funcType$1(Cons)); /* */ $s = 46; case 46: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = defun2("Consp", new funcType(Consp)); /* */ $s = 47; case 47: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = defun2("ContinueCondition", new funcType$3(ContinueCondition)); /* */ $s = 48; case 48: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = defun2("Cos", new funcType(Cos)); /* */ $s = 49; case 49: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = defun2("Cosh", new funcType(Cosh)); /* */ $s = 50; case 50: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = defun2("Create", new funcType$3(Create)); /* */ $s = 51; case 51: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = defun2("CreateArray", new funcType$3(CreateArray)); /* */ $s = 52; case 52: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = defun2("CreateList", new funcType$3(CreateList)); /* */ $s = 53; case 53: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = defun2("CreateString", new funcType$3(CreateString)); /* */ $s = 54; case 54: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = defun2("CreateStringInputStream", new funcType(CreateStringInputStream)); /* */ $s = 55; case 55: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = defun2("CreateStringOutputStream", new funcType$6(CreateStringOutputStream)); /* */ $s = 56; case 56: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = defun2("CreateVector", new funcType$3(CreateVector)); /* */ $s = 57; case 57: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
 		$r = defspecial2("Defclass", new funcType$7(Defclass)); /* */ $s = 58; case 58: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
 		$r = defspecial2("Defconstant", new funcType$1(Defconstant)); /* */ $s = 59; case 59: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
 		$r = defspecial2("Defdynamic", new funcType$1(Defdynamic)); /* */ $s = 60; case 60: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
 		$r = defspecial2("Defgeneric", new funcType$4(Defgeneric)); /* */ $s = 61; case 61: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = defspecial2("Defglobal", new funcType$1(Defglobal)); /* */ $s = 62; case 62: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = defspecial2("Defmacro", new funcType$4(Defmacro)); /* */ $s = 63; case 63: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = defspecial2("Defun", new funcType$4(Defun)); /* */ $s = 64; case 64: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = defun2$1("Div", new funcType$1(Div)); /* */ $s = 65; case 65: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = defspecial2("Dynamic", new funcType(Dynamic)); /* */ $s = 66; case 66: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = defspecial2("DynamicLet", new funcType$3(DynamicLet)); /* */ $s = 67; case 67: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = defun2$1("Elt", new funcType$1(Elt)); /* */ $s = 68; case 68: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = defun2$1("Eq", new funcType$1(Eq)); /* */ $s = 69; case 69: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = defun2$1("Eql", new funcType$1(Eql)); /* */ $s = 70; case 70: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = defun2$1("Equal", new funcType$1(Equal)); /* */ $s = 71; case 71: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = defun2$1("Error", new funcType$4(Error)); /* */ $s = 72; case 72: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = defun2$1("ErrorOutput", new funcType$6(ErrorOutput)); /* */ $s = 73; case 73: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = defun2$1("Exp", new funcType(Exp)); /* */ $s = 74; case 74: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = defun2$1("Expt", new funcType$1(Expt)); /* */ $s = 75; case 75: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = defspecial2("Flet", new funcType$3(Flet)); /* */ $s = 76; case 76: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = defun2$1("Float", new funcType(Float)); /* */ $s = 77; case 77: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = defun2$1("Floatp", new funcType(Floatp)); /* */ $s = 78; case 78: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = defun2$1("Floor", new funcType(Floor)); /* */ $s = 79; case 79: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = defspecial2("For", new funcType$4(For)); /* */ $s = 80; case 80: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = defun2$1("Format", new funcType$4(Format)); /* */ $s = 81; case 81: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = defun2$1("Funcall", new funcType$3(Funcall)); /* */ $s = 82; case 82: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = defspecial2("Function", new funcType(Function)); /* */ $s = 83; case 83: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = defun2$1("Functionp", new funcType(Functionp)); /* */ $s = 84; case 84: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = defun2$1("Garef", new funcType$3(Garef)); /* */ $s = 85; case 85: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = defun2$1("Gcd", new funcType$1(Gcd)); /* */ $s = 86; case 86: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = defun2$1("GENERAL-ARRAY*-P", new funcType(GeneralArrayStarP)); /* */ $s = 87; case 87: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = defun2$1("GeneralVectorP", new funcType(GeneralVectorP)); /* */ $s = 88; case 88: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = defun2$1("Gensym", new funcType$6(Gensym)); /* */ $s = 89; case 89: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = defun2$1("GetOutputStreamString", new funcType(GetOutputStreamString)); /* */ $s = 90; case 90: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = defspecial2("Go", new funcType(Go)); /* */ $s = 91; case 91: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = defspecial2("If", new funcType$4(If)); /* */ $s = 92; case 92: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = defun2$1("InitializeObject", new funcType$3(InitializeObject)); /* */ $s = 93; case 93: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = defun2$1("InputStreamP", new funcType(InputStreamP)); /* */ $s = 94; case 94: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = defun2$1("Instancep", new funcType$8(Instancep)); /* */ $s = 95; case 95: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = defun2$1("Integerp", new funcType(Integerp)); /* */ $s = 96; case 96: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = defun2$1("Isqrt", new funcType(Isqrt)); /* */ $s = 97; case 97: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = defspecial2("Labels", new funcType$3(Labels)); /* */ $s = 98; case 98: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = defspecial2("Lambda", new funcType$3(Lambda)); /* */ $s = 99; case 99: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = defun2$1("Lcm", new funcType$1(Lcm)); /* */ $s = 100; case 100: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = defun2$1("Length", new funcType(Length)); /* */ $s = 101; case 101: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = defspecial2("Let", new funcType$3(Let)); /* */ $s = 102; case 102: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = defspecial2("LET*", new funcType$3(LetStar)); /* */ $s = 103; case 103: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = defun2$1("List", new funcType$2(List)); /* */ $s = 104; case 104: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = defun2$1("Listp", new funcType(Listp)); /* */ $s = 105; case 105: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = defun2$1("Log", new funcType(Log)); /* */ $s = 106; case 106: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = defun2$1("MapInto", new funcType$4(MapInto)); /* */ $s = 107; case 107: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = defun2$1("Mapc", new funcType$4(Mapc)); /* */ $s = 108; case 108: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = defun2$1("Mapcan", new funcType$4(Mapcan)); /* */ $s = 109; case 109: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = defun2$1("Mapcar", new funcType$4(Mapcar)); /* */ $s = 110; case 110: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = defun2$1("Mapcon", new funcType$4(Mapcon)); /* */ $s = 111; case 111: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = defun2$1("Mapl", new funcType$4(Mapl)); /* */ $s = 112; case 112: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = defun2$1("Maplist", new funcType$4(Maplist)); /* */ $s = 113; case 113: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = defun2$1("Max", new funcType$3(Max)); /* */ $s = 114; case 114: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = defun2$1("Member", new funcType$1(Member)); /* */ $s = 115; case 115: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = defun2$1("Min", new funcType$3(Min)); /* */ $s = 116; case 116: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = defun2$1("Mod", new funcType$1(Mod)); /* */ $s = 117; case 117: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = defglobal$1("NIL", $pkg.Nil); /* */ $s = 118; case 118: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = defun2$1("Not", new funcType(Not)); /* */ $s = 119; case 119: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = defun2$1("Nreverse", new funcType(Nreverse)); /* */ $s = 120; case 120: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = defun2$1("Null", new funcType(Null)); /* */ $s = 121; case 121: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = defun2$1("Numberp", new funcType(Numberp)); /* */ $s = 122; case 122: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = defun2$1("OpenInputFile", new funcType$3(OpenInputFile)); /* */ $s = 123; case 123: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = defun2$1("OpenIoFile", new funcType$3(OpenIoFile)); /* */ $s = 124; case 124: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = defun2$1("OpenOutputFile", new funcType$3(OpenOutputFile)); /* */ $s = 125; case 125: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = defun2$1("OpenStreamP", new funcType(OpenStreamP)); /* */ $s = 126; case 126: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = defspecial2("Or", new funcType$2(Or)); /* */ $s = 127; case 127: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = defun2$1("OutputStreamP", new funcType(OutputStreamP)); /* */ $s = 128; case 128: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = defun2$1("ParseNumber", new funcType(ParseNumber)); /* */ $s = 129; case 129: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = defspecial2("Progn", new funcType$2(Progn)); /* */ $s = 130; case 130: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = defun2$1("Property", new funcType$4(Property)); /* */ $s = 131; case 131: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = defspecial2("Quasiquote", new funcType(Quasiquote)); /* */ $s = 132; case 132: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = defspecial2("Quote", new funcType(Quote)); /* */ $s = 133; case 133: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = defun2$1("Quotient", new funcType$4(Quotient)); /* */ $s = 134; case 134: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = defun2$1("Read", new funcType$2(Read)); /* */ $s = 135; case 135: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = defun2$1("ReadChar", new funcType$2(ReadChar)); /* */ $s = 136; case 136: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = defun2$1("ReadLine", new funcType$2(ReadLine)); /* */ $s = 137; case 137: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = defun2$1("RemoveProperty", new funcType$1(RemoveProperty)); /* */ $s = 138; case 138: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = defun2$1("ReportCondition", new funcType$1(ReportCondition)); /* */ $s = 139; case 139: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = defspecial2("ReturnFrom", new funcType$1(ReturnFrom)); /* */ $s = 140; case 140: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = defun2$1("Reverse", new funcType(Reverse)); /* */ $s = 141; case 141: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = defun2$1("Round", new funcType(Round)); /* */ $s = 142; case 142: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = defun2$1("SetAref", new funcType$4(SetAref)); /* */ $s = 143; case 143: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = defun2$1("(setf aref)", new funcType$4(SetAref)); /* */ $s = 144; case 144: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = defun2$1("SetCar", new funcType$1(SetCar)); /* */ $s = 145; case 145: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = defun2$1("(setf car)", new funcType$1(SetCar)); /* */ $s = 146; case 146: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = defun2$1("SetCdr", new funcType$1(SetCdr)); /* */ $s = 147; case 147: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = defun2$1("(setf cdr)", new funcType$1(SetCdr)); /* */ $s = 148; case 148: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = defun2$1("SetDynamic", new funcType$1(SetDynamic)); /* */ $s = 149; case 149: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = defun2$1("(setf dynamic)", new funcType$1(SetDynamic)); /* */ $s = 150; case 150: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = defun2$1("SetElt", new funcType$9(SetElt)); /* */ $s = 151; case 151: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = defun2$1("(setf elt)", new funcType$9(SetElt)); /* */ $s = 152; case 152: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = defun2$1("SetGaref", new funcType$4(SetGaref)); /* */ $s = 153; case 153: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = defun2$1("(setf garef)", new funcType$4(SetGaref)); /* */ $s = 154; case 154: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = defun2$1("SetProperty", new funcType$9(SetProperty)); /* */ $s = 155; case 155: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = defun2$1("(setf property)", new funcType$9(SetProperty)); /* */ $s = 156; case 156: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = defun2$1("Setf", new funcType$1(Setf)); /* */ $s = 157; case 157: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = defun2$1("Setq", new funcType$1(Setq)); /* */ $s = 158; case 158: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = defun2$1("SignalCondition", new funcType$1(SignalCondition)); /* */ $s = 159; case 159: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = defun2$1("Sin", new funcType(Sin)); /* */ $s = 160; case 160: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = defun2$1("Sinh", new funcType(Sinh)); /* */ $s = 161; case 161: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = defun2$1("Sqrt", new funcType(Sqrt)); /* */ $s = 162; case 162: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = defun2$1("StandardInput", new funcType$6(StandardInput)); /* */ $s = 163; case 163: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = defun2$1("StandardOutput", new funcType$6(StandardOutput)); /* */ $s = 164; case 164: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = defun2$1("StreamReadyP", new funcType(StreamReadyP)); /* */ $s = 165; case 165: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = defun2$1("Streamp", new funcType(Streamp)); /* */ $s = 166; case 166: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = defun2$1("StringAppend", new funcType$2(StringAppend)); /* */ $s = 167; case 167: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = defun2$1("StringIndex", new funcType$4(StringIndex)); /* */ $s = 168; case 168: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = defun2$1("String/=", new funcType$1(StringNotEqual)); /* */ $s = 169; case 169: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = defun2$1("String<", new funcType$1(StringGreaterThan)); /* */ $s = 170; case 170: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = defun2$1("String<=", new funcType$1(StringGreaterThan)); /* */ $s = 171; case 171: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = defun2$1("String=", new funcType$1(StringEqual)); /* */ $s = 172; case 172: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = defun2$1("String>", new funcType$1(StringGreaterThan)); /* */ $s = 173; case 173: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = defun2$1("String>=", new funcType$1(StringGreaterThanOrEqual)); /* */ $s = 174; case 174: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = defun2$1("Stringp", new funcType(Stringp)); /* */ $s = 175; case 175: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = defun2$1("Subclassp", new funcType$10(Subclassp)); /* */ $s = 176; case 176: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = defun2$1("Subseq", new funcType$9(Subseq)); /* */ $s = 177; case 177: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = defun2$1("Symbolp", new funcType(Symbolp)); /* */ $s = 178; case 178: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = defglobal$1("T", $pkg.T); /* */ $s = 179; case 179: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = defspecial2("Tagbody", new funcType$2(Tagbody)); /* */ $s = 180; case 180: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = defspecial2("Tan", new funcType(Tan)); /* */ $s = 181; case 181: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = defspecial2("Tanh", new funcType(Tanh)); /* */ $s = 182; case 182: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = defspecial2("Throw", new funcType$1(Throw)); /* */ $s = 183; case 183: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = defun2$1("Truncate", new funcType(Truncate)); /* */ $s = 184; case 184: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = defspecial2("UnwindProtect", new funcType$3(UnwindProtect)); /* */ $s = 185; case 185: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = defun2$1("Vector", new funcType$2(Vector)); /* */ $s = 186; case 186: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = defspecial2("While", new funcType$3(While)); /* */ $s = 187; case 187: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = defspecial2("WithErrorOutput", new funcType$3(WithErrorOutput)); /* */ $s = 188; case 188: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = defspecial2("WithHandler", new funcType$3(WithHandler)); /* */ $s = 189; case 189: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = defspecial2("WithOpenInputFile", new funcType$3(WithOpenInputFile)); /* */ $s = 190; case 190: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = defspecial2("WithOpenOutputFile", new funcType$3(WithOpenOutputFile)); /* */ $s = 191; case 191: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = defspecial2("WithStandardInput", new funcType$3(WithStandardInput)); /* */ $s = 192; case 192: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = defspecial2("WithStandardOutput", new funcType$3(WithStandardOutput)); /* */ $s = 193; case 193: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = defspecial2("Defmethod", new funcType$2(Defmethod)); /* */ $s = 62; case 62: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = defspecial2("Defglobal", new funcType$1(Defglobal)); /* */ $s = 63; case 63: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = defspecial2("Defmacro", new funcType$4(Defmacro)); /* */ $s = 64; case 64: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = defspecial2("Defun", new funcType$4(Defun)); /* */ $s = 65; case 65: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = defun2("Div", new funcType$1(Div)); /* */ $s = 66; case 66: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = defspecial2("Dynamic", new funcType(Dynamic)); /* */ $s = 67; case 67: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = defspecial2("DynamicLet", new funcType$3(DynamicLet)); /* */ $s = 68; case 68: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = defun2("Elt", new funcType$1(Elt)); /* */ $s = 69; case 69: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = defun2("Eq", new funcType$1(Eq)); /* */ $s = 70; case 70: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = defun2("Eql", new funcType$1(Eql)); /* */ $s = 71; case 71: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = defun2("Equal", new funcType$1(Equal)); /* */ $s = 72; case 72: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = defun2("Error", new funcType$4(Error)); /* */ $s = 73; case 73: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = defun2("ErrorOutput", new funcType$6(ErrorOutput)); /* */ $s = 74; case 74: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = defun2("Exp", new funcType(Exp)); /* */ $s = 75; case 75: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = defun2("Expt", new funcType$1(Expt)); /* */ $s = 76; case 76: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = defspecial2("Flet", new funcType$3(Flet)); /* */ $s = 77; case 77: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = defun2("Float", new funcType(Float)); /* */ $s = 78; case 78: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = defun2("Floatp", new funcType(Floatp)); /* */ $s = 79; case 79: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = defun2("Floor", new funcType(Floor)); /* */ $s = 80; case 80: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = defspecial2("For", new funcType$4(For)); /* */ $s = 81; case 81: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = defun2("Format", new funcType$4(Format)); /* */ $s = 82; case 82: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = defun2("Funcall", new funcType$3(Funcall)); /* */ $s = 83; case 83: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = defspecial2("Function", new funcType(Function)); /* */ $s = 84; case 84: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = defun2("Functionp", new funcType(Functionp)); /* */ $s = 85; case 85: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = defun2("Garef", new funcType$3(Garef)); /* */ $s = 86; case 86: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = defun2("Gcd", new funcType$1(Gcd)); /* */ $s = 87; case 87: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = defun2("GENERAL-ARRAY*-P", new funcType(GeneralArrayStarP)); /* */ $s = 88; case 88: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = defun2("GeneralVectorP", new funcType(GeneralVectorP)); /* */ $s = 89; case 89: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = defun2("Gensym", new funcType$6(Gensym)); /* */ $s = 90; case 90: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = defun2("GetOutputStreamString", new funcType(GetOutputStreamString)); /* */ $s = 91; case 91: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = defspecial2("Go", new funcType(Go)); /* */ $s = 92; case 92: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = defspecial2("If", new funcType$4(If)); /* */ $s = 93; case 93: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = defun2("InitializeObject", new funcType$3(InitializeObject)); /* */ $s = 94; case 94: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = defun2("InputStreamP", new funcType(InputStreamP)); /* */ $s = 95; case 95: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = defun2("Instancep", new funcType$8(Instancep)); /* */ $s = 96; case 96: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = defun2("Integerp", new funcType(Integerp)); /* */ $s = 97; case 97: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = defun2("Isqrt", new funcType(Isqrt)); /* */ $s = 98; case 98: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = defspecial2("Labels", new funcType$3(Labels)); /* */ $s = 99; case 99: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = defspecial2("Lambda", new funcType$3(Lambda)); /* */ $s = 100; case 100: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = defun2("Lcm", new funcType$1(Lcm)); /* */ $s = 101; case 101: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = defun2("Length", new funcType(Length)); /* */ $s = 102; case 102: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = defspecial2("Let", new funcType$3(Let)); /* */ $s = 103; case 103: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = defspecial2("LET*", new funcType$3(LetStar)); /* */ $s = 104; case 104: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = defun2("List", new funcType$2(List)); /* */ $s = 105; case 105: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = defun2("Listp", new funcType(Listp)); /* */ $s = 106; case 106: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = defun2("Log", new funcType(Log)); /* */ $s = 107; case 107: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = defun2("MapInto", new funcType$4(MapInto)); /* */ $s = 108; case 108: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = defun2("Mapc", new funcType$4(Mapc)); /* */ $s = 109; case 109: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = defun2("Mapcan", new funcType$4(Mapcan)); /* */ $s = 110; case 110: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = defun2("Mapcar", new funcType$4(Mapcar)); /* */ $s = 111; case 111: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = defun2("Mapcon", new funcType$4(Mapcon)); /* */ $s = 112; case 112: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = defun2("Mapl", new funcType$4(Mapl)); /* */ $s = 113; case 113: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = defun2("Maplist", new funcType$4(Maplist)); /* */ $s = 114; case 114: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = defun2("Max", new funcType$3(Max)); /* */ $s = 115; case 115: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = defun2("Member", new funcType$1(Member)); /* */ $s = 116; case 116: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = defun2("Min", new funcType$3(Min)); /* */ $s = 117; case 117: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = defun2("Mod", new funcType$1(Mod)); /* */ $s = 118; case 118: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = defglobal("NIL", $pkg.Nil); /* */ $s = 119; case 119: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = defun2("Not", new funcType(Not)); /* */ $s = 120; case 120: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = defun2("Nreverse", new funcType(Nreverse)); /* */ $s = 121; case 121: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = defun2("Null", new funcType(Null)); /* */ $s = 122; case 122: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = defun2("Numberp", new funcType(Numberp)); /* */ $s = 123; case 123: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = defun2("OpenInputFile", new funcType$3(OpenInputFile)); /* */ $s = 124; case 124: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = defun2("OpenIoFile", new funcType$3(OpenIoFile)); /* */ $s = 125; case 125: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = defun2("OpenOutputFile", new funcType$3(OpenOutputFile)); /* */ $s = 126; case 126: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = defun2("OpenStreamP", new funcType(OpenStreamP)); /* */ $s = 127; case 127: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = defspecial2("Or", new funcType$2(Or)); /* */ $s = 128; case 128: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = defun2("OutputStreamP", new funcType(OutputStreamP)); /* */ $s = 129; case 129: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = defun2("ParseNumber", new funcType(ParseNumber)); /* */ $s = 130; case 130: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = defspecial2("Progn", new funcType$2(Progn)); /* */ $s = 131; case 131: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = defun2("Property", new funcType$4(Property)); /* */ $s = 132; case 132: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = defspecial2("Quasiquote", new funcType(Quasiquote)); /* */ $s = 133; case 133: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = defspecial2("Quote", new funcType(Quote)); /* */ $s = 134; case 134: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = defun2("Quotient", new funcType$4(Quotient)); /* */ $s = 135; case 135: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = defun2("Read", new funcType$2(Read)); /* */ $s = 136; case 136: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = defun2("ReadChar", new funcType$2(ReadChar)); /* */ $s = 137; case 137: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = defun2("ReadLine", new funcType$2(ReadLine)); /* */ $s = 138; case 138: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = defun2("RemoveProperty", new funcType$1(RemoveProperty)); /* */ $s = 139; case 139: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = defun2("ReportCondition", new funcType$1(ReportCondition)); /* */ $s = 140; case 140: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = defspecial2("ReturnFrom", new funcType$1(ReturnFrom)); /* */ $s = 141; case 141: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = defun2("Reverse", new funcType(Reverse)); /* */ $s = 142; case 142: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = defun2("Round", new funcType(Round)); /* */ $s = 143; case 143: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = defun2("SetAref", new funcType$4(SetAref)); /* */ $s = 144; case 144: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = defun2("(setf aref)", new funcType$4(SetAref)); /* */ $s = 145; case 145: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = defun2("SetCar", new funcType$1(SetCar)); /* */ $s = 146; case 146: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = defun2("(setf car)", new funcType$1(SetCar)); /* */ $s = 147; case 147: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = defun2("SetCdr", new funcType$1(SetCdr)); /* */ $s = 148; case 148: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = defun2("(setf cdr)", new funcType$1(SetCdr)); /* */ $s = 149; case 149: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = defun2("SetDynamic", new funcType$1(SetDynamic)); /* */ $s = 150; case 150: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = defun2("(setf dynamic)", new funcType$1(SetDynamic)); /* */ $s = 151; case 151: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = defun2("SetElt", new funcType$9(SetElt)); /* */ $s = 152; case 152: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = defun2("(setf elt)", new funcType$9(SetElt)); /* */ $s = 153; case 153: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = defun2("SetGaref", new funcType$4(SetGaref)); /* */ $s = 154; case 154: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = defun2("(setf garef)", new funcType$4(SetGaref)); /* */ $s = 155; case 155: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = defun2("SetProperty", new funcType$9(SetProperty)); /* */ $s = 156; case 156: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = defun2("(setf property)", new funcType$9(SetProperty)); /* */ $s = 157; case 157: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = defspecial2("Setf", new funcType$1(Setf)); /* */ $s = 158; case 158: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = defspecial2("Setq", new funcType$1(Setq)); /* */ $s = 159; case 159: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = defun2("SignalCondition", new funcType$1(SignalCondition)); /* */ $s = 160; case 160: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = defun2("Sin", new funcType(Sin)); /* */ $s = 161; case 161: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = defun2("Sinh", new funcType(Sinh)); /* */ $s = 162; case 162: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = defun2("Sqrt", new funcType(Sqrt)); /* */ $s = 163; case 163: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = defun2("StandardInput", new funcType$6(StandardInput)); /* */ $s = 164; case 164: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = defun2("StandardOutput", new funcType$6(StandardOutput)); /* */ $s = 165; case 165: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = defun2("StreamReadyP", new funcType(StreamReadyP)); /* */ $s = 166; case 166: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = defun2("Streamp", new funcType(Streamp)); /* */ $s = 167; case 167: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = defun2("StringAppend", new funcType$2(StringAppend)); /* */ $s = 168; case 168: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = defun2("StringIndex", new funcType$4(StringIndex)); /* */ $s = 169; case 169: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = defun2("String/=", new funcType$1(StringNotEqual)); /* */ $s = 170; case 170: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = defun2("String<", new funcType$1(StringGreaterThan)); /* */ $s = 171; case 171: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = defun2("String<=", new funcType$1(StringGreaterThan)); /* */ $s = 172; case 172: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = defun2("String=", new funcType$1(StringEqual)); /* */ $s = 173; case 173: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = defun2("String>", new funcType$1(StringGreaterThan)); /* */ $s = 174; case 174: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = defun2("String>=", new funcType$1(StringGreaterThanOrEqual)); /* */ $s = 175; case 175: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = defun2("Stringp", new funcType(Stringp)); /* */ $s = 176; case 176: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = defun2("Subclassp", new funcType$10(Subclassp)); /* */ $s = 177; case 177: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = defun2("Subseq", new funcType$9(Subseq)); /* */ $s = 178; case 178: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = defun2("Symbolp", new funcType(Symbolp)); /* */ $s = 179; case 179: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = defglobal("T", $pkg.T); /* */ $s = 180; case 180: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = defspecial2("Tagbody", new funcType$2(Tagbody)); /* */ $s = 181; case 181: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = defspecial2("Tan", new funcType(Tan)); /* */ $s = 182; case 182: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = defspecial2("Tanh", new funcType(Tanh)); /* */ $s = 183; case 183: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = defspecial2("Throw", new funcType$1(Throw)); /* */ $s = 184; case 184: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = defun2("Truncate", new funcType(Truncate)); /* */ $s = 185; case 185: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = defspecial2("UnwindProtect", new funcType$3(UnwindProtect)); /* */ $s = 186; case 186: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = defun2("Vector", new funcType$2(Vector)); /* */ $s = 187; case 187: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = defspecial2("While", new funcType$3(While)); /* */ $s = 188; case 188: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = defspecial2("WithErrorOutput", new funcType$3(WithErrorOutput)); /* */ $s = 189; case 189: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = defspecial2("WithHandler", new funcType$3(WithHandler)); /* */ $s = 190; case 190: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = defspecial2("WithOpenInputFile", new funcType$3(WithOpenInputFile)); /* */ $s = 191; case 191: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = defspecial2("WithOpenOutputFile", new funcType$3(WithOpenOutputFile)); /* */ $s = 192; case 192: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = defspecial2("WithStandardInput", new funcType$3(WithStandardInput)); /* */ $s = 193; case 193: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = defspecial2("WithStandardOutput", new funcType$3(WithStandardOutput)); /* */ $s = 194; case 194: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
 		$s = -1; return;
-		/* */ } return; } if ($f === undefined) { $f = { $blk: init }; } $f.$ptr = $ptr; $f.defglobal$1 = defglobal$1; $f.defspecial2 = defspecial2; $f.defun2$1 = defun2$1; $f.$s = $s; $f.$r = $r; return $f;
+		/* */ } return; } if ($f === undefined) { $f = { $blk: init }; } $f.$ptr = $ptr; $f.defglobal = defglobal; $f.defspecial2 = defspecial2; $f.defun2 = defun2; $f.$s = $s; $f.$r = $r; return $f;
 	};
 	Length = function(e, sequence) {
 		var $ptr, _r, _r$1, _r$2, _r$3, _r$4, _r$5, e, sequence, x, $s, $r;
