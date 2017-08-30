@@ -31832,9 +31832,9 @@ $packages["github.com/ta2gch/iris/reader/tokenizer"] = (function() {
 		str = str + ("#[xX][-+]?[[:xdigit:]]+|");
 		str = str + ("#\\\\[[:alpha:]]+|");
 		str = str + ("#\\\\[[:graph:]]|");
-		str = str + ("\"[^\"]*\"|");
+		str = str + ("\"(?:\\\\\\\\|\\\\\"|[^\"])*\"|");
 		str = str + ("[:&][a-zA-Z]+|");
-		str = str + ("\\|.*\\||");
+		str = str + ("\\|(?:\\\\\\\\|\\\\\\||[^|])*\\||");
 		str = str + ("\\+|\\-|1\\+|1\\-|");
 		str = str + ("[a-zA-Z<>/*=?_!$%[\\]^{}~][-a-zA-Z0-9+<>/*=?_!$%[\\]^{}~]*|");
 		str = str + ("[.()]|");
@@ -35917,8 +35917,8 @@ $packages["github.com/ta2gch/iris/runtime"] = (function() {
 	};
 	$pkg.While = While;
 	For = function(e, iterationSpecs, endTestAndResults, forms) {
-		var $ptr, _1, _2, _i, _i$1, _r, _r$1, _r$10, _r$11, _r$12, _r$13, _r$14, _r$15, _r$16, _r$17, _r$18, _r$19, _r$2, _r$3, _r$4, _r$5, _r$6, _r$7, _r$8, _r$9, _ref, _ref$1, _tuple, _tuple$1, _tuple$2, e, endTest, endTestAndResults, ends, err, err$1, err$2, err$3, err$4, err$5, forms, i, init$1, is, is$1, iterationSpecs, results, step, test$1, var1, var1$1, $s, $r;
-		/* */ $s = 0; var $f, $c = false; if (this !== undefined && this.$blk !== undefined) { $f = this; $c = true; $ptr = $f.$ptr; _1 = $f._1; _2 = $f._2; _i = $f._i; _i$1 = $f._i$1; _r = $f._r; _r$1 = $f._r$1; _r$10 = $f._r$10; _r$11 = $f._r$11; _r$12 = $f._r$12; _r$13 = $f._r$13; _r$14 = $f._r$14; _r$15 = $f._r$15; _r$16 = $f._r$16; _r$17 = $f._r$17; _r$18 = $f._r$18; _r$19 = $f._r$19; _r$2 = $f._r$2; _r$3 = $f._r$3; _r$4 = $f._r$4; _r$5 = $f._r$5; _r$6 = $f._r$6; _r$7 = $f._r$7; _r$8 = $f._r$8; _r$9 = $f._r$9; _ref = $f._ref; _ref$1 = $f._ref$1; _tuple = $f._tuple; _tuple$1 = $f._tuple$1; _tuple$2 = $f._tuple$2; e = $f.e; endTest = $f.endTest; endTestAndResults = $f.endTestAndResults; ends = $f.ends; err = $f.err; err$1 = $f.err$1; err$2 = $f.err$2; err$3 = $f.err$3; err$4 = $f.err$4; err$5 = $f.err$5; forms = $f.forms; i = $f.i; init$1 = $f.init$1; is = $f.is; is$1 = $f.is$1; iterationSpecs = $f.iterationSpecs; results = $f.results; step = $f.step; test$1 = $f.test$1; var1 = $f.var1; var1$1 = $f.var1$1; $s = $f.$s; $r = $f.$r; } s: while (true) { switch ($s) { case 0:
+		var $ptr, _1, _2, _arg, _arg$1, _i, _i$1, _r, _r$1, _r$10, _r$11, _r$12, _r$13, _r$14, _r$15, _r$16, _r$17, _r$18, _r$19, _r$2, _r$20, _r$3, _r$4, _r$5, _r$6, _r$7, _r$8, _r$9, _ref, _ref$1, _tuple, _tuple$1, _tuple$2, _tuple$3, e, endTest, endTestAndResults, ends, err, err$1, err$2, err$3, err$4, err$5, err$6, forms, i, init$1, is, is$1, iterationSpecs, results, step, test$1, var1, var1$1, $s, $r;
+		/* */ $s = 0; var $f, $c = false; if (this !== undefined && this.$blk !== undefined) { $f = this; $c = true; $ptr = $f.$ptr; _1 = $f._1; _2 = $f._2; _arg = $f._arg; _arg$1 = $f._arg$1; _i = $f._i; _i$1 = $f._i$1; _r = $f._r; _r$1 = $f._r$1; _r$10 = $f._r$10; _r$11 = $f._r$11; _r$12 = $f._r$12; _r$13 = $f._r$13; _r$14 = $f._r$14; _r$15 = $f._r$15; _r$16 = $f._r$16; _r$17 = $f._r$17; _r$18 = $f._r$18; _r$19 = $f._r$19; _r$2 = $f._r$2; _r$20 = $f._r$20; _r$3 = $f._r$3; _r$4 = $f._r$4; _r$5 = $f._r$5; _r$6 = $f._r$6; _r$7 = $f._r$7; _r$8 = $f._r$8; _r$9 = $f._r$9; _ref = $f._ref; _ref$1 = $f._ref$1; _tuple = $f._tuple; _tuple$1 = $f._tuple$1; _tuple$2 = $f._tuple$2; _tuple$3 = $f._tuple$3; e = $f.e; endTest = $f.endTest; endTestAndResults = $f.endTestAndResults; ends = $f.ends; err = $f.err; err$1 = $f.err$1; err$2 = $f.err$2; err$3 = $f.err$3; err$4 = $f.err$4; err$5 = $f.err$5; err$6 = $f.err$6; forms = $f.forms; i = $f.i; init$1 = $f.init$1; is = $f.is; is$1 = $f.is$1; iterationSpecs = $f.iterationSpecs; results = $f.results; step = $f.step; test$1 = $f.test$1; var1 = $f.var1; var1$1 = $f.var1$1; $s = $f.$s; $r = $f.$r; } s: while (true) { switch ($s) { case 0:
 		_r = ensure(class$1.List, new sliceType([iterationSpecs])); /* */ $s = 1; case 1: if($c) { $c = false; _r = _r.$blk(); } if (_r && _r.$blk !== undefined) { break s; }
 		err = _r;
 		if (!($interfaceIsEqual(err, $ifaceNil))) {
@@ -36008,33 +36008,41 @@ $packages["github.com/ta2gch/iris/runtime"] = (function() {
 					/* } else if (_2 === (3)) { */ case 31:
 						_r$14 = $assertType(is$1, instance.List).Nth(0); /* */ $s = 34; case 34: if($c) { $c = false; _r$14 = _r$14.$blk(); } if (_r$14 && _r$14.$blk !== undefined) { break s; }
 						var1$1 = _r$14;
+						_arg = $clone(e, env.Environment);
 						_r$15 = $assertType(is$1, instance.List).Nth(2); /* */ $s = 35; case 35: if($c) { $c = false; _r$15 = _r$15.$blk(); } if (_r$15 && _r$15.$blk !== undefined) { break s; }
-						step = _r$15;
-						/* */ if (e.Variable.Set(var1$1, step)) { $s = 36; continue; }
-						/* */ $s = 37; continue;
-						/* if (e.Variable.Set(var1$1, step)) { */ case 36:
-							_r$16 = instance.NewImmutableBinding(); /* */ $s = 38; case 38: if($c) { $c = false; _r$16 = _r$16.$blk(); } if (_r$16 && _r$16.$blk !== undefined) { break s; }
-							$s = -1; return [$ifaceNil, _r$16];
-						/* } */ case 37:
+						_arg$1 = _r$15;
+						_r$16 = Eval(_arg, _arg$1); /* */ $s = 36; case 36: if($c) { $c = false; _r$16 = _r$16.$blk(); } if (_r$16 && _r$16.$blk !== undefined) { break s; }
+						_tuple$2 = _r$16;
+						step = _tuple$2[0];
+						err$6 = _tuple$2[1];
+						if (!($interfaceIsEqual(err$6, $ifaceNil))) {
+							$s = -1; return [$ifaceNil, err$6];
+						}
+						/* */ if (!e.Variable.Set(var1$1, step)) { $s = 37; continue; }
+						/* */ $s = 38; continue;
+						/* if (!e.Variable.Set(var1$1, step)) { */ case 37:
+							_r$17 = instance.NewImmutableBinding(); /* */ $s = 39; case 39: if($c) { $c = false; _r$17 = _r$17.$blk(); } if (_r$17 && _r$17.$blk !== undefined) { break s; }
+							$s = -1; return [$ifaceNil, _r$17];
+						/* } */ case 38:
 						$s = 33; continue;
 					/* } else { */ case 32:
-						_r$17 = instance.NewArityError(); /* */ $s = 39; case 39: if($c) { $c = false; _r$17 = _r$17.$blk(); } if (_r$17 && _r$17.$blk !== undefined) { break s; }
-						$s = -1; return [$ifaceNil, _r$17];
+						_r$18 = instance.NewArityError(); /* */ $s = 40; case 40: if($c) { $c = false; _r$18 = _r$18.$blk(); } if (_r$18 && _r$18.$blk !== undefined) { break s; }
+						$s = -1; return [$ifaceNil, _r$18];
 					/* } */ case 33:
 				case 28:
 				_i$1++;
 			/* } */ $s = 25; continue; case 26:
-			_r$18 = Eval($clone(e, env.Environment), endTest); /* */ $s = 40; case 40: if($c) { $c = false; _r$18 = _r$18.$blk(); } if (_r$18 && _r$18.$blk !== undefined) { break s; }
-			_tuple$2 = _r$18;
-			test$1 = _tuple$2[0];
-			err$4 = _tuple$2[1];
+			_r$19 = Eval($clone(e, env.Environment), endTest); /* */ $s = 41; case 41: if($c) { $c = false; _r$19 = _r$19.$blk(); } if (_r$19 && _r$19.$blk !== undefined) { break s; }
+			_tuple$3 = _r$19;
+			test$1 = _tuple$3[0];
+			err$4 = _tuple$3[1];
 			if (!($interfaceIsEqual(err$4, $ifaceNil))) {
 				$s = -1; return [$ifaceNil, err$4];
 			}
 		/* } */ $s = 21; continue; case 22:
-		_r$19 = Progn($clone(e, env.Environment), results); /* */ $s = 41; case 41: if($c) { $c = false; _r$19 = _r$19.$blk(); } if (_r$19 && _r$19.$blk !== undefined) { break s; }
-		$s = -1; return _r$19;
-		/* */ } return; } if ($f === undefined) { $f = { $blk: For }; } $f.$ptr = $ptr; $f._1 = _1; $f._2 = _2; $f._i = _i; $f._i$1 = _i$1; $f._r = _r; $f._r$1 = _r$1; $f._r$10 = _r$10; $f._r$11 = _r$11; $f._r$12 = _r$12; $f._r$13 = _r$13; $f._r$14 = _r$14; $f._r$15 = _r$15; $f._r$16 = _r$16; $f._r$17 = _r$17; $f._r$18 = _r$18; $f._r$19 = _r$19; $f._r$2 = _r$2; $f._r$3 = _r$3; $f._r$4 = _r$4; $f._r$5 = _r$5; $f._r$6 = _r$6; $f._r$7 = _r$7; $f._r$8 = _r$8; $f._r$9 = _r$9; $f._ref = _ref; $f._ref$1 = _ref$1; $f._tuple = _tuple; $f._tuple$1 = _tuple$1; $f._tuple$2 = _tuple$2; $f.e = e; $f.endTest = endTest; $f.endTestAndResults = endTestAndResults; $f.ends = ends; $f.err = err; $f.err$1 = err$1; $f.err$2 = err$2; $f.err$3 = err$3; $f.err$4 = err$4; $f.err$5 = err$5; $f.forms = forms; $f.i = i; $f.init$1 = init$1; $f.is = is; $f.is$1 = is$1; $f.iterationSpecs = iterationSpecs; $f.results = results; $f.step = step; $f.test$1 = test$1; $f.var1 = var1; $f.var1$1 = var1$1; $f.$s = $s; $f.$r = $r; return $f;
+		_r$20 = Progn($clone(e, env.Environment), results); /* */ $s = 42; case 42: if($c) { $c = false; _r$20 = _r$20.$blk(); } if (_r$20 && _r$20.$blk !== undefined) { break s; }
+		$s = -1; return _r$20;
+		/* */ } return; } if ($f === undefined) { $f = { $blk: For }; } $f.$ptr = $ptr; $f._1 = _1; $f._2 = _2; $f._arg = _arg; $f._arg$1 = _arg$1; $f._i = _i; $f._i$1 = _i$1; $f._r = _r; $f._r$1 = _r$1; $f._r$10 = _r$10; $f._r$11 = _r$11; $f._r$12 = _r$12; $f._r$13 = _r$13; $f._r$14 = _r$14; $f._r$15 = _r$15; $f._r$16 = _r$16; $f._r$17 = _r$17; $f._r$18 = _r$18; $f._r$19 = _r$19; $f._r$2 = _r$2; $f._r$20 = _r$20; $f._r$3 = _r$3; $f._r$4 = _r$4; $f._r$5 = _r$5; $f._r$6 = _r$6; $f._r$7 = _r$7; $f._r$8 = _r$8; $f._r$9 = _r$9; $f._ref = _ref; $f._ref$1 = _ref$1; $f._tuple = _tuple; $f._tuple$1 = _tuple$1; $f._tuple$2 = _tuple$2; $f._tuple$3 = _tuple$3; $f.e = e; $f.endTest = endTest; $f.endTestAndResults = endTestAndResults; $f.ends = ends; $f.err = err; $f.err$1 = err$1; $f.err$2 = err$2; $f.err$3 = err$3; $f.err$4 = err$4; $f.err$5 = err$5; $f.err$6 = err$6; $f.forms = forms; $f.i = i; $f.init$1 = init$1; $f.is = is; $f.is$1 = is$1; $f.iterationSpecs = iterationSpecs; $f.results = results; $f.step = step; $f.test$1 = test$1; $f.var1 = var1; $f.var1$1 = var1$1; $f.$s = $s; $f.$r = $r; return $f;
 	};
 	$pkg.For = For;
 	Listp = function(e, obj) {
