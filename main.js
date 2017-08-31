@@ -30256,7 +30256,7 @@ $packages["github.com/k0kubun/pp"] = (function() {
 	return $pkg;
 })();
 $packages["github.com/ta2gch/iris/runtime/ilos/instance"] = (function() {
-	var $pkg = {}, $init, fmt, pp, env, ilos, io, reflect, sort, GeneralArrayStar, GeneralVector, String, BuiltInClass, Character, Applicable, Function, method, GenericFunction, Instance, List, Cons, Null, Integer, Float, StandardClass, Stream, Symbol, sliceType, sliceType$1, sliceType$2, sliceType$3, sliceType$4, ptrType, sliceType$5, funcType, mapType, ptrType$1, sliceType$6, ptrType$2, ptrType$3, NewGeneralArrayStar, NewGeneralVector, NewString, NewBuiltInClass, NewCharacter, NewArithmeticError, NewDivisionByZero, NewParseError, NewDomainError, NewUndefinedFunction, NewUndefinedVariable, NewUndefinedClass, NewArityError, NewIndexOutOfRange, NewImmutableBinding, NewSimpleError, NewControlError, NewFunction, NewGenericFunction, Create, InitializeObject, NewCons, NewNull, NewInteger, NewFloat, NewStandardClass, NewStream, NewSymbol, NewBlockTag, NewCatchTag, NewTagbodyTag;
+	var $pkg = {}, $init, fmt, pp, env, ilos, io, reflect, sort, GeneralArrayStar, GeneralVector, String, BuiltInClass, Character, Applicable, Function, method, GenericFunction, slots, Instance, List, Cons, Null, Integer, Float, StandardClass, Stream, Symbol, sliceType, sliceType$1, sliceType$2, sliceType$3, sliceType$4, ptrType, sliceType$5, funcType, ptrType$1, sliceType$6, ptrType$2, ptrType$3, mapType, NewGeneralArrayStar, NewGeneralVector, NewString, NewBuiltInClass, NewCharacter, NewArithmeticError, NewDivisionByZero, NewParseError, NewDomainError, NewUndefinedFunction, NewUndefinedVariable, NewUndefinedClass, NewArityError, NewIndexOutOfRange, NewImmutableBinding, NewSimpleError, NewControlError, NewFunction, NewGenericFunction, Create, InitializeObject, NewCons, NewNull, NewInteger, NewFloat, NewStandardClass, NewStream, NewSymbol, NewBlockTag, NewCatchTag, NewTagbodyTag;
 	fmt = $packages["fmt"];
 	pp = $packages["github.com/k0kubun/pp"];
 	env = $packages["github.com/ta2gch/iris/runtime/env"];
@@ -30328,6 +30328,7 @@ $packages["github.com/ta2gch/iris/runtime/ilos/instance"] = (function() {
 		this.genericFunctionClass = genericFunctionClass_;
 		this.methods = methods_;
 	});
+	slots = $pkg.slots = $newType(4, $kindMap, "instance.slots", true, "github.com/ta2gch/iris/runtime/ilos/instance", false, null);
 	Instance = $pkg.Instance = $newType(0, $kindStruct, "instance.Instance", true, "github.com/ta2gch/iris/runtime/ilos/instance", true, function(class$0_, supers_, slots_) {
 		this.$val = this;
 		if (arguments.length === 0) {
@@ -30398,11 +30399,11 @@ $packages["github.com/ta2gch/iris/runtime/ilos/instance"] = (function() {
 	ptrType = $ptrType(reflect.rtype);
 	sliceType$5 = $sliceType(method);
 	funcType = $funcType([env.Environment], [ilos.Instance, ilos.Instance], false);
-	mapType = $mapType(ilos.Instance, ilos.Instance);
 	ptrType$1 = $ptrType(Cons);
 	sliceType$6 = $sliceType(GeneralArrayStar);
 	ptrType$2 = $ptrType(GenericFunction);
 	ptrType$3 = $ptrType(Null);
+	mapType = $mapType(ilos.Instance, ilos.Instance);
 	NewGeneralArrayStar = function(vector, scalar) {
 		var $ptr, scalar, vector, x;
 		return (x = new GeneralArrayStar.ptr(vector, scalar), new x.constructor.elem(x));
@@ -30454,10 +30455,10 @@ $packages["github.com/ta2gch/iris/runtime/ilos/instance"] = (function() {
 		return "\"" + ($runesToString(i)) + "\"";
 	};
 	$ptrType(String).prototype.String = function() { return this.$get().String(); };
-	NewBuiltInClass = function(name, super$1, slots) {
-		var $ptr, _i, _ref, name, slot, slotNames, slots, super$1, x;
+	NewBuiltInClass = function(name, super$1, slots$1) {
+		var $ptr, _i, _ref, name, slot, slotNames, slots$1, super$1, x;
 		slotNames = new sliceType$1([]);
-		_ref = slots;
+		_ref = slots$1;
 		_i = 0;
 		while (true) {
 			if (!(_i < _ref.$length)) { break; }
@@ -30893,8 +30894,8 @@ $packages["github.com/ta2gch/iris/runtime/ilos/instance"] = (function() {
 		/* */ if (index[0] < width) { $s = 20; continue; }
 		/* */ $s = 21; continue;
 		/* if (index[0] < width) { */ case 20:
-			callNextMethod[0] = $throwNilPointerError;
-			callNextMethod[0] = (function(after, arguments$1, around, before, callNextMethod, callNextMethod$1, callNextMethod$2, index, index$1, methods, nextMethodPisNil, nextMethodPisT, parameters) { return function $b(e$1) {
+			callNextMethod$1[0] = $throwNilPointerError;
+			callNextMethod$1[0] = (function(after, arguments$1, around, before, callNextMethod, callNextMethod$1, callNextMethod$2, index, index$1, methods, nextMethodPisNil, nextMethodPisT, parameters) { return function $b(e$1) {
 				var $ptr, _i$2, _i$3, _r$10, _r$11, _r$12, _r$6, _r$7, _r$8, _r$9, _ref$2, _ref$3, _tuple, _tuple$1, _tuple$2, _tuple$3, callNextMethod$3, depth, e$1, err, err$1, err$2, i$1, index$2, index$3, method$2, method$3, ret, test$2, test$3, test$4, width$1, width$2, width$3, x, $s, $r;
 				/* */ $s = 0; var $f, $c = false; if (this !== undefined && this.$blk !== undefined) { $f = this; $c = true; $ptr = $f.$ptr; _i$2 = $f._i$2; _i$3 = $f._i$3; _r$10 = $f._r$10; _r$11 = $f._r$11; _r$12 = $f._r$12; _r$6 = $f._r$6; _r$7 = $f._r$7; _r$8 = $f._r$8; _r$9 = $f._r$9; _ref$2 = $f._ref$2; _ref$3 = $f._ref$3; _tuple = $f._tuple; _tuple$1 = $f._tuple$1; _tuple$2 = $f._tuple$2; _tuple$3 = $f._tuple$3; callNextMethod$3 = $f.callNextMethod$3; depth = $f.depth; e$1 = $f.e$1; err = $f.err; err$1 = $f.err$1; err$2 = $f.err$2; i$1 = $f.i$1; index$2 = $f.index$2; index$3 = $f.index$3; method$2 = $f.method$2; method$3 = $f.method$3; ret = $f.ret; test$2 = $f.test$2; test$3 = $f.test$3; test$4 = $f.test$4; width$1 = $f.width$1; width$2 = $f.width$2; width$3 = $f.width$3; x = $f.x; $s = $f.$s; $r = $f.$r; } s: while (true) { switch ($s) { case 0:
 				callNextMethod$3 = [callNextMethod$3];
@@ -30906,24 +30907,24 @@ $packages["github.com/ta2gch/iris/runtime/ilos/instance"] = (function() {
 				_i$2 = 0;
 				/* while (true) { */ case 1:
 					/* if (!(_i$2 < _ref$2.$length)) { break; } */ if(!(_i$2 < _ref$2.$length)) { $s = 2; continue; }
-					index$2[0] = _i$2;
+					index$3[0] = _i$2;
 					method$2 = $clone(((_i$2 < 0 || _i$2 >= _ref$2.$length) ? ($throwRuntimeError("index out of range"), undefined) : _ref$2.$array[_ref$2.$offset + _i$2]), method);
 					/* */ if ($interfaceIsEqual(method$2.qualifier, around[0])) { $s = 3; continue; }
 					/* */ $s = 4; continue;
 					/* if ($interfaceIsEqual(method$2.qualifier, around[0])) { */ case 3:
-						e$1.DynamicVariable.Define(NewSymbol("IRIS/DEPTH"), NewInteger(index$2[0]));
+						e$1.DynamicVariable.Define(NewSymbol("IRIS/DEPTH"), NewInteger(index$3[0]));
 						e$1.Function.Define(NewSymbol("NEXT-METHOD-P"), nextMethodPisNil[0]);
-						width$1 = (methods[0].$length - index$2[0] >> 0) - 1 >> 0;
+						width$1 = (methods[0].$length - index$3[0] >> 0) - 1 >> 0;
 						test$2 = (function(after, arguments$1, around, before, callNextMethod, callNextMethod$1, callNextMethod$2, callNextMethod$3, index, index$1, index$2, index$3, methods, nextMethodPisNil, nextMethodPisT, parameters) { return function(i$1) {
 							var $ptr, i$1, x, x$1;
-							return $interfaceIsEqual((x = (index$2[0] + i$1 >> 0) + 1 >> 0, ((x < 0 || x >= methods[0].$length) ? ($throwRuntimeError("index out of range"), undefined) : methods[0].$array[methods[0].$offset + x])).qualifier, $ifaceNil) || $interfaceIsEqual((x$1 = (index$2[0] + i$1 >> 0) + 1 >> 0, ((x$1 < 0 || x$1 >= methods[0].$length) ? ($throwRuntimeError("index out of range"), undefined) : methods[0].$array[methods[0].$offset + x$1])).qualifier, around[0]);
+							return $interfaceIsEqual((x = (index$3[0] + i$1 >> 0) + 1 >> 0, ((x < 0 || x >= methods[0].$length) ? ($throwRuntimeError("index out of range"), undefined) : methods[0].$array[methods[0].$offset + x])).qualifier, $ifaceNil) || $interfaceIsEqual((x$1 = (index$3[0] + i$1 >> 0) + 1 >> 0, ((x$1 < 0 || x$1 >= methods[0].$length) ? ($throwRuntimeError("index out of range"), undefined) : methods[0].$array[methods[0].$offset + x$1])).qualifier, around[0]);
 						}; })(after, arguments$1, around, before, callNextMethod, callNextMethod$1, callNextMethod$2, callNextMethod$3, index, index$1, index$2, index$3, methods, nextMethodPisNil, nextMethodPisT, parameters);
 						_r$6 = sort.Search(width$1, test$2); /* */ $s = 7; case 7: if($c) { $c = false; _r$6 = _r$6.$blk(); } if (_r$6 && _r$6.$blk !== undefined) { break s; }
 						/* */ if (_r$6 < width$1) { $s = 5; continue; }
 						/* */ $s = 6; continue;
 						/* if (_r$6 < width$1) { */ case 5:
 							e$1.Function.Define(NewSymbol("NEXT-METHOD-P"), nextMethodPisT[0]);
-							e$1.Function.Define(NewSymbol("CALL-NEXT-METHOD"), NewFunction(NewSymbol("CALL-NEXT-METHOD"), new funcType(callNextMethod[0])));
+							e$1.Function.Define(NewSymbol("CALL-NEXT-METHOD"), NewFunction(NewSymbol("CALL-NEXT-METHOD"), new funcType(callNextMethod$1[0])));
 						/* } */ case 6:
 						_r$7 = $clone((x = (($assertType(depth, Integer) >> 0)), ((x < 0 || x >= methods[0].$length) ? ($throwRuntimeError("index out of range"), undefined) : methods[0].$array[methods[0].$offset + x])).function$2, Function).Apply($clone(e$1, env.Environment), arguments$1[0]); /* */ $s = 8; case 8: if($c) { $c = false; _r$7 = _r$7.$blk(); } if (_r$7 && _r$7.$blk !== undefined) { break s; }
 						$s = -1; return _r$7;
@@ -30980,21 +30981,21 @@ $packages["github.com/ta2gch/iris/runtime/ilos/instance"] = (function() {
 					$s = -1; return _r$11;
 					/* */ } return; } if ($f === undefined) { $f = { $blk: $b }; } $f.$ptr = $ptr; $f._r$10 = _r$10; $f._r$11 = _r$11; $f._r$9 = _r$9; $f._tuple$2 = _tuple$2; $f.depth$1 = depth$1; $f.e$2 = e$2; $f.index$4 = index$4; $f.test$3 = test$3; $f.test$4 = test$4; $f.width$2 = width$2; $f.width$3 = width$3; $f.$s = $s; $f.$r = $r; return $f;
 				}; })(after, arguments$1, around, before, callNextMethod, callNextMethod$1, callNextMethod$2, callNextMethod$3, index, index$1, index$2, index$3, methods, nextMethodPisNil, nextMethodPisT, parameters);
-				index$3[0] = 0;
-				width$2 = (methods[0].$length - index$3[0] >> 0) - 1 >> 0;
+				index$2[0] = 0;
+				width$2 = (methods[0].$length - index$2[0] >> 0) - 1 >> 0;
 				test$3 = (function(after, arguments$1, around, before, callNextMethod, callNextMethod$1, callNextMethod$2, callNextMethod$3, index, index$1, index$2, index$3, methods, nextMethodPisNil, nextMethodPisT, parameters) { return function(i$1) {
 					var $ptr, i$1, x$1;
-					return $interfaceIsEqual((x$1 = (index$3[0] + i$1 >> 0) + 1 >> 0, ((x$1 < 0 || x$1 >= methods[0].$length) ? ($throwRuntimeError("index out of range"), undefined) : methods[0].$array[methods[0].$offset + x$1])).qualifier, $ifaceNil);
+					return $interfaceIsEqual((x$1 = (index$2[0] + i$1 >> 0) + 1 >> 0, ((x$1 < 0 || x$1 >= methods[0].$length) ? ($throwRuntimeError("index out of range"), undefined) : methods[0].$array[methods[0].$offset + x$1])).qualifier, $ifaceNil);
 				}; })(after, arguments$1, around, before, callNextMethod, callNextMethod$1, callNextMethod$2, callNextMethod$3, index, index$1, index$2, index$3, methods, nextMethodPisNil, nextMethodPisT, parameters);
 				_r$9 = sort.Search(width$2, test$3); /* */ $s = 14; case 14: if($c) { $c = false; _r$9 = _r$9.$blk(); } if (_r$9 && _r$9.$blk !== undefined) { break s; }
-				index$3[0] = _r$9;
-				e$1.DynamicVariable.Define(NewSymbol("IRIS/DEPTH"), NewInteger(index$3[0]));
+				index$2[0] = _r$9;
+				e$1.DynamicVariable.Define(NewSymbol("IRIS/DEPTH"), NewInteger(index$2[0]));
 				e$1.Function.Define(NewSymbol("NEXT-METHOD-P"), nextMethodPisNil[0]);
 				test$4 = (function(after, arguments$1, around, before, callNextMethod, callNextMethod$1, callNextMethod$2, callNextMethod$3, index, index$1, index$2, index$3, methods, nextMethodPisNil, nextMethodPisT, parameters) { return function(i$1) {
 					var $ptr, i$1, x$1;
-					return $interfaceIsEqual((x$1 = (index$3[0] + i$1 >> 0) + 1 >> 0, ((x$1 < 0 || x$1 >= methods[0].$length) ? ($throwRuntimeError("index out of range"), undefined) : methods[0].$array[methods[0].$offset + x$1])).qualifier, $ifaceNil);
+					return $interfaceIsEqual((x$1 = (index$2[0] + i$1 >> 0) + 1 >> 0, ((x$1 < 0 || x$1 >= methods[0].$length) ? ($throwRuntimeError("index out of range"), undefined) : methods[0].$array[methods[0].$offset + x$1])).qualifier, $ifaceNil);
 				}; })(after, arguments$1, around, before, callNextMethod, callNextMethod$1, callNextMethod$2, callNextMethod$3, index, index$1, index$2, index$3, methods, nextMethodPisNil, nextMethodPisT, parameters);
-				width$3 = (methods[0].$length - index$3[0] >> 0) - 1 >> 0;
+				width$3 = (methods[0].$length - index$2[0] >> 0) - 1 >> 0;
 				_r$10 = sort.Search(width$3, test$4); /* */ $s = 17; case 17: if($c) { $c = false; _r$10 = _r$10.$blk(); } if (_r$10 && _r$10.$blk !== undefined) { break s; }
 				/* */ if (_r$10 < width$3) { $s = 15; continue; }
 				/* */ $s = 16; continue;
@@ -31002,7 +31003,7 @@ $packages["github.com/ta2gch/iris/runtime/ilos/instance"] = (function() {
 					e$1.Function.Define(NewSymbol("NEXT-METHOD-P"), nextMethodPisT[0]);
 					e$1.Function.Define(NewSymbol("CALL-NEXT-METHOD"), NewFunction(NewSymbol("CALL-NEXT-METHOD"), new funcType(callNextMethod$3[0])));
 				/* } */ case 16:
-				_r$11 = $clone(((index$3[0] < 0 || index$3[0] >= methods[0].$length) ? ($throwRuntimeError("index out of range"), undefined) : methods[0].$array[methods[0].$offset + index$3[0]]).function$2, Function).Apply($clone(e$1, env.Environment), arguments$1[0]); /* */ $s = 18; case 18: if($c) { $c = false; _r$11 = _r$11.$blk(); } if (_r$11 && _r$11.$blk !== undefined) { break s; }
+				_r$11 = $clone(((index$2[0] < 0 || index$2[0] >= methods[0].$length) ? ($throwRuntimeError("index out of range"), undefined) : methods[0].$array[methods[0].$offset + index$2[0]]).function$2, Function).Apply($clone(e$1, env.Environment), arguments$1[0]); /* */ $s = 18; case 18: if($c) { $c = false; _r$11 = _r$11.$blk(); } if (_r$11 && _r$11.$blk !== undefined) { break s; }
 				_tuple$2 = _r$11;
 				ret = _tuple$2[0];
 				err$1 = _tuple$2[1];
@@ -31039,13 +31040,13 @@ $packages["github.com/ta2gch/iris/runtime/ilos/instance"] = (function() {
 			/* */ $s = 23; continue;
 			/* if (_r$6 < width$1) { */ case 22:
 				e.Function.Define(NewSymbol("NEXT-METHOD-P"), nextMethodPisT[0]);
-				e.Function.Define(NewSymbol("CALL-NEXT-METHOD"), NewFunction(NewSymbol("CALL-NEXT-METHOD"), new funcType(callNextMethod[0])));
+				e.Function.Define(NewSymbol("CALL-NEXT-METHOD"), NewFunction(NewSymbol("CALL-NEXT-METHOD"), new funcType(callNextMethod$1[0])));
 			/* } */ case 23:
 			_r$7 = $clone(((index[0] < 0 || index[0] >= methods[0].$length) ? ($throwRuntimeError("index out of range"), undefined) : methods[0].$array[methods[0].$offset + index[0]]).function$2, Function).Apply($clone(e, env.Environment), arguments$1[0]); /* */ $s = 25; case 25: if($c) { $c = false; _r$7 = _r$7.$blk(); } if (_r$7 && _r$7.$blk !== undefined) { break s; }
 			$s = -1; return _r$7;
 		/* } */ case 21:
-		callNextMethod$1[0] = $throwNilPointerError;
-		callNextMethod$1[0] = (function(after, arguments$1, around, before, callNextMethod, callNextMethod$1, callNextMethod$2, index, index$1, methods, nextMethodPisNil, nextMethodPisT, parameters) { return function $b(e$1) {
+		callNextMethod[0] = $throwNilPointerError;
+		callNextMethod[0] = (function(after, arguments$1, around, before, callNextMethod, callNextMethod$1, callNextMethod$2, index, index$1, methods, nextMethodPisNil, nextMethodPisT, parameters) { return function $b(e$1) {
 			var $ptr, _r$10, _r$8, _r$9, _tuple, depth, e$1, index$2, test$3, test$4, width$2, width$3, x, $s, $r;
 			/* */ $s = 0; var $f, $c = false; if (this !== undefined && this.$blk !== undefined) { $f = this; $c = true; $ptr = $f.$ptr; _r$10 = $f._r$10; _r$8 = $f._r$8; _r$9 = $f._r$9; _tuple = $f._tuple; depth = $f.depth; e$1 = $f.e$1; index$2 = $f.index$2; test$3 = $f.test$3; test$4 = $f.test$4; width$2 = $f.width$2; width$3 = $f.width$3; x = $f.x; $s = $f.$s; $r = $f.$r; } s: while (true) { switch ($s) { case 0:
 			index$2 = [index$2];
@@ -31071,7 +31072,7 @@ $packages["github.com/ta2gch/iris/runtime/ilos/instance"] = (function() {
 			/* */ $s = 3; continue;
 			/* if (_r$9 < width$3) { */ case 2:
 				e$1.Function.Define(NewSymbol("NEXT-METHOD-P"), nextMethodPisT[0]);
-				e$1.Function.Define(NewSymbol("CALL-NEXT-METHOD"), NewFunction(NewSymbol("CALL-NEXT-METHOD"), new funcType(callNextMethod$1[0])));
+				e$1.Function.Define(NewSymbol("CALL-NEXT-METHOD"), NewFunction(NewSymbol("CALL-NEXT-METHOD"), new funcType(callNextMethod[0])));
 			/* } */ case 3:
 			_r$10 = $clone((x = (($assertType(depth, Integer) >> 0)), ((x < 0 || x >= methods[0].$length) ? ($throwRuntimeError("index out of range"), undefined) : methods[0].$array[methods[0].$offset + x])).function$2, Function).Apply($clone(e$1, env.Environment), arguments$1[0]); /* */ $s = 5; case 5: if($c) { $c = false; _r$10 = _r$10.$blk(); } if (_r$10 && _r$10.$blk !== undefined) { break s; }
 			$s = -1; return _r$10;
@@ -31120,7 +31121,7 @@ $packages["github.com/ta2gch/iris/runtime/ilos/instance"] = (function() {
 		/* */ $s = 36; continue;
 		/* if (_r$11 < width$3) { */ case 35:
 			e.Function.Define(NewSymbol("NEXT-METHOD-P"), nextMethodPisT[0]);
-			e.Function.Define(NewSymbol("CALL-NEXT-METHOD"), NewFunction(NewSymbol("CALL-NEXT-METHOD"), new funcType(callNextMethod$1[0])));
+			e.Function.Define(NewSymbol("CALL-NEXT-METHOD"), NewFunction(NewSymbol("CALL-NEXT-METHOD"), new funcType(callNextMethod[0])));
 		/* } */ case 36:
 		_r$12 = $clone(((index$1[0] < 0 || index$1[0] >= methods[0].$length) ? ($throwRuntimeError("index out of range"), undefined) : methods[0].$array[methods[0].$offset + index$1[0]]).function$2, Function).Apply($clone(e, env.Environment), arguments$1[0]); /* */ $s = 38; case 38: if($c) { $c = false; _r$12 = _r$12.$blk(); } if (_r$12 && _r$12.$blk !== undefined) { break s; }
 		_tuple$1 = _r$12;
@@ -31254,6 +31255,34 @@ $packages["github.com/ta2gch/iris/runtime/ilos/instance"] = (function() {
 		/* */ } return; } if ($f === undefined) { $f = { $blk: InitializeObject }; } $f.$ptr = $ptr; $f._arg = _arg; $f._arg$1 = _arg$1; $f._arg$2 = _arg$2; $f._arg$3 = _arg$3; $f._arg$4 = _arg$4; $f._arg$5 = _arg$5; $f._arg$6 = _arg$6; $f._arg$7 = _arg$7; $f._i = _i; $f._i$1 = _i$1; $f._i$2 = _i$2; $f._r = _r; $f._r$1 = _r$1; $f._r$10 = _r$10; $f._r$11 = _r$11; $f._r$12 = _r$12; $f._r$13 = _r$13; $f._r$14 = _r$14; $f._r$15 = _r$15; $f._r$2 = _r$2; $f._r$3 = _r$3; $f._r$4 = _r$4; $f._r$5 = _r$5; $f._r$6 = _r$6; $f._r$7 = _r$7; $f._r$8 = _r$8; $f._r$9 = _r$9; $f._ref = _ref; $f._ref$1 = _ref$1; $f._ref$2 = _ref$2; $f._tuple = _tuple; $f._tuple$1 = _tuple$1; $f._tuple$2 = _tuple$2; $f._tuple$3 = _tuple$3; $f.argName = argName; $f.argValue = argValue; $f.e = e; $f.form = form; $f.i = i; $f.inits = inits; $f.object = object; $f.ok = ok; $f.ok$1 = ok$1; $f.ok$2 = ok$2; $f.s = s; $f.slotName = slotName; $f.slotName$1 = slotName$1; $f.super$1 = super$1; $f.value = value; $f.x = x; $f.$s = $s; $f.$r = $r; return $f;
 	};
 	$pkg.InitializeObject = InitializeObject;
+	slots.prototype.String = function() {
+		var $ptr, _entry, _i, _keys, _r, _ref, k, s, str, v, $s, $r;
+		/* */ $s = 0; var $f, $c = false; if (this !== undefined && this.$blk !== undefined) { $f = this; $c = true; $ptr = $f.$ptr; _entry = $f._entry; _i = $f._i; _keys = $f._keys; _r = $f._r; _ref = $f._ref; k = $f.k; s = $f.s; str = $f.str; v = $f.v; $s = $f.$s; $r = $f.$r; } s: while (true) { switch ($s) { case 0:
+		s = this.$val;
+		str = "{";
+		_ref = s;
+		_i = 0;
+		_keys = $keys(_ref);
+		/* while (true) { */ case 1:
+			/* if (!(_i < _keys.length)) { break; } */ if(!(_i < _keys.length)) { $s = 2; continue; }
+			_entry = _ref[_keys[_i]];
+			if (_entry === undefined) {
+				_i++;
+				/* continue; */ $s = 1; continue;
+			}
+			k = _entry.k;
+			v = _entry.v;
+			_r = fmt.Sprintf("%v: %v, ", new sliceType$3([k, v])); /* */ $s = 3; case 3: if($c) { $c = false; _r = _r.$blk(); } if (_r && _r.$blk !== undefined) { break s; }
+			str = str + (_r);
+			_i++;
+		/* } */ $s = 1; continue; case 2:
+		if (str.length === 1) {
+			$s = -1; return "";
+		}
+		$s = -1; return $substring(str, 0, (str.length - 2 >> 0)) + "}";
+		/* */ } return; } if ($f === undefined) { $f = { $blk: slots.prototype.String }; } $f.$ptr = $ptr; $f._entry = _entry; $f._i = _i; $f._keys = _keys; $f._r = _r; $f._ref = _ref; $f.k = k; $f.s = s; $f.str = str; $f.v = v; $f.$s = $s; $f.$r = $r; return $f;
+	};
+	$ptrType(slots).prototype.String = function() { return new slots(this.$get()).String(); };
 	Instance.ptr.prototype.Class = function() {
 		var $ptr, i;
 		i = this;
@@ -31320,7 +31349,7 @@ $packages["github.com/ta2gch/iris/runtime/ilos/instance"] = (function() {
 		/* */ } return; } if ($f === undefined) { $f = { $blk: Instance.ptr.prototype.SetSlotValue }; } $f.$ptr = $ptr; $f._i = _i; $f._key = _key; $f._r = _r; $f._r$1 = _r$1; $f._ref = _ref; $f.class$1 = class$1; $f.i = i; $f.key = key; $f.ok = ok; $f.s = s; $f.value = value; $f.$s = $s; $f.$r = $r; return $f;
 	};
 	Instance.prototype.SetSlotValue = function(key, value, class$1) { return this.$val.SetSlotValue(key, value, class$1); };
-	Instance.ptr.prototype.Slots = function() {
+	Instance.ptr.prototype.getAllSlots = function() {
 		var $ptr, _entry, _entry$1, _i, _i$1, _i$2, _key, _key$1, _keys, _keys$1, _ref, _ref$1, _ref$2, _tuple, c, i, k, k$1, m, ok, v, v$1;
 		i = this;
 		m = $makeMap(ilos.Instance.keyFor, []);
@@ -31347,7 +31376,7 @@ $packages["github.com/ta2gch/iris/runtime/ilos/instance"] = (function() {
 			_tuple = $assertType(c, Instance, true);
 			ok = _tuple[1];
 			if (ok) {
-				_ref$2 = $clone($assertType(c, Instance), Instance).Slots();
+				_ref$2 = $clone($assertType(c, Instance), Instance).getAllSlots();
 				_i$2 = 0;
 				_keys$1 = $keys(_ref$2);
 				while (true) {
@@ -31367,14 +31396,14 @@ $packages["github.com/ta2gch/iris/runtime/ilos/instance"] = (function() {
 		}
 		return m;
 	};
-	Instance.prototype.Slots = function() { return this.$val.Slots(); };
+	Instance.prototype.getAllSlots = function() { return this.$val.getAllSlots(); };
 	Instance.ptr.prototype.String = function() {
 		var $ptr, _r, _r$1, c, i, $s, $r;
 		/* */ $s = 0; var $f, $c = false; if (this !== undefined && this.$blk !== undefined) { $f = this; $c = true; $ptr = $f.$ptr; _r = $f._r; _r$1 = $f._r$1; c = $f.c; i = $f.i; $s = $f.$s; $r = $f.$r; } s: while (true) { switch ($s) { case 0:
 		i = this;
 		_r = $clone(i, Instance).Class().String(); /* */ $s = 1; case 1: if($c) { $c = false; _r = _r.$blk(); } if (_r && _r.$blk !== undefined) { break s; }
 		c = _r;
-		_r$1 = fmt.Sprintf("#%v %v>", new sliceType$3([new $String($substring(c, 0, (c.length - 1 >> 0))), new mapType($clone(i, Instance).Slots())])); /* */ $s = 2; case 2: if($c) { $c = false; _r$1 = _r$1.$blk(); } if (_r$1 && _r$1.$blk !== undefined) { break s; }
+		_r$1 = fmt.Sprintf("#%v %v>", new sliceType$3([new $String($substring(c, 0, (c.length - 1 >> 0))), new slots($clone(i, Instance).getAllSlots())])); /* */ $s = 2; case 2: if($c) { $c = false; _r$1 = _r$1.$blk(); } if (_r$1 && _r$1.$blk !== undefined) { break s; }
 		$s = -1; return _r$1;
 		/* */ } return; } if ($f === undefined) { $f = { $blk: Instance.ptr.prototype.String }; } $f.$ptr = $ptr; $f._r = _r; $f._r$1 = _r$1; $f.c = c; $f.i = i; $f.$s = $s; $f.$r = $r; return $f;
 	};
@@ -31560,9 +31589,9 @@ $packages["github.com/ta2gch/iris/runtime/ilos/instance"] = (function() {
 		/* */ } return; } if ($f === undefined) { $f = { $blk: Float.prototype.String }; } $f.$ptr = $ptr; $f._r = _r; $f.i = i; $f.$s = $s; $f.$r = $r; return $f;
 	};
 	$ptrType(Float).prototype.String = function() { return new Float(this.$get()).String(); };
-	NewStandardClass = function(name, supers, slots, initforms, initargs, metaclass, abstractp) {
-		var $ptr, abstractp, initargs, initforms, metaclass, name, slots, supers, x;
-		return (x = new StandardClass.ptr(name, supers, slots, initforms, initargs, metaclass, abstractp), new x.constructor.elem(x));
+	NewStandardClass = function(name, supers, slots$1, initforms, initargs, metaclass, abstractp) {
+		var $ptr, abstractp, initargs, initforms, metaclass, name, slots$1, supers, x;
+		return (x = new StandardClass.ptr(name, supers, slots$1, initforms, initargs, metaclass, abstractp), new x.constructor.elem(x));
 	};
 	$pkg.NewStandardClass = NewStandardClass;
 	StandardClass.ptr.prototype.Supers = function() {
@@ -31672,7 +31701,8 @@ $packages["github.com/ta2gch/iris/runtime/ilos/instance"] = (function() {
 	Character.methods = [{prop: "Class", name: "Class", pkg: "", typ: $funcType([], [ilos.Class], false)}, {prop: "String", name: "String", pkg: "", typ: $funcType([], [$String], false)}];
 	Function.methods = [{prop: "Class", name: "Class", pkg: "", typ: $funcType([], [ilos.Class], false)}, {prop: "String", name: "String", pkg: "", typ: $funcType([], [$String], false)}, {prop: "Apply", name: "Apply", pkg: "", typ: $funcType([env.Environment, sliceType$1], [ilos.Instance, ilos.Instance], true)}];
 	ptrType$2.methods = [{prop: "AddMethod", name: "AddMethod", pkg: "", typ: $funcType([ilos.Instance, ilos.Instance, sliceType, ilos.Instance], [$Bool], false)}, {prop: "Class", name: "Class", pkg: "", typ: $funcType([], [ilos.Class], false)}, {prop: "String", name: "String", pkg: "", typ: $funcType([], [$String], false)}, {prop: "Apply", name: "Apply", pkg: "", typ: $funcType([env.Environment, sliceType$1], [ilos.Instance, ilos.Instance], true)}];
-	Instance.methods = [{prop: "Class", name: "Class", pkg: "", typ: $funcType([], [ilos.Class], false)}, {prop: "GetSlotValue", name: "GetSlotValue", pkg: "", typ: $funcType([ilos.Instance, ilos.Class], [ilos.Instance, $Bool], false)}, {prop: "SetSlotValue", name: "SetSlotValue", pkg: "", typ: $funcType([ilos.Instance, ilos.Instance, ilos.Class], [$Bool], false)}, {prop: "Slots", name: "Slots", pkg: "", typ: $funcType([], [mapType], false)}, {prop: "String", name: "String", pkg: "", typ: $funcType([], [$String], false)}];
+	slots.methods = [{prop: "String", name: "String", pkg: "", typ: $funcType([], [$String], false)}];
+	Instance.methods = [{prop: "Class", name: "Class", pkg: "", typ: $funcType([], [ilos.Class], false)}, {prop: "GetSlotValue", name: "GetSlotValue", pkg: "", typ: $funcType([ilos.Instance, ilos.Class], [ilos.Instance, $Bool], false)}, {prop: "SetSlotValue", name: "SetSlotValue", pkg: "", typ: $funcType([ilos.Instance, ilos.Instance, ilos.Class], [$Bool], false)}, {prop: "getAllSlots", name: "getAllSlots", pkg: "github.com/ta2gch/iris/runtime/ilos/instance", typ: $funcType([], [slots], false)}, {prop: "String", name: "String", pkg: "", typ: $funcType([], [$String], false)}];
 	ptrType$1.methods = [{prop: "Class", name: "Class", pkg: "", typ: $funcType([], [ilos.Class], false)}, {prop: "String", name: "String", pkg: "", typ: $funcType([], [$String], false)}, {prop: "Slice", name: "Slice", pkg: "", typ: $funcType([], [sliceType$1], false)}, {prop: "Length", name: "Length", pkg: "", typ: $funcType([], [$Int], false)}, {prop: "Nth", name: "Nth", pkg: "", typ: $funcType([$Int], [ilos.Instance], false)}, {prop: "SetNth", name: "SetNth", pkg: "", typ: $funcType([ilos.Instance, $Int], [], false)}, {prop: "NthCdr", name: "NthCdr", pkg: "", typ: $funcType([$Int], [ilos.Instance], false)}];
 	ptrType$3.methods = [{prop: "Class", name: "Class", pkg: "", typ: $funcType([], [ilos.Class], false)}, {prop: "String", name: "String", pkg: "", typ: $funcType([], [$String], false)}, {prop: "Slice", name: "Slice", pkg: "", typ: $funcType([], [sliceType$1], false)}, {prop: "Nth", name: "Nth", pkg: "", typ: $funcType([$Int], [ilos.Instance], false)}, {prop: "SetNth", name: "SetNth", pkg: "", typ: $funcType([ilos.Instance, $Int], [], false)}, {prop: "NthCdr", name: "NthCdr", pkg: "", typ: $funcType([$Int], [ilos.Instance], false)}, {prop: "Length", name: "Length", pkg: "", typ: $funcType([], [$Int], false)}];
 	Integer.methods = [{prop: "Class", name: "Class", pkg: "", typ: $funcType([], [ilos.Class], false)}, {prop: "String", name: "String", pkg: "", typ: $funcType([], [$String], false)}];
@@ -31688,7 +31718,8 @@ $packages["github.com/ta2gch/iris/runtime/ilos/instance"] = (function() {
 	Function.init("github.com/ta2gch/iris/runtime/ilos/instance", [{prop: "name", name: "name", exported: false, typ: ilos.Instance, tag: ""}, {prop: "function$1", name: "function", exported: false, typ: $emptyInterface, tag: ""}]);
 	method.init("github.com/ta2gch/iris/runtime/ilos/instance", [{prop: "qualifier", name: "qualifier", exported: false, typ: ilos.Instance, tag: ""}, {prop: "classList", name: "classList", exported: false, typ: sliceType, tag: ""}, {prop: "function$2", name: "function", exported: false, typ: Function, tag: ""}]);
 	GenericFunction.init("github.com/ta2gch/iris/runtime/ilos/instance", [{prop: "funcSpec", name: "funcSpec", exported: false, typ: ilos.Instance, tag: ""}, {prop: "lambdaList", name: "lambdaList", exported: false, typ: ilos.Instance, tag: ""}, {prop: "methodCombination", name: "methodCombination", exported: false, typ: ilos.Instance, tag: ""}, {prop: "genericFunctionClass", name: "genericFunctionClass", exported: false, typ: ilos.Class, tag: ""}, {prop: "methods", name: "methods", exported: false, typ: sliceType$5, tag: ""}]);
-	Instance.init("github.com/ta2gch/iris/runtime/ilos/instance", [{prop: "class$0", name: "class", exported: false, typ: ilos.Class, tag: ""}, {prop: "supers", name: "supers", exported: false, typ: sliceType$1, tag: ""}, {prop: "slots", name: "slots", exported: false, typ: mapType, tag: ""}]);
+	slots.init(ilos.Instance, ilos.Instance);
+	Instance.init("github.com/ta2gch/iris/runtime/ilos/instance", [{prop: "class$0", name: "class", exported: false, typ: ilos.Class, tag: ""}, {prop: "supers", name: "supers", exported: false, typ: sliceType$1, tag: ""}, {prop: "slots", name: "slots", exported: false, typ: slots, tag: ""}]);
 	List.init([{prop: "Length", name: "Length", pkg: "", typ: $funcType([], [$Int], false)}, {prop: "Nth", name: "Nth", pkg: "", typ: $funcType([$Int], [ilos.Instance], false)}, {prop: "NthCdr", name: "NthCdr", pkg: "", typ: $funcType([$Int], [ilos.Instance], false)}, {prop: "SetNth", name: "SetNth", pkg: "", typ: $funcType([ilos.Instance, $Int], [], false)}, {prop: "Slice", name: "Slice", pkg: "", typ: $funcType([], [sliceType$1], false)}]);
 	Cons.init("", [{prop: "Car", name: "Car", exported: true, typ: ilos.Instance, tag: ""}, {prop: "Cdr", name: "Cdr", exported: true, typ: ilos.Instance, tag: ""}]);
 	Null.init("", []);
@@ -31824,6 +31855,7 @@ $packages["github.com/ta2gch/iris/reader/tokenizer"] = (function() {
 		var $ptr, _r, r, sc, str, $s, $r;
 		/* */ $s = 0; var $f, $c = false; if (this !== undefined && this.$blk !== undefined) { $f = this; $c = true; $ptr = $f.$ptr; _r = $f._r; r = $f.r; sc = $f.sc; str = $f.str; $s = $f.$s; $r = $f.$r; } s: while (true) { switch ($s) { case 0:
 		str = "";
+		str = str + ("1\\+|1-|");
 		str = str + ("[-+]?[[:digit:]]+\\.[[:digit:]]+|");
 		str = str + ("[-+]?[[:digit:]]+(?:\\.[[:digit:]]+)?[eE][-+]?[[:digit:]]+|");
 		str = str + ("[-+]?[[:digit:]]+|");
@@ -31834,9 +31866,8 @@ $packages["github.com/ta2gch/iris/reader/tokenizer"] = (function() {
 		str = str + ("#\\\\[[:graph:]]|");
 		str = str + ("\"(?:\\\\\\\\|\\\\\"|[^\"])*\"|");
 		str = str + ("[:&][a-zA-Z]+|");
+		str = str + ("\\+|-|[a-zA-Z<>/*=?_!$%[\\]^{}~][-a-zA-Z0-9+<>/*=?_!$%[\\]^{}~]*|");
 		str = str + ("\\|(?:\\\\\\\\|\\\\\\||[^|])*\\||");
-		str = str + ("\\+|\\-|1\\+|1\\-|");
-		str = str + ("[a-zA-Z<>/*=?_!$%[\\]^{}~][-a-zA-Z0-9+<>/*=?_!$%[\\]^{}~]*|");
 		str = str + ("[.()]|");
 		str = str + ("#'|,@?|'|`|#[[:digit:]]*[aA]|#");
 		_r = regexp.MustCompile(str); /* */ $s = 1; case 1: if($c) { $c = false; _r = _r.$blk(); } if (_r && _r.$blk !== undefined) { break s; }
@@ -32037,7 +32068,7 @@ $packages["github.com/ta2gch/iris/reader/parser"] = (function() {
 		str = "^(";
 		str = str + ("[:&][a-zA-Z]+|");
 		str = str + ("\\|.*\\||");
-		str = str + ("\\+|\\-|1\\+|1\\-|");
+		str = str + ("\\+|-|1\\+|1-|");
 		str = str + ("[a-zA-Z<>/*=?_!$%[\\]^{}~][-a-zA-Z0-9+<>/*=?_!$%[\\]^{}~]*|");
 		str = str + (")$");
 		_r$18 = regexp.MatchString(str, tok); /* */ $s = 19; case 19: if($c) { $c = false; _r$18 = _r$18.$blk(); } if (_r$18 && _r$18.$blk !== undefined) { break s; }
