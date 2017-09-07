@@ -48,10 +48,10 @@ func main() {
 	runtime.TopLevel.Function.Set(instance.NewSymbol("READ"), nil)
 	runtime.TopLevel.Function.Set(instance.NewSymbol("READ-LINE"), nil)
 	runtime.TopLevel.Function.Set(instance.NewSymbol("READ-CHAR"), nil)
-	fmt.Fprintf(dom, `Welcome to Iris %v. Iris is an ISLisp implementation on Go.
+	fmt.Fprintf(dom, `Welcome to Iris @%v. Iris is an ISLisp implementation on Go.
 This REPL works with gopherjs and has no methods to get input.
 
-Copyright &copy; 2017 TANIGUCHI Masaya All Rights Reserved.`, runtime.Version)
+Copyright &copy; 2017 TANIGUCHI Masaya All Rights Reserved.`, "HEAD")
 	jQuery("body").On(jquery.KEYDOWN, func(e jquery.Event) {
 		if !e.ShiftKey && e.KeyCode == 13 {
 			fmt.Fprint(dom, "\n> ")
