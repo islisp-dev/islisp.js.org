@@ -34499,178 +34499,253 @@ $packages["github.com/ta2gch/iris/runtime"] = (function() {
 	};
 	$pkg.FormatFreshLine = FormatFreshLine;
 	Format = function(env$1, stream, formatString, formatArguments) {
-		var $ptr, _r, _r$1, _r$10, _r$11, _r$12, _r$13, _r$14, _r$15, _r$16, _r$17, _r$18, _r$19, _r$2, _r$20, _r$21, _r$22, _r$23, _r$24, _r$25, _r$26, _r$27, _r$28, _r$29, _r$3, _r$30, _r$4, _r$5, _r$6, _r$7, _r$8, _r$9, _tmp, _tmp$1, _tmp$2, _tuple, _tuple$1, b, c, e, env$1, formatArguments, formatString, loc, n, n$1, re, s, str, stream, $s, $r;
-		/* */ $s = 0; var $f, $c = false; if (this !== undefined && this.$blk !== undefined) { $f = this; $c = true; $ptr = $f.$ptr; _r = $f._r; _r$1 = $f._r$1; _r$10 = $f._r$10; _r$11 = $f._r$11; _r$12 = $f._r$12; _r$13 = $f._r$13; _r$14 = $f._r$14; _r$15 = $f._r$15; _r$16 = $f._r$16; _r$17 = $f._r$17; _r$18 = $f._r$18; _r$19 = $f._r$19; _r$2 = $f._r$2; _r$20 = $f._r$20; _r$21 = $f._r$21; _r$22 = $f._r$22; _r$23 = $f._r$23; _r$24 = $f._r$24; _r$25 = $f._r$25; _r$26 = $f._r$26; _r$27 = $f._r$27; _r$28 = $f._r$28; _r$29 = $f._r$29; _r$3 = $f._r$3; _r$30 = $f._r$30; _r$4 = $f._r$4; _r$5 = $f._r$5; _r$6 = $f._r$6; _r$7 = $f._r$7; _r$8 = $f._r$8; _r$9 = $f._r$9; _tmp = $f._tmp; _tmp$1 = $f._tmp$1; _tmp$2 = $f._tmp$2; _tuple = $f._tuple; _tuple$1 = $f._tuple$1; b = $f.b; c = $f.c; e = $f.e; env$1 = $f.env$1; formatArguments = $f.formatArguments; formatString = $f.formatString; loc = $f.loc; n = $f.n; n$1 = $f.n$1; re = $f.re; s = $f.s; str = $f.str; stream = $f.stream; $s = $f.$s; $r = $f.$r; } s: while (true) { switch ($s) { case 0:
+		var $ptr, _arg, _arg$1, _arg$2, _arg$3, _arg$4, _arg$5, _r, _r$1, _r$10, _r$11, _r$12, _r$13, _r$14, _r$15, _r$16, _r$17, _r$18, _r$19, _r$2, _r$20, _r$21, _r$22, _r$23, _r$24, _r$25, _r$26, _r$27, _r$28, _r$29, _r$3, _r$30, _r$31, _r$32, _r$33, _r$34, _r$35, _r$4, _r$5, _r$6, _r$7, _r$8, _r$9, _tmp, _tmp$1, _tmp$2, _tuple, _tuple$1, _tuple$10, _tuple$11, _tuple$12, _tuple$13, _tuple$14, _tuple$15, _tuple$2, _tuple$3, _tuple$4, _tuple$5, _tuple$6, _tuple$7, _tuple$8, _tuple$9, b, c, e, env$1, err, err$1, err$10, err$11, err$12, err$2, err$3, err$4, err$5, err$6, err$7, err$8, err$9, formatArguments, formatString, loc, n, n$1, ok, re, s, str, stream, $s, $r;
+		/* */ $s = 0; var $f, $c = false; if (this !== undefined && this.$blk !== undefined) { $f = this; $c = true; $ptr = $f.$ptr; _arg = $f._arg; _arg$1 = $f._arg$1; _arg$2 = $f._arg$2; _arg$3 = $f._arg$3; _arg$4 = $f._arg$4; _arg$5 = $f._arg$5; _r = $f._r; _r$1 = $f._r$1; _r$10 = $f._r$10; _r$11 = $f._r$11; _r$12 = $f._r$12; _r$13 = $f._r$13; _r$14 = $f._r$14; _r$15 = $f._r$15; _r$16 = $f._r$16; _r$17 = $f._r$17; _r$18 = $f._r$18; _r$19 = $f._r$19; _r$2 = $f._r$2; _r$20 = $f._r$20; _r$21 = $f._r$21; _r$22 = $f._r$22; _r$23 = $f._r$23; _r$24 = $f._r$24; _r$25 = $f._r$25; _r$26 = $f._r$26; _r$27 = $f._r$27; _r$28 = $f._r$28; _r$29 = $f._r$29; _r$3 = $f._r$3; _r$30 = $f._r$30; _r$31 = $f._r$31; _r$32 = $f._r$32; _r$33 = $f._r$33; _r$34 = $f._r$34; _r$35 = $f._r$35; _r$4 = $f._r$4; _r$5 = $f._r$5; _r$6 = $f._r$6; _r$7 = $f._r$7; _r$8 = $f._r$8; _r$9 = $f._r$9; _tmp = $f._tmp; _tmp$1 = $f._tmp$1; _tmp$2 = $f._tmp$2; _tuple = $f._tuple; _tuple$1 = $f._tuple$1; _tuple$10 = $f._tuple$10; _tuple$11 = $f._tuple$11; _tuple$12 = $f._tuple$12; _tuple$13 = $f._tuple$13; _tuple$14 = $f._tuple$14; _tuple$15 = $f._tuple$15; _tuple$2 = $f._tuple$2; _tuple$3 = $f._tuple$3; _tuple$4 = $f._tuple$4; _tuple$5 = $f._tuple$5; _tuple$6 = $f._tuple$6; _tuple$7 = $f._tuple$7; _tuple$8 = $f._tuple$8; _tuple$9 = $f._tuple$9; b = $f.b; c = $f.c; e = $f.e; env$1 = $f.env$1; err = $f.err; err$1 = $f.err$1; err$10 = $f.err$10; err$11 = $f.err$11; err$12 = $f.err$12; err$2 = $f.err$2; err$3 = $f.err$3; err$4 = $f.err$4; err$5 = $f.err$5; err$6 = $f.err$6; err$7 = $f.err$7; err$8 = $f.err$8; err$9 = $f.err$9; formatArguments = $f.formatArguments; formatString = $f.formatString; loc = $f.loc; n = $f.n; n$1 = $f.n$1; ok = $f.ok; re = $f.re; s = $f.s; str = $f.str; stream = $f.stream; $s = $f.$s; $r = $f.$r; } s: while (true) { switch ($s) { case 0:
+		_r = Stringp($clone(env$1, env.Environment), formatString); /* */ $s = 1; case 1: if($c) { $c = false; _r = _r.$blk(); } if (_r && _r.$blk !== undefined) { break s; }
+		_tuple = _r;
+		ok = _tuple[0];
+		/* */ if ($interfaceIsEqual(ok, $pkg.Nil)) { $s = 2; continue; }
+		/* */ $s = 3; continue;
+		/* if ($interfaceIsEqual(ok, $pkg.Nil)) { */ case 2:
+			_arg = $clone(env$1, env.Environment);
+			_r$1 = instance.NewDomainError($clone(env$1, env.Environment), formatString, class$1.String); /* */ $s = 4; case 4: if($c) { $c = false; _r$1 = _r$1.$blk(); } if (_r$1 && _r$1.$blk !== undefined) { break s; }
+			_arg$1 = _r$1;
+			_arg$2 = $pkg.Nil;
+			_r$2 = SignalCondition(_arg, _arg$1, _arg$2); /* */ $s = 5; case 5: if($c) { $c = false; _r$2 = _r$2.$blk(); } if (_r$2 && _r$2.$blk !== undefined) { break s; }
+			$s = -1; return _r$2;
+		/* } */ case 3:
 		str = ($runesToString($assertType(formatString, instance.String)));
-		_r = regexp.MustCompile("~(?:[ABCDGOSX%&~]|[0-9]+[RT])"); /* */ $s = 1; case 1: if($c) { $c = false; _r = _r.$blk(); } if (_r && _r.$blk !== undefined) { break s; }
-		re = _r;
+		_r$3 = regexp.MustCompile("~(?:[ABCDGOSX%&~]|[0-9]+[RT])"); /* */ $s = 6; case 6: if($c) { $c = false; _r$3 = _r$3.$blk(); } if (_r$3 && _r$3.$blk !== undefined) { break s; }
+		re = _r$3;
 		_tmp = 0;
 		_tmp$1 = 0;
 		_tmp$2 = 0;
 		s = _tmp;
 		e = _tmp$1;
 		c = _tmp$2;
-		_r$1 = re.FindStringIndex($substring(str, s)); /* */ $s = 2; case 2: if($c) { $c = false; _r$1 = _r$1.$blk(); } if (_r$1 && _r$1.$blk !== undefined) { break s; }
-		loc = _r$1;
-		/* while (true) { */ case 3:
-			/* if (!(!(loc === sliceType$5.nil))) { break; } */ if(!(!(loc === sliceType$5.nil))) { $s = 4; continue; }
+		_r$4 = re.FindStringIndex($substring(str, s)); /* */ $s = 7; case 7: if($c) { $c = false; _r$4 = _r$4.$blk(); } if (_r$4 && _r$4.$blk !== undefined) { break s; }
+		loc = _r$4;
+		/* while (true) { */ case 8:
+			/* if (!(!(loc === sliceType$5.nil))) { break; } */ if(!(!(loc === sliceType$5.nil))) { $s = 9; continue; }
+			/* */ if (c === formatArguments.$length) { $s = 10; continue; }
+			/* */ $s = 11; continue;
+			/* if (c === formatArguments.$length) { */ case 10:
+				_arg$3 = $clone(env$1, env.Environment);
+				_r$5 = instance.NewArityError($clone(env$1, env.Environment)); /* */ $s = 12; case 12: if($c) { $c = false; _r$5 = _r$5.$blk(); } if (_r$5 && _r$5.$blk !== undefined) { break s; }
+				_arg$4 = _r$5;
+				_arg$5 = $pkg.Nil;
+				_r$6 = SignalCondition(_arg$3, _arg$4, _arg$5); /* */ $s = 13; case 13: if($c) { $c = false; _r$6 = _r$6.$blk(); } if (_r$6 && _r$6.$blk !== undefined) { break s; }
+				$s = -1; return _r$6;
+			/* } */ case 11:
 			b = s;
 			s = b + 0 >> 0;
 			e = b + (0 >= loc.$length ? ($throwRuntimeError("index out of range"), undefined) : loc.$array[loc.$offset + 0]) >> 0;
-			_r$2 = FormatObject($clone(env$1, env.Environment), stream, instance.NewString((new sliceType$4($stringToRunes($substring(str, s, e))))), $pkg.Nil); /* */ $s = 5; case 5: if($c) { $c = false; _r$2 = _r$2.$blk(); } if (_r$2 && _r$2.$blk !== undefined) { break s; }
-			_r$2;
+			_r$7 = FormatObject($clone(env$1, env.Environment), stream, instance.NewString((new sliceType$4($stringToRunes($substring(str, s, e))))), $pkg.Nil); /* */ $s = 14; case 14: if($c) { $c = false; _r$7 = _r$7.$blk(); } if (_r$7 && _r$7.$blk !== undefined) { break s; }
+			_r$7;
 			s = b + (0 >= loc.$length ? ($throwRuntimeError("index out of range"), undefined) : loc.$array[loc.$offset + 0]) >> 0;
 			e = b + (1 >= loc.$length ? ($throwRuntimeError("index out of range"), undefined) : loc.$array[loc.$offset + 1]) >> 0;
-			/* */ if ($substring(str, s, e) === "~A") { $s = 6; continue; }
-			/* */ $s = 7; continue;
-			/* if ($substring(str, s, e) === "~A") { */ case 6:
-				_r$3 = FormatObject($clone(env$1, env.Environment), stream, ((c < 0 || c >= formatArguments.$length) ? ($throwRuntimeError("index out of range"), undefined) : formatArguments.$array[formatArguments.$offset + c]), $pkg.Nil); /* */ $s = 8; case 8: if($c) { $c = false; _r$3 = _r$3.$blk(); } if (_r$3 && _r$3.$blk !== undefined) { break s; }
-				_r$3;
+			/* */ if ($substring(str, s, e) === "~A") { $s = 15; continue; }
+			/* */ $s = 16; continue;
+			/* if ($substring(str, s, e) === "~A") { */ case 15:
+				_r$8 = FormatObject($clone(env$1, env.Environment), stream, ((c < 0 || c >= formatArguments.$length) ? ($throwRuntimeError("index out of range"), undefined) : formatArguments.$array[formatArguments.$offset + c]), $pkg.Nil); /* */ $s = 17; case 17: if($c) { $c = false; _r$8 = _r$8.$blk(); } if (_r$8 && _r$8.$blk !== undefined) { break s; }
+				_tuple$1 = _r$8;
+				err = _tuple$1[1];
+				if (!($interfaceIsEqual(err, $ifaceNil))) {
+					$s = -1; return [$ifaceNil, err];
+				}
 				c = c + (1) >> 0;
 				s = e;
-				_r$4 = re.FindStringIndex($substring(str, s)); /* */ $s = 9; case 9: if($c) { $c = false; _r$4 = _r$4.$blk(); } if (_r$4 && _r$4.$blk !== undefined) { break s; }
-				loc = _r$4;
-				/* continue; */ $s = 3; continue;
-			/* } */ case 7:
-			/* */ if ($substring(str, s, e) === "~B") { $s = 10; continue; }
-			/* */ $s = 11; continue;
-			/* if ($substring(str, s, e) === "~B") { */ case 10:
-				_r$5 = FormatInteger($clone(env$1, env.Environment), stream, ((c < 0 || c >= formatArguments.$length) ? ($throwRuntimeError("index out of range"), undefined) : formatArguments.$array[formatArguments.$offset + c]), instance.NewInteger(2)); /* */ $s = 12; case 12: if($c) { $c = false; _r$5 = _r$5.$blk(); } if (_r$5 && _r$5.$blk !== undefined) { break s; }
-				_r$5;
+				_r$9 = re.FindStringIndex($substring(str, s)); /* */ $s = 18; case 18: if($c) { $c = false; _r$9 = _r$9.$blk(); } if (_r$9 && _r$9.$blk !== undefined) { break s; }
+				loc = _r$9;
+				/* continue; */ $s = 8; continue;
+			/* } */ case 16:
+			/* */ if ($substring(str, s, e) === "~B") { $s = 19; continue; }
+			/* */ $s = 20; continue;
+			/* if ($substring(str, s, e) === "~B") { */ case 19:
+				_r$10 = FormatInteger($clone(env$1, env.Environment), stream, ((c < 0 || c >= formatArguments.$length) ? ($throwRuntimeError("index out of range"), undefined) : formatArguments.$array[formatArguments.$offset + c]), instance.NewInteger(2)); /* */ $s = 21; case 21: if($c) { $c = false; _r$10 = _r$10.$blk(); } if (_r$10 && _r$10.$blk !== undefined) { break s; }
+				_tuple$2 = _r$10;
+				err$1 = _tuple$2[1];
+				if (!($interfaceIsEqual(err$1, $ifaceNil))) {
+					$s = -1; return [$ifaceNil, err$1];
+				}
 				c = c + (1) >> 0;
 				s = e;
-				_r$6 = re.FindStringIndex($substring(str, s)); /* */ $s = 13; case 13: if($c) { $c = false; _r$6 = _r$6.$blk(); } if (_r$6 && _r$6.$blk !== undefined) { break s; }
-				loc = _r$6;
-				/* continue; */ $s = 3; continue;
-			/* } */ case 11:
-			/* */ if ($substring(str, s, e) === "~C") { $s = 14; continue; }
-			/* */ $s = 15; continue;
-			/* if ($substring(str, s, e) === "~C") { */ case 14:
-				_r$7 = FormatChar($clone(env$1, env.Environment), stream, ((c < 0 || c >= formatArguments.$length) ? ($throwRuntimeError("index out of range"), undefined) : formatArguments.$array[formatArguments.$offset + c])); /* */ $s = 16; case 16: if($c) { $c = false; _r$7 = _r$7.$blk(); } if (_r$7 && _r$7.$blk !== undefined) { break s; }
-				_r$7;
+				_r$11 = re.FindStringIndex($substring(str, s)); /* */ $s = 22; case 22: if($c) { $c = false; _r$11 = _r$11.$blk(); } if (_r$11 && _r$11.$blk !== undefined) { break s; }
+				loc = _r$11;
+				/* continue; */ $s = 8; continue;
+			/* } */ case 20:
+			/* */ if ($substring(str, s, e) === "~C") { $s = 23; continue; }
+			/* */ $s = 24; continue;
+			/* if ($substring(str, s, e) === "~C") { */ case 23:
+				_r$12 = FormatChar($clone(env$1, env.Environment), stream, ((c < 0 || c >= formatArguments.$length) ? ($throwRuntimeError("index out of range"), undefined) : formatArguments.$array[formatArguments.$offset + c])); /* */ $s = 25; case 25: if($c) { $c = false; _r$12 = _r$12.$blk(); } if (_r$12 && _r$12.$blk !== undefined) { break s; }
+				_tuple$3 = _r$12;
+				err$2 = _tuple$3[1];
+				if (!($interfaceIsEqual(err$2, $ifaceNil))) {
+					$s = -1; return [$ifaceNil, err$2];
+				}
 				c = c + (1) >> 0;
 				s = e;
-				_r$8 = re.FindStringIndex($substring(str, s)); /* */ $s = 17; case 17: if($c) { $c = false; _r$8 = _r$8.$blk(); } if (_r$8 && _r$8.$blk !== undefined) { break s; }
-				loc = _r$8;
-				/* continue; */ $s = 3; continue;
-			/* } */ case 15:
-			/* */ if ($substring(str, s, e) === "~D") { $s = 18; continue; }
-			/* */ $s = 19; continue;
-			/* if ($substring(str, s, e) === "~D") { */ case 18:
-				_r$9 = FormatInteger($clone(env$1, env.Environment), stream, ((c < 0 || c >= formatArguments.$length) ? ($throwRuntimeError("index out of range"), undefined) : formatArguments.$array[formatArguments.$offset + c]), instance.NewInteger(10)); /* */ $s = 20; case 20: if($c) { $c = false; _r$9 = _r$9.$blk(); } if (_r$9 && _r$9.$blk !== undefined) { break s; }
-				_r$9;
+				_r$13 = re.FindStringIndex($substring(str, s)); /* */ $s = 26; case 26: if($c) { $c = false; _r$13 = _r$13.$blk(); } if (_r$13 && _r$13.$blk !== undefined) { break s; }
+				loc = _r$13;
+				/* continue; */ $s = 8; continue;
+			/* } */ case 24:
+			/* */ if ($substring(str, s, e) === "~D") { $s = 27; continue; }
+			/* */ $s = 28; continue;
+			/* if ($substring(str, s, e) === "~D") { */ case 27:
+				_r$14 = FormatInteger($clone(env$1, env.Environment), stream, ((c < 0 || c >= formatArguments.$length) ? ($throwRuntimeError("index out of range"), undefined) : formatArguments.$array[formatArguments.$offset + c]), instance.NewInteger(10)); /* */ $s = 29; case 29: if($c) { $c = false; _r$14 = _r$14.$blk(); } if (_r$14 && _r$14.$blk !== undefined) { break s; }
+				_tuple$4 = _r$14;
+				err$3 = _tuple$4[1];
+				if (!($interfaceIsEqual(err$3, $ifaceNil))) {
+					$s = -1; return [$ifaceNil, err$3];
+				}
 				c = c + (1) >> 0;
 				s = e;
-				_r$10 = re.FindStringIndex($substring(str, s)); /* */ $s = 21; case 21: if($c) { $c = false; _r$10 = _r$10.$blk(); } if (_r$10 && _r$10.$blk !== undefined) { break s; }
-				loc = _r$10;
-				/* continue; */ $s = 3; continue;
-			/* } */ case 19:
-			/* */ if ($substring(str, s, e) === "~G") { $s = 22; continue; }
-			/* */ $s = 23; continue;
-			/* if ($substring(str, s, e) === "~G") { */ case 22:
-				_r$11 = FormatFloat($clone(env$1, env.Environment), stream, ((c < 0 || c >= formatArguments.$length) ? ($throwRuntimeError("index out of range"), undefined) : formatArguments.$array[formatArguments.$offset + c])); /* */ $s = 24; case 24: if($c) { $c = false; _r$11 = _r$11.$blk(); } if (_r$11 && _r$11.$blk !== undefined) { break s; }
-				_r$11;
+				_r$15 = re.FindStringIndex($substring(str, s)); /* */ $s = 30; case 30: if($c) { $c = false; _r$15 = _r$15.$blk(); } if (_r$15 && _r$15.$blk !== undefined) { break s; }
+				loc = _r$15;
+				/* continue; */ $s = 8; continue;
+			/* } */ case 28:
+			/* */ if ($substring(str, s, e) === "~G") { $s = 31; continue; }
+			/* */ $s = 32; continue;
+			/* if ($substring(str, s, e) === "~G") { */ case 31:
+				_r$16 = FormatFloat($clone(env$1, env.Environment), stream, ((c < 0 || c >= formatArguments.$length) ? ($throwRuntimeError("index out of range"), undefined) : formatArguments.$array[formatArguments.$offset + c])); /* */ $s = 33; case 33: if($c) { $c = false; _r$16 = _r$16.$blk(); } if (_r$16 && _r$16.$blk !== undefined) { break s; }
+				_tuple$5 = _r$16;
+				err$4 = _tuple$5[1];
+				if (!($interfaceIsEqual(err$4, $ifaceNil))) {
+					$s = -1; return [$ifaceNil, err$4];
+				}
 				c = c + (1) >> 0;
 				s = e;
-				_r$12 = re.FindStringIndex($substring(str, s)); /* */ $s = 25; case 25: if($c) { $c = false; _r$12 = _r$12.$blk(); } if (_r$12 && _r$12.$blk !== undefined) { break s; }
-				loc = _r$12;
-				/* continue; */ $s = 3; continue;
-			/* } */ case 23:
-			/* */ if ($substring(str, s, e) === "~O") { $s = 26; continue; }
-			/* */ $s = 27; continue;
-			/* if ($substring(str, s, e) === "~O") { */ case 26:
-				_r$13 = FormatInteger($clone(env$1, env.Environment), stream, ((c < 0 || c >= formatArguments.$length) ? ($throwRuntimeError("index out of range"), undefined) : formatArguments.$array[formatArguments.$offset + c]), instance.NewInteger(8)); /* */ $s = 28; case 28: if($c) { $c = false; _r$13 = _r$13.$blk(); } if (_r$13 && _r$13.$blk !== undefined) { break s; }
-				_r$13;
+				_r$17 = re.FindStringIndex($substring(str, s)); /* */ $s = 34; case 34: if($c) { $c = false; _r$17 = _r$17.$blk(); } if (_r$17 && _r$17.$blk !== undefined) { break s; }
+				loc = _r$17;
+				/* continue; */ $s = 8; continue;
+			/* } */ case 32:
+			/* */ if ($substring(str, s, e) === "~O") { $s = 35; continue; }
+			/* */ $s = 36; continue;
+			/* if ($substring(str, s, e) === "~O") { */ case 35:
+				_r$18 = FormatInteger($clone(env$1, env.Environment), stream, ((c < 0 || c >= formatArguments.$length) ? ($throwRuntimeError("index out of range"), undefined) : formatArguments.$array[formatArguments.$offset + c]), instance.NewInteger(8)); /* */ $s = 37; case 37: if($c) { $c = false; _r$18 = _r$18.$blk(); } if (_r$18 && _r$18.$blk !== undefined) { break s; }
+				_tuple$6 = _r$18;
+				err$5 = _tuple$6[1];
+				if (!($interfaceIsEqual(err$5, $ifaceNil))) {
+					$s = -1; return [$ifaceNil, err$5];
+				}
 				c = c + (1) >> 0;
 				s = e;
-				_r$14 = re.FindStringIndex($substring(str, s)); /* */ $s = 29; case 29: if($c) { $c = false; _r$14 = _r$14.$blk(); } if (_r$14 && _r$14.$blk !== undefined) { break s; }
-				loc = _r$14;
-				/* continue; */ $s = 3; continue;
-			/* } */ case 27:
-			/* */ if ($substring(str, s, e) === "~S") { $s = 30; continue; }
-			/* */ $s = 31; continue;
-			/* if ($substring(str, s, e) === "~S") { */ case 30:
-				_r$15 = FormatObject($clone(env$1, env.Environment), stream, ((c < 0 || c >= formatArguments.$length) ? ($throwRuntimeError("index out of range"), undefined) : formatArguments.$array[formatArguments.$offset + c]), $pkg.T); /* */ $s = 32; case 32: if($c) { $c = false; _r$15 = _r$15.$blk(); } if (_r$15 && _r$15.$blk !== undefined) { break s; }
-				_r$15;
+				_r$19 = re.FindStringIndex($substring(str, s)); /* */ $s = 38; case 38: if($c) { $c = false; _r$19 = _r$19.$blk(); } if (_r$19 && _r$19.$blk !== undefined) { break s; }
+				loc = _r$19;
+				/* continue; */ $s = 8; continue;
+			/* } */ case 36:
+			/* */ if ($substring(str, s, e) === "~S") { $s = 39; continue; }
+			/* */ $s = 40; continue;
+			/* if ($substring(str, s, e) === "~S") { */ case 39:
+				_r$20 = FormatObject($clone(env$1, env.Environment), stream, ((c < 0 || c >= formatArguments.$length) ? ($throwRuntimeError("index out of range"), undefined) : formatArguments.$array[formatArguments.$offset + c]), $pkg.T); /* */ $s = 41; case 41: if($c) { $c = false; _r$20 = _r$20.$blk(); } if (_r$20 && _r$20.$blk !== undefined) { break s; }
+				_tuple$7 = _r$20;
+				err$6 = _tuple$7[1];
+				if (!($interfaceIsEqual(err$6, $ifaceNil))) {
+					$s = -1; return [$ifaceNil, err$6];
+				}
 				c = c + (1) >> 0;
 				s = e;
-				_r$16 = re.FindStringIndex($substring(str, s)); /* */ $s = 33; case 33: if($c) { $c = false; _r$16 = _r$16.$blk(); } if (_r$16 && _r$16.$blk !== undefined) { break s; }
-				loc = _r$16;
-				/* continue; */ $s = 3; continue;
-			/* } */ case 31:
-			/* */ if ($substring(str, s, e) === "~X") { $s = 34; continue; }
-			/* */ $s = 35; continue;
-			/* if ($substring(str, s, e) === "~X") { */ case 34:
-				_r$17 = FormatInteger($clone(env$1, env.Environment), stream, ((c < 0 || c >= formatArguments.$length) ? ($throwRuntimeError("index out of range"), undefined) : formatArguments.$array[formatArguments.$offset + c]), instance.NewInteger(16)); /* */ $s = 36; case 36: if($c) { $c = false; _r$17 = _r$17.$blk(); } if (_r$17 && _r$17.$blk !== undefined) { break s; }
-				_r$17;
+				_r$21 = re.FindStringIndex($substring(str, s)); /* */ $s = 42; case 42: if($c) { $c = false; _r$21 = _r$21.$blk(); } if (_r$21 && _r$21.$blk !== undefined) { break s; }
+				loc = _r$21;
+				/* continue; */ $s = 8; continue;
+			/* } */ case 40:
+			/* */ if ($substring(str, s, e) === "~X") { $s = 43; continue; }
+			/* */ $s = 44; continue;
+			/* if ($substring(str, s, e) === "~X") { */ case 43:
+				_r$22 = FormatInteger($clone(env$1, env.Environment), stream, ((c < 0 || c >= formatArguments.$length) ? ($throwRuntimeError("index out of range"), undefined) : formatArguments.$array[formatArguments.$offset + c]), instance.NewInteger(16)); /* */ $s = 45; case 45: if($c) { $c = false; _r$22 = _r$22.$blk(); } if (_r$22 && _r$22.$blk !== undefined) { break s; }
+				_tuple$8 = _r$22;
+				err$7 = _tuple$8[1];
+				if (!($interfaceIsEqual(err$7, $ifaceNil))) {
+					$s = -1; return [$ifaceNil, err$7];
+				}
 				c = c + (1) >> 0;
 				s = e;
-				_r$18 = re.FindStringIndex($substring(str, s)); /* */ $s = 37; case 37: if($c) { $c = false; _r$18 = _r$18.$blk(); } if (_r$18 && _r$18.$blk !== undefined) { break s; }
-				loc = _r$18;
-				/* continue; */ $s = 3; continue;
-			/* } */ case 35:
-			/* */ if ($substring(str, s, e) === "~%") { $s = 38; continue; }
-			/* */ $s = 39; continue;
-			/* if ($substring(str, s, e) === "~%") { */ case 38:
-				_r$19 = FormatChar($clone(env$1, env.Environment), stream, instance.NewCharacter((("\n".charCodeAt(0) >> 0)))); /* */ $s = 40; case 40: if($c) { $c = false; _r$19 = _r$19.$blk(); } if (_r$19 && _r$19.$blk !== undefined) { break s; }
-				_r$19;
+				_r$23 = re.FindStringIndex($substring(str, s)); /* */ $s = 46; case 46: if($c) { $c = false; _r$23 = _r$23.$blk(); } if (_r$23 && _r$23.$blk !== undefined) { break s; }
+				loc = _r$23;
+				/* continue; */ $s = 8; continue;
+			/* } */ case 44:
+			/* */ if ($substring(str, s, e) === "~%") { $s = 47; continue; }
+			/* */ $s = 48; continue;
+			/* if ($substring(str, s, e) === "~%") { */ case 47:
+				_r$24 = FormatChar($clone(env$1, env.Environment), stream, instance.NewCharacter((("\n".charCodeAt(0) >> 0)))); /* */ $s = 49; case 49: if($c) { $c = false; _r$24 = _r$24.$blk(); } if (_r$24 && _r$24.$blk !== undefined) { break s; }
+				_tuple$9 = _r$24;
+				err$8 = _tuple$9[1];
+				if (!($interfaceIsEqual(err$8, $ifaceNil))) {
+					$s = -1; return [$ifaceNil, err$8];
+				}
 				s = e;
-				_r$20 = re.FindStringIndex($substring(str, s)); /* */ $s = 41; case 41: if($c) { $c = false; _r$20 = _r$20.$blk(); } if (_r$20 && _r$20.$blk !== undefined) { break s; }
-				loc = _r$20;
-				/* continue; */ $s = 3; continue;
-			/* } */ case 39:
-			/* */ if ($substring(str, s, e) === "~&") { $s = 42; continue; }
-			/* */ $s = 43; continue;
-			/* if ($substring(str, s, e) === "~&") { */ case 42:
-				_r$21 = FormatFreshLine($clone(env$1, env.Environment), stream); /* */ $s = 44; case 44: if($c) { $c = false; _r$21 = _r$21.$blk(); } if (_r$21 && _r$21.$blk !== undefined) { break s; }
-				_r$21;
+				_r$25 = re.FindStringIndex($substring(str, s)); /* */ $s = 50; case 50: if($c) { $c = false; _r$25 = _r$25.$blk(); } if (_r$25 && _r$25.$blk !== undefined) { break s; }
+				loc = _r$25;
+				/* continue; */ $s = 8; continue;
+			/* } */ case 48:
+			/* */ if ($substring(str, s, e) === "~&") { $s = 51; continue; }
+			/* */ $s = 52; continue;
+			/* if ($substring(str, s, e) === "~&") { */ case 51:
+				_r$26 = FormatFreshLine($clone(env$1, env.Environment), stream); /* */ $s = 53; case 53: if($c) { $c = false; _r$26 = _r$26.$blk(); } if (_r$26 && _r$26.$blk !== undefined) { break s; }
+				_tuple$10 = _r$26;
+				err$9 = _tuple$10[1];
+				if (!($interfaceIsEqual(err$9, $ifaceNil))) {
+					$s = -1; return [$ifaceNil, err$9];
+				}
 				s = e;
-				_r$22 = re.FindStringIndex($substring(str, s)); /* */ $s = 45; case 45: if($c) { $c = false; _r$22 = _r$22.$blk(); } if (_r$22 && _r$22.$blk !== undefined) { break s; }
-				loc = _r$22;
-				/* continue; */ $s = 3; continue;
-			/* } */ case 43:
-			/* */ if ($substring(str, s, e) === "~~") { $s = 46; continue; }
-			/* */ $s = 47; continue;
-			/* if ($substring(str, s, e) === "~~") { */ case 46:
-				_r$23 = FormatChar($clone(env$1, env.Environment), stream, instance.NewCharacter(126)); /* */ $s = 48; case 48: if($c) { $c = false; _r$23 = _r$23.$blk(); } if (_r$23 && _r$23.$blk !== undefined) { break s; }
-				_r$23;
+				_r$27 = re.FindStringIndex($substring(str, s)); /* */ $s = 54; case 54: if($c) { $c = false; _r$27 = _r$27.$blk(); } if (_r$27 && _r$27.$blk !== undefined) { break s; }
+				loc = _r$27;
+				/* continue; */ $s = 8; continue;
+			/* } */ case 52:
+			/* */ if ($substring(str, s, e) === "~~") { $s = 55; continue; }
+			/* */ $s = 56; continue;
+			/* if ($substring(str, s, e) === "~~") { */ case 55:
+				_r$28 = FormatChar($clone(env$1, env.Environment), stream, instance.NewCharacter(126)); /* */ $s = 57; case 57: if($c) { $c = false; _r$28 = _r$28.$blk(); } if (_r$28 && _r$28.$blk !== undefined) { break s; }
+				_tuple$11 = _r$28;
+				err$10 = _tuple$11[1];
+				if (!($interfaceIsEqual(err$10, $ifaceNil))) {
+					$s = -1; return [$ifaceNil, err$10];
+				}
 				s = e;
-				_r$24 = re.FindStringIndex($substring(str, s)); /* */ $s = 49; case 49: if($c) { $c = false; _r$24 = _r$24.$blk(); } if (_r$24 && _r$24.$blk !== undefined) { break s; }
-				loc = _r$24;
-				/* continue; */ $s = 3; continue;
-			/* } */ case 47:
-			/* */ if (str.charCodeAt((str.length - 1 >> 0)) === 82) { $s = 50; continue; }
-			/* */ $s = 51; continue;
-			/* if (str.charCodeAt((str.length - 1 >> 0)) === 82) { */ case 50:
-				_tuple = strconv.Atoi($substring(str, 1, (str.length - 1 >> 0)));
-				n = _tuple[0];
-				_r$25 = FormatInteger($clone(env$1, env.Environment), stream, ((c < 0 || c >= formatArguments.$length) ? ($throwRuntimeError("index out of range"), undefined) : formatArguments.$array[formatArguments.$offset + c]), instance.NewInteger(n)); /* */ $s = 52; case 52: if($c) { $c = false; _r$25 = _r$25.$blk(); } if (_r$25 && _r$25.$blk !== undefined) { break s; }
-				_r$25;
+				_r$29 = re.FindStringIndex($substring(str, s)); /* */ $s = 58; case 58: if($c) { $c = false; _r$29 = _r$29.$blk(); } if (_r$29 && _r$29.$blk !== undefined) { break s; }
+				loc = _r$29;
+				/* continue; */ $s = 8; continue;
+			/* } */ case 56:
+			/* */ if (str.charCodeAt((str.length - 1 >> 0)) === 82) { $s = 59; continue; }
+			/* */ $s = 60; continue;
+			/* if (str.charCodeAt((str.length - 1 >> 0)) === 82) { */ case 59:
+				_tuple$12 = strconv.Atoi($substring(str, 1, (str.length - 1 >> 0)));
+				n = _tuple$12[0];
+				_r$30 = FormatInteger($clone(env$1, env.Environment), stream, ((c < 0 || c >= formatArguments.$length) ? ($throwRuntimeError("index out of range"), undefined) : formatArguments.$array[formatArguments.$offset + c]), instance.NewInteger(n)); /* */ $s = 61; case 61: if($c) { $c = false; _r$30 = _r$30.$blk(); } if (_r$30 && _r$30.$blk !== undefined) { break s; }
+				_tuple$13 = _r$30;
+				err$11 = _tuple$13[1];
+				if (!($interfaceIsEqual(err$11, $ifaceNil))) {
+					$s = -1; return [$ifaceNil, err$11];
+				}
 				c = c + (1) >> 0;
 				s = e;
-				_r$26 = re.FindStringIndex($substring(str, s)); /* */ $s = 53; case 53: if($c) { $c = false; _r$26 = _r$26.$blk(); } if (_r$26 && _r$26.$blk !== undefined) { break s; }
-				loc = _r$26;
-				/* continue; */ $s = 3; continue;
-			/* } */ case 51:
-			/* */ if (str.charCodeAt((str.length - 1 >> 0)) === 84) { $s = 54; continue; }
-			/* */ $s = 55; continue;
-			/* if (str.charCodeAt((str.length - 1 >> 0)) === 84) { */ case 54:
-				_tuple$1 = strconv.Atoi($substring(str, 1, (str.length - 1 >> 0)));
-				n$1 = _tuple$1[0];
-				_r$27 = FormatTab($clone(env$1, env.Environment), stream, instance.NewInteger(n$1)); /* */ $s = 56; case 56: if($c) { $c = false; _r$27 = _r$27.$blk(); } if (_r$27 && _r$27.$blk !== undefined) { break s; }
-				_r$27;
+				_r$31 = re.FindStringIndex($substring(str, s)); /* */ $s = 62; case 62: if($c) { $c = false; _r$31 = _r$31.$blk(); } if (_r$31 && _r$31.$blk !== undefined) { break s; }
+				loc = _r$31;
+				/* continue; */ $s = 8; continue;
+			/* } */ case 60:
+			/* */ if (str.charCodeAt((str.length - 1 >> 0)) === 84) { $s = 63; continue; }
+			/* */ $s = 64; continue;
+			/* if (str.charCodeAt((str.length - 1 >> 0)) === 84) { */ case 63:
+				_tuple$14 = strconv.Atoi($substring(str, 1, (str.length - 1 >> 0)));
+				n$1 = _tuple$14[0];
+				_r$32 = FormatTab($clone(env$1, env.Environment), stream, instance.NewInteger(n$1)); /* */ $s = 65; case 65: if($c) { $c = false; _r$32 = _r$32.$blk(); } if (_r$32 && _r$32.$blk !== undefined) { break s; }
+				_tuple$15 = _r$32;
+				err$12 = _tuple$15[1];
+				if (!($interfaceIsEqual(err$12, $ifaceNil))) {
+					$s = -1; return [$ifaceNil, err$12];
+				}
 				s = e;
-				_r$28 = re.FindStringIndex($substring(str, s)); /* */ $s = 57; case 57: if($c) { $c = false; _r$28 = _r$28.$blk(); } if (_r$28 && _r$28.$blk !== undefined) { break s; }
-				loc = _r$28;
-				/* continue; */ $s = 3; continue;
-			/* } */ case 55:
-			_r$29 = re.FindStringIndex($substring(str, s)); /* */ $s = 58; case 58: if($c) { $c = false; _r$29 = _r$29.$blk(); } if (_r$29 && _r$29.$blk !== undefined) { break s; }
-			loc = _r$29;
-		/* } */ $s = 3; continue; case 4:
-		_r$30 = fmt.Print(new sliceType$3([new $String($substring(str, s))])); /* */ $s = 59; case 59: if($c) { $c = false; _r$30 = _r$30.$blk(); } if (_r$30 && _r$30.$blk !== undefined) { break s; }
-		_r$30;
+				_r$33 = re.FindStringIndex($substring(str, s)); /* */ $s = 66; case 66: if($c) { $c = false; _r$33 = _r$33.$blk(); } if (_r$33 && _r$33.$blk !== undefined) { break s; }
+				loc = _r$33;
+				/* continue; */ $s = 8; continue;
+			/* } */ case 64:
+			_r$34 = re.FindStringIndex($substring(str, s)); /* */ $s = 67; case 67: if($c) { $c = false; _r$34 = _r$34.$blk(); } if (_r$34 && _r$34.$blk !== undefined) { break s; }
+			loc = _r$34;
+		/* } */ $s = 8; continue; case 9:
+		_r$35 = fmt.Print(new sliceType$3([new $String($substring(str, s))])); /* */ $s = 68; case 68: if($c) { $c = false; _r$35 = _r$35.$blk(); } if (_r$35 && _r$35.$blk !== undefined) { break s; }
+		_r$35;
 		$s = -1; return [$pkg.Nil, $ifaceNil];
-		/* */ } return; } if ($f === undefined) { $f = { $blk: Format }; } $f.$ptr = $ptr; $f._r = _r; $f._r$1 = _r$1; $f._r$10 = _r$10; $f._r$11 = _r$11; $f._r$12 = _r$12; $f._r$13 = _r$13; $f._r$14 = _r$14; $f._r$15 = _r$15; $f._r$16 = _r$16; $f._r$17 = _r$17; $f._r$18 = _r$18; $f._r$19 = _r$19; $f._r$2 = _r$2; $f._r$20 = _r$20; $f._r$21 = _r$21; $f._r$22 = _r$22; $f._r$23 = _r$23; $f._r$24 = _r$24; $f._r$25 = _r$25; $f._r$26 = _r$26; $f._r$27 = _r$27; $f._r$28 = _r$28; $f._r$29 = _r$29; $f._r$3 = _r$3; $f._r$30 = _r$30; $f._r$4 = _r$4; $f._r$5 = _r$5; $f._r$6 = _r$6; $f._r$7 = _r$7; $f._r$8 = _r$8; $f._r$9 = _r$9; $f._tmp = _tmp; $f._tmp$1 = _tmp$1; $f._tmp$2 = _tmp$2; $f._tuple = _tuple; $f._tuple$1 = _tuple$1; $f.b = b; $f.c = c; $f.e = e; $f.env$1 = env$1; $f.formatArguments = formatArguments; $f.formatString = formatString; $f.loc = loc; $f.n = n; $f.n$1 = n$1; $f.re = re; $f.s = s; $f.str = str; $f.stream = stream; $f.$s = $s; $f.$r = $r; return $f;
+		/* */ } return; } if ($f === undefined) { $f = { $blk: Format }; } $f.$ptr = $ptr; $f._arg = _arg; $f._arg$1 = _arg$1; $f._arg$2 = _arg$2; $f._arg$3 = _arg$3; $f._arg$4 = _arg$4; $f._arg$5 = _arg$5; $f._r = _r; $f._r$1 = _r$1; $f._r$10 = _r$10; $f._r$11 = _r$11; $f._r$12 = _r$12; $f._r$13 = _r$13; $f._r$14 = _r$14; $f._r$15 = _r$15; $f._r$16 = _r$16; $f._r$17 = _r$17; $f._r$18 = _r$18; $f._r$19 = _r$19; $f._r$2 = _r$2; $f._r$20 = _r$20; $f._r$21 = _r$21; $f._r$22 = _r$22; $f._r$23 = _r$23; $f._r$24 = _r$24; $f._r$25 = _r$25; $f._r$26 = _r$26; $f._r$27 = _r$27; $f._r$28 = _r$28; $f._r$29 = _r$29; $f._r$3 = _r$3; $f._r$30 = _r$30; $f._r$31 = _r$31; $f._r$32 = _r$32; $f._r$33 = _r$33; $f._r$34 = _r$34; $f._r$35 = _r$35; $f._r$4 = _r$4; $f._r$5 = _r$5; $f._r$6 = _r$6; $f._r$7 = _r$7; $f._r$8 = _r$8; $f._r$9 = _r$9; $f._tmp = _tmp; $f._tmp$1 = _tmp$1; $f._tmp$2 = _tmp$2; $f._tuple = _tuple; $f._tuple$1 = _tuple$1; $f._tuple$10 = _tuple$10; $f._tuple$11 = _tuple$11; $f._tuple$12 = _tuple$12; $f._tuple$13 = _tuple$13; $f._tuple$14 = _tuple$14; $f._tuple$15 = _tuple$15; $f._tuple$2 = _tuple$2; $f._tuple$3 = _tuple$3; $f._tuple$4 = _tuple$4; $f._tuple$5 = _tuple$5; $f._tuple$6 = _tuple$6; $f._tuple$7 = _tuple$7; $f._tuple$8 = _tuple$8; $f._tuple$9 = _tuple$9; $f.b = b; $f.c = c; $f.e = e; $f.env$1 = env$1; $f.err = err; $f.err$1 = err$1; $f.err$10 = err$10; $f.err$11 = err$11; $f.err$12 = err$12; $f.err$2 = err$2; $f.err$3 = err$3; $f.err$4 = err$4; $f.err$5 = err$5; $f.err$6 = err$6; $f.err$7 = err$7; $f.err$8 = err$8; $f.err$9 = err$9; $f.formatArguments = formatArguments; $f.formatString = formatString; $f.loc = loc; $f.n = n; $f.n$1 = n$1; $f.ok = ok; $f.re = re; $f.s = s; $f.str = str; $f.stream = stream; $f.$s = $s; $f.$r = $r; return $f;
 	};
 	$pkg.Format = Format;
 	Functionp = function(e, fun) {
@@ -39923,10 +39998,10 @@ $packages["main"] = (function() {
 		runtime.TopLevel.Function.Set(instance.NewSymbol("READ"), $ifaceNil);
 		runtime.TopLevel.Function.Set(instance.NewSymbol("READ-LINE"), $ifaceNil);
 		runtime.TopLevel.Function.Set(instance.NewSymbol("READ-CHAR"), $ifaceNil);
-		_r = fmt.Fprintf(dom[0], "Welcome to Iris (%v). Iris is an ISLisp implementation on Go.\nThis REPL works with gopherjs and has no methods to get input.\n\nCopyright &copy; 2017 TANIGUCHI Masaya All Rights Reserved.", new sliceType([new $String("b631fce")])); /* */ $s = 1; case 1: if($c) { $c = false; _r = _r.$blk(); } if (_r && _r.$blk !== undefined) { break s; }
+		_r = fmt.Fprintf(dom[0], "Welcome to Iris (%v). Iris is an ISLisp implementation on Go.\nThis REPL works with gopherjs and has no methods to get input.\n\nCopyright &copy; 2017 TANIGUCHI Masaya All Rights Reserved.", new sliceType([new $String("c8aadbe")])); /* */ $s = 1; case 1: if($c) { $c = false; _r = _r.$blk(); } if (_r && _r.$blk !== undefined) { break s; }
 		_r;
 		_r$1 = jQuery(new sliceType([new $String("#version")])); /* */ $s = 2; case 2: if($c) { $c = false; _r$1 = _r$1.$blk(); } if (_r$1 && _r$1.$blk !== undefined) { break s; }
-		_r$2 = $clone(_r$1, jquery.JQuery).SetHtml(new $String("b631fce")); /* */ $s = 3; case 3: if($c) { $c = false; _r$2 = _r$2.$blk(); } if (_r$2 && _r$2.$blk !== undefined) { break s; }
+		_r$2 = $clone(_r$1, jquery.JQuery).SetHtml(new $String("c8aadbe")); /* */ $s = 3; case 3: if($c) { $c = false; _r$2 = _r$2.$blk(); } if (_r$2 && _r$2.$blk !== undefined) { break s; }
 		_r$2;
 		_r$3 = jQuery(new sliceType([new $String("body")])); /* */ $s = 4; case 4: if($c) { $c = false; _r$3 = _r$3.$blk(); } if (_r$3 && _r$3.$blk !== undefined) { break s; }
 		_r$4 = $clone(_r$3, jquery.JQuery).On(new sliceType([new $String("keydown"), new funcType((function(dom) { return function $b(e) {
