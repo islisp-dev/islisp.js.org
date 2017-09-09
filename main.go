@@ -15,7 +15,7 @@ import (
 	"github.com/ta2gch/jquery"
 )
 
-const version = "48fdd2a"
+const version = "b631fce"
 
 type Dom struct{}
 
