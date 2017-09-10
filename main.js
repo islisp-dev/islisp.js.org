@@ -48886,10 +48886,10 @@ $packages["main"] = (function() {
 		runtime.TopLevel.Function.Set(instance.NewSymbol("READ"), $ifaceNil);
 		runtime.TopLevel.Function.Set(instance.NewSymbol("READ-LINE"), $ifaceNil);
 		runtime.TopLevel.Function.Set(instance.NewSymbol("READ-CHAR"), $ifaceNil);
-		_r = fmt.Fprintf(dom[0], "Welcome to Iris (%v). Iris is an ISLisp implementation on Go.\nThis REPL works with gopherjs and has no methods to get input.\n\nCopyright &copy; 2017 TANIGUCHI Masaya All Rights Reserved.", new sliceType([new $String("b24d953")])); /* */ $s = 1; case 1: if($c) { $c = false; _r = _r.$blk(); } if (_r && _r.$blk !== undefined) { break s; }
+		_r = fmt.Fprintf(dom[0], "Welcome to Iris (%v). Iris is an ISLisp implementation on Go.\nThis REPL works with gopherjs and has no methods to get input.\n\nCopyright &copy; 2017 TANIGUCHI Masaya All Rights Reserved.", new sliceType([new $String("99545bf")])); /* */ $s = 1; case 1: if($c) { $c = false; _r = _r.$blk(); } if (_r && _r.$blk !== undefined) { break s; }
 		_r;
 		_r$1 = jQuery(new sliceType([new $String("#version")])); /* */ $s = 2; case 2: if($c) { $c = false; _r$1 = _r$1.$blk(); } if (_r$1 && _r$1.$blk !== undefined) { break s; }
-		_r$2 = $clone(_r$1, jquery.JQuery).SetHtml(new $String("b24d953")); /* */ $s = 3; case 3: if($c) { $c = false; _r$2 = _r$2.$blk(); } if (_r$2 && _r$2.$blk !== undefined) { break s; }
+		_r$2 = $clone(_r$1, jquery.JQuery).SetHtml(new $String("99545bf")); /* */ $s = 3; case 3: if($c) { $c = false; _r$2 = _r$2.$blk(); } if (_r$2 && _r$2.$blk !== undefined) { break s; }
 		_r$2;
 		_r$3 = jQuery(new sliceType([new $String("body")])); /* */ $s = 4; case 4: if($c) { $c = false; _r$3 = _r$3.$blk(); } if (_r$3 && _r$3.$blk !== undefined) { break s; }
 		_r$4 = $clone(_r$3, jquery.JQuery).On(new sliceType([new $String("keydown"), new funcType((function(dom) { return function $b(e) {
