@@ -28,7 +28,6 @@ func (dom Dom) Read(p []byte) (n int, err error) {
 	input := jQuery("#input").Html()
 	jQuery("#input").SetHtml("")
 	copy(p, jQuery(`<span>`+input+`</span>`).Text())
-	println(input)
 	if !strings.Contains(input, "<br>") {
 		dom.Write([]byte(input + "<br>"))
 	} else {
