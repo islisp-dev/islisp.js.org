@@ -7,8 +7,6 @@ package main
 import (
 	"fmt"
 	"html"
-	"io"
-	"strings"
 
 	"github.com/ta2gch/iris/runtime"
 	"github.com/ta2gch/iris/runtime/ilos/instance"
@@ -16,6 +14,8 @@ import (
 )
 
 const version = "97677d0"
+
+var stream = make(chan string)
 
 type Dom struct{}
 
@@ -25,50 +25,52 @@ func (Dom) Write(p []byte) (n int, err error) {
 }
 
 func (dom Dom) Read(p []byte) (n int, err error) {
-	input := jQuery("#input").Html()
-	jQuery("#input").SetHtml("")
-	copy(p, jQuery(`<span>`+input+`</span>`).Text())
-	if !strings.Contains(input, "<br>") {
-		dom.Write([]byte(input + "<br>"))
-	} else {
-		dom.Write([]byte(input))
-	}
-	if len(p) == 0 {
-		return 0, io.EOF
-	}
+	s := <-stream
+	fmt.Fprint(dom, s, "\n")
+	copy(p, []byte(s))
 	return len(p), nil
 }
 
 var jQuery = jquery.NewJQuery
 
 func main() {
+	prompt := true
 	dom := new(Dom)
 	runtime.TopLevel.StandardInput = instance.NewStream(dom, nil)
 	runtime.TopLevel.StandardOutput = instance.NewStream(nil, dom)
 	runtime.TopLevel.ErrorOutput = instance.NewStream(nil, dom)
-	runtime.TopLevel.Function.Set(instance.NewSymbol("READ"), nil)
-	runtime.TopLevel.Function.Set(instance.NewSymbol("READ-LINE"), nil)
-	runtime.TopLevel.Function.Set(instance.NewSymbol("READ-CHAR"), nil)
 	fmt.Fprintf(dom, `Welcome to Iris (%v). Iris is an ISLisp implementation on Go.
-This REPL works with gopherjs and has no methods to get input.
+This REPL works on JavaScript with gopherjs.
 
 Copyright &copy; 2017 TANIGUCHI Masaya All Rights Reserved.`, version)
 	jQuery("#version").SetHtml(version)
-	jQuery("body").On(jquery.KEYDOWN, func(e jquery.Event) {
+	jQuery("#input").On(jquery.KEYDOWN, func(e jquery.Event) {
 		if !e.ShiftKey && e.KeyCode == 13 {
-			fmt.Fprint(dom, "\n> ")
-			exp, err := runtime.Read(runtime.TopLevel)
-			if err != nil {
-				fmt.Fprint(dom, html.EscapeString(err.String()))
-				return
+			if prompt {
+				fmt.Fprint(dom, "\n> ")
 			}
-			ret, err := runtime.Eval(runtime.TopLevel, exp)
-			if err != nil {
-				fmt.Fprint(dom, html.EscapeString(err.String()))
-				return
-			}
-			fmt.Fprint(dom, html.EscapeString(ret.String()))
-			return
+			go func() {
+				input := jQuery("#input").Html()
+				jQuery("#input").SetHtml("")
+				stream <- jQuery(`<span>` + input + `</span>`).Text()
+			}()
 		}
 	})
+	for {
+		prompt = true
+		jQuery("#prompt").Show()
+		exp, err := runtime.Read(runtime.TopLevel)
+		if err != nil {
+			fmt.Fprint(dom, html.EscapeString(err.String()))
+			continue
+		}
+		prompt = false
+		jQuery("#prompt").Hide()
+		ret, err := runtime.Eval(runtime.TopLevel, exp)
+		if err != nil {
+			fmt.Fprint(dom, html.EscapeString(err.String()))
+			continue
+		}
+		fmt.Fprint(dom, html.EscapeString(ret.String()))
+	}
 }

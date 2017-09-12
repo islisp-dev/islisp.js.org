@@ -31993,7 +31993,7 @@ $packages["testing"] = (function() {
 	return $pkg;
 })();
 $packages["github.com/ta2gch/iris/runtime"] = (function() {
-	var $pkg = {}, $init, bufio, bytes, fmt, parser, tokenizer, env, ilos, class$1, instance, math, os, reflect, regexp, runtime, strconv, strings, testing, funcType, sliceType, ptrType, sliceType$1, sliceType$2, sliceType$3, ptrType$1, ptrType$2, funcType$1, sliceType$4, sliceType$5, funcType$2, funcType$3, funcType$4, funcType$5, funcType$6, funcType$7, funcType$8, funcType$9, funcType$10, ptrType$3, sliceType$6, arrayType, ptrType$4, unique, BasicArrayP, BasicArrayStarP, GeneralArrayStarP, CreateArray, createGeneralVector, createGeneralArrayStar, Aref, Garef, SetAref, SetGaref, ArrayDimensions, Characterp, CharEqual, CharNotEqual, CharGreaterThan, CharGreaterThanOrEqual, CharLessThan, CharLessThanOrEqual, ClassOf, Instancep, Subclassp, Class, checkSuperClass, Defclass, Create, InitializeObject, Defmethod, Defgeneric, SignalCondition, Cerror, Error, ReportCondition, ConditionContinuable, ContinueCondition, WithHandler, If, Cond, Case, CaseUsing, Consp, Cons, Car, Cdr, SetCar, SetCdr, Quote, Defconstant, Defglobal, Defdynamic, Defun, Dynamic, SetDynamic, DynamicLet, isComparable, Eq, Eql, Equal, evalArguments, evalLambda, evalSpecial, evalMacro, evalFunction, evalCons, evalVariable, Eval, Floatp, Float, Floor, Ceiling, Truncate, Round, FormatObject, FormatChar, FormatFloat, FormatInteger, FormatTab, FormatFreshLine, Format, Functionp, Function, Lambda, Labels, Flet, Apply, Funcall, convInt, Integerp, Div, Mod, Gcd, Lcm, Isqrt, While, For, Listp, CreateList, List, Reverse, Nreverse, Append, Member, Mapcar, Mapc, Mapcan, Maplist, Mapl, Mapcon, Assoc, Null, Not, And, Or, Defmacro, Quasiquote, expand, checkLambdaList, newNamedFunction, Block, ReturnFrom, Catch, Throw, Tagbody, Go, UnwindProtect, Numberp, ParseNumber, NumberEqual, NumberGreaterThan, NumberGreaterThanOrEqual, NumberLessThan, NumberLessThanOrEqual, Add, Multiply, Substruct, Quotient, Max, Min, Abs, Exp, Log, Expt, Sqrt, Sin, Cos, Tan, Atan, Atan2, Sinh, Cosh, Tanh, Atanh, TopLevelHander, defspecial2, defun2, defglobal, init, Length, Elt, SetElt, Subseq, MapInto, Progn, Streamp, OpenStreamP, InputStreamP, OutputStreamP, StandardInput, StandardOutput, ErrorOutput, WithStandardInput, WithStandardOutput, WithErrorOutput, OpenInputFile, OpenOutputFile, OpenIoFile, WithOpenInputFile, WithOpenOutputFile, Close, CreateStringInputStream, CreateStringOutputStream, GetOutputStreamString, Read, ReadChar, ReadLine, StreamReadyP, Stringp, CreateString, StringEqual, StringNotEqual, StringGreaterThan, StringGreaterThanOrEqual, StringLessThan, StringLessThanOrEqual, CharIndex, StringIndex, StringAppend, Symbolp, Property, SetProperty, RemoveProperty, Gensym, convFloat64, ensure, uniqueInt, func2symbol, Setq, Setf, Let, LetStar, BasicVectorP, GeneralVectorP, CreateVector, Vector;
+	var $pkg = {}, $init, bufio, bytes, fmt, parser, tokenizer, env, ilos, class$1, instance, math, os, reflect, regexp, runtime, strconv, strings, testing, funcType, sliceType, ptrType, sliceType$1, sliceType$2, ptrType$1, sliceType$3, ptrType$2, funcType$1, sliceType$4, sliceType$5, funcType$2, funcType$3, funcType$4, funcType$5, funcType$6, funcType$7, funcType$8, funcType$9, funcType$10, ptrType$3, sliceType$6, arrayType, ptrType$4, unique, BasicArrayP, BasicArrayStarP, GeneralArrayStarP, CreateArray, createGeneralVector, createGeneralArrayStar, Aref, Garef, SetAref, SetGaref, ArrayDimensions, Characterp, CharEqual, CharNotEqual, CharGreaterThan, CharGreaterThanOrEqual, CharLessThan, CharLessThanOrEqual, ClassOf, Instancep, Subclassp, Class, checkSuperClass, Defclass, Create, InitializeObject, Defmethod, Defgeneric, SignalCondition, Cerror, Error, ReportCondition, ConditionContinuable, ContinueCondition, WithHandler, If, Cond, Case, CaseUsing, Consp, Cons, Car, Cdr, SetCar, SetCdr, Quote, Defconstant, Defglobal, Defdynamic, Defun, Dynamic, SetDynamic, DynamicLet, isComparable, Eq, Eql, Equal, evalArguments, evalLambda, evalSpecial, evalMacro, evalFunction, evalCons, evalVariable, Eval, Floatp, Float, Floor, Ceiling, Truncate, Round, FormatObject, FormatChar, FormatFloat, FormatInteger, FormatTab, FormatFreshLine, Format, Functionp, Function, Lambda, Labels, Flet, Apply, Funcall, convInt, Integerp, Div, Mod, Gcd, Lcm, Isqrt, While, For, Listp, CreateList, List, Reverse, Nreverse, Append, Member, Mapcar, Mapc, Mapcan, Maplist, Mapl, Mapcon, Assoc, Null, Not, And, Or, Defmacro, Quasiquote, expand, checkLambdaList, newNamedFunction, Block, ReturnFrom, Catch, Throw, Tagbody, Go, UnwindProtect, Numberp, ParseNumber, NumberEqual, NumberGreaterThan, NumberGreaterThanOrEqual, NumberLessThan, NumberLessThanOrEqual, Add, Multiply, Substruct, Quotient, Max, Min, Abs, Exp, Log, Expt, Sqrt, Sin, Cos, Tan, Atan, Atan2, Sinh, Cosh, Tanh, Atanh, TopLevelHander, defspecial2, defun2, defglobal, init, Length, Elt, SetElt, Subseq, MapInto, Progn, Streamp, OpenStreamP, InputStreamP, OutputStreamP, StandardInput, StandardOutput, ErrorOutput, WithStandardInput, WithStandardOutput, WithErrorOutput, OpenInputFile, OpenOutputFile, OpenIoFile, WithOpenInputFile, WithOpenOutputFile, Close, CreateStringInputStream, CreateStringOutputStream, GetOutputStreamString, Read, ReadChar, ReadLine, StreamReadyP, Stringp, CreateString, StringEqual, StringNotEqual, StringGreaterThan, StringGreaterThanOrEqual, StringLessThan, StringLessThanOrEqual, CharIndex, StringIndex, StringAppend, Symbolp, Property, SetProperty, RemoveProperty, Gensym, convFloat64, ensure, uniqueInt, func2symbol, Setq, Setf, Let, LetStar, BasicVectorP, GeneralVectorP, CreateVector, Vector;
 	bufio = $packages["bufio"];
 	bytes = $packages["bytes"];
 	fmt = $packages["fmt"];
@@ -32015,9 +32015,9 @@ $packages["github.com/ta2gch/iris/runtime"] = (function() {
 	sliceType = $sliceType(ilos.Instance);
 	ptrType = $ptrType(instance.GeneralArrayStar);
 	sliceType$1 = $sliceType(ptrType);
-	sliceType$2 = $sliceType($emptyInterface);
-	sliceType$3 = $sliceType(ilos.Class);
+	sliceType$2 = $sliceType(ilos.Class);
 	ptrType$1 = $ptrType(instance.Cons);
+	sliceType$3 = $sliceType($emptyInterface);
 	ptrType$2 = $ptrType(instance.GenericFunction);
 	funcType$1 = $funcType([env.Environment, ilos.Instance, ilos.Instance], [ilos.Instance, ilos.Instance], false);
 	sliceType$4 = $sliceType($Int32);
@@ -32612,10 +32612,8 @@ $packages["github.com/ta2gch/iris/runtime"] = (function() {
 	};
 	$pkg.Subclassp = Subclassp;
 	Class = function(e, className) {
-		var $ptr, _arg, _arg$1, _arg$2, _r, _r$1, _r$2, _tuple, _tuple$1, className, e, err, ok, v, $s, $r;
-		/* */ $s = 0; var $f, $c = false; if (this !== undefined && this.$blk !== undefined) { $f = this; $c = true; $ptr = $f.$ptr; _arg = $f._arg; _arg$1 = $f._arg$1; _arg$2 = $f._arg$2; _r = $f._r; _r$1 = $f._r$1; _r$2 = $f._r$2; _tuple = $f._tuple; _tuple$1 = $f._tuple$1; className = $f.className; e = $f.e; err = $f.err; ok = $f.ok; v = $f.v; $s = $f.$s; $r = $f.$r; } s: while (true) { switch ($s) { case 0:
-		_r = fmt.Print(new sliceType$2([$subslice(e.Class, 0, 1)])); /* */ $s = 1; case 1: if($c) { $c = false; _r = _r.$blk(); } if (_r && _r.$blk !== undefined) { break s; }
-		_r;
+		var $ptr, _arg, _arg$1, _arg$2, _r, _r$1, _tuple, _tuple$1, className, e, err, ok, v, $s, $r;
+		/* */ $s = 0; var $f, $c = false; if (this !== undefined && this.$blk !== undefined) { $f = this; $c = true; $ptr = $f.$ptr; _arg = $f._arg; _arg$1 = $f._arg$1; _arg$2 = $f._arg$2; _r = $f._r; _r$1 = $f._r$1; _tuple = $f._tuple; _tuple$1 = $f._tuple$1; className = $f.className; e = $f.e; err = $f.err; ok = $f.ok; v = $f.v; $s = $f.$s; $r = $f.$r; } s: while (true) { switch ($s) { case 0:
 		_tuple = $subslice(e.Class, 0, 1).Get(className);
 		v = _tuple[0];
 		ok = _tuple[1];
@@ -32623,14 +32621,14 @@ $packages["github.com/ta2gch/iris/runtime"] = (function() {
 			$s = -1; return [$assertType(v, ilos.Class), $ifaceNil];
 		}
 		_arg = $clone(e, env.Environment);
-		_r$1 = instance.NewUndefinedClass($clone(e, env.Environment), className); /* */ $s = 2; case 2: if($c) { $c = false; _r$1 = _r$1.$blk(); } if (_r$1 && _r$1.$blk !== undefined) { break s; }
-		_arg$1 = _r$1;
+		_r = instance.NewUndefinedClass($clone(e, env.Environment), className); /* */ $s = 1; case 1: if($c) { $c = false; _r = _r.$blk(); } if (_r && _r.$blk !== undefined) { break s; }
+		_arg$1 = _r;
 		_arg$2 = $pkg.Nil;
-		_r$2 = SignalCondition(_arg, _arg$1, _arg$2); /* */ $s = 3; case 3: if($c) { $c = false; _r$2 = _r$2.$blk(); } if (_r$2 && _r$2.$blk !== undefined) { break s; }
-		_tuple$1 = _r$2;
+		_r$1 = SignalCondition(_arg, _arg$1, _arg$2); /* */ $s = 2; case 2: if($c) { $c = false; _r$1 = _r$1.$blk(); } if (_r$1 && _r$1.$blk !== undefined) { break s; }
+		_tuple$1 = _r$1;
 		err = _tuple$1[1];
 		$s = -1; return [$ifaceNil, err];
-		/* */ } return; } if ($f === undefined) { $f = { $blk: Class }; } $f.$ptr = $ptr; $f._arg = _arg; $f._arg$1 = _arg$1; $f._arg$2 = _arg$2; $f._r = _r; $f._r$1 = _r$1; $f._r$2 = _r$2; $f._tuple = _tuple; $f._tuple$1 = _tuple$1; $f.className = className; $f.e = e; $f.err = err; $f.ok = ok; $f.v = v; $f.$s = $s; $f.$r = $r; return $f;
+		/* */ } return; } if ($f === undefined) { $f = { $blk: Class }; } $f.$ptr = $ptr; $f._arg = _arg; $f._arg$1 = _arg$1; $f._arg$2 = _arg$2; $f._r = _r; $f._r$1 = _r$1; $f._tuple = _tuple; $f._tuple$1 = _tuple$1; $f.className = className; $f.e = e; $f.err = err; $f.ok = ok; $f.v = v; $f.$s = $s; $f.$r = $r; return $f;
 	};
 	$pkg.Class = Class;
 	checkSuperClass = function(a, b) {
@@ -32699,7 +32697,7 @@ $packages["github.com/ta2gch/iris/runtime"] = (function() {
 		if (!($interfaceIsEqual(err$1, $ifaceNil))) {
 			$s = -1; return [$ifaceNil, err$1];
 		}
-		supers = new sliceType$3([class$1.StandardObject]);
+		supers = new sliceType$2([class$1.StandardObject]);
 		_r$2 = $assertType(scNames, instance.List).Slice(); /* */ $s = 3; case 3: if($c) { $c = false; _r$2 = _r$2.$blk(); } if (_r$2 && _r$2.$blk !== undefined) { break s; }
 		_ref = _r$2;
 		_i = 0;
@@ -32862,7 +32860,7 @@ $packages["github.com/ta2gch/iris/runtime"] = (function() {
 						$s = 52; continue;
 					/* } else if ($interfaceIsEqual(_3, (instance.NewSymbol(":ACCESSOR")))) { */ case 50:
 						readerFunctionName = (x$4 = i$1 + 1 >> 0, ((x$4 < 0 || x$4 >= slotOpts$1.$length) ? ($throwRuntimeError("index out of range"), undefined) : slotOpts$1.$array[slotOpts$1.$offset + x$4]));
-						_r$18 = fmt.Sprintf("(SETF %v)", new sliceType$2([(x$5 = i$1 + 1 >> 0, ((x$5 < 0 || x$5 >= slotOpts$1.$length) ? ($throwRuntimeError("index out of range"), undefined) : slotOpts$1.$array[slotOpts$1.$offset + x$5]))])); /* */ $s = 53; case 53: if($c) { $c = false; _r$18 = _r$18.$blk(); } if (_r$18 && _r$18.$blk !== undefined) { break s; }
+						_r$18 = fmt.Sprintf("(SETF %v)", new sliceType$3([(x$5 = i$1 + 1 >> 0, ((x$5 < 0 || x$5 >= slotOpts$1.$length) ? ($throwRuntimeError("index out of range"), undefined) : slotOpts$1.$array[slotOpts$1.$offset + x$5]))])); /* */ $s = 53; case 53: if($c) { $c = false; _r$18 = _r$18.$blk(); } if (_r$18 && _r$18.$blk !== undefined) { break s; }
 						_r$19 = instance.NewSymbol(_r$18); /* */ $s = 54; case 54: if($c) { $c = false; _r$19 = _r$19.$blk(); } if (_r$19 && _r$19.$blk !== undefined) { break s; }
 						writerFunctionName = _r$19;
 						$s = 52; continue;
@@ -32895,7 +32893,7 @@ $packages["github.com/ta2gch/iris/runtime"] = (function() {
 				/* } */ case 58:
 				_tuple$6 = e.Function.Get(readerFunctionName);
 				fun = _tuple$6[0];
-				_r$22 = $assertType(fun, ptrType$2).AddMethod($ifaceNil, lambdaList, new sliceType$3([classObject[0]]), instance.NewFunction(readerFunctionName, new funcType((function(classObject, slotName$2) { return function $b(e$1, object) {
+				_r$22 = $assertType(fun, ptrType$2).AddMethod($ifaceNil, lambdaList, new sliceType$2([classObject[0]]), instance.NewFunction(readerFunctionName, new funcType((function(classObject, slotName$2) { return function $b(e$1, object) {
 					var $ptr, _r$22, _tuple$7, e$1, object, ok$1, slot, $s, $r;
 					/* */ $s = 0; var $f, $c = false; if (this !== undefined && this.$blk !== undefined) { $f = this; $c = true; $ptr = $f.$ptr; _r$22 = $f._r$22; _tuple$7 = $f._tuple$7; e$1 = $f.e$1; object = $f.object; ok$1 = $f.ok$1; slot = $f.slot; $s = $f.$s; $r = $f.$r; } s: while (true) { switch ($s) { case 0:
 					_r$22 = $clone($assertType(object, instance.Instance), instance.Instance).GetSlotValue(slotName$2[0], classObject[0]); /* */ $s = 1; case 1: if($c) { $c = false; _r$22 = _r$22.$blk(); } if (_r$22 && _r$22.$blk !== undefined) { break s; }
@@ -32933,7 +32931,7 @@ $packages["github.com/ta2gch/iris/runtime"] = (function() {
 				/* } */ case 66:
 				_tuple$9 = e.Function.Get(writerFunctionName);
 				fun$1 = _tuple$9[0];
-				_r$25 = $assertType(fun$1, ptrType$2).AddMethod($ifaceNil, lambdaList$1, new sliceType$3([(x$7 = class$1.Object, new x$7.constructor.elem(x$7)), classObject[0]]), instance.NewFunction(writerFunctionName, new funcType$1((function(classObject, slotName$2) { return function $b(e$1, obj, object) {
+				_r$25 = $assertType(fun$1, ptrType$2).AddMethod($ifaceNil, lambdaList$1, new sliceType$2([(x$7 = class$1.Object, new x$7.constructor.elem(x$7)), classObject[0]]), instance.NewFunction(writerFunctionName, new funcType$1((function(classObject, slotName$2) { return function $b(e$1, obj, object) {
 					var $ptr, _r$25, e$1, obj, object, ok$2, $s, $r;
 					/* */ $s = 0; var $f, $c = false; if (this !== undefined && this.$blk !== undefined) { $f = this; $c = true; $ptr = $f.$ptr; _r$25 = $f._r$25; e$1 = $f.e$1; obj = $f.obj; object = $f.object; ok$2 = $f.ok$2; $s = $f.$s; $r = $f.$r; } s: while (true) { switch ($s) { case 0:
 					_r$25 = $clone($assertType(object, instance.Instance), instance.Instance).SetSlotValue(obj, slotName$2[0], classObject[0]); /* */ $s = 1; case 1: if($c) { $c = false; _r$25 = _r$25.$blk(); } if (_r$25 && _r$25.$blk !== undefined) { break s; }
@@ -32969,7 +32967,7 @@ $packages["github.com/ta2gch/iris/runtime"] = (function() {
 				/* } */ case 74:
 				_tuple$12 = e.Function.Get(boundpFunctionName);
 				fun$2 = _tuple$12[0];
-				_r$28 = $assertType(fun$2, ptrType$2).AddMethod($ifaceNil, lambdaList$2, new sliceType$3([classObject[0]]), instance.NewFunction(boundpFunctionName, new funcType((function(classObject, slotName$2) { return function $b(e$1, object) {
+				_r$28 = $assertType(fun$2, ptrType$2).AddMethod($ifaceNil, lambdaList$2, new sliceType$2([classObject[0]]), instance.NewFunction(boundpFunctionName, new funcType((function(classObject, slotName$2) { return function $b(e$1, object) {
 					var $ptr, _r$28, _tuple$13, e$1, object, ok$3, $s, $r;
 					/* */ $s = 0; var $f, $c = false; if (this !== undefined && this.$blk !== undefined) { $f = this; $c = true; $ptr = $f.$ptr; _r$28 = $f._r$28; _tuple$13 = $f._tuple$13; e$1 = $f.e$1; object = $f.object; ok$3 = $f.ok$3; $s = $f.$s; $r = $f.$r; } s: while (true) { switch ($s) { case 0:
 					_r$28 = $clone($assertType(object, instance.Instance), instance.Instance).GetSlotValue(slotName$2[0], classObject[0]); /* */ $s = 1; case 1: if($c) { $c = false; _r$28 = _r$28.$blk(); } if (_r$28 && _r$28.$blk !== undefined) { break s; }
@@ -33060,7 +33058,7 @@ $packages["github.com/ta2gch/iris/runtime"] = (function() {
 		if (!($interfaceIsEqual(err, $ifaceNil))) {
 			$s = -1; return [$ifaceNil, err];
 		}
-		classList = new sliceType$3([]);
+		classList = new sliceType$2([]);
 		_r$5 = $assertType((x$1 = i + 1 >> 0, ((x$1 < 0 || x$1 >= arguments$1.$length) ? ($throwRuntimeError("index out of range"), undefined) : arguments$1.$array[arguments$1.$offset + x$1])), instance.List).Slice(); /* */ $s = 13; case 13: if($c) { $c = false; _r$5 = _r$5.$blk(); } if (_r$5 && _r$5.$blk !== undefined) { break s; }
 		_ref$1 = _r$5;
 		_i$1 = 0;
@@ -34375,7 +34373,7 @@ $packages["github.com/ta2gch/iris/runtime"] = (function() {
 		/* */ if ($interfaceIsEqual(escapep, $pkg.T)) { $s = 5; continue; }
 		/* */ $s = 6; continue;
 		/* if ($interfaceIsEqual(escapep, $pkg.T)) { */ case 5:
-			_r$2 = fmt.Fprint((x = $assertType(stream, instance.Stream), new x.constructor.elem(x)), new sliceType$2([object])); /* */ $s = 7; case 7: if($c) { $c = false; _r$2 = _r$2.$blk(); } if (_r$2 && _r$2.$blk !== undefined) { break s; }
+			_r$2 = fmt.Fprint((x = $assertType(stream, instance.Stream), new x.constructor.elem(x)), new sliceType$3([object])); /* */ $s = 7; case 7: if($c) { $c = false; _r$2 = _r$2.$blk(); } if (_r$2 && _r$2.$blk !== undefined) { break s; }
 			_r$2;
 			$s = -1; return [$pkg.Nil, $ifaceNil];
 		/* } */ case 6:
@@ -34385,7 +34383,7 @@ $packages["github.com/ta2gch/iris/runtime"] = (function() {
 		/* */ if ($interfaceIsEqual(ok$1, $pkg.T)) { $s = 9; continue; }
 		/* */ $s = 10; continue;
 		/* if ($interfaceIsEqual(ok$1, $pkg.T)) { */ case 9:
-			_r$4 = fmt.Fprint((x$1 = $assertType(stream, instance.Stream), new x$1.constructor.elem(x$1)), new sliceType$2([new $String(($runesToString($assertType(object, instance.String))))])); /* */ $s = 11; case 11: if($c) { $c = false; _r$4 = _r$4.$blk(); } if (_r$4 && _r$4.$blk !== undefined) { break s; }
+			_r$4 = fmt.Fprint((x$1 = $assertType(stream, instance.Stream), new x$1.constructor.elem(x$1)), new sliceType$3([new $String(($runesToString($assertType(object, instance.String))))])); /* */ $s = 11; case 11: if($c) { $c = false; _r$4 = _r$4.$blk(); } if (_r$4 && _r$4.$blk !== undefined) { break s; }
 			_r$4;
 			$s = -1; return [$pkg.Nil, $ifaceNil];
 		/* } */ case 10:
@@ -34395,11 +34393,11 @@ $packages["github.com/ta2gch/iris/runtime"] = (function() {
 		/* */ if ($interfaceIsEqual(ok$2, $pkg.T)) { $s = 13; continue; }
 		/* */ $s = 14; continue;
 		/* if ($interfaceIsEqual(ok$2, $pkg.T)) { */ case 13:
-			_r$6 = fmt.Fprint((x$2 = $assertType(stream, instance.Stream), new x$2.constructor.elem(x$2)), new sliceType$2([new $String(($encodeRune($assertType(object, instance.Character))))])); /* */ $s = 15; case 15: if($c) { $c = false; _r$6 = _r$6.$blk(); } if (_r$6 && _r$6.$blk !== undefined) { break s; }
+			_r$6 = fmt.Fprint((x$2 = $assertType(stream, instance.Stream), new x$2.constructor.elem(x$2)), new sliceType$3([new $String(($encodeRune($assertType(object, instance.Character))))])); /* */ $s = 15; case 15: if($c) { $c = false; _r$6 = _r$6.$blk(); } if (_r$6 && _r$6.$blk !== undefined) { break s; }
 			_r$6;
 			$s = -1; return [$pkg.Nil, $ifaceNil];
 		/* } */ case 14:
-		_r$7 = fmt.Fprint((x$3 = $assertType(stream, instance.Stream), new x$3.constructor.elem(x$3)), new sliceType$2([object])); /* */ $s = 16; case 16: if($c) { $c = false; _r$7 = _r$7.$blk(); } if (_r$7 && _r$7.$blk !== undefined) { break s; }
+		_r$7 = fmt.Fprint((x$3 = $assertType(stream, instance.Stream), new x$3.constructor.elem(x$3)), new sliceType$3([object])); /* */ $s = 16; case 16: if($c) { $c = false; _r$7 = _r$7.$blk(); } if (_r$7 && _r$7.$blk !== undefined) { break s; }
 		_r$7;
 		$s = -1; return [$pkg.Nil, $ifaceNil];
 		/* */ } return; } if ($f === undefined) { $f = { $blk: FormatObject }; } $f.$ptr = $ptr; $f._arg = _arg; $f._arg$1 = _arg$1; $f._arg$2 = _arg$2; $f._r = _r; $f._r$1 = _r$1; $f._r$2 = _r$2; $f._r$3 = _r$3; $f._r$4 = _r$4; $f._r$5 = _r$5; $f._r$6 = _r$6; $f._r$7 = _r$7; $f._tuple = _tuple; $f._tuple$1 = _tuple$1; $f._tuple$2 = _tuple$2; $f.e = e; $f.escapep = escapep; $f.object = object; $f.ok = ok; $f.ok$1 = ok$1; $f.ok$2 = ok$2; $f.stream = stream; $f.x = x; $f.x$1 = x$1; $f.x$2 = x$2; $f.x$3 = x$3; $f.$s = $s; $f.$r = $r; return $f;
@@ -34433,7 +34431,7 @@ $packages["github.com/ta2gch/iris/runtime"] = (function() {
 			_r$4 = SignalCondition(_arg$3, _arg$4, _arg$5); /* */ $s = 9; case 9: if($c) { $c = false; _r$4 = _r$4.$blk(); } if (_r$4 && _r$4.$blk !== undefined) { break s; }
 			$s = -1; return _r$4;
 		/* } */ case 7:
-		_r$5 = fmt.Fprint((x = $assertType(stream, instance.Stream), new x.constructor.elem(x)), new sliceType$2([new $String(($encodeRune($assertType(object, instance.Character))))])); /* */ $s = 10; case 10: if($c) { $c = false; _r$5 = _r$5.$blk(); } if (_r$5 && _r$5.$blk !== undefined) { break s; }
+		_r$5 = fmt.Fprint((x = $assertType(stream, instance.Stream), new x.constructor.elem(x)), new sliceType$3([new $String(($encodeRune($assertType(object, instance.Character))))])); /* */ $s = 10; case 10: if($c) { $c = false; _r$5 = _r$5.$blk(); } if (_r$5 && _r$5.$blk !== undefined) { break s; }
 		_r$5;
 		$s = -1; return [$pkg.Nil, $ifaceNil];
 		/* */ } return; } if ($f === undefined) { $f = { $blk: FormatChar }; } $f.$ptr = $ptr; $f._arg = _arg; $f._arg$1 = _arg$1; $f._arg$2 = _arg$2; $f._arg$3 = _arg$3; $f._arg$4 = _arg$4; $f._arg$5 = _arg$5; $f._r = _r; $f._r$1 = _r$1; $f._r$2 = _r$2; $f._r$3 = _r$3; $f._r$4 = _r$4; $f._r$5 = _r$5; $f._tuple = _tuple; $f._tuple$1 = _tuple$1; $f.e = e; $f.object = object; $f.ok = ok; $f.ok$1 = ok$1; $f.stream = stream; $f.x = x; $f.$s = $s; $f.$r = $r; return $f;
@@ -34467,7 +34465,7 @@ $packages["github.com/ta2gch/iris/runtime"] = (function() {
 			_r$4 = SignalCondition(_arg$3, _arg$4, _arg$5); /* */ $s = 9; case 9: if($c) { $c = false; _r$4 = _r$4.$blk(); } if (_r$4 && _r$4.$blk !== undefined) { break s; }
 			$s = -1; return _r$4;
 		/* } */ case 7:
-		_r$5 = fmt.Fprint((x = $assertType(stream, instance.Stream), new x.constructor.elem(x)), new sliceType$2([new $Float64(($assertType(object, instance.Float)))])); /* */ $s = 10; case 10: if($c) { $c = false; _r$5 = _r$5.$blk(); } if (_r$5 && _r$5.$blk !== undefined) { break s; }
+		_r$5 = fmt.Fprint((x = $assertType(stream, instance.Stream), new x.constructor.elem(x)), new sliceType$3([new $Float64(($assertType(object, instance.Float)))])); /* */ $s = 10; case 10: if($c) { $c = false; _r$5 = _r$5.$blk(); } if (_r$5 && _r$5.$blk !== undefined) { break s; }
 		_r$5;
 		$s = -1; return [$pkg.Nil, $ifaceNil];
 		/* */ } return; } if ($f === undefined) { $f = { $blk: FormatFloat }; } $f.$ptr = $ptr; $f._arg = _arg; $f._arg$1 = _arg$1; $f._arg$2 = _arg$2; $f._arg$3 = _arg$3; $f._arg$4 = _arg$4; $f._arg$5 = _arg$5; $f._r = _r; $f._r$1 = _r$1; $f._r$2 = _r$2; $f._r$3 = _r$3; $f._r$4 = _r$4; $f._r$5 = _r$5; $f._tuple = _tuple; $f._tuple$1 = _tuple$1; $f.e = e; $f.object = object; $f.ok = ok; $f.ok$1 = ok$1; $f.stream = stream; $f.x = x; $f.$s = $s; $f.$r = $r; return $f;
@@ -34516,7 +34514,7 @@ $packages["github.com/ta2gch/iris/runtime"] = (function() {
 		/* } */ case 12:
 		i = (($assertType(object, instance.Integer) >> 0));
 		r = (($assertType(radix, instance.Integer) >> 0));
-		_r$8 = fmt.Fprint((x = $assertType(stream, instance.Stream), new x.constructor.elem(x)), new sliceType$2([new $String(strconv.FormatInt((new $Int64(0, i)), r))])); /* */ $s = 15; case 15: if($c) { $c = false; _r$8 = _r$8.$blk(); } if (_r$8 && _r$8.$blk !== undefined) { break s; }
+		_r$8 = fmt.Fprint((x = $assertType(stream, instance.Stream), new x.constructor.elem(x)), new sliceType$3([new $String(strconv.FormatInt((new $Int64(0, i)), r))])); /* */ $s = 15; case 15: if($c) { $c = false; _r$8 = _r$8.$blk(); } if (_r$8 && _r$8.$blk !== undefined) { break s; }
 		_r$8;
 		$s = -1; return [$pkg.Nil, $ifaceNil];
 		/* */ } return; } if ($f === undefined) { $f = { $blk: FormatInteger }; } $f.$ptr = $ptr; $f._arg = _arg; $f._arg$1 = _arg$1; $f._arg$2 = _arg$2; $f._arg$3 = _arg$3; $f._arg$4 = _arg$4; $f._arg$5 = _arg$5; $f._arg$6 = _arg$6; $f._arg$7 = _arg$7; $f._arg$8 = _arg$8; $f._r = _r; $f._r$1 = _r$1; $f._r$2 = _r$2; $f._r$3 = _r$3; $f._r$4 = _r$4; $f._r$5 = _r$5; $f._r$6 = _r$6; $f._r$7 = _r$7; $f._r$8 = _r$8; $f._tuple = _tuple; $f._tuple$1 = _tuple$1; $f._tuple$2 = _tuple$2; $f.e = e; $f.i = i; $f.object = object; $f.ok = ok; $f.ok$1 = ok$1; $f.ok$2 = ok$2; $f.r = r; $f.radix = radix; $f.stream = stream; $f.x = x; $f.$s = $s; $f.$r = $r; return $f;
@@ -36210,7 +36208,7 @@ $packages["github.com/ta2gch/iris/runtime"] = (function() {
 				/* */ if (!e$1.Variable.Define(key, value$1)) { $s = 13; continue; }
 				/* */ $s = 14; continue;
 				/* if (!e$1.Variable.Define(key, value$1)) { */ case 13:
-					_r$7 = fmt.Print(new sliceType$2([key, value$1])); /* */ $s = 15; case 15: if($c) { $c = false; _r$7 = _r$7.$blk(); } if (_r$7 && _r$7.$blk !== undefined) { break s; }
+					_r$7 = fmt.Print(new sliceType$3([key, value$1])); /* */ $s = 15; case 15: if($c) { $c = false; _r$7 = _r$7.$blk(); } if (_r$7 && _r$7.$blk !== undefined) { break s; }
 					_r$7;
 					_arg$6 = $clone(e$1, env.Environment);
 					_r$8 = instance.NewImmutableBinding($clone(e$1, env.Environment)); /* */ $s = 16; case 16: if($c) { $c = false; _r$8 = _r$8.$blk(); } if (_r$8 && _r$8.$blk !== undefined) { break s; }
@@ -38788,7 +38786,7 @@ $packages["github.com/ta2gch/iris/runtime"] = (function() {
 	Gensym = function(e) {
 		var $ptr, _r, _r$1, e, symbol, $s, $r;
 		/* */ $s = 0; var $f, $c = false; if (this !== undefined && this.$blk !== undefined) { $f = this; $c = true; $ptr = $f.$ptr; _r = $f._r; _r$1 = $f._r$1; e = $f.e; symbol = $f.symbol; $s = $f.$s; $r = $f.$r; } s: while (true) { switch ($s) { case 0:
-		_r = fmt.Sprintf("#:%v", new sliceType$2([new $Int(uniqueInt())])); /* */ $s = 1; case 1: if($c) { $c = false; _r = _r.$blk(); } if (_r && _r.$blk !== undefined) { break s; }
+		_r = fmt.Sprintf("#:%v", new sliceType$3([new $Int(uniqueInt())])); /* */ $s = 1; case 1: if($c) { $c = false; _r = _r.$blk(); } if (_r && _r.$blk !== undefined) { break s; }
 		_r$1 = instance.NewSymbol(_r); /* */ $s = 2; case 2: if($c) { $c = false; _r$1 = _r$1.$blk(); } if (_r$1 && _r$1.$blk !== undefined) { break s; }
 		symbol = _r$1;
 		$s = -1; return [symbol, $ifaceNil];
@@ -38916,7 +38914,7 @@ $packages["github.com/ta2gch/iris/runtime"] = (function() {
 		/* } */ case 2:
 		_r$3 = $assertType(var1, instance.List).Nth(0); /* */ $s = 6; case 6: if($c) { $c = false; _r$3 = _r$3.$blk(); } if (_r$3 && _r$3.$blk !== undefined) { break s; }
 		_arg = _r$3;
-		_r$4 = fmt.Sprintf("(SETF %v)", new sliceType$2([_arg])); /* */ $s = 7; case 7: if($c) { $c = false; _r$4 = _r$4.$blk(); } if (_r$4 && _r$4.$blk !== undefined) { break s; }
+		_r$4 = fmt.Sprintf("(SETF %v)", new sliceType$3([_arg])); /* */ $s = 7; case 7: if($c) { $c = false; _r$4 = _r$4.$blk(); } if (_r$4 && _r$4.$blk !== undefined) { break s; }
 		_r$5 = instance.NewSymbol(_r$4); /* */ $s = 8; case 8: if($c) { $c = false; _r$5 = _r$5.$blk(); } if (_r$5 && _r$5.$blk !== undefined) { break s; }
 		funcSpec = _r$5;
 		_tuple$1 = e.Function.Get(funcSpec);
@@ -40141,14 +40139,12 @@ $packages["html"] = (function() {
 	return $pkg;
 })();
 $packages["main"] = (function() {
-	var $pkg = {}, $init, fmt, runtime, instance, jquery, html, io, strings, Dom, sliceType, sliceType$1, funcType, sliceType$2, jQuery, main;
+	var $pkg = {}, $init, fmt, runtime, instance, jquery, html, Dom, sliceType, sliceType$1, funcType, sliceType$2, stream, jQuery, main;
 	fmt = $packages["fmt"];
 	runtime = $packages["github.com/ta2gch/iris/runtime"];
 	instance = $packages["github.com/ta2gch/iris/runtime/ilos/instance"];
 	jquery = $packages["github.com/ta2gch/jquery"];
 	html = $packages["html"];
-	io = $packages["io"];
-	strings = $packages["strings"];
 	Dom = $pkg.Dom = $newType(0, $kindStruct, "main.Dom", true, "main", true, function() {
 		this.$val = this;
 		if (arguments.length === 0) {
@@ -40176,114 +40172,120 @@ $packages["main"] = (function() {
 	};
 	Dom.prototype.Write = function(p) { return this.$val.Write(p); };
 	Dom.ptr.prototype.Read = function(p) {
-		var $ptr, _r, _r$1, _r$2, _r$3, _r$4, _r$5, _r$6, _r$7, _tmp, _tmp$1, _tmp$2, _tmp$3, dom, err, input, n, p, $s, $r;
-		/* */ $s = 0; var $f, $c = false; if (this !== undefined && this.$blk !== undefined) { $f = this; $c = true; $ptr = $f.$ptr; _r = $f._r; _r$1 = $f._r$1; _r$2 = $f._r$2; _r$3 = $f._r$3; _r$4 = $f._r$4; _r$5 = $f._r$5; _r$6 = $f._r$6; _r$7 = $f._r$7; _tmp = $f._tmp; _tmp$1 = $f._tmp$1; _tmp$2 = $f._tmp$2; _tmp$3 = $f._tmp$3; dom = $f.dom; err = $f.err; input = $f.input; n = $f.n; p = $f.p; $s = $f.$s; $r = $f.$r; } s: while (true) { switch ($s) { case 0:
+		var $ptr, _r, _r$1, _tmp, _tmp$1, dom, err, n, p, s, $s, $r;
+		/* */ $s = 0; var $f, $c = false; if (this !== undefined && this.$blk !== undefined) { $f = this; $c = true; $ptr = $f.$ptr; _r = $f._r; _r$1 = $f._r$1; _tmp = $f._tmp; _tmp$1 = $f._tmp$1; dom = $f.dom; err = $f.err; n = $f.n; p = $f.p; s = $f.s; $s = $f.$s; $r = $f.$r; } s: while (true) { switch ($s) { case 0:
 		n = 0;
 		err = $ifaceNil;
 		dom = this;
-		_r = jQuery(new sliceType([new $String("#input")])); /* */ $s = 1; case 1: if($c) { $c = false; _r = _r.$blk(); } if (_r && _r.$blk !== undefined) { break s; }
-		_r$1 = $clone(_r, jquery.JQuery).Html(); /* */ $s = 2; case 2: if($c) { $c = false; _r$1 = _r$1.$blk(); } if (_r$1 && _r$1.$blk !== undefined) { break s; }
-		input = _r$1;
-		_r$2 = jQuery(new sliceType([new $String("#input")])); /* */ $s = 3; case 3: if($c) { $c = false; _r$2 = _r$2.$blk(); } if (_r$2 && _r$2.$blk !== undefined) { break s; }
-		_r$3 = $clone(_r$2, jquery.JQuery).SetHtml(new $String("")); /* */ $s = 4; case 4: if($c) { $c = false; _r$3 = _r$3.$blk(); } if (_r$3 && _r$3.$blk !== undefined) { break s; }
-		_r$3;
-		_r$4 = jQuery(new sliceType([new $String("<span>" + input + "</span>")])); /* */ $s = 5; case 5: if($c) { $c = false; _r$4 = _r$4.$blk(); } if (_r$4 && _r$4.$blk !== undefined) { break s; }
-		_r$5 = $clone(_r$4, jquery.JQuery).Text(); /* */ $s = 6; case 6: if($c) { $c = false; _r$5 = _r$5.$blk(); } if (_r$5 && _r$5.$blk !== undefined) { break s; }
-		$copyString(p, _r$5);
-		/* */ if (!strings.Contains(input, "<br>")) { $s = 7; continue; }
-		/* */ $s = 8; continue;
-		/* if (!strings.Contains(input, "<br>")) { */ case 7:
-			_r$6 = $clone(dom, Dom).Write((new sliceType$1($stringToBytes(input + "<br>")))); /* */ $s = 10; case 10: if($c) { $c = false; _r$6 = _r$6.$blk(); } if (_r$6 && _r$6.$blk !== undefined) { break s; }
-			_r$6;
-			$s = 9; continue;
-		/* } else { */ case 8:
-			_r$7 = $clone(dom, Dom).Write((new sliceType$1($stringToBytes(input)))); /* */ $s = 11; case 11: if($c) { $c = false; _r$7 = _r$7.$blk(); } if (_r$7 && _r$7.$blk !== undefined) { break s; }
-			_r$7;
-		/* } */ case 9:
-		if (p.$length === 0) {
-			_tmp = 0;
-			_tmp$1 = io.EOF;
-			n = _tmp;
-			err = _tmp$1;
-			$s = -1; return [n, err];
-		}
-		_tmp$2 = p.$length;
-		_tmp$3 = $ifaceNil;
-		n = _tmp$2;
-		err = _tmp$3;
+		_r = $recv(stream); /* */ $s = 1; case 1: if($c) { $c = false; _r = _r.$blk(); } if (_r && _r.$blk !== undefined) { break s; }
+		s = _r[0];
+		_r$1 = fmt.Fprint(new dom.constructor.elem(dom), new sliceType([new $String(s), new $String("\n")])); /* */ $s = 2; case 2: if($c) { $c = false; _r$1 = _r$1.$blk(); } if (_r$1 && _r$1.$blk !== undefined) { break s; }
+		_r$1;
+		$copySlice(p, (new sliceType$1($stringToBytes(s))));
+		_tmp = p.$length;
+		_tmp$1 = $ifaceNil;
+		n = _tmp;
+		err = _tmp$1;
 		$s = -1; return [n, err];
-		/* */ } return; } if ($f === undefined) { $f = { $blk: Dom.ptr.prototype.Read }; } $f.$ptr = $ptr; $f._r = _r; $f._r$1 = _r$1; $f._r$2 = _r$2; $f._r$3 = _r$3; $f._r$4 = _r$4; $f._r$5 = _r$5; $f._r$6 = _r$6; $f._r$7 = _r$7; $f._tmp = _tmp; $f._tmp$1 = _tmp$1; $f._tmp$2 = _tmp$2; $f._tmp$3 = _tmp$3; $f.dom = dom; $f.err = err; $f.input = input; $f.n = n; $f.p = p; $f.$s = $s; $f.$r = $r; return $f;
+		/* */ } return; } if ($f === undefined) { $f = { $blk: Dom.ptr.prototype.Read }; } $f.$ptr = $ptr; $f._r = _r; $f._r$1 = _r$1; $f._tmp = _tmp; $f._tmp$1 = _tmp$1; $f.dom = dom; $f.err = err; $f.n = n; $f.p = p; $f.s = s; $f.$s = $s; $f.$r = $r; return $f;
 	};
 	Dom.prototype.Read = function(p) { return this.$val.Read(p); };
 	main = function() {
-		var $ptr, _r, _r$1, _r$2, _r$3, _r$4, dom, $s, $r;
-		/* */ $s = 0; var $f, $c = false; if (this !== undefined && this.$blk !== undefined) { $f = this; $c = true; $ptr = $f.$ptr; _r = $f._r; _r$1 = $f._r$1; _r$2 = $f._r$2; _r$3 = $f._r$3; _r$4 = $f._r$4; dom = $f.dom; $s = $f.$s; $r = $f.$r; } s: while (true) { switch ($s) { case 0:
+		var $ptr, _arg, _arg$1, _arg$2, _arg$3, _arg$4, _arg$5, _r, _r$1, _r$10, _r$11, _r$12, _r$13, _r$14, _r$15, _r$16, _r$17, _r$18, _r$19, _r$2, _r$3, _r$4, _r$5, _r$6, _r$7, _r$8, _r$9, _tuple, _tuple$1, dom, err, exp, prompt, ret, $s, $r;
+		/* */ $s = 0; var $f, $c = false; if (this !== undefined && this.$blk !== undefined) { $f = this; $c = true; $ptr = $f.$ptr; _arg = $f._arg; _arg$1 = $f._arg$1; _arg$2 = $f._arg$2; _arg$3 = $f._arg$3; _arg$4 = $f._arg$4; _arg$5 = $f._arg$5; _r = $f._r; _r$1 = $f._r$1; _r$10 = $f._r$10; _r$11 = $f._r$11; _r$12 = $f._r$12; _r$13 = $f._r$13; _r$14 = $f._r$14; _r$15 = $f._r$15; _r$16 = $f._r$16; _r$17 = $f._r$17; _r$18 = $f._r$18; _r$19 = $f._r$19; _r$2 = $f._r$2; _r$3 = $f._r$3; _r$4 = $f._r$4; _r$5 = $f._r$5; _r$6 = $f._r$6; _r$7 = $f._r$7; _r$8 = $f._r$8; _r$9 = $f._r$9; _tuple = $f._tuple; _tuple$1 = $f._tuple$1; dom = $f.dom; err = $f.err; exp = $f.exp; prompt = $f.prompt; ret = $f.ret; $s = $f.$s; $r = $f.$r; } s: while (true) { switch ($s) { case 0:
 		dom = [dom];
+		prompt = [prompt];
+		prompt[0] = true;
 		dom[0] = new Dom.ptr();
 		runtime.TopLevel.StandardInput = instance.NewStream(dom[0], $ifaceNil);
 		runtime.TopLevel.StandardOutput = instance.NewStream($ifaceNil, dom[0]);
 		runtime.TopLevel.ErrorOutput = instance.NewStream($ifaceNil, dom[0]);
-		runtime.TopLevel.Function.Set(instance.NewSymbol("READ"), $ifaceNil);
-		runtime.TopLevel.Function.Set(instance.NewSymbol("READ-LINE"), $ifaceNil);
-		runtime.TopLevel.Function.Set(instance.NewSymbol("READ-CHAR"), $ifaceNil);
-		_r = fmt.Fprintf(dom[0], "Welcome to Iris (%v). Iris is an ISLisp implementation on Go.\nThis REPL works with gopherjs and has no methods to get input.\n\nCopyright &copy; 2017 TANIGUCHI Masaya All Rights Reserved.", new sliceType([new $String("97677d0")])); /* */ $s = 1; case 1: if($c) { $c = false; _r = _r.$blk(); } if (_r && _r.$blk !== undefined) { break s; }
+		_r = fmt.Fprintf(dom[0], "Welcome to Iris (%v). Iris is an ISLisp implementation on Go.\nThis REPL works on JavaScript with gopherjs.\n\nCopyright &copy; 2017 TANIGUCHI Masaya All Rights Reserved.", new sliceType([new $String("97677d0")])); /* */ $s = 1; case 1: if($c) { $c = false; _r = _r.$blk(); } if (_r && _r.$blk !== undefined) { break s; }
 		_r;
 		_r$1 = jQuery(new sliceType([new $String("#version")])); /* */ $s = 2; case 2: if($c) { $c = false; _r$1 = _r$1.$blk(); } if (_r$1 && _r$1.$blk !== undefined) { break s; }
 		_r$2 = $clone(_r$1, jquery.JQuery).SetHtml(new $String("97677d0")); /* */ $s = 3; case 3: if($c) { $c = false; _r$2 = _r$2.$blk(); } if (_r$2 && _r$2.$blk !== undefined) { break s; }
 		_r$2;
-		_r$3 = jQuery(new sliceType([new $String("body")])); /* */ $s = 4; case 4: if($c) { $c = false; _r$3 = _r$3.$blk(); } if (_r$3 && _r$3.$blk !== undefined) { break s; }
-		_r$4 = $clone(_r$3, jquery.JQuery).On(new sliceType([new $String("keydown"), new funcType((function(dom) { return function $b(e) {
-			var $ptr, _arg, _arg$1, _arg$2, _arg$3, _arg$4, _arg$5, _r$10, _r$11, _r$12, _r$13, _r$14, _r$15, _r$4, _r$5, _r$6, _r$7, _r$8, _r$9, _tuple, _tuple$1, e, err, exp, ret, $s, $r;
-			/* */ $s = 0; var $f, $c = false; if (this !== undefined && this.$blk !== undefined) { $f = this; $c = true; $ptr = $f.$ptr; _arg = $f._arg; _arg$1 = $f._arg$1; _arg$2 = $f._arg$2; _arg$3 = $f._arg$3; _arg$4 = $f._arg$4; _arg$5 = $f._arg$5; _r$10 = $f._r$10; _r$11 = $f._r$11; _r$12 = $f._r$12; _r$13 = $f._r$13; _r$14 = $f._r$14; _r$15 = $f._r$15; _r$4 = $f._r$4; _r$5 = $f._r$5; _r$6 = $f._r$6; _r$7 = $f._r$7; _r$8 = $f._r$8; _r$9 = $f._r$9; _tuple = $f._tuple; _tuple$1 = $f._tuple$1; e = $f.e; err = $f.err; exp = $f.exp; ret = $f.ret; $s = $f.$s; $r = $f.$r; } s: while (true) { switch ($s) { case 0:
+		_r$3 = jQuery(new sliceType([new $String("#input")])); /* */ $s = 4; case 4: if($c) { $c = false; _r$3 = _r$3.$blk(); } if (_r$3 && _r$3.$blk !== undefined) { break s; }
+		_r$4 = $clone(_r$3, jquery.JQuery).On(new sliceType([new $String("keydown"), new funcType((function(dom, prompt) { return function $b(e) {
+			var $ptr, _r$4, e, $s, $r;
+			/* */ $s = 0; var $f, $c = false; if (this !== undefined && this.$blk !== undefined) { $f = this; $c = true; $ptr = $f.$ptr; _r$4 = $f._r$4; e = $f.e; $s = $f.$s; $r = $f.$r; } s: while (true) { switch ($s) { case 0:
 			/* */ if (!!!(e.Object.shiftKey) && (($parseInt(e.Object.keyCode) >> 0) === 13)) { $s = 1; continue; }
 			/* */ $s = 2; continue;
 			/* if (!!!(e.Object.shiftKey) && (($parseInt(e.Object.keyCode) >> 0) === 13)) { */ case 1:
-				_r$4 = fmt.Fprint(dom[0], new sliceType([new $String("\n> ")])); /* */ $s = 3; case 3: if($c) { $c = false; _r$4 = _r$4.$blk(); } if (_r$4 && _r$4.$blk !== undefined) { break s; }
-				_r$4;
-				_r$5 = runtime.Read($clone(runtime.TopLevel, $packages["github.com/ta2gch/iris/runtime/env"].Environment), new sliceType$2([])); /* */ $s = 4; case 4: if($c) { $c = false; _r$5 = _r$5.$blk(); } if (_r$5 && _r$5.$blk !== undefined) { break s; }
-				_tuple = _r$5;
-				exp = _tuple[0];
-				err = _tuple[1];
-				/* */ if (!($interfaceIsEqual(err, $ifaceNil))) { $s = 5; continue; }
-				/* */ $s = 6; continue;
-				/* if (!($interfaceIsEqual(err, $ifaceNil))) { */ case 5:
-					_arg = dom[0];
-					_r$6 = err.String(); /* */ $s = 7; case 7: if($c) { $c = false; _r$6 = _r$6.$blk(); } if (_r$6 && _r$6.$blk !== undefined) { break s; }
-					_r$7 = html.EscapeString(_r$6); /* */ $s = 8; case 8: if($c) { $c = false; _r$7 = _r$7.$blk(); } if (_r$7 && _r$7.$blk !== undefined) { break s; }
-					_arg$1 = new $String(_r$7);
-					_r$8 = fmt.Fprint(_arg, new sliceType([_arg$1])); /* */ $s = 9; case 9: if($c) { $c = false; _r$8 = _r$8.$blk(); } if (_r$8 && _r$8.$blk !== undefined) { break s; }
+				/* */ if (prompt[0]) { $s = 3; continue; }
+				/* */ $s = 4; continue;
+				/* if (prompt[0]) { */ case 3:
+					_r$4 = fmt.Fprint(dom[0], new sliceType([new $String("\n> ")])); /* */ $s = 5; case 5: if($c) { $c = false; _r$4 = _r$4.$blk(); } if (_r$4 && _r$4.$blk !== undefined) { break s; }
+					_r$4;
+				/* } */ case 4:
+				$go((function(dom, prompt) { return function $b() {
+					var $ptr, _r$10, _r$5, _r$6, _r$7, _r$8, _r$9, input, $s, $r;
+					/* */ $s = 0; var $f, $c = false; if (this !== undefined && this.$blk !== undefined) { $f = this; $c = true; $ptr = $f.$ptr; _r$10 = $f._r$10; _r$5 = $f._r$5; _r$6 = $f._r$6; _r$7 = $f._r$7; _r$8 = $f._r$8; _r$9 = $f._r$9; input = $f.input; $s = $f.$s; $r = $f.$r; } s: while (true) { switch ($s) { case 0:
+					_r$5 = jQuery(new sliceType([new $String("#input")])); /* */ $s = 1; case 1: if($c) { $c = false; _r$5 = _r$5.$blk(); } if (_r$5 && _r$5.$blk !== undefined) { break s; }
+					_r$6 = $clone(_r$5, jquery.JQuery).Html(); /* */ $s = 2; case 2: if($c) { $c = false; _r$6 = _r$6.$blk(); } if (_r$6 && _r$6.$blk !== undefined) { break s; }
+					input = _r$6;
+					_r$7 = jQuery(new sliceType([new $String("#input")])); /* */ $s = 3; case 3: if($c) { $c = false; _r$7 = _r$7.$blk(); } if (_r$7 && _r$7.$blk !== undefined) { break s; }
+					_r$8 = $clone(_r$7, jquery.JQuery).SetHtml(new $String("")); /* */ $s = 4; case 4: if($c) { $c = false; _r$8 = _r$8.$blk(); } if (_r$8 && _r$8.$blk !== undefined) { break s; }
 					_r$8;
+					_r$9 = jQuery(new sliceType([new $String("<span>" + input + "</span>")])); /* */ $s = 5; case 5: if($c) { $c = false; _r$9 = _r$9.$blk(); } if (_r$9 && _r$9.$blk !== undefined) { break s; }
+					_r$10 = $clone(_r$9, jquery.JQuery).Text(); /* */ $s = 6; case 6: if($c) { $c = false; _r$10 = _r$10.$blk(); } if (_r$10 && _r$10.$blk !== undefined) { break s; }
+					$r = $send(stream, _r$10); /* */ $s = 7; case 7: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
 					$s = -1; return;
-				/* } */ case 6:
-				_r$9 = runtime.Eval($clone(runtime.TopLevel, $packages["github.com/ta2gch/iris/runtime/env"].Environment), exp); /* */ $s = 10; case 10: if($c) { $c = false; _r$9 = _r$9.$blk(); } if (_r$9 && _r$9.$blk !== undefined) { break s; }
-				_tuple$1 = _r$9;
-				ret = _tuple$1[0];
-				err = _tuple$1[1];
-				/* */ if (!($interfaceIsEqual(err, $ifaceNil))) { $s = 11; continue; }
-				/* */ $s = 12; continue;
-				/* if (!($interfaceIsEqual(err, $ifaceNil))) { */ case 11:
-					_arg$2 = dom[0];
-					_r$10 = err.String(); /* */ $s = 13; case 13: if($c) { $c = false; _r$10 = _r$10.$blk(); } if (_r$10 && _r$10.$blk !== undefined) { break s; }
-					_r$11 = html.EscapeString(_r$10); /* */ $s = 14; case 14: if($c) { $c = false; _r$11 = _r$11.$blk(); } if (_r$11 && _r$11.$blk !== undefined) { break s; }
-					_arg$3 = new $String(_r$11);
-					_r$12 = fmt.Fprint(_arg$2, new sliceType([_arg$3])); /* */ $s = 15; case 15: if($c) { $c = false; _r$12 = _r$12.$blk(); } if (_r$12 && _r$12.$blk !== undefined) { break s; }
-					_r$12;
-					$s = -1; return;
-				/* } */ case 12:
-				_arg$4 = dom[0];
-				_r$13 = ret.String(); /* */ $s = 16; case 16: if($c) { $c = false; _r$13 = _r$13.$blk(); } if (_r$13 && _r$13.$blk !== undefined) { break s; }
-				_r$14 = html.EscapeString(_r$13); /* */ $s = 17; case 17: if($c) { $c = false; _r$14 = _r$14.$blk(); } if (_r$14 && _r$14.$blk !== undefined) { break s; }
-				_arg$5 = new $String(_r$14);
-				_r$15 = fmt.Fprint(_arg$4, new sliceType([_arg$5])); /* */ $s = 18; case 18: if($c) { $c = false; _r$15 = _r$15.$blk(); } if (_r$15 && _r$15.$blk !== undefined) { break s; }
-				_r$15;
-				$s = -1; return;
+					/* */ } return; } if ($f === undefined) { $f = { $blk: $b }; } $f.$ptr = $ptr; $f._r$10 = _r$10; $f._r$5 = _r$5; $f._r$6 = _r$6; $f._r$7 = _r$7; $f._r$8 = _r$8; $f._r$9 = _r$9; $f.input = input; $f.$s = $s; $f.$r = $r; return $f;
+				}; })(dom, prompt), []);
 			/* } */ case 2:
 			$s = -1; return;
-			/* */ } return; } if ($f === undefined) { $f = { $blk: $b }; } $f.$ptr = $ptr; $f._arg = _arg; $f._arg$1 = _arg$1; $f._arg$2 = _arg$2; $f._arg$3 = _arg$3; $f._arg$4 = _arg$4; $f._arg$5 = _arg$5; $f._r$10 = _r$10; $f._r$11 = _r$11; $f._r$12 = _r$12; $f._r$13 = _r$13; $f._r$14 = _r$14; $f._r$15 = _r$15; $f._r$4 = _r$4; $f._r$5 = _r$5; $f._r$6 = _r$6; $f._r$7 = _r$7; $f._r$8 = _r$8; $f._r$9 = _r$9; $f._tuple = _tuple; $f._tuple$1 = _tuple$1; $f.e = e; $f.err = err; $f.exp = exp; $f.ret = ret; $f.$s = $s; $f.$r = $r; return $f;
-		}; })(dom))])); /* */ $s = 5; case 5: if($c) { $c = false; _r$4 = _r$4.$blk(); } if (_r$4 && _r$4.$blk !== undefined) { break s; }
+			/* */ } return; } if ($f === undefined) { $f = { $blk: $b }; } $f.$ptr = $ptr; $f._r$4 = _r$4; $f.e = e; $f.$s = $s; $f.$r = $r; return $f;
+		}; })(dom, prompt))])); /* */ $s = 5; case 5: if($c) { $c = false; _r$4 = _r$4.$blk(); } if (_r$4 && _r$4.$blk !== undefined) { break s; }
 		_r$4;
+		/* while (true) { */ case 6:
+			prompt[0] = true;
+			_r$5 = jQuery(new sliceType([new $String("#prompt")])); /* */ $s = 8; case 8: if($c) { $c = false; _r$5 = _r$5.$blk(); } if (_r$5 && _r$5.$blk !== undefined) { break s; }
+			_r$6 = $clone(_r$5, jquery.JQuery).Show(new sliceType([])); /* */ $s = 9; case 9: if($c) { $c = false; _r$6 = _r$6.$blk(); } if (_r$6 && _r$6.$blk !== undefined) { break s; }
+			_r$6;
+			_r$7 = runtime.Read($clone(runtime.TopLevel, $packages["github.com/ta2gch/iris/runtime/env"].Environment), new sliceType$2([])); /* */ $s = 10; case 10: if($c) { $c = false; _r$7 = _r$7.$blk(); } if (_r$7 && _r$7.$blk !== undefined) { break s; }
+			_tuple = _r$7;
+			exp = _tuple[0];
+			err = _tuple[1];
+			/* */ if (!($interfaceIsEqual(err, $ifaceNil))) { $s = 11; continue; }
+			/* */ $s = 12; continue;
+			/* if (!($interfaceIsEqual(err, $ifaceNil))) { */ case 11:
+				_arg = dom[0];
+				_r$8 = err.String(); /* */ $s = 13; case 13: if($c) { $c = false; _r$8 = _r$8.$blk(); } if (_r$8 && _r$8.$blk !== undefined) { break s; }
+				_r$9 = html.EscapeString(_r$8); /* */ $s = 14; case 14: if($c) { $c = false; _r$9 = _r$9.$blk(); } if (_r$9 && _r$9.$blk !== undefined) { break s; }
+				_arg$1 = new $String(_r$9);
+				_r$10 = fmt.Fprint(_arg, new sliceType([_arg$1])); /* */ $s = 15; case 15: if($c) { $c = false; _r$10 = _r$10.$blk(); } if (_r$10 && _r$10.$blk !== undefined) { break s; }
+				_r$10;
+				/* continue; */ $s = 6; continue;
+			/* } */ case 12:
+			prompt[0] = false;
+			_r$11 = jQuery(new sliceType([new $String("#prompt")])); /* */ $s = 16; case 16: if($c) { $c = false; _r$11 = _r$11.$blk(); } if (_r$11 && _r$11.$blk !== undefined) { break s; }
+			_r$12 = $clone(_r$11, jquery.JQuery).Hide(new sliceType([])); /* */ $s = 17; case 17: if($c) { $c = false; _r$12 = _r$12.$blk(); } if (_r$12 && _r$12.$blk !== undefined) { break s; }
+			_r$12;
+			_r$13 = runtime.Eval($clone(runtime.TopLevel, $packages["github.com/ta2gch/iris/runtime/env"].Environment), exp); /* */ $s = 18; case 18: if($c) { $c = false; _r$13 = _r$13.$blk(); } if (_r$13 && _r$13.$blk !== undefined) { break s; }
+			_tuple$1 = _r$13;
+			ret = _tuple$1[0];
+			err = _tuple$1[1];
+			/* */ if (!($interfaceIsEqual(err, $ifaceNil))) { $s = 19; continue; }
+			/* */ $s = 20; continue;
+			/* if (!($interfaceIsEqual(err, $ifaceNil))) { */ case 19:
+				_arg$2 = dom[0];
+				_r$14 = err.String(); /* */ $s = 21; case 21: if($c) { $c = false; _r$14 = _r$14.$blk(); } if (_r$14 && _r$14.$blk !== undefined) { break s; }
+				_r$15 = html.EscapeString(_r$14); /* */ $s = 22; case 22: if($c) { $c = false; _r$15 = _r$15.$blk(); } if (_r$15 && _r$15.$blk !== undefined) { break s; }
+				_arg$3 = new $String(_r$15);
+				_r$16 = fmt.Fprint(_arg$2, new sliceType([_arg$3])); /* */ $s = 23; case 23: if($c) { $c = false; _r$16 = _r$16.$blk(); } if (_r$16 && _r$16.$blk !== undefined) { break s; }
+				_r$16;
+				/* continue; */ $s = 6; continue;
+			/* } */ case 20:
+			_arg$4 = dom[0];
+			_r$17 = ret.String(); /* */ $s = 24; case 24: if($c) { $c = false; _r$17 = _r$17.$blk(); } if (_r$17 && _r$17.$blk !== undefined) { break s; }
+			_r$18 = html.EscapeString(_r$17); /* */ $s = 25; case 25: if($c) { $c = false; _r$18 = _r$18.$blk(); } if (_r$18 && _r$18.$blk !== undefined) { break s; }
+			_arg$5 = new $String(_r$18);
+			_r$19 = fmt.Fprint(_arg$4, new sliceType([_arg$5])); /* */ $s = 26; case 26: if($c) { $c = false; _r$19 = _r$19.$blk(); } if (_r$19 && _r$19.$blk !== undefined) { break s; }
+			_r$19;
+		/* } */ $s = 6; continue; case 7:
 		$s = -1; return;
-		/* */ } return; } if ($f === undefined) { $f = { $blk: main }; } $f.$ptr = $ptr; $f._r = _r; $f._r$1 = _r$1; $f._r$2 = _r$2; $f._r$3 = _r$3; $f._r$4 = _r$4; $f.dom = dom; $f.$s = $s; $f.$r = $r; return $f;
+		/* */ } return; } if ($f === undefined) { $f = { $blk: main }; } $f.$ptr = $ptr; $f._arg = _arg; $f._arg$1 = _arg$1; $f._arg$2 = _arg$2; $f._arg$3 = _arg$3; $f._arg$4 = _arg$4; $f._arg$5 = _arg$5; $f._r = _r; $f._r$1 = _r$1; $f._r$10 = _r$10; $f._r$11 = _r$11; $f._r$12 = _r$12; $f._r$13 = _r$13; $f._r$14 = _r$14; $f._r$15 = _r$15; $f._r$16 = _r$16; $f._r$17 = _r$17; $f._r$18 = _r$18; $f._r$19 = _r$19; $f._r$2 = _r$2; $f._r$3 = _r$3; $f._r$4 = _r$4; $f._r$5 = _r$5; $f._r$6 = _r$6; $f._r$7 = _r$7; $f._r$8 = _r$8; $f._r$9 = _r$9; $f._tuple = _tuple; $f._tuple$1 = _tuple$1; $f.dom = dom; $f.err = err; $f.exp = exp; $f.prompt = prompt; $f.ret = ret; $f.$s = $s; $f.$r = $r; return $f;
 	};
 	Dom.methods = [{prop: "Write", name: "Write", pkg: "", typ: $funcType([sliceType$1], [$Int, $error], false)}, {prop: "Read", name: "Read", pkg: "", typ: $funcType([sliceType$1], [$Int, $error], false)}];
 	Dom.init("", []);
@@ -40295,15 +40297,14 @@ $packages["main"] = (function() {
 		$r = instance.$init(); /* */ $s = 3; case 3: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
 		$r = jquery.$init(); /* */ $s = 4; case 4: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
 		$r = html.$init(); /* */ $s = 5; case 5: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = io.$init(); /* */ $s = 6; case 6: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = strings.$init(); /* */ $s = 7; case 7: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		stream = new $Chan($String, 0);
 		jQuery = jquery.NewJQuery;
-		/* */ if ($pkg === $mainPkg) { $s = 8; continue; }
-		/* */ $s = 9; continue;
-		/* if ($pkg === $mainPkg) { */ case 8:
-			$r = main(); /* */ $s = 10; case 10: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		/* */ if ($pkg === $mainPkg) { $s = 6; continue; }
+		/* */ $s = 7; continue;
+		/* if ($pkg === $mainPkg) { */ case 6:
+			$r = main(); /* */ $s = 8; case 8: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
 			$mainFinished = true;
-		/* } */ case 9:
+		/* } */ case 7:
 		/* */ } return; } if ($f === undefined) { $f = { $blk: $init }; } $f.$s = $s; $f.$r = $r; return $f;
 	};
 	$pkg.$init = $init;
