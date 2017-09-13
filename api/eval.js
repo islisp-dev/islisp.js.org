@@ -41609,7 +41609,7 @@ $packages["main"] = (function() {
 	sliceType$1 = $sliceType($packages["github.com/ta2gch/iris/runtime/ilos"].Instance);
 	sliceType$2 = $sliceType($emptyInterface);
 	main = function() {
-		console.log("Welcome to Iris (eb927c4). Iris is an ISLisp implementation on Go.\nThis library works with gopherjs and has no methods to get input.\nFor more infomation, see https://islisp.js.org.\n\nCopyright &copy; 2017 TANIGUCHI Masaya All Rights Reserved.");
+		console.log("Welcome to Iris (7cd80c3). Iris is an ISLisp implementation on Go.\nThis library works with gopherjs and has no methods to get input.\nFor more infomation, see https://islisp.js.org.\n\nCopyright &copy; 2017 TANIGUCHI Masaya All Rights Reserved.");
 		$global.islisp = $externalize($makeMap($String.keyFor, [{ k: "eval", v: new funcType(eval$1) }]), mapType);
 	};
 	eval$1 = function(s) {
