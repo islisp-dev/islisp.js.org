@@ -15,7 +15,7 @@ import (
 	"github.com/ta2gch/iris/runtime/ilos/instance"
 )
 
-const version = "7cd80c3"
+const version = "0984252"
 
 func main() {
 	print(`Welcome to Iris (` + version + `). Iris is an ISLisp implementation on Go.
