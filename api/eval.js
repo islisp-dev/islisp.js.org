@@ -37822,23 +37822,27 @@ $packages["github.com/ta2gch/iris/runtime"] = (function() {
 	};
 	$pkg.Listp = Listp;
 	CreateList = function(e, i, initialElement) {
-		var _arg, _arg$1, _arg$2, _r, _r$1, _r$2, cons, e, elm, err, i, initialElement, j, $s, $r;
-		/* */ $s = 0; var $f, $c = false; if (this !== undefined && this.$blk !== undefined) { $f = this; $c = true; _arg = $f._arg; _arg$1 = $f._arg$1; _arg$2 = $f._arg$2; _r = $f._r; _r$1 = $f._r$1; _r$2 = $f._r$2; cons = $f.cons; e = $f.e; elm = $f.elm; err = $f.err; i = $f.i; initialElement = $f.initialElement; j = $f.j; $s = $f.$s; $r = $f.$r; } s: while (true) { switch ($s) { case 0:
-		_r = ensure($clone(e, env.Environment), class$1.Integer, new sliceType([i])); /* */ $s = 1; case 1: if($c) { $c = false; _r = _r.$blk(); } if (_r && _r.$blk !== undefined) { break s; }
-		err = _r;
-		if (!($interfaceIsEqual(err, $ifaceNil))) {
-			$s = -1; return [$ifaceNil, err];
-		}
-		/* */ if (initialElement.$length > 1) { $s = 2; continue; }
+		var _arg, _arg$1, _arg$2, _r, _r$1, _r$2, _r$3, _tuple, cons, e, elm, i, initialElement, j, ok, $s, $r;
+		/* */ $s = 0; var $f, $c = false; if (this !== undefined && this.$blk !== undefined) { $f = this; $c = true; _arg = $f._arg; _arg$1 = $f._arg$1; _arg$2 = $f._arg$2; _r = $f._r; _r$1 = $f._r$1; _r$2 = $f._r$2; _r$3 = $f._r$3; _tuple = $f._tuple; cons = $f.cons; e = $f.e; elm = $f.elm; i = $f.i; initialElement = $f.initialElement; j = $f.j; ok = $f.ok; $s = $f.$s; $r = $f.$r; } s: while (true) { switch ($s) { case 0:
+		_r = Integerp($clone(e, env.Environment), i); /* */ $s = 1; case 1: if($c) { $c = false; _r = _r.$blk(); } if (_r && _r.$blk !== undefined) { break s; }
+		_tuple = _r;
+		ok = _tuple[0];
+		/* */ if ($interfaceIsEqual(ok, $pkg.Nil)) { $s = 2; continue; }
 		/* */ $s = 3; continue;
-		/* if (initialElement.$length > 1) { */ case 2:
-			_arg = $clone(e, env.Environment);
-			_r$1 = instance.NewArityError($clone(e, env.Environment)); /* */ $s = 4; case 4: if($c) { $c = false; _r$1 = _r$1.$blk(); } if (_r$1 && _r$1.$blk !== undefined) { break s; }
-			_arg$1 = _r$1;
-			_arg$2 = $pkg.Nil;
-			_r$2 = SignalCondition(_arg, _arg$1, _arg$2); /* */ $s = 5; case 5: if($c) { $c = false; _r$2 = _r$2.$blk(); } if (_r$2 && _r$2.$blk !== undefined) { break s; }
-			$s = -1; return _r$2;
+		/* if ($interfaceIsEqual(ok, $pkg.Nil)) { */ case 2:
+			_r$1 = instance.NewDomainError($clone(e, env.Environment), i, class$1.Integer); /* */ $s = 4; case 4: if($c) { $c = false; _r$1 = _r$1.$blk(); } if (_r$1 && _r$1.$blk !== undefined) { break s; }
+			$s = -1; return [$ifaceNil, _r$1];
 		/* } */ case 3:
+		/* */ if (initialElement.$length > 1) { $s = 5; continue; }
+		/* */ $s = 6; continue;
+		/* if (initialElement.$length > 1) { */ case 5:
+			_arg = $clone(e, env.Environment);
+			_r$2 = instance.NewArityError($clone(e, env.Environment)); /* */ $s = 7; case 7: if($c) { $c = false; _r$2 = _r$2.$blk(); } if (_r$2 && _r$2.$blk !== undefined) { break s; }
+			_arg$1 = _r$2;
+			_arg$2 = $pkg.Nil;
+			_r$3 = SignalCondition(_arg, _arg$1, _arg$2); /* */ $s = 8; case 8: if($c) { $c = false; _r$3 = _r$3.$blk(); } if (_r$3 && _r$3.$blk !== undefined) { break s; }
+			$s = -1; return _r$3;
+		/* } */ case 6:
 		elm = $pkg.Nil;
 		if (initialElement.$length === 1) {
 			elm = (0 >= initialElement.$length ? ($throwRuntimeError("index out of range"), undefined) : initialElement.$array[initialElement.$offset + 0]);
@@ -37851,7 +37855,7 @@ $packages["github.com/ta2gch/iris/runtime"] = (function() {
 			j = j + (1) >> 0;
 		}
 		$s = -1; return [cons, $ifaceNil];
-		/* */ } return; } if ($f === undefined) { $f = { $blk: CreateList }; } $f._arg = _arg; $f._arg$1 = _arg$1; $f._arg$2 = _arg$2; $f._r = _r; $f._r$1 = _r$1; $f._r$2 = _r$2; $f.cons = cons; $f.e = e; $f.elm = elm; $f.err = err; $f.i = i; $f.initialElement = initialElement; $f.j = j; $f.$s = $s; $f.$r = $r; return $f;
+		/* */ } return; } if ($f === undefined) { $f = { $blk: CreateList }; } $f._arg = _arg; $f._arg$1 = _arg$1; $f._arg$2 = _arg$2; $f._r = _r; $f._r$1 = _r$1; $f._r$2 = _r$2; $f._r$3 = _r$3; $f._tuple = _tuple; $f.cons = cons; $f.e = e; $f.elm = elm; $f.i = i; $f.initialElement = initialElement; $f.j = j; $f.ok = ok; $f.$s = $s; $f.$r = $r; return $f;
 	};
 	$pkg.CreateList = CreateList;
 	List = function(e, objs) {
@@ -37867,52 +37871,60 @@ $packages["github.com/ta2gch/iris/runtime"] = (function() {
 	};
 	$pkg.List = List;
 	Reverse = function(e, list) {
-		var _i, _r, _r$1, _ref, car, cons, e, err, list, $s, $r;
-		/* */ $s = 0; var $f, $c = false; if (this !== undefined && this.$blk !== undefined) { $f = this; $c = true; _i = $f._i; _r = $f._r; _r$1 = $f._r$1; _ref = $f._ref; car = $f.car; cons = $f.cons; e = $f.e; err = $f.err; list = $f.list; $s = $f.$s; $r = $f.$r; } s: while (true) { switch ($s) { case 0:
-		_r = ensure($clone(e, env.Environment), class$1.List, new sliceType([list])); /* */ $s = 1; case 1: if($c) { $c = false; _r = _r.$blk(); } if (_r && _r.$blk !== undefined) { break s; }
-		err = _r;
-		if (!($interfaceIsEqual(err, $ifaceNil))) {
-			$s = -1; return [$ifaceNil, err];
-		}
+		var _i, _r, _r$1, _r$2, _ref, _tuple, car, cons, e, list, ok, $s, $r;
+		/* */ $s = 0; var $f, $c = false; if (this !== undefined && this.$blk !== undefined) { $f = this; $c = true; _i = $f._i; _r = $f._r; _r$1 = $f._r$1; _r$2 = $f._r$2; _ref = $f._ref; _tuple = $f._tuple; car = $f.car; cons = $f.cons; e = $f.e; list = $f.list; ok = $f.ok; $s = $f.$s; $r = $f.$r; } s: while (true) { switch ($s) { case 0:
+		_r = Listp($clone(e, env.Environment), list); /* */ $s = 1; case 1: if($c) { $c = false; _r = _r.$blk(); } if (_r && _r.$blk !== undefined) { break s; }
+		_tuple = _r;
+		ok = _tuple[0];
+		/* */ if ($interfaceIsEqual(ok, $pkg.Nil)) { $s = 2; continue; }
+		/* */ $s = 3; continue;
+		/* if ($interfaceIsEqual(ok, $pkg.Nil)) { */ case 2:
+			_r$1 = instance.NewDomainError($clone(e, env.Environment), list, class$1.List); /* */ $s = 4; case 4: if($c) { $c = false; _r$1 = _r$1.$blk(); } if (_r$1 && _r$1.$blk !== undefined) { break s; }
+			$s = -1; return [$ifaceNil, _r$1];
+		/* } */ case 3:
 		cons = $pkg.Nil;
-		_r$1 = $assertType(list, instance.List).Slice(); /* */ $s = 2; case 2: if($c) { $c = false; _r$1 = _r$1.$blk(); } if (_r$1 && _r$1.$blk !== undefined) { break s; }
-		_ref = _r$1;
+		_r$2 = $assertType(list, instance.List).Slice(); /* */ $s = 5; case 5: if($c) { $c = false; _r$2 = _r$2.$blk(); } if (_r$2 && _r$2.$blk !== undefined) { break s; }
+		_ref = _r$2;
 		_i = 0;
-		/* while (true) { */ case 3:
-			/* if (!(_i < _ref.$length)) { break; } */ if(!(_i < _ref.$length)) { $s = 4; continue; }
+		/* while (true) { */ case 6:
+			/* if (!(_i < _ref.$length)) { break; } */ if(!(_i < _ref.$length)) { $s = 7; continue; }
 			car = ((_i < 0 || _i >= _ref.$length) ? ($throwRuntimeError("index out of range"), undefined) : _ref.$array[_ref.$offset + _i]);
 			cons = instance.NewCons(car, cons);
 			_i++;
-		/* } */ $s = 3; continue; case 4:
+		/* } */ $s = 6; continue; case 7:
 		$s = -1; return [cons, $ifaceNil];
-		/* */ } return; } if ($f === undefined) { $f = { $blk: Reverse }; } $f._i = _i; $f._r = _r; $f._r$1 = _r$1; $f._ref = _ref; $f.car = car; $f.cons = cons; $f.e = e; $f.err = err; $f.list = list; $f.$s = $s; $f.$r = $r; return $f;
+		/* */ } return; } if ($f === undefined) { $f = { $blk: Reverse }; } $f._i = _i; $f._r = _r; $f._r$1 = _r$1; $f._r$2 = _r$2; $f._ref = _ref; $f._tuple = _tuple; $f.car = car; $f.cons = cons; $f.e = e; $f.list = list; $f.ok = ok; $f.$s = $s; $f.$r = $r; return $f;
 	};
 	$pkg.Reverse = Reverse;
 	Nreverse = function(e, list) {
-		var _i, _r, _r$1, _ref, car, cons, e, err, list, $s, $r;
-		/* */ $s = 0; var $f, $c = false; if (this !== undefined && this.$blk !== undefined) { $f = this; $c = true; _i = $f._i; _r = $f._r; _r$1 = $f._r$1; _ref = $f._ref; car = $f.car; cons = $f.cons; e = $f.e; err = $f.err; list = $f.list; $s = $f.$s; $r = $f.$r; } s: while (true) { switch ($s) { case 0:
-		_r = ensure($clone(e, env.Environment), class$1.List, new sliceType([list])); /* */ $s = 1; case 1: if($c) { $c = false; _r = _r.$blk(); } if (_r && _r.$blk !== undefined) { break s; }
-		err = _r;
-		if (!($interfaceIsEqual(err, $ifaceNil))) {
-			$s = -1; return [$ifaceNil, err];
-		}
+		var _i, _r, _r$1, _r$2, _ref, _tuple, car, cons, e, list, ok, $s, $r;
+		/* */ $s = 0; var $f, $c = false; if (this !== undefined && this.$blk !== undefined) { $f = this; $c = true; _i = $f._i; _r = $f._r; _r$1 = $f._r$1; _r$2 = $f._r$2; _ref = $f._ref; _tuple = $f._tuple; car = $f.car; cons = $f.cons; e = $f.e; list = $f.list; ok = $f.ok; $s = $f.$s; $r = $f.$r; } s: while (true) { switch ($s) { case 0:
+		_r = Listp($clone(e, env.Environment), list); /* */ $s = 1; case 1: if($c) { $c = false; _r = _r.$blk(); } if (_r && _r.$blk !== undefined) { break s; }
+		_tuple = _r;
+		ok = _tuple[0];
+		/* */ if ($interfaceIsEqual(ok, $pkg.Nil)) { $s = 2; continue; }
+		/* */ $s = 3; continue;
+		/* if ($interfaceIsEqual(ok, $pkg.Nil)) { */ case 2:
+			_r$1 = instance.NewDomainError($clone(e, env.Environment), list, class$1.List); /* */ $s = 4; case 4: if($c) { $c = false; _r$1 = _r$1.$blk(); } if (_r$1 && _r$1.$blk !== undefined) { break s; }
+			$s = -1; return [$ifaceNil, _r$1];
+		/* } */ case 3:
 		cons = $pkg.Nil;
-		_r$1 = $assertType(list, instance.List).Slice(); /* */ $s = 2; case 2: if($c) { $c = false; _r$1 = _r$1.$blk(); } if (_r$1 && _r$1.$blk !== undefined) { break s; }
-		_ref = _r$1;
+		_r$2 = $assertType(list, instance.List).Slice(); /* */ $s = 5; case 5: if($c) { $c = false; _r$2 = _r$2.$blk(); } if (_r$2 && _r$2.$blk !== undefined) { break s; }
+		_ref = _r$2;
 		_i = 0;
-		/* while (true) { */ case 3:
-			/* if (!(_i < _ref.$length)) { break; } */ if(!(_i < _ref.$length)) { $s = 4; continue; }
+		/* while (true) { */ case 6:
+			/* if (!(_i < _ref.$length)) { break; } */ if(!(_i < _ref.$length)) { $s = 7; continue; }
 			car = ((_i < 0 || _i >= _ref.$length) ? ($throwRuntimeError("index out of range"), undefined) : _ref.$array[_ref.$offset + _i]);
 			cons = instance.NewCons(car, cons);
 			_i++;
-		/* } */ $s = 3; continue; case 4:
+		/* } */ $s = 6; continue; case 7:
 		$s = -1; return [cons, $ifaceNil];
-		/* */ } return; } if ($f === undefined) { $f = { $blk: Nreverse }; } $f._i = _i; $f._r = _r; $f._r$1 = _r$1; $f._ref = _ref; $f.car = car; $f.cons = cons; $f.e = e; $f.err = err; $f.list = list; $f.$s = $s; $f.$r = $r; return $f;
+		/* */ } return; } if ($f === undefined) { $f = { $blk: Nreverse }; } $f._i = _i; $f._r = _r; $f._r$1 = _r$1; $f._r$2 = _r$2; $f._ref = _ref; $f._tuple = _tuple; $f.car = car; $f.cons = cons; $f.e = e; $f.list = list; $f.ok = ok; $f.$s = $s; $f.$r = $r; return $f;
 	};
 	$pkg.Nreverse = Nreverse;
 	Append = function(e, lists) {
-		var _i, _i$1, _r, _r$1, _ref, _ref$1, _tuple, _tuple$1, cdr, e, elt, err, err$1, err$2, it, list, lists, result, $s, $r;
-		/* */ $s = 0; var $f, $c = false; if (this !== undefined && this.$blk !== undefined) { $f = this; $c = true; _i = $f._i; _i$1 = $f._i$1; _r = $f._r; _r$1 = $f._r$1; _ref = $f._ref; _ref$1 = $f._ref$1; _tuple = $f._tuple; _tuple$1 = $f._tuple$1; cdr = $f.cdr; e = $f.e; elt = $f.elt; err = $f.err; err$1 = $f.err$1; err$2 = $f.err$2; it = $f.it; list = $f.list; lists = $f.lists; result = $f.result; $s = $f.$s; $r = $f.$r; } s: while (true) { switch ($s) { case 0:
+		var _i, _i$1, _i$2, _r, _r$1, _r$2, _ref, _ref$1, _ref$2, _tuple, _tuple$1, _tuple$2, cdr, e, elt, err, err$1, it, list, list$1, lists, ok, result, $s, $r;
+		/* */ $s = 0; var $f, $c = false; if (this !== undefined && this.$blk !== undefined) { $f = this; $c = true; _i = $f._i; _i$1 = $f._i$1; _i$2 = $f._i$2; _r = $f._r; _r$1 = $f._r$1; _r$2 = $f._r$2; _ref = $f._ref; _ref$1 = $f._ref$1; _ref$2 = $f._ref$2; _tuple = $f._tuple; _tuple$1 = $f._tuple$1; _tuple$2 = $f._tuple$2; cdr = $f.cdr; e = $f.e; elt = $f.elt; err = $f.err; err$1 = $f.err$1; it = $f.it; list = $f.list; list$1 = $f.list$1; lists = $f.lists; ok = $f.ok; result = $f.result; $s = $f.$s; $r = $f.$r; } s: while (true) { switch ($s) { case 0:
 		_tuple = List($clone(e, env.Environment), new sliceType([$pkg.Nil]));
 		result = _tuple[0];
 		err = _tuple[1];
@@ -37920,117 +37932,155 @@ $packages["github.com/ta2gch/iris/runtime"] = (function() {
 			$s = -1; return [$ifaceNil, err];
 		}
 		cdr = result;
-		_r = ensure($clone(e, env.Environment), class$1.List, lists); /* */ $s = 1; case 1: if($c) { $c = false; _r = _r.$blk(); } if (_r && _r.$blk !== undefined) { break s; }
-		err$1 = _r;
-		if (!($interfaceIsEqual(err$1, $ifaceNil))) {
-			$s = -1; return [$ifaceNil, err$1];
-		}
 		_ref = lists;
 		_i = 0;
-		/* while (true) { */ case 2:
-			/* if (!(_i < _ref.$length)) { break; } */ if(!(_i < _ref.$length)) { $s = 3; continue; }
+		/* while (true) { */ case 1:
+			/* if (!(_i < _ref.$length)) { break; } */ if(!(_i < _ref.$length)) { $s = 2; continue; }
 			list = ((_i < 0 || _i >= _ref.$length) ? ($throwRuntimeError("index out of range"), undefined) : _ref.$array[_ref.$offset + _i]);
-			_r$1 = $assertType(list, instance.List).Slice(); /* */ $s = 4; case 4: if($c) { $c = false; _r$1 = _r$1.$blk(); } if (_r$1 && _r$1.$blk !== undefined) { break s; }
-			_ref$1 = _r$1;
-			_i$1 = 0;
-			/* while (true) { */ case 5:
-				/* if (!(_i$1 < _ref$1.$length)) { break; } */ if(!(_i$1 < _ref$1.$length)) { $s = 6; continue; }
-				elt = ((_i$1 < 0 || _i$1 >= _ref$1.$length) ? ($throwRuntimeError("index out of range"), undefined) : _ref$1.$array[_ref$1.$offset + _i$1]);
-				_tuple$1 = List($clone(e, env.Environment), new sliceType([elt]));
-				it = _tuple$1[0];
-				err$2 = _tuple$1[1];
-				if (!($interfaceIsEqual(err$2, $ifaceNil))) {
-					$s = -1; return [$ifaceNil, err$2];
+			_r = Listp($clone(e, env.Environment), list); /* */ $s = 3; case 3: if($c) { $c = false; _r = _r.$blk(); } if (_r && _r.$blk !== undefined) { break s; }
+			_tuple$1 = _r;
+			ok = _tuple$1[0];
+			/* */ if ($interfaceIsEqual(ok, $pkg.Nil)) { $s = 4; continue; }
+			/* */ $s = 5; continue;
+			/* if ($interfaceIsEqual(ok, $pkg.Nil)) { */ case 4:
+				_r$1 = instance.NewDomainError($clone(e, env.Environment), list, class$1.List); /* */ $s = 6; case 6: if($c) { $c = false; _r$1 = _r$1.$blk(); } if (_r$1 && _r$1.$blk !== undefined) { break s; }
+				$s = -1; return [$ifaceNil, _r$1];
+			/* } */ case 5:
+			_i++;
+		/* } */ $s = 1; continue; case 2:
+		_ref$1 = lists;
+		_i$1 = 0;
+		/* while (true) { */ case 7:
+			/* if (!(_i$1 < _ref$1.$length)) { break; } */ if(!(_i$1 < _ref$1.$length)) { $s = 8; continue; }
+			list$1 = ((_i$1 < 0 || _i$1 >= _ref$1.$length) ? ($throwRuntimeError("index out of range"), undefined) : _ref$1.$array[_ref$1.$offset + _i$1]);
+			_r$2 = $assertType(list$1, instance.List).Slice(); /* */ $s = 9; case 9: if($c) { $c = false; _r$2 = _r$2.$blk(); } if (_r$2 && _r$2.$blk !== undefined) { break s; }
+			_ref$2 = _r$2;
+			_i$2 = 0;
+			/* while (true) { */ case 10:
+				/* if (!(_i$2 < _ref$2.$length)) { break; } */ if(!(_i$2 < _ref$2.$length)) { $s = 11; continue; }
+				elt = ((_i$2 < 0 || _i$2 >= _ref$2.$length) ? ($throwRuntimeError("index out of range"), undefined) : _ref$2.$array[_ref$2.$offset + _i$2]);
+				_tuple$2 = List($clone(e, env.Environment), new sliceType([elt]));
+				it = _tuple$2[0];
+				err$1 = _tuple$2[1];
+				if (!($interfaceIsEqual(err$1, $ifaceNil))) {
+					$s = -1; return [$ifaceNil, err$1];
 				}
 				$assertType(cdr, ptrType$1).Cdr = it;
 				cdr = $assertType(cdr, ptrType$1).Cdr;
-				_i$1++;
-			/* } */ $s = 5; continue; case 6:
-			_i++;
-		/* } */ $s = 2; continue; case 3:
+				_i$2++;
+			/* } */ $s = 10; continue; case 11:
+			_i$1++;
+		/* } */ $s = 7; continue; case 8:
 		$s = -1; return [$assertType(result, ptrType$1).Cdr, $ifaceNil];
-		/* */ } return; } if ($f === undefined) { $f = { $blk: Append }; } $f._i = _i; $f._i$1 = _i$1; $f._r = _r; $f._r$1 = _r$1; $f._ref = _ref; $f._ref$1 = _ref$1; $f._tuple = _tuple; $f._tuple$1 = _tuple$1; $f.cdr = cdr; $f.e = e; $f.elt = elt; $f.err = err; $f.err$1 = err$1; $f.err$2 = err$2; $f.it = it; $f.list = list; $f.lists = lists; $f.result = result; $f.$s = $s; $f.$r = $r; return $f;
+		/* */ } return; } if ($f === undefined) { $f = { $blk: Append }; } $f._i = _i; $f._i$1 = _i$1; $f._i$2 = _i$2; $f._r = _r; $f._r$1 = _r$1; $f._r$2 = _r$2; $f._ref = _ref; $f._ref$1 = _ref$1; $f._ref$2 = _ref$2; $f._tuple = _tuple; $f._tuple$1 = _tuple$1; $f._tuple$2 = _tuple$2; $f.cdr = cdr; $f.e = e; $f.elt = elt; $f.err = err; $f.err$1 = err$1; $f.it = it; $f.list = list; $f.list$1 = list$1; $f.lists = lists; $f.ok = ok; $f.result = result; $f.$s = $s; $f.$r = $r; return $f;
 	};
 	$pkg.Append = Append;
 	Member = function(e, obj, list) {
-		var _r, _r$1, _r$2, _r$3, e, err, list, obj, $s, $r;
-		/* */ $s = 0; var $f, $c = false; if (this !== undefined && this.$blk !== undefined) { $f = this; $c = true; _r = $f._r; _r$1 = $f._r$1; _r$2 = $f._r$2; _r$3 = $f._r$3; e = $f.e; err = $f.err; list = $f.list; obj = $f.obj; $s = $f.$s; $r = $f.$r; } s: while (true) { switch ($s) { case 0:
-		_r = ensure($clone(e, env.Environment), class$1.List, new sliceType([list])); /* */ $s = 1; case 1: if($c) { $c = false; _r = _r.$blk(); } if (_r && _r.$blk !== undefined) { break s; }
-		err = _r;
-		if (!($interfaceIsEqual(err, $ifaceNil))) {
-			$s = -1; return [$ifaceNil, err];
-		}
-		_r$1 = ilos.InstanceOf(class$1.Cons, list); /* */ $s = 4; case 4: if($c) { $c = false; _r$1 = _r$1.$blk(); } if (_r$1 && _r$1.$blk !== undefined) { break s; }
-		/* */ if (!_r$1 || $interfaceIsEqual($assertType(list, ptrType$1).Car, obj)) { $s = 2; continue; }
+		var _r, _r$1, _r$2, _r$3, _r$4, _tuple, e, list, obj, ok, $s, $r;
+		/* */ $s = 0; var $f, $c = false; if (this !== undefined && this.$blk !== undefined) { $f = this; $c = true; _r = $f._r; _r$1 = $f._r$1; _r$2 = $f._r$2; _r$3 = $f._r$3; _r$4 = $f._r$4; _tuple = $f._tuple; e = $f.e; list = $f.list; obj = $f.obj; ok = $f.ok; $s = $f.$s; $r = $f.$r; } s: while (true) { switch ($s) { case 0:
+		_r = Listp($clone(e, env.Environment), list); /* */ $s = 1; case 1: if($c) { $c = false; _r = _r.$blk(); } if (_r && _r.$blk !== undefined) { break s; }
+		_tuple = _r;
+		ok = _tuple[0];
+		/* */ if ($interfaceIsEqual(ok, $pkg.Nil)) { $s = 2; continue; }
 		/* */ $s = 3; continue;
-		/* if (!_r$1 || $interfaceIsEqual($assertType(list, ptrType$1).Car, obj)) { */ case 2:
-			$s = -1; return [list, $ifaceNil];
+		/* if ($interfaceIsEqual(ok, $pkg.Nil)) { */ case 2:
+			_r$1 = instance.NewDomainError($clone(e, env.Environment), list, class$1.List); /* */ $s = 4; case 4: if($c) { $c = false; _r$1 = _r$1.$blk(); } if (_r$1 && _r$1.$blk !== undefined) { break s; }
+			$s = -1; return [$ifaceNil, _r$1];
 		/* } */ case 3:
-		_r$2 = ilos.InstanceOf(class$1.Cons, $assertType(list, ptrType$1).Cdr); /* */ $s = 7; case 7: if($c) { $c = false; _r$2 = _r$2.$blk(); } if (_r$2 && _r$2.$blk !== undefined) { break s; }
-		/* */ if (!_r$2) { $s = 5; continue; }
+		_r$2 = ilos.InstanceOf(class$1.Cons, list); /* */ $s = 7; case 7: if($c) { $c = false; _r$2 = _r$2.$blk(); } if (_r$2 && _r$2.$blk !== undefined) { break s; }
+		/* */ if (!_r$2 || $interfaceIsEqual($assertType(list, ptrType$1).Car, obj)) { $s = 5; continue; }
 		/* */ $s = 6; continue;
-		/* if (!_r$2) { */ case 5:
-			$s = -1; return [$assertType(list, ptrType$1).Cdr, $ifaceNil];
+		/* if (!_r$2 || $interfaceIsEqual($assertType(list, ptrType$1).Car, obj)) { */ case 5:
+			$s = -1; return [list, $ifaceNil];
 		/* } */ case 6:
-		_r$3 = Member($clone(e, env.Environment), obj, $assertType(list, ptrType$1).Cdr); /* */ $s = 8; case 8: if($c) { $c = false; _r$3 = _r$3.$blk(); } if (_r$3 && _r$3.$blk !== undefined) { break s; }
-		$s = -1; return _r$3;
-		/* */ } return; } if ($f === undefined) { $f = { $blk: Member }; } $f._r = _r; $f._r$1 = _r$1; $f._r$2 = _r$2; $f._r$3 = _r$3; $f.e = e; $f.err = err; $f.list = list; $f.obj = obj; $f.$s = $s; $f.$r = $r; return $f;
+		_r$3 = ilos.InstanceOf(class$1.Cons, $assertType(list, ptrType$1).Cdr); /* */ $s = 10; case 10: if($c) { $c = false; _r$3 = _r$3.$blk(); } if (_r$3 && _r$3.$blk !== undefined) { break s; }
+		/* */ if (!_r$3) { $s = 8; continue; }
+		/* */ $s = 9; continue;
+		/* if (!_r$3) { */ case 8:
+			$s = -1; return [$assertType(list, ptrType$1).Cdr, $ifaceNil];
+		/* } */ case 9:
+		_r$4 = Member($clone(e, env.Environment), obj, $assertType(list, ptrType$1).Cdr); /* */ $s = 11; case 11: if($c) { $c = false; _r$4 = _r$4.$blk(); } if (_r$4 && _r$4.$blk !== undefined) { break s; }
+		$s = -1; return _r$4;
+		/* */ } return; } if ($f === undefined) { $f = { $blk: Member }; } $f._r = _r; $f._r$1 = _r$1; $f._r$2 = _r$2; $f._r$3 = _r$3; $f._r$4 = _r$4; $f._tuple = _tuple; $f.e = e; $f.list = list; $f.obj = obj; $f.ok = ok; $f.$s = $s; $f.$r = $r; return $f;
 	};
 	$pkg.Member = Member;
 	Mapcar = function(e, function$1, list1, lists) {
-		var _i, _r, _r$1, _r$2, _r$3, _r$4, _ref, _tuple, _tuple$1, arguments$1, car, cdr, e, err, err$1, err$2, err$3, function$1, list, list1, lists, rests, $s, $r;
-		/* */ $s = 0; var $f, $c = false; if (this !== undefined && this.$blk !== undefined) { $f = this; $c = true; _i = $f._i; _r = $f._r; _r$1 = $f._r$1; _r$2 = $f._r$2; _r$3 = $f._r$3; _r$4 = $f._r$4; _ref = $f._ref; _tuple = $f._tuple; _tuple$1 = $f._tuple$1; arguments$1 = $f.arguments$1; car = $f.car; cdr = $f.cdr; e = $f.e; err = $f.err; err$1 = $f.err$1; err$2 = $f.err$2; err$3 = $f.err$3; function$1 = $f.function$1; list = $f.list; list1 = $f.list1; lists = $f.lists; rests = $f.rests; $s = $f.$s; $r = $f.$r; } s: while (true) { switch ($s) { case 0:
+		var _i, _i$1, _i$2, _r, _r$1, _r$2, _r$3, _r$4, _r$5, _r$6, _ref, _ref$1, _ref$2, _tuple, _tuple$1, _tuple$2, _tuple$3, _tuple$4, arguments$1, car, cdr, e, err, function$1, list, list$1, list$2, list1, lists, ok, ok$1, ok$2, rests, $s, $r;
+		/* */ $s = 0; var $f, $c = false; if (this !== undefined && this.$blk !== undefined) { $f = this; $c = true; _i = $f._i; _i$1 = $f._i$1; _i$2 = $f._i$2; _r = $f._r; _r$1 = $f._r$1; _r$2 = $f._r$2; _r$3 = $f._r$3; _r$4 = $f._r$4; _r$5 = $f._r$5; _r$6 = $f._r$6; _ref = $f._ref; _ref$1 = $f._ref$1; _ref$2 = $f._ref$2; _tuple = $f._tuple; _tuple$1 = $f._tuple$1; _tuple$2 = $f._tuple$2; _tuple$3 = $f._tuple$3; _tuple$4 = $f._tuple$4; arguments$1 = $f.arguments$1; car = $f.car; cdr = $f.cdr; e = $f.e; err = $f.err; function$1 = $f.function$1; list = $f.list; list$1 = $f.list$1; list$2 = $f.list$2; list1 = $f.list1; lists = $f.lists; ok = $f.ok; ok$1 = $f.ok$1; ok$2 = $f.ok$2; rests = $f.rests; $s = $f.$s; $r = $f.$r; } s: while (true) { switch ($s) { case 0:
 		lists = $appendSlice(new sliceType([list1]), lists);
-		_r = ensure($clone(e, env.Environment), class$1.Function, new sliceType([function$1])); /* */ $s = 1; case 1: if($c) { $c = false; _r = _r.$blk(); } if (_r && _r.$blk !== undefined) { break s; }
-		err = _r;
+		_r = Functionp($clone(e, env.Environment), function$1); /* */ $s = 1; case 1: if($c) { $c = false; _r = _r.$blk(); } if (_r && _r.$blk !== undefined) { break s; }
+		_tuple = _r;
+		ok = _tuple[0];
+		/* */ if ($interfaceIsEqual(ok, $pkg.Nil)) { $s = 2; continue; }
+		/* */ $s = 3; continue;
+		/* if ($interfaceIsEqual(ok, $pkg.Nil)) { */ case 2:
+			_r$1 = instance.NewDomainError($clone(e, env.Environment), function$1, class$1.Function); /* */ $s = 4; case 4: if($c) { $c = false; _r$1 = _r$1.$blk(); } if (_r$1 && _r$1.$blk !== undefined) { break s; }
+			$s = -1; return [$ifaceNil, _r$1];
+		/* } */ case 3:
+		_ref = lists;
+		_i = 0;
+		/* while (true) { */ case 5:
+			/* if (!(_i < _ref.$length)) { break; } */ if(!(_i < _ref.$length)) { $s = 6; continue; }
+			list = ((_i < 0 || _i >= _ref.$length) ? ($throwRuntimeError("index out of range"), undefined) : _ref.$array[_ref.$offset + _i]);
+			_r$2 = Listp($clone(e, env.Environment), list); /* */ $s = 7; case 7: if($c) { $c = false; _r$2 = _r$2.$blk(); } if (_r$2 && _r$2.$blk !== undefined) { break s; }
+			_tuple$1 = _r$2;
+			ok$1 = _tuple$1[0];
+			/* */ if ($interfaceIsEqual(ok$1, $pkg.Nil)) { $s = 8; continue; }
+			/* */ $s = 9; continue;
+			/* if ($interfaceIsEqual(ok$1, $pkg.Nil)) { */ case 8:
+				_r$3 = instance.NewDomainError($clone(e, env.Environment), list, class$1.List); /* */ $s = 10; case 10: if($c) { $c = false; _r$3 = _r$3.$blk(); } if (_r$3 && _r$3.$blk !== undefined) { break s; }
+				$s = -1; return [$ifaceNil, _r$3];
+			/* } */ case 9:
+			_i++;
+		/* } */ $s = 5; continue; case 6:
+		arguments$1 = new sliceType([]);
+		rests = new sliceType([]);
+		_ref$1 = lists;
+		_i$1 = 0;
+		while (true) {
+			if (!(_i$1 < _ref$1.$length)) { break; }
+			list$1 = ((_i$1 < 0 || _i$1 >= _ref$1.$length) ? ($throwRuntimeError("index out of range"), undefined) : _ref$1.$array[_ref$1.$offset + _i$1]);
+			if ($interfaceIsEqual(list$1, $pkg.Nil)) {
+				$s = -1; return [$pkg.Nil, $ifaceNil];
+			}
+			arguments$1 = $append(arguments$1, $assertType(list$1, ptrType$1).Car);
+			rests = $append(rests, $assertType(list$1, ptrType$1).Cdr);
+			_i$1++;
+		}
+		_r$4 = $assertType(function$1, instance.Applicable).Apply($clone(e.NewDynamic(), env.Environment), arguments$1); /* */ $s = 11; case 11: if($c) { $c = false; _r$4 = _r$4.$blk(); } if (_r$4 && _r$4.$blk !== undefined) { break s; }
+		_tuple$2 = _r$4;
+		car = _tuple$2[0];
+		err = _tuple$2[1];
 		if (!($interfaceIsEqual(err, $ifaceNil))) {
 			$s = -1; return [$ifaceNil, err];
 		}
-		_r$1 = ensure($clone(e, env.Environment), class$1.List, lists); /* */ $s = 2; case 2: if($c) { $c = false; _r$1 = _r$1.$blk(); } if (_r$1 && _r$1.$blk !== undefined) { break s; }
-		err$1 = _r$1;
-		if (!($interfaceIsEqual(err$1, $ifaceNil))) {
-			$s = -1; return [$ifaceNil, err$1];
-		}
-		arguments$1 = new sliceType([]);
-		rests = new sliceType([]);
-		_ref = lists;
-		_i = 0;
-		while (true) {
-			if (!(_i < _ref.$length)) { break; }
-			list = ((_i < 0 || _i >= _ref.$length) ? ($throwRuntimeError("index out of range"), undefined) : _ref.$array[_ref.$offset + _i]);
-			if ($interfaceIsEqual(list, $pkg.Nil)) {
-				$s = -1; return [$pkg.Nil, $ifaceNil];
-			}
-			arguments$1 = $append(arguments$1, $assertType(list, ptrType$1).Car);
-			rests = $append(rests, $assertType(list, ptrType$1).Cdr);
-			_i++;
-		}
-		_r$2 = $assertType(function$1, instance.Applicable).Apply($clone(e.NewDynamic(), env.Environment), arguments$1); /* */ $s = 3; case 3: if($c) { $c = false; _r$2 = _r$2.$blk(); } if (_r$2 && _r$2.$blk !== undefined) { break s; }
-		_tuple = _r$2;
-		car = _tuple[0];
-		err$2 = _tuple[1];
-		if (!($interfaceIsEqual(err$2, $ifaceNil))) {
-			$s = -1; return [$ifaceNil, err$2];
-		}
 		cdr = $ifaceNil;
-		_r$3 = ensure($clone(e, env.Environment), class$1.List, rests); /* */ $s = 4; case 4: if($c) { $c = false; _r$3 = _r$3.$blk(); } if (_r$3 && _r$3.$blk !== undefined) { break s; }
-		err$3 = _r$3;
-		/* */ if (!($interfaceIsEqual(err$3, $ifaceNil))) { $s = 5; continue; }
-		/* */ $s = 6; continue;
-		/* if (!($interfaceIsEqual(err$3, $ifaceNil))) { */ case 5:
-			cdr = $pkg.Nil;
-			$s = 7; continue;
-		/* } else { */ case 6:
-			_r$4 = Mapcar($clone(e, env.Environment), function$1, (0 >= rests.$length ? ($throwRuntimeError("index out of range"), undefined) : rests.$array[rests.$offset + 0]), $subslice(rests, 1)); /* */ $s = 8; case 8: if($c) { $c = false; _r$4 = _r$4.$blk(); } if (_r$4 && _r$4.$blk !== undefined) { break s; }
-			_tuple$1 = _r$4;
-			cdr = _tuple$1[0];
-			err$3 = _tuple$1[1];
-			if (!($interfaceIsEqual(err$3, $ifaceNil))) {
-				$s = -1; return [$ifaceNil, err$3];
+		_ref$2 = lists;
+		_i$2 = 0;
+		/* while (true) { */ case 12:
+			/* if (!(_i$2 < _ref$2.$length)) { break; } */ if(!(_i$2 < _ref$2.$length)) { $s = 13; continue; }
+			list$2 = ((_i$2 < 0 || _i$2 >= _ref$2.$length) ? ($throwRuntimeError("index out of range"), undefined) : _ref$2.$array[_ref$2.$offset + _i$2]);
+			_r$5 = Listp($clone(e, env.Environment), list$2); /* */ $s = 14; case 14: if($c) { $c = false; _r$5 = _r$5.$blk(); } if (_r$5 && _r$5.$blk !== undefined) { break s; }
+			_tuple$3 = _r$5;
+			ok$2 = _tuple$3[0];
+			if ($interfaceIsEqual(ok$2, $pkg.Nil)) {
+				cdr = $pkg.Nil;
 			}
-		/* } */ case 7:
+			_i$2++;
+		/* } */ $s = 12; continue; case 13:
+		/* */ if ($interfaceIsEqual(cdr, $ifaceNil)) { $s = 15; continue; }
+		/* */ $s = 16; continue;
+		/* if ($interfaceIsEqual(cdr, $ifaceNil)) { */ case 15:
+			_r$6 = Mapcar($clone(e, env.Environment), function$1, (0 >= rests.$length ? ($throwRuntimeError("index out of range"), undefined) : rests.$array[rests.$offset + 0]), $subslice(rests, 1)); /* */ $s = 17; case 17: if($c) { $c = false; _r$6 = _r$6.$blk(); } if (_r$6 && _r$6.$blk !== undefined) { break s; }
+			_tuple$4 = _r$6;
+			cdr = _tuple$4[0];
+			err = _tuple$4[1];
+			if (!($interfaceIsEqual(err, $ifaceNil))) {
+				$s = -1; return [$ifaceNil, err];
+			}
+		/* } */ case 16:
 		$s = -1; return Cons($clone(e, env.Environment), car, cdr);
-		/* */ } return; } if ($f === undefined) { $f = { $blk: Mapcar }; } $f._i = _i; $f._r = _r; $f._r$1 = _r$1; $f._r$2 = _r$2; $f._r$3 = _r$3; $f._r$4 = _r$4; $f._ref = _ref; $f._tuple = _tuple; $f._tuple$1 = _tuple$1; $f.arguments$1 = arguments$1; $f.car = car; $f.cdr = cdr; $f.e = e; $f.err = err; $f.err$1 = err$1; $f.err$2 = err$2; $f.err$3 = err$3; $f.function$1 = function$1; $f.list = list; $f.list1 = list1; $f.lists = lists; $f.rests = rests; $f.$s = $s; $f.$r = $r; return $f;
+		/* */ } return; } if ($f === undefined) { $f = { $blk: Mapcar }; } $f._i = _i; $f._i$1 = _i$1; $f._i$2 = _i$2; $f._r = _r; $f._r$1 = _r$1; $f._r$2 = _r$2; $f._r$3 = _r$3; $f._r$4 = _r$4; $f._r$5 = _r$5; $f._r$6 = _r$6; $f._ref = _ref; $f._ref$1 = _ref$1; $f._ref$2 = _ref$2; $f._tuple = _tuple; $f._tuple$1 = _tuple$1; $f._tuple$2 = _tuple$2; $f._tuple$3 = _tuple$3; $f._tuple$4 = _tuple$4; $f.arguments$1 = arguments$1; $f.car = car; $f.cdr = cdr; $f.e = e; $f.err = err; $f.function$1 = function$1; $f.list = list; $f.list$1 = list$1; $f.list$2 = list$2; $f.list1 = list1; $f.lists = lists; $f.ok = ok; $f.ok$1 = ok$1; $f.ok$2 = ok$2; $f.rests = rests; $f.$s = $s; $f.$r = $r; return $f;
 	};
 	$pkg.Mapcar = Mapcar;
 	Mapc = function(e, function$1, list1, lists) {
@@ -38060,59 +38110,82 @@ $packages["github.com/ta2gch/iris/runtime"] = (function() {
 	};
 	$pkg.Mapcan = Mapcan;
 	Maplist = function(e, function$1, list1, lists) {
-		var _i, _r, _r$1, _r$2, _r$3, _r$4, _ref, _tuple, _tuple$1, arguments$1, car, cdr, e, err, err$1, err$2, err$3, function$1, list, list1, lists, rests, $s, $r;
-		/* */ $s = 0; var $f, $c = false; if (this !== undefined && this.$blk !== undefined) { $f = this; $c = true; _i = $f._i; _r = $f._r; _r$1 = $f._r$1; _r$2 = $f._r$2; _r$3 = $f._r$3; _r$4 = $f._r$4; _ref = $f._ref; _tuple = $f._tuple; _tuple$1 = $f._tuple$1; arguments$1 = $f.arguments$1; car = $f.car; cdr = $f.cdr; e = $f.e; err = $f.err; err$1 = $f.err$1; err$2 = $f.err$2; err$3 = $f.err$3; function$1 = $f.function$1; list = $f.list; list1 = $f.list1; lists = $f.lists; rests = $f.rests; $s = $f.$s; $r = $f.$r; } s: while (true) { switch ($s) { case 0:
+		var _i, _i$1, _i$2, _r, _r$1, _r$2, _r$3, _r$4, _r$5, _r$6, _ref, _ref$1, _ref$2, _tuple, _tuple$1, _tuple$2, _tuple$3, _tuple$4, arguments$1, car, cdr, e, err, function$1, list, list$1, list$2, list1, lists, ok, ok$1, ok$2, rests, $s, $r;
+		/* */ $s = 0; var $f, $c = false; if (this !== undefined && this.$blk !== undefined) { $f = this; $c = true; _i = $f._i; _i$1 = $f._i$1; _i$2 = $f._i$2; _r = $f._r; _r$1 = $f._r$1; _r$2 = $f._r$2; _r$3 = $f._r$3; _r$4 = $f._r$4; _r$5 = $f._r$5; _r$6 = $f._r$6; _ref = $f._ref; _ref$1 = $f._ref$1; _ref$2 = $f._ref$2; _tuple = $f._tuple; _tuple$1 = $f._tuple$1; _tuple$2 = $f._tuple$2; _tuple$3 = $f._tuple$3; _tuple$4 = $f._tuple$4; arguments$1 = $f.arguments$1; car = $f.car; cdr = $f.cdr; e = $f.e; err = $f.err; function$1 = $f.function$1; list = $f.list; list$1 = $f.list$1; list$2 = $f.list$2; list1 = $f.list1; lists = $f.lists; ok = $f.ok; ok$1 = $f.ok$1; ok$2 = $f.ok$2; rests = $f.rests; $s = $f.$s; $r = $f.$r; } s: while (true) { switch ($s) { case 0:
 		lists = $appendSlice(new sliceType([list1]), lists);
-		_r = ensure($clone(e, env.Environment), class$1.Function, new sliceType([function$1])); /* */ $s = 1; case 1: if($c) { $c = false; _r = _r.$blk(); } if (_r && _r.$blk !== undefined) { break s; }
-		err = _r;
+		_r = Functionp($clone(e, env.Environment), function$1); /* */ $s = 1; case 1: if($c) { $c = false; _r = _r.$blk(); } if (_r && _r.$blk !== undefined) { break s; }
+		_tuple = _r;
+		ok = _tuple[0];
+		/* */ if ($interfaceIsEqual(ok, $pkg.Nil)) { $s = 2; continue; }
+		/* */ $s = 3; continue;
+		/* if ($interfaceIsEqual(ok, $pkg.Nil)) { */ case 2:
+			_r$1 = instance.NewDomainError($clone(e, env.Environment), function$1, class$1.Function); /* */ $s = 4; case 4: if($c) { $c = false; _r$1 = _r$1.$blk(); } if (_r$1 && _r$1.$blk !== undefined) { break s; }
+			$s = -1; return [$ifaceNil, _r$1];
+		/* } */ case 3:
+		_ref = lists;
+		_i = 0;
+		/* while (true) { */ case 5:
+			/* if (!(_i < _ref.$length)) { break; } */ if(!(_i < _ref.$length)) { $s = 6; continue; }
+			list = ((_i < 0 || _i >= _ref.$length) ? ($throwRuntimeError("index out of range"), undefined) : _ref.$array[_ref.$offset + _i]);
+			_r$2 = Listp($clone(e, env.Environment), list); /* */ $s = 7; case 7: if($c) { $c = false; _r$2 = _r$2.$blk(); } if (_r$2 && _r$2.$blk !== undefined) { break s; }
+			_tuple$1 = _r$2;
+			ok$1 = _tuple$1[0];
+			/* */ if ($interfaceIsEqual(ok$1, $pkg.Nil)) { $s = 8; continue; }
+			/* */ $s = 9; continue;
+			/* if ($interfaceIsEqual(ok$1, $pkg.Nil)) { */ case 8:
+				_r$3 = instance.NewDomainError($clone(e, env.Environment), list, class$1.List); /* */ $s = 10; case 10: if($c) { $c = false; _r$3 = _r$3.$blk(); } if (_r$3 && _r$3.$blk !== undefined) { break s; }
+				$s = -1; return [$ifaceNil, _r$3];
+			/* } */ case 9:
+			_i++;
+		/* } */ $s = 5; continue; case 6:
+		arguments$1 = new sliceType([]);
+		rests = new sliceType([]);
+		_ref$1 = lists;
+		_i$1 = 0;
+		while (true) {
+			if (!(_i$1 < _ref$1.$length)) { break; }
+			list$1 = ((_i$1 < 0 || _i$1 >= _ref$1.$length) ? ($throwRuntimeError("index out of range"), undefined) : _ref$1.$array[_ref$1.$offset + _i$1]);
+			if ($interfaceIsEqual(list$1, $pkg.Nil)) {
+				$s = -1; return [$pkg.Nil, $ifaceNil];
+			}
+			arguments$1 = $append(arguments$1, list$1);
+			rests = $append(rests, $assertType(list$1, ptrType$1).Cdr);
+			_i$1++;
+		}
+		_r$4 = $assertType(function$1, instance.Applicable).Apply($clone(e.NewDynamic(), env.Environment), arguments$1); /* */ $s = 11; case 11: if($c) { $c = false; _r$4 = _r$4.$blk(); } if (_r$4 && _r$4.$blk !== undefined) { break s; }
+		_tuple$2 = _r$4;
+		car = _tuple$2[0];
+		err = _tuple$2[1];
 		if (!($interfaceIsEqual(err, $ifaceNil))) {
 			$s = -1; return [$ifaceNil, err];
 		}
-		_r$1 = ensure($clone(e, env.Environment), class$1.List, lists); /* */ $s = 2; case 2: if($c) { $c = false; _r$1 = _r$1.$blk(); } if (_r$1 && _r$1.$blk !== undefined) { break s; }
-		err$1 = _r$1;
-		if (!($interfaceIsEqual(err$1, $ifaceNil))) {
-			$s = -1; return [$ifaceNil, err$1];
-		}
-		arguments$1 = new sliceType([]);
-		rests = new sliceType([]);
-		_ref = lists;
-		_i = 0;
-		while (true) {
-			if (!(_i < _ref.$length)) { break; }
-			list = ((_i < 0 || _i >= _ref.$length) ? ($throwRuntimeError("index out of range"), undefined) : _ref.$array[_ref.$offset + _i]);
-			if ($interfaceIsEqual(list, $pkg.Nil)) {
-				$s = -1; return [$pkg.Nil, $ifaceNil];
-			}
-			arguments$1 = $append(arguments$1, list);
-			rests = $append(rests, $assertType(list, ptrType$1).Cdr);
-			_i++;
-		}
-		_r$2 = $assertType(function$1, instance.Applicable).Apply($clone(e.NewDynamic(), env.Environment), arguments$1); /* */ $s = 3; case 3: if($c) { $c = false; _r$2 = _r$2.$blk(); } if (_r$2 && _r$2.$blk !== undefined) { break s; }
-		_tuple = _r$2;
-		car = _tuple[0];
-		err$2 = _tuple[1];
-		if (!($interfaceIsEqual(err$2, $ifaceNil))) {
-			$s = -1; return [$ifaceNil, err$2];
-		}
 		cdr = $ifaceNil;
-		_r$3 = ensure($clone(e, env.Environment), class$1.List, rests); /* */ $s = 4; case 4: if($c) { $c = false; _r$3 = _r$3.$blk(); } if (_r$3 && _r$3.$blk !== undefined) { break s; }
-		err$3 = _r$3;
-		/* */ if (!($interfaceIsEqual(err$3, $ifaceNil))) { $s = 5; continue; }
-		/* */ $s = 6; continue;
-		/* if (!($interfaceIsEqual(err$3, $ifaceNil))) { */ case 5:
-			cdr = $pkg.Nil;
-			$s = 7; continue;
-		/* } else { */ case 6:
-			_r$4 = Maplist($clone(e, env.Environment), function$1, (0 >= rests.$length ? ($throwRuntimeError("index out of range"), undefined) : rests.$array[rests.$offset + 0]), $subslice(rests, 1)); /* */ $s = 8; case 8: if($c) { $c = false; _r$4 = _r$4.$blk(); } if (_r$4 && _r$4.$blk !== undefined) { break s; }
-			_tuple$1 = _r$4;
-			cdr = _tuple$1[0];
-			err$3 = _tuple$1[1];
-			if (!($interfaceIsEqual(err$3, $ifaceNil))) {
-				$s = -1; return [$ifaceNil, err$3];
+		_ref$2 = lists;
+		_i$2 = 0;
+		/* while (true) { */ case 12:
+			/* if (!(_i$2 < _ref$2.$length)) { break; } */ if(!(_i$2 < _ref$2.$length)) { $s = 13; continue; }
+			list$2 = ((_i$2 < 0 || _i$2 >= _ref$2.$length) ? ($throwRuntimeError("index out of range"), undefined) : _ref$2.$array[_ref$2.$offset + _i$2]);
+			_r$5 = Listp($clone(e, env.Environment), list$2); /* */ $s = 14; case 14: if($c) { $c = false; _r$5 = _r$5.$blk(); } if (_r$5 && _r$5.$blk !== undefined) { break s; }
+			_tuple$3 = _r$5;
+			ok$2 = _tuple$3[0];
+			if ($interfaceIsEqual(ok$2, $pkg.Nil)) {
+				cdr = $pkg.Nil;
 			}
-		/* } */ case 7:
+			_i$2++;
+		/* } */ $s = 12; continue; case 13:
+		/* */ if ($interfaceIsEqual(cdr, $ifaceNil)) { $s = 15; continue; }
+		/* */ $s = 16; continue;
+		/* if ($interfaceIsEqual(cdr, $ifaceNil)) { */ case 15:
+			_r$6 = Maplist($clone(e, env.Environment), function$1, (0 >= rests.$length ? ($throwRuntimeError("index out of range"), undefined) : rests.$array[rests.$offset + 0]), $subslice(rests, 1)); /* */ $s = 17; case 17: if($c) { $c = false; _r$6 = _r$6.$blk(); } if (_r$6 && _r$6.$blk !== undefined) { break s; }
+			_tuple$4 = _r$6;
+			cdr = _tuple$4[0];
+			err = _tuple$4[1];
+			if (!($interfaceIsEqual(err, $ifaceNil))) {
+				$s = -1; return [$ifaceNil, err];
+			}
+		/* } */ case 16:
 		$s = -1; return Cons($clone(e, env.Environment), car, cdr);
-		/* */ } return; } if ($f === undefined) { $f = { $blk: Maplist }; } $f._i = _i; $f._r = _r; $f._r$1 = _r$1; $f._r$2 = _r$2; $f._r$3 = _r$3; $f._r$4 = _r$4; $f._ref = _ref; $f._tuple = _tuple; $f._tuple$1 = _tuple$1; $f.arguments$1 = arguments$1; $f.car = car; $f.cdr = cdr; $f.e = e; $f.err = err; $f.err$1 = err$1; $f.err$2 = err$2; $f.err$3 = err$3; $f.function$1 = function$1; $f.list = list; $f.list1 = list1; $f.lists = lists; $f.rests = rests; $f.$s = $s; $f.$r = $r; return $f;
+		/* */ } return; } if ($f === undefined) { $f = { $blk: Maplist }; } $f._i = _i; $f._i$1 = _i$1; $f._i$2 = _i$2; $f._r = _r; $f._r$1 = _r$1; $f._r$2 = _r$2; $f._r$3 = _r$3; $f._r$4 = _r$4; $f._r$5 = _r$5; $f._r$6 = _r$6; $f._ref = _ref; $f._ref$1 = _ref$1; $f._ref$2 = _ref$2; $f._tuple = _tuple; $f._tuple$1 = _tuple$1; $f._tuple$2 = _tuple$2; $f._tuple$3 = _tuple$3; $f._tuple$4 = _tuple$4; $f.arguments$1 = arguments$1; $f.car = car; $f.cdr = cdr; $f.e = e; $f.err = err; $f.function$1 = function$1; $f.list = list; $f.list$1 = list$1; $f.list$2 = list$2; $f.list1 = list1; $f.lists = lists; $f.ok = ok; $f.ok$1 = ok$1; $f.ok$2 = ok$2; $f.rests = rests; $f.$s = $s; $f.$r = $r; return $f;
 	};
 	$pkg.Maplist = Maplist;
 	Mapl = function(e, function$1, list1, lists) {
@@ -38142,32 +38215,40 @@ $packages["github.com/ta2gch/iris/runtime"] = (function() {
 	};
 	$pkg.Mapcon = Mapcon;
 	Assoc = function(e, obj, associationList) {
-		var _r, _r$1, _r$2, _r$3, associationList, car, cdr, e, err, err$1, obj, $s, $r;
-		/* */ $s = 0; var $f, $c = false; if (this !== undefined && this.$blk !== undefined) { $f = this; $c = true; _r = $f._r; _r$1 = $f._r$1; _r$2 = $f._r$2; _r$3 = $f._r$3; associationList = $f.associationList; car = $f.car; cdr = $f.cdr; e = $f.e; err = $f.err; err$1 = $f.err$1; obj = $f.obj; $s = $f.$s; $r = $f.$r; } s: while (true) { switch ($s) { case 0:
-		_r = ensure($clone(e, env.Environment), class$1.List, new sliceType([associationList])); /* */ $s = 1; case 1: if($c) { $c = false; _r = _r.$blk(); } if (_r && _r.$blk !== undefined) { break s; }
-		err = _r;
-		if (!($interfaceIsEqual(err, $ifaceNil))) {
-			$s = -1; return [$ifaceNil, err];
-		}
-		_r$1 = ilos.InstanceOf(class$1.Cons, associationList); /* */ $s = 4; case 4: if($c) { $c = false; _r$1 = _r$1.$blk(); } if (_r$1 && _r$1.$blk !== undefined) { break s; }
-		/* */ if (!_r$1) { $s = 2; continue; }
+		var _r, _r$1, _r$2, _r$3, _r$4, _r$5, _tuple, _tuple$1, associationList, car, cdr, e, obj, ok, ok$1, $s, $r;
+		/* */ $s = 0; var $f, $c = false; if (this !== undefined && this.$blk !== undefined) { $f = this; $c = true; _r = $f._r; _r$1 = $f._r$1; _r$2 = $f._r$2; _r$3 = $f._r$3; _r$4 = $f._r$4; _r$5 = $f._r$5; _tuple = $f._tuple; _tuple$1 = $f._tuple$1; associationList = $f.associationList; car = $f.car; cdr = $f.cdr; e = $f.e; obj = $f.obj; ok = $f.ok; ok$1 = $f.ok$1; $s = $f.$s; $r = $f.$r; } s: while (true) { switch ($s) { case 0:
+		_r = Listp($clone(e, env.Environment), associationList); /* */ $s = 1; case 1: if($c) { $c = false; _r = _r.$blk(); } if (_r && _r.$blk !== undefined) { break s; }
+		_tuple = _r;
+		ok = _tuple[0];
+		/* */ if ($interfaceIsEqual(ok, $pkg.Nil)) { $s = 2; continue; }
 		/* */ $s = 3; continue;
-		/* if (!_r$1) { */ case 2:
-			$s = -1; return [$pkg.Nil, $ifaceNil];
+		/* if ($interfaceIsEqual(ok, $pkg.Nil)) { */ case 2:
+			_r$1 = instance.NewDomainError($clone(e, env.Environment), associationList, class$1.List); /* */ $s = 4; case 4: if($c) { $c = false; _r$1 = _r$1.$blk(); } if (_r$1 && _r$1.$blk !== undefined) { break s; }
+			$s = -1; return [$ifaceNil, _r$1];
 		/* } */ case 3:
+		_r$2 = ilos.InstanceOf(class$1.Cons, associationList); /* */ $s = 7; case 7: if($c) { $c = false; _r$2 = _r$2.$blk(); } if (_r$2 && _r$2.$blk !== undefined) { break s; }
+		/* */ if (!_r$2) { $s = 5; continue; }
+		/* */ $s = 6; continue;
+		/* if (!_r$2) { */ case 5:
+			$s = -1; return [$pkg.Nil, $ifaceNil];
+		/* } */ case 6:
 		car = $assertType(associationList, ptrType$1).Car;
 		cdr = $assertType(associationList, ptrType$1).Cdr;
-		_r$2 = ensure($clone(e, env.Environment), class$1.Cons, new sliceType([car])); /* */ $s = 5; case 5: if($c) { $c = false; _r$2 = _r$2.$blk(); } if (_r$2 && _r$2.$blk !== undefined) { break s; }
-		err$1 = _r$2;
-		if (!($interfaceIsEqual(err$1, $ifaceNil))) {
-			$s = -1; return [$ifaceNil, err$1];
-		}
+		_r$3 = Consp($clone(e, env.Environment), car); /* */ $s = 8; case 8: if($c) { $c = false; _r$3 = _r$3.$blk(); } if (_r$3 && _r$3.$blk !== undefined) { break s; }
+		_tuple$1 = _r$3;
+		ok$1 = _tuple$1[0];
+		/* */ if ($interfaceIsEqual(ok$1, $pkg.Nil)) { $s = 9; continue; }
+		/* */ $s = 10; continue;
+		/* if ($interfaceIsEqual(ok$1, $pkg.Nil)) { */ case 9:
+			_r$4 = instance.NewDomainError($clone(e, env.Environment), car, class$1.Cons); /* */ $s = 11; case 11: if($c) { $c = false; _r$4 = _r$4.$blk(); } if (_r$4 && _r$4.$blk !== undefined) { break s; }
+			$s = -1; return [$ifaceNil, _r$4];
+		/* } */ case 10:
 		if ($interfaceIsEqual($assertType(car, ptrType$1).Car, obj)) {
 			$s = -1; return [car, $ifaceNil];
 		}
-		_r$3 = Assoc($clone(e, env.Environment), obj, cdr); /* */ $s = 6; case 6: if($c) { $c = false; _r$3 = _r$3.$blk(); } if (_r$3 && _r$3.$blk !== undefined) { break s; }
-		$s = -1; return _r$3;
-		/* */ } return; } if ($f === undefined) { $f = { $blk: Assoc }; } $f._r = _r; $f._r$1 = _r$1; $f._r$2 = _r$2; $f._r$3 = _r$3; $f.associationList = associationList; $f.car = car; $f.cdr = cdr; $f.e = e; $f.err = err; $f.err$1 = err$1; $f.obj = obj; $f.$s = $s; $f.$r = $r; return $f;
+		_r$5 = Assoc($clone(e, env.Environment), obj, cdr); /* */ $s = 12; case 12: if($c) { $c = false; _r$5 = _r$5.$blk(); } if (_r$5 && _r$5.$blk !== undefined) { break s; }
+		$s = -1; return _r$5;
+		/* */ } return; } if ($f === undefined) { $f = { $blk: Assoc }; } $f._r = _r; $f._r$1 = _r$1; $f._r$2 = _r$2; $f._r$3 = _r$3; $f._r$4 = _r$4; $f._r$5 = _r$5; $f._tuple = _tuple; $f._tuple$1 = _tuple$1; $f.associationList = associationList; $f.car = car; $f.cdr = cdr; $f.e = e; $f.obj = obj; $f.ok = ok; $f.ok$1 = ok$1; $f.$s = $s; $f.$r = $r; return $f;
 	};
 	$pkg.Assoc = Assoc;
 	Null = function(e, obj) {
@@ -41647,7 +41728,7 @@ $packages["main"] = (function() {
 	sliceType$1 = $sliceType($packages["github.com/ta2gch/iris/runtime/ilos"].Instance);
 	sliceType$2 = $sliceType($emptyInterface);
 	main = function() {
-		console.log("Welcome to Iris (66c88ff). Iris is an ISLisp implementation on Go.\nThis library works with gopherjs and has no methods to get input.\nFor more infomation, see https://islisp.js.org.\n\nCopyright &copy; 2017 TANIGUCHI Masaya All Rights Reserved.");
+		console.log("Welcome to Iris (df749fa). Iris is an ISLisp implementation on Go.\nThis library works with gopherjs and has no methods to get input.\nFor more infomation, see https://islisp.js.org.\n\nCopyright &copy; 2017 TANIGUCHI Masaya All Rights Reserved.");
 		$global.islisp = $externalize($makeMap($String.keyFor, [{ k: "eval", v: new funcType(eval$1) }]), mapType);
 	};
 	eval$1 = function(s) {

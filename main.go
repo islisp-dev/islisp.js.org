@@ -13,7 +13,7 @@ import (
 	"github.com/ta2gch/jquery"
 )
 
-const version = "66c88ff"
+const version = "df749fa"
 
 var stream = make(chan string)
 
