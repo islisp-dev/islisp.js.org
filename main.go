@@ -8,11 +8,11 @@ import (
 	"fmt"
 	"html"
 
+	"github.com/gopherjs/jquery"
 	"github.com/ta2gch/iris/runtime"
 	"github.com/ta2gch/iris/runtime/ilos"
 	"github.com/ta2gch/iris/runtime/ilos/class"
 	"github.com/ta2gch/iris/runtime/ilos/instance"
-	"github.com/ta2gch/jquery"
 )
 
 const version = "63f4517"
