@@ -9,6 +9,8 @@ import (
 	"html"
 
 	"github.com/ta2gch/iris/runtime"
+	"github.com/ta2gch/iris/runtime/ilos"
+	"github.com/ta2gch/iris/runtime/ilos/class"
 	"github.com/ta2gch/iris/runtime/ilos/instance"
 	"github.com/ta2gch/jquery"
 )
@@ -59,9 +61,12 @@ Copyright &copy; 2017 TANIGUCHI Masaya All Rights Reserved.`, version)
 	for {
 		prompt = true
 		jQuery("#prompt").Show()
+		runtime.TopLevel.StandardInput = instance.NewStream(dom, nil)
 		exp, err := runtime.Read(runtime.TopLevel)
 		if err != nil {
-			fmt.Fprint(dom, html.EscapeString(err.String()))
+			if !ilos.InstanceOf(class.EndOfStream, err) {
+				fmt.Fprint(dom, html.EscapeString(err.String()))
+			}
 			continue
 		}
 		prompt = false

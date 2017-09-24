@@ -30518,7 +30518,8 @@ $packages["regexp"] = (function() {
 	return $pkg;
 })();
 $packages["github.com/ta2gch/iris/reader/tokenizer"] = (function() {
-	var $pkg = {}, $init, io, regexp, strings, Reader, sliceType, sliceType$1, ptrType, str, re, _r, NewReader;
+	var $pkg = {}, $init, bufio, io, regexp, strings, Reader, ptrType, sliceType, sliceType$1, ptrType$1, str, re, _r, NewReader;
+	bufio = $packages["bufio"];
 	io = $packages["io"];
 	regexp = $packages["regexp"];
 	strings = $packages["strings"];
@@ -30528,7 +30529,7 @@ $packages["github.com/ta2gch/iris/reader/tokenizer"] = (function() {
 			this.err = $ifaceNil;
 			this.ru = 0;
 			this.sz = 0;
-			this.rr = $ifaceNil;
+			this.rr = ptrType.nil;
 			return;
 		}
 		this.err = err_;
@@ -30536,13 +30537,14 @@ $packages["github.com/ta2gch/iris/reader/tokenizer"] = (function() {
 		this.sz = sz_;
 		this.rr = rr_;
 	});
+	ptrType = $ptrType(bufio.Reader);
 	sliceType = $sliceType($Uint8);
 	sliceType$1 = $sliceType($Int32);
-	ptrType = $ptrType(Reader);
+	ptrType$1 = $ptrType(Reader);
 	NewReader = function(r) {
 		var b, r;
-		b = new Reader.ptr($ifaceNil, 0, 0, $ifaceNil);
-		b.rr = r;
+		b = new Reader.ptr($ifaceNil, 0, 0, ptrType.nil);
+		b.rr = bufio.NewReader(r);
 		return b;
 	};
 	$pkg.NewReader = NewReader;
@@ -30614,7 +30616,7 @@ $packages["github.com/ta2gch/iris/reader/tokenizer"] = (function() {
 			_tuple = _r$1;
 			ru = _tuple[0];
 			err = _tuple[2];
-			if (!($interfaceIsEqual(err, $ifaceNil))) {
+			if ((ru === 0) || !($interfaceIsEqual(err, $ifaceNil))) {
 				$s = -1; return ["", io.EOF];
 			}
 			if (!strings.ContainsRune(" \t\n\r", ru)) {
@@ -30632,7 +30634,7 @@ $packages["github.com/ta2gch/iris/reader/tokenizer"] = (function() {
 			_tuple$1 = _r$3;
 			ru$1 = _tuple$1[0];
 			err$1 = _tuple$1[2];
-			if (!($interfaceIsEqual(err$1, $ifaceNil))) {
+			if ((ru$1 === 0) || !($interfaceIsEqual(err$1, $ifaceNil))) {
 				if (mat) {
 					$s = -1; return [buf, $ifaceNil];
 				}
@@ -30697,16 +30699,17 @@ $packages["github.com/ta2gch/iris/reader/tokenizer"] = (function() {
 		/* */ } return; } if ($f === undefined) { $f = { $blk: Reader.ptr.prototype.Next }; } $f._r$1 = _r$1; $f._r$10 = _r$10; $f._r$2 = _r$2; $f._r$3 = _r$3; $f._r$4 = _r$4; $f._r$5 = _r$5; $f._r$6 = _r$6; $f._r$7 = _r$7; $f._r$8 = _r$8; $f._r$9 = _r$9; $f._tuple = _tuple; $f._tuple$1 = _tuple$1; $f._tuple$2 = _tuple$2; $f._v = _v; $f.buf = buf; $f.err = err; $f.err$1 = err$1; $f.mat = mat; $f.matched = matched; $f.num = num; $f.r = r; $f.ru = ru; $f.ru$1 = ru$1; $f.shp = shp; $f.$s = $s; $f.$r = $r; return $f;
 	};
 	Reader.prototype.Next = function() { return this.$val.Next(); };
-	ptrType.methods = [{prop: "PeekRune", name: "PeekRune", pkg: "", typ: $funcType([], [$Int32, $Int, $error], false)}, {prop: "ReadRune", name: "ReadRune", pkg: "", typ: $funcType([], [$Int32, $Int, $error], false)}, {prop: "Read", name: "Read", pkg: "", typ: $funcType([sliceType], [$Int, $error], false)}, {prop: "Next", name: "Next", pkg: "", typ: $funcType([], [$String, $error], false)}];
-	Reader.init("github.com/ta2gch/iris/reader/tokenizer", [{prop: "err", name: "err", anonymous: false, exported: false, typ: $error, tag: ""}, {prop: "ru", name: "ru", anonymous: false, exported: false, typ: $Int32, tag: ""}, {prop: "sz", name: "sz", anonymous: false, exported: false, typ: $Int, tag: ""}, {prop: "rr", name: "rr", anonymous: false, exported: false, typ: io.RuneReader, tag: ""}]);
+	ptrType$1.methods = [{prop: "PeekRune", name: "PeekRune", pkg: "", typ: $funcType([], [$Int32, $Int, $error], false)}, {prop: "ReadRune", name: "ReadRune", pkg: "", typ: $funcType([], [$Int32, $Int, $error], false)}, {prop: "Read", name: "Read", pkg: "", typ: $funcType([sliceType], [$Int, $error], false)}, {prop: "Next", name: "Next", pkg: "", typ: $funcType([], [$String, $error], false)}];
+	Reader.init("github.com/ta2gch/iris/reader/tokenizer", [{prop: "err", name: "err", anonymous: false, exported: false, typ: $error, tag: ""}, {prop: "ru", name: "ru", anonymous: false, exported: false, typ: $Int32, tag: ""}, {prop: "sz", name: "sz", anonymous: false, exported: false, typ: $Int, tag: ""}, {prop: "rr", name: "rr", anonymous: false, exported: false, typ: ptrType, tag: ""}]);
 	$init = function() {
 		$pkg.$init = function() {};
 		/* */ var $f, $c = false, $s = 0, $r; if (this !== undefined && this.$blk !== undefined) { $f = this; $c = true; $s = $f.$s; $r = $f.$r; } s: while (true) { switch ($s) { case 0:
-		$r = io.$init(); /* */ $s = 1; case 1: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = regexp.$init(); /* */ $s = 2; case 2: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = strings.$init(); /* */ $s = 3; case 3: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = bufio.$init(); /* */ $s = 1; case 1: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = io.$init(); /* */ $s = 2; case 2: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = regexp.$init(); /* */ $s = 3; case 3: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = strings.$init(); /* */ $s = 4; case 4: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
 		str = "^1\\+$|^1-$|^[-+]?[[:digit:]]+\\.[[:digit:]]+$|^[-+]?[[:digit:]]+(?:\\.[[:digit:]]+)?[eE][-+]?[[:digit:]]+$|^[-+]?[[:digit:]]+$|^#[bB][-+]?[01]+$|^#[oO][-+]?[0-7]+$|^#[xX][-+]?[[:xdigit:]]+$|^#\\\\[[:alpha:]]+$|^#\\\\[[:graph:]]$|^\"(?:\\\\\\\\|\\\\\"|[^\\\\\"])*\"$|^[:&][a-zA-Z]+$|^\\+$|^-$|^[a-zA-Z<>/*=?_!$%[\\]^{}~][-a-zA-Z0-9+<>/*=?_!$%[\\]^{}~]*$|^\\|(?:\\\\\\\\|\\\\\\||[^\\\\|])*\\|$|^[.()]$|^;.*?\n|$^#\\|.*?\\|#$|^#'$|^,@?$|^'$|^`$|^#[[:digit:]]*[aA]$|^#$";
-		_r = regexp.MustCompile(str); /* */ $s = 4; case 4: if($c) { $c = false; _r = _r.$blk(); } if (_r && _r.$blk !== undefined) { break s; }
+		_r = regexp.MustCompile(str); /* */ $s = 5; case 5: if($c) { $c = false; _r = _r.$blk(); } if (_r && _r.$blk !== undefined) { break s; }
 		re = _r;
 		/* */ } return; } if ($f === undefined) { $f = { $blk: $init }; } $f.$s = $s; $f.$r = $r; return $f;
 	};
@@ -31051,8 +31054,7 @@ $packages["github.com/ta2gch/iris/runtime/env"] = (function() {
 	return $pkg;
 })();
 $packages["github.com/ta2gch/iris/runtime/ilos/instance"] = (function() {
-	var $pkg = {}, $init, bufio, fmt, tokenizer, env, ilos, io, reflect, sort, strings, GeneralArrayStar, GeneralVector, String, BuiltInClass, Character, Applicable, Function, method, GenericFunction, slots, Instance, List, Cons, Null, Integer, Float, StandardClass, Stream, Symbol, sliceType, sliceType$1, sliceType$2, ptrType, sliceType$3, sliceType$4, sliceType$5, ptrType$1, sliceType$6, funcType, ptrType$2, ptrType$3, ptrType$4, ptrType$5, ptrType$6, mapType, sliceType$7, NewGeneralArrayStar, NewGeneralVector, NewString, NewBuiltInClass, NewCharacter, NewArithmeticError, NewParseError, NewDomainError, NewUndefinedFunction, NewUndefinedVariable, NewUndefinedClass, NewArityError, NewIndexOutOfRange, NewImmutableBinding, NewControlError, NewStreamError, NewFunction, NewGenericFunction, Create, InitializeObject, NewCons, NewNull, NewInteger, NewFloat, NewStandardClass, NewStream, NewSymbol, NewBlockTag, NewCatchTag, NewTagbodyTag;
-	bufio = $packages["bufio"];
+	var $pkg = {}, $init, fmt, tokenizer, env, ilos, io, reflect, sort, strings, GeneralArrayStar, GeneralVector, String, BuiltInClass, Character, Applicable, Function, method, GenericFunction, slots, Instance, List, Cons, Null, Integer, Float, StandardClass, Stream, Symbol, sliceType, sliceType$1, sliceType$2, ptrType, sliceType$3, sliceType$4, sliceType$5, ptrType$1, sliceType$6, funcType, ptrType$2, ptrType$3, ptrType$4, ptrType$5, ptrType$6, mapType, sliceType$7, NewGeneralArrayStar, NewGeneralVector, NewString, NewBuiltInClass, NewCharacter, NewArithmeticError, NewParseError, NewDomainError, NewUndefinedFunction, NewUndefinedVariable, NewUndefinedClass, NewArityError, NewIndexOutOfRange, NewImmutableBinding, NewControlError, NewStreamError, NewFunction, NewGenericFunction, Create, InitializeObject, NewCons, NewNull, NewInteger, NewFloat, NewStandardClass, NewStream, NewSymbol, NewBlockTag, NewCatchTag, NewTagbodyTag;
 	fmt = $packages["fmt"];
 	tokenizer = $packages["github.com/ta2gch/iris/reader/tokenizer"];
 	env = $packages["github.com/ta2gch/iris/runtime/env"];
@@ -32485,7 +32487,7 @@ $packages["github.com/ta2gch/iris/runtime/ilos/instance"] = (function() {
 		if ($interfaceIsEqual(r, $ifaceNil)) {
 			return (x = new Stream.ptr($newDataPointer(0, ptrType$3), ptrType$4.nil, w), new x.constructor.elem(x));
 		}
-		return (x$1 = new Stream.ptr($newDataPointer(0, ptrType$3), tokenizer.NewReader(bufio.NewReader(r)), w), new x$1.constructor.elem(x$1));
+		return (x$1 = new Stream.ptr($newDataPointer(0, ptrType$3), tokenizer.NewReader(r), w), new x$1.constructor.elem(x$1));
 	};
 	$pkg.NewStream = NewStream;
 	Stream.ptr.prototype.Class = function() {
@@ -32603,15 +32605,14 @@ $packages["github.com/ta2gch/iris/runtime/ilos/instance"] = (function() {
 	$init = function() {
 		$pkg.$init = function() {};
 		/* */ var $f, $c = false, $s = 0, $r; if (this !== undefined && this.$blk !== undefined) { $f = this; $c = true; $s = $f.$s; $r = $f.$r; } s: while (true) { switch ($s) { case 0:
-		$r = bufio.$init(); /* */ $s = 1; case 1: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = fmt.$init(); /* */ $s = 2; case 2: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = tokenizer.$init(); /* */ $s = 3; case 3: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = env.$init(); /* */ $s = 4; case 4: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = ilos.$init(); /* */ $s = 5; case 5: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = io.$init(); /* */ $s = 6; case 6: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = reflect.$init(); /* */ $s = 7; case 7: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = sort.$init(); /* */ $s = 8; case 8: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = strings.$init(); /* */ $s = 9; case 9: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = fmt.$init(); /* */ $s = 1; case 1: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = tokenizer.$init(); /* */ $s = 2; case 2: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = env.$init(); /* */ $s = 3; case 3: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = ilos.$init(); /* */ $s = 4; case 4: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = io.$init(); /* */ $s = 5; case 5: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = reflect.$init(); /* */ $s = 6; case 6: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = sort.$init(); /* */ $s = 7; case 7: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = strings.$init(); /* */ $s = 8; case 8: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
 		$pkg.ObjectClass = new BuiltInClass.ptr(NewSymbol("<OBJECT>"), new sliceType([]), new sliceType$1([]));
 		$pkg.BuiltInClassClass = NewBuiltInClass("<BUILT-IN-CLASS>", new $pkg.ObjectClass.constructor.elem($pkg.ObjectClass), new sliceType$2([]));
 		$pkg.StandardClassClass = NewBuiltInClass("<STANDARD-CLASS>", new $pkg.ObjectClass.constructor.elem($pkg.ObjectClass), new sliceType$2([]));
@@ -37943,12 +37944,16 @@ $packages["github.com/ta2gch/iris/runtime"] = (function() {
 	};
 	$pkg.Mapcar = Mapcar;
 	Mapc = function(e, function$1, list1, lists) {
-		var _r, e, function$1, list1, lists, $s, $r;
-		/* */ $s = 0; var $f, $c = false; if (this !== undefined && this.$blk !== undefined) { $f = this; $c = true; _r = $f._r; e = $f.e; function$1 = $f.function$1; list1 = $f.list1; lists = $f.lists; $s = $f.$s; $r = $f.$r; } s: while (true) { switch ($s) { case 0:
+		var _r, _tuple, e, err, function$1, list1, lists, $s, $r;
+		/* */ $s = 0; var $f, $c = false; if (this !== undefined && this.$blk !== undefined) { $f = this; $c = true; _r = $f._r; _tuple = $f._tuple; e = $f.e; err = $f.err; function$1 = $f.function$1; list1 = $f.list1; lists = $f.lists; $s = $f.$s; $r = $f.$r; } s: while (true) { switch ($s) { case 0:
 		_r = Mapcar($clone(e, env.Environment), function$1, list1, lists); /* */ $s = 1; case 1: if($c) { $c = false; _r = _r.$blk(); } if (_r && _r.$blk !== undefined) { break s; }
-		_r;
+		_tuple = _r;
+		err = _tuple[1];
+		if (!($interfaceIsEqual(err, $ifaceNil))) {
+			$s = -1; return [$ifaceNil, err];
+		}
 		$s = -1; return [list1, $ifaceNil];
-		/* */ } return; } if ($f === undefined) { $f = { $blk: Mapc }; } $f._r = _r; $f.e = e; $f.function$1 = function$1; $f.list1 = list1; $f.lists = lists; $f.$s = $s; $f.$r = $r; return $f;
+		/* */ } return; } if ($f === undefined) { $f = { $blk: Mapc }; } $f._r = _r; $f._tuple = _tuple; $f.e = e; $f.err = err; $f.function$1 = function$1; $f.list1 = list1; $f.lists = lists; $f.$s = $s; $f.$r = $r; return $f;
 	};
 	$pkg.Mapc = Mapc;
 	Mapcan = function(e, function$1, list1, lists) {
@@ -38048,12 +38053,16 @@ $packages["github.com/ta2gch/iris/runtime"] = (function() {
 	};
 	$pkg.Maplist = Maplist;
 	Mapl = function(e, function$1, list1, lists) {
-		var _r, e, function$1, list1, lists, $s, $r;
-		/* */ $s = 0; var $f, $c = false; if (this !== undefined && this.$blk !== undefined) { $f = this; $c = true; _r = $f._r; e = $f.e; function$1 = $f.function$1; list1 = $f.list1; lists = $f.lists; $s = $f.$s; $r = $f.$r; } s: while (true) { switch ($s) { case 0:
+		var _r, _tuple, e, err, function$1, list1, lists, $s, $r;
+		/* */ $s = 0; var $f, $c = false; if (this !== undefined && this.$blk !== undefined) { $f = this; $c = true; _r = $f._r; _tuple = $f._tuple; e = $f.e; err = $f.err; function$1 = $f.function$1; list1 = $f.list1; lists = $f.lists; $s = $f.$s; $r = $f.$r; } s: while (true) { switch ($s) { case 0:
 		_r = Maplist($clone(e, env.Environment), function$1, list1, lists); /* */ $s = 1; case 1: if($c) { $c = false; _r = _r.$blk(); } if (_r && _r.$blk !== undefined) { break s; }
-		_r;
+		_tuple = _r;
+		err = _tuple[1];
+		if (!($interfaceIsEqual(err, $ifaceNil))) {
+			$s = -1; return [$ifaceNil, err];
+		}
 		$s = -1; return [list1, $ifaceNil];
-		/* */ } return; } if ($f === undefined) { $f = { $blk: Mapl }; } $f._r = _r; $f.e = e; $f.function$1 = function$1; $f.list1 = list1; $f.lists = lists; $f.$s = $s; $f.$r = $r; return $f;
+		/* */ } return; } if ($f === undefined) { $f = { $blk: Mapl }; } $f._r = _r; $f._tuple = _tuple; $f.e = e; $f.err = err; $f.function$1 = function$1; $f.list1 = list1; $f.lists = lists; $f.$s = $s; $f.$r = $r; return $f;
 	};
 	$pkg.Mapl = Mapl;
 	Mapcon = function(e, function$1, list1, lists) {
@@ -41235,9 +41244,6 @@ $packages["github.com/ta2gch/iris/runtime"] = (function() {
 		if (e.Variable.Set(var1, ret)) {
 			$s = -1; return [ret, $ifaceNil];
 		}
-		if (e.Variable.Set(var1, ret)) {
-			$s = -1; return [ret, $ifaceNil];
-		}
 		_arg = $clone(e, env.Environment);
 		_r$1 = instance.NewUndefinedVariable($clone(e, env.Environment), var1); /* */ $s = 2; case 2: if($c) { $c = false; _r$1 = _r$1.$blk(); } if (_r$1 && _r$1.$blk !== undefined) { break s; }
 		_arg$1 = _r$1;
@@ -41248,53 +41254,46 @@ $packages["github.com/ta2gch/iris/runtime"] = (function() {
 	};
 	$pkg.Setq = Setq;
 	Setf = function(e, var1, form) {
-		var _arg, _arg$1, _arg$2, _arg$3, _arg$4, _arg$5, _r, _r$1, _r$10, _r$2, _r$3, _r$4, _r$5, _r$6, _r$7, _r$8, _r$9, _tuple, _tuple$1, _tuple$2, arguments$1, e, err, err$1, form, fun, funcSpec, ok, val, var1, $s, $r;
-		/* */ $s = 0; var $f, $c = false; if (this !== undefined && this.$blk !== undefined) { $f = this; $c = true; _arg = $f._arg; _arg$1 = $f._arg$1; _arg$2 = $f._arg$2; _arg$3 = $f._arg$3; _arg$4 = $f._arg$4; _arg$5 = $f._arg$5; _r = $f._r; _r$1 = $f._r$1; _r$10 = $f._r$10; _r$2 = $f._r$2; _r$3 = $f._r$3; _r$4 = $f._r$4; _r$5 = $f._r$5; _r$6 = $f._r$6; _r$7 = $f._r$7; _r$8 = $f._r$8; _r$9 = $f._r$9; _tuple = $f._tuple; _tuple$1 = $f._tuple$1; _tuple$2 = $f._tuple$2; arguments$1 = $f.arguments$1; e = $f.e; err = $f.err; err$1 = $f.err$1; form = $f.form; fun = $f.fun; funcSpec = $f.funcSpec; ok = $f.ok; val = $f.val; var1 = $f.var1; $s = $f.$s; $r = $f.$r; } s: while (true) { switch ($s) { case 0:
+		var _arg, _arg$1, _arg$2, _arg$3, _arg$4, _arg$5, _r, _r$1, _r$2, _r$3, _r$4, _r$5, _r$6, _r$7, _r$8, _r$9, _tuple, _tuple$1, arguments$1, e, err, form, fun, funcSpec, ok, var1, $s, $r;
+		/* */ $s = 0; var $f, $c = false; if (this !== undefined && this.$blk !== undefined) { $f = this; $c = true; _arg = $f._arg; _arg$1 = $f._arg$1; _arg$2 = $f._arg$2; _arg$3 = $f._arg$3; _arg$4 = $f._arg$4; _arg$5 = $f._arg$5; _r = $f._r; _r$1 = $f._r$1; _r$2 = $f._r$2; _r$3 = $f._r$3; _r$4 = $f._r$4; _r$5 = $f._r$5; _r$6 = $f._r$6; _r$7 = $f._r$7; _r$8 = $f._r$8; _r$9 = $f._r$9; _tuple = $f._tuple; _tuple$1 = $f._tuple$1; arguments$1 = $f.arguments$1; e = $f.e; err = $f.err; form = $f.form; fun = $f.fun; funcSpec = $f.funcSpec; ok = $f.ok; var1 = $f.var1; $s = $f.$s; $r = $f.$r; } s: while (true) { switch ($s) { case 0:
 		_r = ilos.InstanceOf(class$1.Symbol, var1); /* */ $s = 3; case 3: if($c) { $c = false; _r = _r.$blk(); } if (_r && _r.$blk !== undefined) { break s; }
 		/* */ if (_r) { $s = 1; continue; }
 		/* */ $s = 2; continue;
 		/* if (_r) { */ case 1:
-			_r$1 = Eval($clone(e, env.Environment), form); /* */ $s = 4; case 4: if($c) { $c = false; _r$1 = _r$1.$blk(); } if (_r$1 && _r$1.$blk !== undefined) { break s; }
-			_tuple = _r$1;
-			val = _tuple[0];
-			err = _tuple[1];
-			if (!($interfaceIsEqual(err, $ifaceNil))) {
-				$s = -1; return [$ifaceNil, err];
-			}
-			_r$2 = Setq($clone(e, env.Environment), var1, val); /* */ $s = 5; case 5: if($c) { $c = false; _r$2 = _r$2.$blk(); } if (_r$2 && _r$2.$blk !== undefined) { break s; }
-			$s = -1; return _r$2;
+			_r$1 = Setq($clone(e, env.Environment), var1, form); /* */ $s = 4; case 4: if($c) { $c = false; _r$1 = _r$1.$blk(); } if (_r$1 && _r$1.$blk !== undefined) { break s; }
+			$s = -1; return _r$1;
 		/* } */ case 2:
-		_r$3 = $assertType(var1, instance.List).Nth(0); /* */ $s = 6; case 6: if($c) { $c = false; _r$3 = _r$3.$blk(); } if (_r$3 && _r$3.$blk !== undefined) { break s; }
-		_arg = _r$3;
-		_r$4 = fmt.Sprintf("(SETF %v)", new sliceType$3([_arg])); /* */ $s = 7; case 7: if($c) { $c = false; _r$4 = _r$4.$blk(); } if (_r$4 && _r$4.$blk !== undefined) { break s; }
-		_r$5 = instance.NewSymbol(_r$4); /* */ $s = 8; case 8: if($c) { $c = false; _r$5 = _r$5.$blk(); } if (_r$5 && _r$5.$blk !== undefined) { break s; }
-		funcSpec = _r$5;
-		_tuple$1 = e.Function.Get(funcSpec);
-		fun = _tuple$1[0];
-		ok = _tuple$1[1];
-		/* */ if (!ok) { $s = 9; continue; }
-		/* */ $s = 10; continue;
-		/* if (!ok) { */ case 9:
+		_r$2 = $assertType(var1, instance.List).Nth(0); /* */ $s = 5; case 5: if($c) { $c = false; _r$2 = _r$2.$blk(); } if (_r$2 && _r$2.$blk !== undefined) { break s; }
+		_arg = _r$2;
+		_r$3 = fmt.Sprintf("(SETF %v)", new sliceType$3([_arg])); /* */ $s = 6; case 6: if($c) { $c = false; _r$3 = _r$3.$blk(); } if (_r$3 && _r$3.$blk !== undefined) { break s; }
+		_r$4 = instance.NewSymbol(_r$3); /* */ $s = 7; case 7: if($c) { $c = false; _r$4 = _r$4.$blk(); } if (_r$4 && _r$4.$blk !== undefined) { break s; }
+		funcSpec = _r$4;
+		_tuple = e.Function.Get(funcSpec);
+		fun = _tuple[0];
+		ok = _tuple[1];
+		/* */ if (!ok) { $s = 8; continue; }
+		/* */ $s = 9; continue;
+		/* if (!ok) { */ case 8:
 			_arg$1 = $clone(e, env.Environment);
-			_r$6 = instance.NewUndefinedFunction($clone(e, env.Environment), funcSpec); /* */ $s = 11; case 11: if($c) { $c = false; _r$6 = _r$6.$blk(); } if (_r$6 && _r$6.$blk !== undefined) { break s; }
-			_arg$2 = _r$6;
+			_r$5 = instance.NewUndefinedFunction($clone(e, env.Environment), funcSpec); /* */ $s = 10; case 10: if($c) { $c = false; _r$5 = _r$5.$blk(); } if (_r$5 && _r$5.$blk !== undefined) { break s; }
+			_arg$2 = _r$5;
 			_arg$3 = $pkg.Nil;
-			_r$7 = SignalCondition(_arg$1, _arg$2, _arg$3); /* */ $s = 12; case 12: if($c) { $c = false; _r$7 = _r$7.$blk(); } if (_r$7 && _r$7.$blk !== undefined) { break s; }
-			$s = -1; return _r$7;
-		/* } */ case 10:
-		_r$8 = evalArguments($clone(e, env.Environment), instance.NewCons(form, $assertType(var1, ptrType$1).Cdr)); /* */ $s = 13; case 13: if($c) { $c = false; _r$8 = _r$8.$blk(); } if (_r$8 && _r$8.$blk !== undefined) { break s; }
-		_tuple$2 = _r$8;
-		arguments$1 = _tuple$2[0];
-		err$1 = _tuple$2[1];
-		if (!($interfaceIsEqual(err$1, $ifaceNil))) {
-			$s = -1; return [$ifaceNil, err$1];
+			_r$6 = SignalCondition(_arg$1, _arg$2, _arg$3); /* */ $s = 11; case 11: if($c) { $c = false; _r$6 = _r$6.$blk(); } if (_r$6 && _r$6.$blk !== undefined) { break s; }
+			$s = -1; return _r$6;
+		/* } */ case 9:
+		_r$7 = evalArguments($clone(e, env.Environment), instance.NewCons(form, $assertType(var1, ptrType$1).Cdr)); /* */ $s = 12; case 12: if($c) { $c = false; _r$7 = _r$7.$blk(); } if (_r$7 && _r$7.$blk !== undefined) { break s; }
+		_tuple$1 = _r$7;
+		arguments$1 = _tuple$1[0];
+		err = _tuple$1[1];
+		if (!($interfaceIsEqual(err, $ifaceNil))) {
+			$s = -1; return [$ifaceNil, err];
 		}
 		_arg$4 = $clone(e, env.Environment);
-		_r$9 = $assertType(arguments$1, instance.List).Slice(); /* */ $s = 14; case 14: if($c) { $c = false; _r$9 = _r$9.$blk(); } if (_r$9 && _r$9.$blk !== undefined) { break s; }
-		_arg$5 = _r$9;
-		_r$10 = $assertType(fun, instance.Applicable).Apply(_arg$4, _arg$5); /* */ $s = 15; case 15: if($c) { $c = false; _r$10 = _r$10.$blk(); } if (_r$10 && _r$10.$blk !== undefined) { break s; }
-		$s = -1; return _r$10;
-		/* */ } return; } if ($f === undefined) { $f = { $blk: Setf }; } $f._arg = _arg; $f._arg$1 = _arg$1; $f._arg$2 = _arg$2; $f._arg$3 = _arg$3; $f._arg$4 = _arg$4; $f._arg$5 = _arg$5; $f._r = _r; $f._r$1 = _r$1; $f._r$10 = _r$10; $f._r$2 = _r$2; $f._r$3 = _r$3; $f._r$4 = _r$4; $f._r$5 = _r$5; $f._r$6 = _r$6; $f._r$7 = _r$7; $f._r$8 = _r$8; $f._r$9 = _r$9; $f._tuple = _tuple; $f._tuple$1 = _tuple$1; $f._tuple$2 = _tuple$2; $f.arguments$1 = arguments$1; $f.e = e; $f.err = err; $f.err$1 = err$1; $f.form = form; $f.fun = fun; $f.funcSpec = funcSpec; $f.ok = ok; $f.val = val; $f.var1 = var1; $f.$s = $s; $f.$r = $r; return $f;
+		_r$8 = $assertType(arguments$1, instance.List).Slice(); /* */ $s = 13; case 13: if($c) { $c = false; _r$8 = _r$8.$blk(); } if (_r$8 && _r$8.$blk !== undefined) { break s; }
+		_arg$5 = _r$8;
+		_r$9 = $assertType(fun, instance.Applicable).Apply(_arg$4, _arg$5); /* */ $s = 14; case 14: if($c) { $c = false; _r$9 = _r$9.$blk(); } if (_r$9 && _r$9.$blk !== undefined) { break s; }
+		$s = -1; return _r$9;
+		/* */ } return; } if ($f === undefined) { $f = { $blk: Setf }; } $f._arg = _arg; $f._arg$1 = _arg$1; $f._arg$2 = _arg$2; $f._arg$3 = _arg$3; $f._arg$4 = _arg$4; $f._arg$5 = _arg$5; $f._r = _r; $f._r$1 = _r$1; $f._r$2 = _r$2; $f._r$3 = _r$3; $f._r$4 = _r$4; $f._r$5 = _r$5; $f._r$6 = _r$6; $f._r$7 = _r$7; $f._r$8 = _r$8; $f._r$9 = _r$9; $f._tuple = _tuple; $f._tuple$1 = _tuple$1; $f.arguments$1 = arguments$1; $f.e = e; $f.err = err; $f.form = form; $f.fun = fun; $f.funcSpec = funcSpec; $f.ok = ok; $f.var1 = var1; $f.$s = $s; $f.$r = $r; return $f;
 	};
 	$pkg.Setf = Setf;
 	Let = function(e, varForm, bodyForm) {
