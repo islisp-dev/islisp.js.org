@@ -15,7 +15,7 @@ import (
 	"github.com/ta2gch/iris/runtime/ilos/instance"
 )
 
-const version = "63f4517"
+const version = "526f28d"
 
 var stream = make(chan string)
 
