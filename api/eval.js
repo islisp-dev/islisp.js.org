@@ -30517,13 +30517,13 @@ $packages["regexp"] = (function() {
 	$pkg.$init = $init;
 	return $pkg;
 })();
-$packages["github.com/ta2gch/iris/reader/tokenizer"] = (function() {
+$packages["github.com/asciian/iris/reader/tokenizer"] = (function() {
 	var $pkg = {}, $init, bufio, io, regexp, strings, Reader, ptrType, sliceType, sliceType$1, ptrType$1, str, re, _r, NewReader;
 	bufio = $packages["bufio"];
 	io = $packages["io"];
 	regexp = $packages["regexp"];
 	strings = $packages["strings"];
-	Reader = $pkg.Reader = $newType(0, $kindStruct, "tokenizer.Reader", true, "github.com/ta2gch/iris/reader/tokenizer", true, function(err_, ru_, sz_, rr_) {
+	Reader = $pkg.Reader = $newType(0, $kindStruct, "tokenizer.Reader", true, "github.com/asciian/iris/reader/tokenizer", true, function(err_, ru_, sz_, rr_) {
 		this.$val = this;
 		if (arguments.length === 0) {
 			this.err = $ifaceNil;
@@ -30700,7 +30700,7 @@ $packages["github.com/ta2gch/iris/reader/tokenizer"] = (function() {
 	};
 	Reader.prototype.Next = function() { return this.$val.Next(); };
 	ptrType$1.methods = [{prop: "PeekRune", name: "PeekRune", pkg: "", typ: $funcType([], [$Int32, $Int, $error], false)}, {prop: "ReadRune", name: "ReadRune", pkg: "", typ: $funcType([], [$Int32, $Int, $error], false)}, {prop: "Read", name: "Read", pkg: "", typ: $funcType([sliceType], [$Int, $error], false)}, {prop: "Next", name: "Next", pkg: "", typ: $funcType([], [$String, $error], false)}];
-	Reader.init("github.com/ta2gch/iris/reader/tokenizer", [{prop: "err", name: "err", anonymous: false, exported: false, typ: $error, tag: ""}, {prop: "ru", name: "ru", anonymous: false, exported: false, typ: $Int32, tag: ""}, {prop: "sz", name: "sz", anonymous: false, exported: false, typ: $Int, tag: ""}, {prop: "rr", name: "rr", anonymous: false, exported: false, typ: ptrType, tag: ""}]);
+	Reader.init("github.com/asciian/iris/reader/tokenizer", [{prop: "err", name: "err", anonymous: false, exported: false, typ: $error, tag: ""}, {prop: "ru", name: "ru", anonymous: false, exported: false, typ: $Int32, tag: ""}, {prop: "sz", name: "sz", anonymous: false, exported: false, typ: $Int, tag: ""}, {prop: "rr", name: "rr", anonymous: false, exported: false, typ: ptrType, tag: ""}]);
 	$init = function() {
 		$pkg.$init = function() {};
 		/* */ var $f, $c = false, $s = 0, $r; if (this !== undefined && this.$blk !== undefined) { $f = this; $c = true; $s = $f.$s; $r = $f.$r; } s: while (true) { switch ($s) { case 0:
@@ -30716,11 +30716,11 @@ $packages["github.com/ta2gch/iris/reader/tokenizer"] = (function() {
 	$pkg.$init = $init;
 	return $pkg;
 })();
-$packages["github.com/ta2gch/iris/runtime/ilos"] = (function() {
+$packages["github.com/asciian/iris/runtime/ilos"] = (function() {
 	var $pkg = {}, $init, reflect, Class, Instance, sliceType, sliceType$1, SubclassOf, InstanceOf;
 	reflect = $packages["reflect"];
-	Class = $pkg.Class = $newType(8, $kindInterface, "ilos.Class", true, "github.com/ta2gch/iris/runtime/ilos", true, null);
-	Instance = $pkg.Instance = $newType(8, $kindInterface, "ilos.Instance", true, "github.com/ta2gch/iris/runtime/ilos", true, null);
+	Class = $pkg.Class = $newType(8, $kindInterface, "ilos.Class", true, "github.com/asciian/iris/runtime/ilos", true, null);
+	Instance = $pkg.Instance = $newType(8, $kindInterface, "ilos.Instance", true, "github.com/asciian/iris/runtime/ilos", true, null);
 	sliceType = $sliceType(Instance);
 	sliceType$1 = $sliceType(Class);
 	SubclassOf = function(super$1, sub) {
@@ -30801,10 +30801,10 @@ $packages["github.com/ta2gch/iris/runtime/ilos"] = (function() {
 	$pkg.$init = $init;
 	return $pkg;
 })();
-$packages["github.com/ta2gch/iris/runtime/env"] = (function() {
+$packages["github.com/asciian/iris/runtime/env"] = (function() {
 	var $pkg = {}, $init, ilos, Environment, map2, stack, mapType, sliceType, arrayType, ptrType, NewEnvironment, NewMap2, NewStack;
-	ilos = $packages["github.com/ta2gch/iris/runtime/ilos"];
-	Environment = $pkg.Environment = $newType(0, $kindStruct, "env.Environment", true, "github.com/ta2gch/iris/runtime/env", true, function(BlockTag_, TagbodyTag_, Function_, Variable_, Class_, Macro_, Special_, Property_, Constant_, CatchTag_, DynamicVariable_, StandardInput_, StandardOutput_, ErrorOutput_, Handler_) {
+	ilos = $packages["github.com/asciian/iris/runtime/ilos"];
+	Environment = $pkg.Environment = $newType(0, $kindStruct, "env.Environment", true, "github.com/asciian/iris/runtime/env", true, function(BlockTag_, TagbodyTag_, Function_, Variable_, Class_, Macro_, Special_, Property_, Constant_, CatchTag_, DynamicVariable_, StandardInput_, StandardOutput_, ErrorOutput_, Handler_) {
 		this.$val = this;
 		if (arguments.length === 0) {
 			this.BlockTag = stack.nil;
@@ -30840,8 +30840,8 @@ $packages["github.com/ta2gch/iris/runtime/env"] = (function() {
 		this.ErrorOutput = ErrorOutput_;
 		this.Handler = Handler_;
 	});
-	map2 = $pkg.map2 = $newType(4, $kindMap, "env.map2", true, "github.com/ta2gch/iris/runtime/env", false, null);
-	stack = $pkg.stack = $newType(12, $kindSlice, "env.stack", true, "github.com/ta2gch/iris/runtime/env", false, null);
+	map2 = $pkg.map2 = $newType(4, $kindMap, "env.map2", true, "github.com/asciian/iris/runtime/env", false, null);
+	stack = $pkg.stack = $newType(12, $kindSlice, "env.stack", true, "github.com/asciian/iris/runtime/env", false, null);
 	mapType = $mapType(ilos.Instance, ilos.Instance);
 	sliceType = $sliceType(mapType);
 	arrayType = $arrayType(ilos.Instance, 2);
@@ -31053,17 +31053,17 @@ $packages["github.com/ta2gch/iris/runtime/env"] = (function() {
 	$pkg.$init = $init;
 	return $pkg;
 })();
-$packages["github.com/ta2gch/iris/runtime/ilos/instance"] = (function() {
+$packages["github.com/asciian/iris/runtime/ilos/instance"] = (function() {
 	var $pkg = {}, $init, fmt, tokenizer, env, ilos, io, reflect, sort, strings, GeneralArrayStar, GeneralVector, String, BuiltInClass, Character, Applicable, Function, method, GenericFunction, slots, Instance, List, Cons, Null, Integer, Float, StandardClass, Stream, Symbol, sliceType, sliceType$1, sliceType$2, ptrType, sliceType$3, sliceType$4, sliceType$5, ptrType$1, sliceType$6, funcType, ptrType$2, ptrType$3, ptrType$4, ptrType$5, ptrType$6, mapType, sliceType$7, NewGeneralArrayStar, NewGeneralVector, NewString, NewBuiltInClass, NewCharacter, NewArithmeticError, NewParseError, NewDomainError, NewUndefinedFunction, NewUndefinedVariable, NewUndefinedClass, NewArityError, NewIndexOutOfRange, NewImmutableBinding, NewControlError, NewStreamError, NewFunction, NewGenericFunction, Create, InitializeObject, NewCons, NewNull, NewInteger, NewFloat, NewStandardClass, NewStream, NewSymbol, NewBlockTag, NewCatchTag, NewTagbodyTag;
 	fmt = $packages["fmt"];
-	tokenizer = $packages["github.com/ta2gch/iris/reader/tokenizer"];
-	env = $packages["github.com/ta2gch/iris/runtime/env"];
-	ilos = $packages["github.com/ta2gch/iris/runtime/ilos"];
+	tokenizer = $packages["github.com/asciian/iris/reader/tokenizer"];
+	env = $packages["github.com/asciian/iris/runtime/env"];
+	ilos = $packages["github.com/asciian/iris/runtime/ilos"];
 	io = $packages["io"];
 	reflect = $packages["reflect"];
 	sort = $packages["sort"];
 	strings = $packages["strings"];
-	GeneralArrayStar = $pkg.GeneralArrayStar = $newType(0, $kindStruct, "instance.GeneralArrayStar", true, "github.com/ta2gch/iris/runtime/ilos/instance", true, function(Vector_, Scalar_) {
+	GeneralArrayStar = $pkg.GeneralArrayStar = $newType(0, $kindStruct, "instance.GeneralArrayStar", true, "github.com/asciian/iris/runtime/ilos/instance", true, function(Vector_, Scalar_) {
 		this.$val = this;
 		if (arguments.length === 0) {
 			this.Vector = sliceType$3.nil;
@@ -31073,9 +31073,9 @@ $packages["github.com/ta2gch/iris/runtime/ilos/instance"] = (function() {
 		this.Vector = Vector_;
 		this.Scalar = Scalar_;
 	});
-	GeneralVector = $pkg.GeneralVector = $newType(12, $kindSlice, "instance.GeneralVector", true, "github.com/ta2gch/iris/runtime/ilos/instance", true, null);
-	String = $pkg.String = $newType(12, $kindSlice, "instance.String", true, "github.com/ta2gch/iris/runtime/ilos/instance", true, null);
-	BuiltInClass = $pkg.BuiltInClass = $newType(0, $kindStruct, "instance.BuiltInClass", true, "github.com/ta2gch/iris/runtime/ilos/instance", true, function(name_, supers_, slots_) {
+	GeneralVector = $pkg.GeneralVector = $newType(12, $kindSlice, "instance.GeneralVector", true, "github.com/asciian/iris/runtime/ilos/instance", true, null);
+	String = $pkg.String = $newType(12, $kindSlice, "instance.String", true, "github.com/asciian/iris/runtime/ilos/instance", true, null);
+	BuiltInClass = $pkg.BuiltInClass = $newType(0, $kindStruct, "instance.BuiltInClass", true, "github.com/asciian/iris/runtime/ilos/instance", true, function(name_, supers_, slots_) {
 		this.$val = this;
 		if (arguments.length === 0) {
 			this.name = $ifaceNil;
@@ -31087,9 +31087,9 @@ $packages["github.com/ta2gch/iris/runtime/ilos/instance"] = (function() {
 		this.supers = supers_;
 		this.slots = slots_;
 	});
-	Character = $pkg.Character = $newType(4, $kindInt32, "instance.Character", true, "github.com/ta2gch/iris/runtime/ilos/instance", true, null);
-	Applicable = $pkg.Applicable = $newType(8, $kindInterface, "instance.Applicable", true, "github.com/ta2gch/iris/runtime/ilos/instance", true, null);
-	Function = $pkg.Function = $newType(0, $kindStruct, "instance.Function", true, "github.com/ta2gch/iris/runtime/ilos/instance", true, function(name_, function$1_) {
+	Character = $pkg.Character = $newType(4, $kindInt32, "instance.Character", true, "github.com/asciian/iris/runtime/ilos/instance", true, null);
+	Applicable = $pkg.Applicable = $newType(8, $kindInterface, "instance.Applicable", true, "github.com/asciian/iris/runtime/ilos/instance", true, null);
+	Function = $pkg.Function = $newType(0, $kindStruct, "instance.Function", true, "github.com/asciian/iris/runtime/ilos/instance", true, function(name_, function$1_) {
 		this.$val = this;
 		if (arguments.length === 0) {
 			this.name = $ifaceNil;
@@ -31099,7 +31099,7 @@ $packages["github.com/ta2gch/iris/runtime/ilos/instance"] = (function() {
 		this.name = name_;
 		this.function$1 = function$1_;
 	});
-	method = $pkg.method = $newType(0, $kindStruct, "instance.method", true, "github.com/ta2gch/iris/runtime/ilos/instance", false, function(qualifier_, classList_, function$2_) {
+	method = $pkg.method = $newType(0, $kindStruct, "instance.method", true, "github.com/asciian/iris/runtime/ilos/instance", false, function(qualifier_, classList_, function$2_) {
 		this.$val = this;
 		if (arguments.length === 0) {
 			this.qualifier = $ifaceNil;
@@ -31111,7 +31111,7 @@ $packages["github.com/ta2gch/iris/runtime/ilos/instance"] = (function() {
 		this.classList = classList_;
 		this.function$2 = function$2_;
 	});
-	GenericFunction = $pkg.GenericFunction = $newType(0, $kindStruct, "instance.GenericFunction", true, "github.com/ta2gch/iris/runtime/ilos/instance", true, function(funcSpec_, lambdaList_, methodCombination_, genericFunctionClass_, methods_) {
+	GenericFunction = $pkg.GenericFunction = $newType(0, $kindStruct, "instance.GenericFunction", true, "github.com/asciian/iris/runtime/ilos/instance", true, function(funcSpec_, lambdaList_, methodCombination_, genericFunctionClass_, methods_) {
 		this.$val = this;
 		if (arguments.length === 0) {
 			this.funcSpec = $ifaceNil;
@@ -31127,8 +31127,8 @@ $packages["github.com/ta2gch/iris/runtime/ilos/instance"] = (function() {
 		this.genericFunctionClass = genericFunctionClass_;
 		this.methods = methods_;
 	});
-	slots = $pkg.slots = $newType(4, $kindMap, "instance.slots", true, "github.com/ta2gch/iris/runtime/ilos/instance", false, null);
-	Instance = $pkg.Instance = $newType(0, $kindStruct, "instance.Instance", true, "github.com/ta2gch/iris/runtime/ilos/instance", true, function(class$0_, supers_, slots_) {
+	slots = $pkg.slots = $newType(4, $kindMap, "instance.slots", true, "github.com/asciian/iris/runtime/ilos/instance", false, null);
+	Instance = $pkg.Instance = $newType(0, $kindStruct, "instance.Instance", true, "github.com/asciian/iris/runtime/ilos/instance", true, function(class$0_, supers_, slots_) {
 		this.$val = this;
 		if (arguments.length === 0) {
 			this.class$0 = $ifaceNil;
@@ -31140,8 +31140,8 @@ $packages["github.com/ta2gch/iris/runtime/ilos/instance"] = (function() {
 		this.supers = supers_;
 		this.slots = slots_;
 	});
-	List = $pkg.List = $newType(8, $kindInterface, "instance.List", true, "github.com/ta2gch/iris/runtime/ilos/instance", true, null);
-	Cons = $pkg.Cons = $newType(0, $kindStruct, "instance.Cons", true, "github.com/ta2gch/iris/runtime/ilos/instance", true, function(Car_, Cdr_) {
+	List = $pkg.List = $newType(8, $kindInterface, "instance.List", true, "github.com/asciian/iris/runtime/ilos/instance", true, null);
+	Cons = $pkg.Cons = $newType(0, $kindStruct, "instance.Cons", true, "github.com/asciian/iris/runtime/ilos/instance", true, function(Car_, Cdr_) {
 		this.$val = this;
 		if (arguments.length === 0) {
 			this.Car = $ifaceNil;
@@ -31151,15 +31151,15 @@ $packages["github.com/ta2gch/iris/runtime/ilos/instance"] = (function() {
 		this.Car = Car_;
 		this.Cdr = Cdr_;
 	});
-	Null = $pkg.Null = $newType(0, $kindStruct, "instance.Null", true, "github.com/ta2gch/iris/runtime/ilos/instance", true, function() {
+	Null = $pkg.Null = $newType(0, $kindStruct, "instance.Null", true, "github.com/asciian/iris/runtime/ilos/instance", true, function() {
 		this.$val = this;
 		if (arguments.length === 0) {
 			return;
 		}
 	});
-	Integer = $pkg.Integer = $newType(4, $kindInt, "instance.Integer", true, "github.com/ta2gch/iris/runtime/ilos/instance", true, null);
-	Float = $pkg.Float = $newType(8, $kindFloat64, "instance.Float", true, "github.com/ta2gch/iris/runtime/ilos/instance", true, null);
-	StandardClass = $pkg.StandardClass = $newType(0, $kindStruct, "instance.StandardClass", true, "github.com/ta2gch/iris/runtime/ilos/instance", true, function(name_, supers_, slots_, initforms_, initargs_, metaclass_, abstractp_) {
+	Integer = $pkg.Integer = $newType(4, $kindInt, "instance.Integer", true, "github.com/asciian/iris/runtime/ilos/instance", true, null);
+	Float = $pkg.Float = $newType(8, $kindFloat64, "instance.Float", true, "github.com/asciian/iris/runtime/ilos/instance", true, null);
+	StandardClass = $pkg.StandardClass = $newType(0, $kindStruct, "instance.StandardClass", true, "github.com/asciian/iris/runtime/ilos/instance", true, function(name_, supers_, slots_, initforms_, initargs_, metaclass_, abstractp_) {
 		this.$val = this;
 		if (arguments.length === 0) {
 			this.name = $ifaceNil;
@@ -31179,7 +31179,7 @@ $packages["github.com/ta2gch/iris/runtime/ilos/instance"] = (function() {
 		this.metaclass = metaclass_;
 		this.abstractp = abstractp_;
 	});
-	Stream = $pkg.Stream = $newType(0, $kindStruct, "instance.Stream", true, "github.com/ta2gch/iris/runtime/ilos/instance", true, function(Column_, Reader_, Writer_) {
+	Stream = $pkg.Stream = $newType(0, $kindStruct, "instance.Stream", true, "github.com/asciian/iris/runtime/ilos/instance", true, function(Column_, Reader_, Writer_) {
 		this.$val = this;
 		if (arguments.length === 0) {
 			this.Column = ptrType$3.nil;
@@ -31191,7 +31191,7 @@ $packages["github.com/ta2gch/iris/runtime/ilos/instance"] = (function() {
 		this.Reader = Reader_;
 		this.Writer = Writer_;
 	});
-	Symbol = $pkg.Symbol = $newType(8, $kindString, "instance.Symbol", true, "github.com/ta2gch/iris/runtime/ilos/instance", true, null);
+	Symbol = $pkg.Symbol = $newType(8, $kindString, "instance.Symbol", true, "github.com/asciian/iris/runtime/ilos/instance", true, null);
 	sliceType = $sliceType(ilos.Class);
 	sliceType$1 = $sliceType(ilos.Instance);
 	sliceType$2 = $sliceType($String);
@@ -32579,7 +32579,7 @@ $packages["github.com/ta2gch/iris/runtime/ilos/instance"] = (function() {
 	Function.methods = [{prop: "Class", name: "Class", pkg: "", typ: $funcType([], [ilos.Class], false)}, {prop: "String", name: "String", pkg: "", typ: $funcType([], [$String], false)}, {prop: "Apply", name: "Apply", pkg: "", typ: $funcType([env.Environment, sliceType$1], [ilos.Instance, ilos.Instance], true)}];
 	ptrType$5.methods = [{prop: "AddMethod", name: "AddMethod", pkg: "", typ: $funcType([ilos.Instance, ilos.Instance, sliceType, ilos.Instance], [$Bool], false)}, {prop: "Class", name: "Class", pkg: "", typ: $funcType([], [ilos.Class], false)}, {prop: "String", name: "String", pkg: "", typ: $funcType([], [$String], false)}, {prop: "Apply", name: "Apply", pkg: "", typ: $funcType([env.Environment, sliceType$1], [ilos.Instance, ilos.Instance], true)}];
 	slots.methods = [{prop: "String", name: "String", pkg: "", typ: $funcType([], [$String], false)}];
-	Instance.methods = [{prop: "Class", name: "Class", pkg: "", typ: $funcType([], [ilos.Class], false)}, {prop: "GetSlotValue", name: "GetSlotValue", pkg: "", typ: $funcType([ilos.Instance, ilos.Class], [ilos.Instance, $Bool], false)}, {prop: "SetSlotValue", name: "SetSlotValue", pkg: "", typ: $funcType([ilos.Instance, ilos.Instance, ilos.Class], [$Bool], false)}, {prop: "getAllSlots", name: "getAllSlots", pkg: "github.com/ta2gch/iris/runtime/ilos/instance", typ: $funcType([], [slots], false)}, {prop: "String", name: "String", pkg: "", typ: $funcType([], [$String], false)}];
+	Instance.methods = [{prop: "Class", name: "Class", pkg: "", typ: $funcType([], [ilos.Class], false)}, {prop: "GetSlotValue", name: "GetSlotValue", pkg: "", typ: $funcType([ilos.Instance, ilos.Class], [ilos.Instance, $Bool], false)}, {prop: "SetSlotValue", name: "SetSlotValue", pkg: "", typ: $funcType([ilos.Instance, ilos.Instance, ilos.Class], [$Bool], false)}, {prop: "getAllSlots", name: "getAllSlots", pkg: "github.com/asciian/iris/runtime/ilos/instance", typ: $funcType([], [slots], false)}, {prop: "String", name: "String", pkg: "", typ: $funcType([], [$String], false)}];
 	ptrType$2.methods = [{prop: "Class", name: "Class", pkg: "", typ: $funcType([], [ilos.Class], false)}, {prop: "String", name: "String", pkg: "", typ: $funcType([], [$String], false)}, {prop: "Slice", name: "Slice", pkg: "", typ: $funcType([], [sliceType$1], false)}, {prop: "Length", name: "Length", pkg: "", typ: $funcType([], [$Int], false)}, {prop: "Nth", name: "Nth", pkg: "", typ: $funcType([$Int], [ilos.Instance], false)}, {prop: "SetNth", name: "SetNth", pkg: "", typ: $funcType([ilos.Instance, $Int], [], false)}, {prop: "NthCdr", name: "NthCdr", pkg: "", typ: $funcType([$Int], [ilos.Instance], false)}];
 	ptrType$6.methods = [{prop: "Class", name: "Class", pkg: "", typ: $funcType([], [ilos.Class], false)}, {prop: "String", name: "String", pkg: "", typ: $funcType([], [$String], false)}, {prop: "Slice", name: "Slice", pkg: "", typ: $funcType([], [sliceType$1], false)}, {prop: "Nth", name: "Nth", pkg: "", typ: $funcType([$Int], [ilos.Instance], false)}, {prop: "SetNth", name: "SetNth", pkg: "", typ: $funcType([ilos.Instance, $Int], [], false)}, {prop: "NthCdr", name: "NthCdr", pkg: "", typ: $funcType([$Int], [ilos.Instance], false)}, {prop: "Length", name: "Length", pkg: "", typ: $funcType([], [$Int], false)}];
 	Integer.methods = [{prop: "Class", name: "Class", pkg: "", typ: $funcType([], [ilos.Class], false)}, {prop: "String", name: "String", pkg: "", typ: $funcType([], [$String], false)}];
@@ -32590,17 +32590,17 @@ $packages["github.com/ta2gch/iris/runtime/ilos/instance"] = (function() {
 	GeneralArrayStar.init("", [{prop: "Vector", name: "Vector", anonymous: false, exported: true, typ: sliceType$3, tag: ""}, {prop: "Scalar", name: "Scalar", anonymous: false, exported: true, typ: ilos.Instance, tag: ""}]);
 	GeneralVector.init(ilos.Instance);
 	String.init($Int32);
-	BuiltInClass.init("github.com/ta2gch/iris/runtime/ilos/instance", [{prop: "name", name: "name", anonymous: false, exported: false, typ: ilos.Instance, tag: ""}, {prop: "supers", name: "supers", anonymous: false, exported: false, typ: sliceType, tag: ""}, {prop: "slots", name: "slots", anonymous: false, exported: false, typ: sliceType$1, tag: ""}]);
+	BuiltInClass.init("github.com/asciian/iris/runtime/ilos/instance", [{prop: "name", name: "name", anonymous: false, exported: false, typ: ilos.Instance, tag: ""}, {prop: "supers", name: "supers", anonymous: false, exported: false, typ: sliceType, tag: ""}, {prop: "slots", name: "slots", anonymous: false, exported: false, typ: sliceType$1, tag: ""}]);
 	Applicable.init([{prop: "Apply", name: "Apply", pkg: "", typ: $funcType([env.Environment, sliceType$1], [ilos.Instance, ilos.Instance], true)}]);
-	Function.init("github.com/ta2gch/iris/runtime/ilos/instance", [{prop: "name", name: "name", anonymous: false, exported: false, typ: ilos.Instance, tag: ""}, {prop: "function$1", name: "function", anonymous: false, exported: false, typ: $emptyInterface, tag: ""}]);
-	method.init("github.com/ta2gch/iris/runtime/ilos/instance", [{prop: "qualifier", name: "qualifier", anonymous: false, exported: false, typ: ilos.Instance, tag: ""}, {prop: "classList", name: "classList", anonymous: false, exported: false, typ: sliceType, tag: ""}, {prop: "function$2", name: "function", anonymous: false, exported: false, typ: Function, tag: ""}]);
-	GenericFunction.init("github.com/ta2gch/iris/runtime/ilos/instance", [{prop: "funcSpec", name: "funcSpec", anonymous: false, exported: false, typ: ilos.Instance, tag: ""}, {prop: "lambdaList", name: "lambdaList", anonymous: false, exported: false, typ: ilos.Instance, tag: ""}, {prop: "methodCombination", name: "methodCombination", anonymous: false, exported: false, typ: ilos.Instance, tag: ""}, {prop: "genericFunctionClass", name: "genericFunctionClass", anonymous: false, exported: false, typ: ilos.Class, tag: ""}, {prop: "methods", name: "methods", anonymous: false, exported: false, typ: sliceType$6, tag: ""}]);
+	Function.init("github.com/asciian/iris/runtime/ilos/instance", [{prop: "name", name: "name", anonymous: false, exported: false, typ: ilos.Instance, tag: ""}, {prop: "function$1", name: "function", anonymous: false, exported: false, typ: $emptyInterface, tag: ""}]);
+	method.init("github.com/asciian/iris/runtime/ilos/instance", [{prop: "qualifier", name: "qualifier", anonymous: false, exported: false, typ: ilos.Instance, tag: ""}, {prop: "classList", name: "classList", anonymous: false, exported: false, typ: sliceType, tag: ""}, {prop: "function$2", name: "function", anonymous: false, exported: false, typ: Function, tag: ""}]);
+	GenericFunction.init("github.com/asciian/iris/runtime/ilos/instance", [{prop: "funcSpec", name: "funcSpec", anonymous: false, exported: false, typ: ilos.Instance, tag: ""}, {prop: "lambdaList", name: "lambdaList", anonymous: false, exported: false, typ: ilos.Instance, tag: ""}, {prop: "methodCombination", name: "methodCombination", anonymous: false, exported: false, typ: ilos.Instance, tag: ""}, {prop: "genericFunctionClass", name: "genericFunctionClass", anonymous: false, exported: false, typ: ilos.Class, tag: ""}, {prop: "methods", name: "methods", anonymous: false, exported: false, typ: sliceType$6, tag: ""}]);
 	slots.init(ilos.Instance, ilos.Instance);
-	Instance.init("github.com/ta2gch/iris/runtime/ilos/instance", [{prop: "class$0", name: "class", anonymous: false, exported: false, typ: ilos.Class, tag: ""}, {prop: "supers", name: "supers", anonymous: false, exported: false, typ: sliceType$1, tag: ""}, {prop: "slots", name: "slots", anonymous: false, exported: false, typ: slots, tag: ""}]);
+	Instance.init("github.com/asciian/iris/runtime/ilos/instance", [{prop: "class$0", name: "class", anonymous: false, exported: false, typ: ilos.Class, tag: ""}, {prop: "supers", name: "supers", anonymous: false, exported: false, typ: sliceType$1, tag: ""}, {prop: "slots", name: "slots", anonymous: false, exported: false, typ: slots, tag: ""}]);
 	List.init([{prop: "Length", name: "Length", pkg: "", typ: $funcType([], [$Int], false)}, {prop: "Nth", name: "Nth", pkg: "", typ: $funcType([$Int], [ilos.Instance], false)}, {prop: "NthCdr", name: "NthCdr", pkg: "", typ: $funcType([$Int], [ilos.Instance], false)}, {prop: "SetNth", name: "SetNth", pkg: "", typ: $funcType([ilos.Instance, $Int], [], false)}, {prop: "Slice", name: "Slice", pkg: "", typ: $funcType([], [sliceType$1], false)}]);
 	Cons.init("", [{prop: "Car", name: "Car", anonymous: false, exported: true, typ: ilos.Instance, tag: ""}, {prop: "Cdr", name: "Cdr", anonymous: false, exported: true, typ: ilos.Instance, tag: ""}]);
 	Null.init("", []);
-	StandardClass.init("github.com/ta2gch/iris/runtime/ilos/instance", [{prop: "name", name: "name", anonymous: false, exported: false, typ: ilos.Instance, tag: ""}, {prop: "supers", name: "supers", anonymous: false, exported: false, typ: sliceType, tag: ""}, {prop: "slots", name: "slots", anonymous: false, exported: false, typ: sliceType$1, tag: ""}, {prop: "initforms", name: "initforms", anonymous: false, exported: false, typ: mapType, tag: ""}, {prop: "initargs", name: "initargs", anonymous: false, exported: false, typ: mapType, tag: ""}, {prop: "metaclass", name: "metaclass", anonymous: false, exported: false, typ: ilos.Class, tag: ""}, {prop: "abstractp", name: "abstractp", anonymous: false, exported: false, typ: ilos.Instance, tag: ""}]);
+	StandardClass.init("github.com/asciian/iris/runtime/ilos/instance", [{prop: "name", name: "name", anonymous: false, exported: false, typ: ilos.Instance, tag: ""}, {prop: "supers", name: "supers", anonymous: false, exported: false, typ: sliceType, tag: ""}, {prop: "slots", name: "slots", anonymous: false, exported: false, typ: sliceType$1, tag: ""}, {prop: "initforms", name: "initforms", anonymous: false, exported: false, typ: mapType, tag: ""}, {prop: "initargs", name: "initargs", anonymous: false, exported: false, typ: mapType, tag: ""}, {prop: "metaclass", name: "metaclass", anonymous: false, exported: false, typ: ilos.Class, tag: ""}, {prop: "abstractp", name: "abstractp", anonymous: false, exported: false, typ: ilos.Instance, tag: ""}]);
 	Stream.init("", [{prop: "Column", name: "Column", anonymous: false, exported: true, typ: ptrType$3, tag: ""}, {prop: "Reader", name: "Reader", anonymous: false, exported: true, typ: ptrType$4, tag: ""}, {prop: "Writer", name: "Writer", anonymous: false, exported: true, typ: io.Writer, tag: ""}]);
 	$init = function() {
 		$pkg.$init = function() {};
@@ -32664,9 +32664,9 @@ $packages["github.com/ta2gch/iris/runtime/ilos/instance"] = (function() {
 	$pkg.$init = $init;
 	return $pkg;
 })();
-$packages["github.com/ta2gch/iris/runtime/ilos/class"] = (function() {
+$packages["github.com/asciian/iris/runtime/ilos/class"] = (function() {
 	var $pkg = {}, $init, instance;
-	instance = $packages["github.com/ta2gch/iris/runtime/ilos/instance"];
+	instance = $packages["github.com/asciian/iris/runtime/ilos/instance"];
 	$init = function() {
 		$pkg.$init = function() {};
 		/* */ var $f, $c = false, $s = 0, $r; if (this !== undefined && this.$blk !== undefined) { $f = this; $c = true; $s = $f.$s; $r = $f.$r; } s: while (true) { switch ($s) { case 0:
@@ -32720,13 +32720,13 @@ $packages["github.com/ta2gch/iris/runtime/ilos/class"] = (function() {
 	$pkg.$init = $init;
 	return $pkg;
 })();
-$packages["github.com/ta2gch/iris/reader/parser"] = (function() {
+$packages["github.com/asciian/iris/reader/parser"] = (function() {
 	var $pkg = {}, $init, tokenizer, env, ilos, class$1, instance, math, regexp, strconv, strings, ptrType, sliceType, ptrType$1, sliceType$1, sliceType$2, eop, bod, list2array, list2vector, ParseAtom, parseMacro, parseCons, Parse;
-	tokenizer = $packages["github.com/ta2gch/iris/reader/tokenizer"];
-	env = $packages["github.com/ta2gch/iris/runtime/env"];
-	ilos = $packages["github.com/ta2gch/iris/runtime/ilos"];
-	class$1 = $packages["github.com/ta2gch/iris/runtime/ilos/class"];
-	instance = $packages["github.com/ta2gch/iris/runtime/ilos/instance"];
+	tokenizer = $packages["github.com/asciian/iris/reader/tokenizer"];
+	env = $packages["github.com/asciian/iris/runtime/env"];
+	ilos = $packages["github.com/asciian/iris/runtime/ilos"];
+	class$1 = $packages["github.com/asciian/iris/runtime/ilos/class"];
+	instance = $packages["github.com/asciian/iris/runtime/ilos/instance"];
 	math = $packages["math"];
 	regexp = $packages["regexp"];
 	strconv = $packages["strconv"];
@@ -34243,17 +34243,17 @@ $packages["testing"] = (function() {
 	$pkg.$init = $init;
 	return $pkg;
 })();
-$packages["github.com/ta2gch/iris/runtime"] = (function() {
+$packages["github.com/asciian/iris/runtime"] = (function() {
 	var $pkg = {}, $init, bufio, bytes, fmt, parser, tokenizer, env, ilos, class$1, instance, math, os, reflect, regexp, runtime, strconv, strings, testing, funcType, sliceType, ptrType, sliceType$1, sliceType$2, ptrType$1, sliceType$3, ptrType$2, funcType$1, sliceType$4, sliceType$5, funcType$2, funcType$3, funcType$4, funcType$5, funcType$6, funcType$7, funcType$8, funcType$9, funcType$10, ptrType$3, sliceType$6, arrayType, ptrType$5, unique, BasicArrayP, BasicArrayStarP, GeneralArrayStarP, CreateArray, createGeneralVector, createGeneralArrayStar, Aref, Garef, SetAref, SetGaref, ArrayDimensions, Characterp, CharEqual, CharNotEqual, CharGreaterThan, CharGreaterThanOrEqual, CharLessThan, CharLessThanOrEqual, ClassOf, Instancep, Subclassp, Class, checkSuperClass, Defclass, Create, InitializeObject, Defmethod, Defgeneric, SignalCondition, Cerror, Error, ReportCondition, ConditionContinuable, ContinueCondition, WithHandler, If, Cond, Case, CaseUsing, Consp, Cons, Car, Cdr, SetCar, SetCdr, Quote, Convert, Defconstant, Defglobal, Defdynamic, Defun, Dynamic, SetDynamic, DynamicLet, isComparable, Eq, Eql, Equal, evalArguments, evalLambda, evalSpecial, evalMacro, evalFunction, evalCons, evalVariable, Eval, Floatp, Float, Floor, Ceiling, Truncate, Round, FormatObject, FormatChar, FormatFloat, FormatInteger, FormatTab, FormatFreshLine, Format, Functionp, Function, Lambda, Labels, Flet, Apply, Funcall, convInt, Integerp, Div, Mod, Gcd, Lcm, Isqrt, While, For, Listp, CreateList, List, Reverse, Nreverse, Append, Member, Mapcar, Mapc, Mapcan, Maplist, Mapl, Mapcon, Assoc, Null, Not, And, Or, Defmacro, Quasiquote, expand, checkLambdaList, newNamedFunction, Block, ReturnFrom, Catch, Throw, Tagbody, Go, UnwindProtect, Numberp, ParseNumber, NumberEqual, NumberGreaterThan, NumberGreaterThanOrEqual, NumberLessThan, NumberLessThanOrEqual, Add, Multiply, Substruct, Quotient, Max, Min, Abs, Exp, Log, Expt, Sqrt, Sin, Cos, Tan, Atan, Atan2, Sinh, Cosh, Tanh, Atanh, TopLevelHander, defclass, defspecial, defun, defgeneric, defglobal, init, Length, Elt, SetElt, Subseq, MapInto, Progn, Streamp, OpenStreamP, InputStreamP, OutputStreamP, StandardInput, StandardOutput, ErrorOutput, WithStandardInput, WithStandardOutput, WithErrorOutput, OpenInputFile, OpenOutputFile, OpenIoFile, WithOpenInputFile, WithOpenOutputFile, Close, CreateStringInputStream, CreateStringOutputStream, GetOutputStreamString, Read, ReadChar, ReadLine, StreamReadyP, Stringp, CreateString, StringEqual, StringNotEqual, StringGreaterThan, StringGreaterThanOrEqual, StringLessThan, StringLessThanOrEqual, CharIndex, StringIndex, StringAppend, Symbolp, Property, SetProperty, RemoveProperty, Gensym, convFloat64, ensure, uniqueInt, func2symbol, Setq, Setf, Let, LetStar, BasicVectorP, GeneralVectorP, CreateVector, Vector;
 	bufio = $packages["bufio"];
 	bytes = $packages["bytes"];
 	fmt = $packages["fmt"];
-	parser = $packages["github.com/ta2gch/iris/reader/parser"];
-	tokenizer = $packages["github.com/ta2gch/iris/reader/tokenizer"];
-	env = $packages["github.com/ta2gch/iris/runtime/env"];
-	ilos = $packages["github.com/ta2gch/iris/runtime/ilos"];
-	class$1 = $packages["github.com/ta2gch/iris/runtime/ilos/class"];
-	instance = $packages["github.com/ta2gch/iris/runtime/ilos/instance"];
+	parser = $packages["github.com/asciian/iris/reader/parser"];
+	tokenizer = $packages["github.com/asciian/iris/reader/tokenizer"];
+	env = $packages["github.com/asciian/iris/runtime/env"];
+	ilos = $packages["github.com/asciian/iris/runtime/ilos"];
+	class$1 = $packages["github.com/asciian/iris/runtime/ilos/class"];
+	instance = $packages["github.com/asciian/iris/runtime/ilos/instance"];
 	math = $packages["math"];
 	os = $packages["os"];
 	reflect = $packages["reflect"];
@@ -41834,18 +41834,18 @@ $packages["main"] = (function() {
 	bytes = $packages["bytes"];
 	fmt = $packages["fmt"];
 	js = $packages["github.com/gopherjs/gopherjs/js"];
-	runtime = $packages["github.com/ta2gch/iris/runtime"];
-	instance = $packages["github.com/ta2gch/iris/runtime/ilos/instance"];
+	runtime = $packages["github.com/asciian/iris/runtime"];
+	instance = $packages["github.com/asciian/iris/runtime/ilos/instance"];
 	html = $packages["html"];
 	strings = $packages["strings"];
 	funcType = $funcType([$String], [$String], false);
 	mapType = $mapType($String, $emptyInterface);
 	sliceType = $sliceType($Uint8);
 	arrayType = $arrayType($Uint8, 64);
-	sliceType$1 = $sliceType($packages["github.com/ta2gch/iris/runtime/ilos"].Instance);
+	sliceType$1 = $sliceType($packages["github.com/asciian/iris/runtime/ilos"].Instance);
 	sliceType$2 = $sliceType($emptyInterface);
 	main = function() {
-		console.log("Welcome to Iris (526f28d). Iris is an ISLisp implementation on Go.\nThis library works with gopherjs and has no methods to get input.\nFor more infomation, see https://islisp.js.org.\n\nCopyright &copy; 2017 TANIGUCHI Masaya All Rights Reserved.");
+		console.log("Welcome to Iris (526f28d). Iris is an ISLisp implementation on Go.\nThis library works with gopherjs and has no methods to get input.\nFor more infomation, see https://islisp.js.org.\n\nCopyright &copy; 2017 asciian All Rights Reserved.");
 		$global.islisp = $externalize($makeMap($String.keyFor, [{ k: "eval", v: new funcType(eval$1) }]), mapType);
 	};
 	eval$1 = function(s) {
@@ -41859,7 +41859,7 @@ $packages["main"] = (function() {
 		runtime.TopLevel.Function.Set(instance.NewSymbol("READ"), $ifaceNil);
 		runtime.TopLevel.Function.Set(instance.NewSymbol("READ-LINE"), $ifaceNil);
 		runtime.TopLevel.Function.Set(instance.NewSymbol("READ-CHAR"), $ifaceNil);
-		_r = runtime.Read($clone(runtime.TopLevel, $packages["github.com/ta2gch/iris/runtime/env"].Environment), new sliceType$1([])); /* */ $s = 1; case 1: if($c) { $c = false; _r = _r.$blk(); } if (_r && _r.$blk !== undefined) { break s; }
+		_r = runtime.Read($clone(runtime.TopLevel, $packages["github.com/asciian/iris/runtime/env"].Environment), new sliceType$1([])); /* */ $s = 1; case 1: if($c) { $c = false; _r = _r.$blk(); } if (_r && _r.$blk !== undefined) { break s; }
 		_tuple = _r;
 		p = _tuple[0];
 		err = _tuple[1];
@@ -41874,7 +41874,7 @@ $packages["main"] = (function() {
 			_r$3;
 			$s = -1; return w.String();
 		/* } */ case 3:
-		_r$4 = runtime.Eval($clone(runtime.TopLevel, $packages["github.com/ta2gch/iris/runtime/env"].Environment), p); /* */ $s = 7; case 7: if($c) { $c = false; _r$4 = _r$4.$blk(); } if (_r$4 && _r$4.$blk !== undefined) { break s; }
+		_r$4 = runtime.Eval($clone(runtime.TopLevel, $packages["github.com/asciian/iris/runtime/env"].Environment), p); /* */ $s = 7; case 7: if($c) { $c = false; _r$4 = _r$4.$blk(); } if (_r$4 && _r$4.$blk !== undefined) { break s; }
 		_tuple$1 = _r$4;
 		e = _tuple$1[0];
 		err = _tuple$1[1];

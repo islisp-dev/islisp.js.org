@@ -9,10 +9,10 @@ import (
 	"html"
 
 	"github.com/gopherjs/jquery"
-	"github.com/ta2gch/iris/runtime"
-	"github.com/ta2gch/iris/runtime/ilos"
-	"github.com/ta2gch/iris/runtime/ilos/class"
-	"github.com/ta2gch/iris/runtime/ilos/instance"
+	"github.com/asciian/iris/runtime"
+	"github.com/asciian/iris/runtime/ilos"
+	"github.com/asciian/iris/runtime/ilos/class"
+	"github.com/asciian/iris/runtime/ilos/instance"
 )
 
 const version = "526f28d"
@@ -44,7 +44,7 @@ func main() {
 	fmt.Fprintf(dom, `Welcome to Iris (%v). Iris is an ISLisp implementation on Go.
 This REPL works on JavaScript with gopherjs.
 
-Copyright &copy; 2017 TANIGUCHI Masaya All Rights Reserved.`, version)
+Copyright &copy; 2017 asciian All Rights Reserved.`, version)
 	jQuery("#version").SetHtml(version)
 	jQuery("#input").On(jquery.KEYDOWN, func(e jquery.Event) {
 		if !e.ShiftKey && e.KeyCode == 13 {

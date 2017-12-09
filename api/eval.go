@@ -11,8 +11,8 @@ import (
 	"strings"
 
 	"github.com/gopherjs/gopherjs/js"
-	"github.com/ta2gch/iris/runtime"
-	"github.com/ta2gch/iris/runtime/ilos/instance"
+	"github.com/asciian/iris/runtime"
+	"github.com/asciian/iris/runtime/ilos/instance"
 )
 
 const version = "526f28d"
@@ -22,7 +22,7 @@ func main() {
 This library works with gopherjs and has no methods to get input.
 For more infomation, see https://islisp.js.org.
 
-Copyright &copy; 2017 TANIGUCHI Masaya All Rights Reserved.`)
+Copyright &copy; 2017 asciian All Rights Reserved.`)
 	js.Global.Set("islisp", map[string]interface{}{"eval": eval})
 }
 
