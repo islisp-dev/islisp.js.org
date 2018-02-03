@@ -37644,8 +37644,8 @@ $packages["github.com/asciian/iris/runtime"] = (function() {
 	};
 	$pkg.Integerp = Integerp;
 	Div = function(e, z1, z2) {
-		var _arg, _arg$1, _arg$2, _q, _q$1, _r, _r$1, _r$2, _r$3, _tuple, _tuple$1, _tuple$2, a, b, e, err, err$1, operands, operation, z1, z2, $s, $r;
-		/* */ $s = 0; var $f, $c = false; if (this !== undefined && this.$blk !== undefined) { $f = this; $c = true; _arg = $f._arg; _arg$1 = $f._arg$1; _arg$2 = $f._arg$2; _q = $f._q; _q$1 = $f._q$1; _r = $f._r; _r$1 = $f._r$1; _r$2 = $f._r$2; _r$3 = $f._r$3; _tuple = $f._tuple; _tuple$1 = $f._tuple$1; _tuple$2 = $f._tuple$2; a = $f.a; b = $f.b; e = $f.e; err = $f.err; err$1 = $f.err$1; operands = $f.operands; operation = $f.operation; z1 = $f.z1; z2 = $f.z2; $s = $f.$s; $r = $f.$r; } s: while (true) { switch ($s) { case 0:
+		var _arg, _arg$1, _arg$2, _r, _r$1, _r$2, _r$3, _tuple, _tuple$1, _tuple$2, a, b, e, err, err$1, operands, operation, z1, z2, $s, $r;
+		/* */ $s = 0; var $f, $c = false; if (this !== undefined && this.$blk !== undefined) { $f = this; $c = true; _arg = $f._arg; _arg$1 = $f._arg$1; _arg$2 = $f._arg$2; _r = $f._r; _r$1 = $f._r$1; _r$2 = $f._r$2; _r$3 = $f._r$3; _tuple = $f._tuple; _tuple$1 = $f._tuple$1; _tuple$2 = $f._tuple$2; a = $f.a; b = $f.b; e = $f.e; err = $f.err; err$1 = $f.err$1; operands = $f.operands; operation = $f.operation; z1 = $f.z1; z2 = $f.z2; $s = $f.$s; $r = $f.$r; } s: while (true) { switch ($s) { case 0:
 		_r = convInt($clone(e, env.Environment), z1); /* */ $s = 1; case 1: if($c) { $c = false; _r = _r.$blk(); } if (_r && _r.$blk !== undefined) { break s; }
 		_tuple = _r;
 		a = _tuple[0];
@@ -37677,11 +37677,8 @@ $packages["github.com/asciian/iris/runtime"] = (function() {
 			_r$3 = SignalCondition(_arg, _arg$1, _arg$2); /* */ $s = 6; case 6: if($c) { $c = false; _r$3 = _r$3.$blk(); } if (_r$3 && _r$3.$blk !== undefined) { break s; }
 			$s = -1; return _r$3;
 		/* } */ case 4:
-		if (($imul(a, b)) < 0) {
-			$s = -1; return [instance.NewInteger((_q = a / b, (_q === _q && _q !== 1/0 && _q !== -1/0) ? _q >> 0 : $throwRuntimeError("integer divide by zero")) - 1 >> 0), $ifaceNil];
-		}
-		$s = -1; return [instance.NewInteger((_q$1 = a / b, (_q$1 === _q$1 && _q$1 !== 1/0 && _q$1 !== -1/0) ? _q$1 >> 0 : $throwRuntimeError("integer divide by zero"))), $ifaceNil];
-		/* */ } return; } if ($f === undefined) { $f = { $blk: Div }; } $f._arg = _arg; $f._arg$1 = _arg$1; $f._arg$2 = _arg$2; $f._q = _q; $f._q$1 = _q$1; $f._r = _r; $f._r$1 = _r$1; $f._r$2 = _r$2; $f._r$3 = _r$3; $f._tuple = _tuple; $f._tuple$1 = _tuple$1; $f._tuple$2 = _tuple$2; $f.a = a; $f.b = b; $f.e = e; $f.err = err; $f.err$1 = err$1; $f.operands = operands; $f.operation = operation; $f.z1 = z1; $f.z2 = z2; $f.$s = $s; $f.$r = $r; return $f;
+		$s = -1; return [instance.NewInteger(((math.Floor((a) / (b)) >> 0))), $ifaceNil];
+		/* */ } return; } if ($f === undefined) { $f = { $blk: Div }; } $f._arg = _arg; $f._arg$1 = _arg$1; $f._arg$2 = _arg$2; $f._r = _r; $f._r$1 = _r$1; $f._r$2 = _r$2; $f._r$3 = _r$3; $f._tuple = _tuple; $f._tuple$1 = _tuple$1; $f._tuple$2 = _tuple$2; $f.a = a; $f.b = b; $f.e = e; $f.err = err; $f.err$1 = err$1; $f.operands = operands; $f.operation = operation; $f.z1 = z1; $f.z2 = z2; $f.$s = $s; $f.$r = $r; return $f;
 	};
 	$pkg.Div = Div;
 	Mod = function(e, z1, z2) {
@@ -42890,10 +42887,10 @@ $packages["main"] = (function() {
 		runtime.TopLevel.StandardInput = instance.NewStream(dom[0], $ifaceNil);
 		runtime.TopLevel.StandardOutput = instance.NewStream($ifaceNil, dom[0]);
 		runtime.TopLevel.ErrorOutput = instance.NewStream($ifaceNil, dom[0]);
-		_r = fmt.Fprintf(dom[0], "Welcome to Iris (%v). Iris is an ISLisp implementation on Go.\nThis REPL works on JavaScript with gopherjs.\n\nCopyright &copy; 2017 asciian All Rights Reserved.", new sliceType([new $String("c7badaa")])); /* */ $s = 1; case 1: if($c) { $c = false; _r = _r.$blk(); } if (_r && _r.$blk !== undefined) { break s; }
+		_r = fmt.Fprintf(dom[0], "Welcome to Iris (%v). Iris is an ISLisp implementation on Go.\nThis REPL works on JavaScript with gopherjs.\n\nCopyright &copy; 2017 asciian All Rights Reserved.", new sliceType([new $String("a0f4f8d")])); /* */ $s = 1; case 1: if($c) { $c = false; _r = _r.$blk(); } if (_r && _r.$blk !== undefined) { break s; }
 		_r;
 		_r$1 = jQuery(new sliceType([new $String("#version")])); /* */ $s = 2; case 2: if($c) { $c = false; _r$1 = _r$1.$blk(); } if (_r$1 && _r$1.$blk !== undefined) { break s; }
-		_r$2 = $clone(_r$1, jquery.JQuery).SetHtml(new $String("c7badaa")); /* */ $s = 3; case 3: if($c) { $c = false; _r$2 = _r$2.$blk(); } if (_r$2 && _r$2.$blk !== undefined) { break s; }
+		_r$2 = $clone(_r$1, jquery.JQuery).SetHtml(new $String("a0f4f8d")); /* */ $s = 3; case 3: if($c) { $c = false; _r$2 = _r$2.$blk(); } if (_r$2 && _r$2.$blk !== undefined) { break s; }
 		_r$2;
 		_r$3 = jQuery(new sliceType([new $String("#input")])); /* */ $s = 4; case 4: if($c) { $c = false; _r$3 = _r$3.$blk(); } if (_r$3 && _r$3.$blk !== undefined) { break s; }
 		_r$4 = $clone(_r$3, jquery.JQuery).On(new sliceType([new $String("keydown"), new funcType((function(dom, prompt) { return function $b(e) {
