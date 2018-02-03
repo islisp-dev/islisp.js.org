@@ -15,7 +15,7 @@ import (
 	"github.com/asciian/iris/runtime/ilos/instance"
 )
 
-const version = "526f28d"
+const version = "c7badaa"
 
 var stream = make(chan string)
 

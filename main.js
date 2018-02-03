@@ -1462,7 +1462,7 @@ var $throw = function(err) { throw err; };
 var $noGoroutine = { asleep: false, exit: false, deferStack: [], panicStack: [] };
 var $curGoroutine = $noGoroutine, $totalGoroutines = 0, $awakeGoroutines = 0, $checkForDeadlock = true;
 var $mainFinished = false;
-var $go = function(fun, args, direct) {
+var $go = function(fun, args) {
   $totalGoroutines++;
   $awakeGoroutines++;
   var $goroutine = function() {
@@ -1861,13 +1861,7 @@ var $externalizeFunction = function(v, t, passThis) {
         }
         args.push($internalize(arguments[i], t.params[i]));
       }
-      var canBlock = $curGoroutine.canBlock;
-      $curGoroutine.canBlock = false;
-      try {
-        var result = v.apply(passThis ? this : undefined, args);
-      } finally {
-        $curGoroutine.canBlock = canBlock;
-      }
+      var result = v.apply(passThis ? this : undefined, args);
       switch (t.results.length) {
       case 0:
         return;
@@ -2555,7 +2549,7 @@ $packages["sync/atomic"] = (function() {
 	return $pkg;
 })();
 $packages["sync"] = (function() {
-	var $pkg = {}, $init, js, race, runtime, atomic, Pool, Map, readOnly, entry, Mutex, poolLocalInternal, poolLocal, notifyList, ptrType, sliceType, ptrType$1, chanType, sliceType$1, ptrType$3, ptrType$4, ptrType$5, ptrType$6, ptrType$7, sliceType$4, funcType, funcType$1, ptrType$15, mapType, ptrType$16, arrayType$2, semWaiters, expunged, allPools, runtime_registerPoolCleanup, runtime_Semacquire, runtime_SemacquireMutex, runtime_Semrelease, runtime_notifyListCheck, runtime_canSpin, runtime_nanotime, newEntry, poolCleanup, init, indexLocal, init$1, runtime_doSpin;
+	var $pkg = {}, $init, js, race, runtime, atomic, Pool, Map, readOnly, entry, Mutex, poolLocalInternal, poolLocal, notifyList, ptrType, sliceType, ptrType$1, chanType, sliceType$1, ptrType$3, ptrType$4, ptrType$5, ptrType$6, ptrType$7, sliceType$4, funcType, funcType$1, ptrType$15, mapType, ptrType$16, arrayType$2, semWaiters, semAwoken, expunged, allPools, runtime_registerPoolCleanup, runtime_SemacquireMutex, runtime_Semrelease, runtime_notifyListCheck, runtime_canSpin, runtime_nanotime, newEntry, poolCleanup, init, indexLocal, init$1, runtime_doSpin;
 	js = $packages["github.com/gopherjs/gopherjs/js"];
 	race = $packages["internal/race"];
 	runtime = $packages["runtime"];
@@ -2704,31 +2698,32 @@ $packages["sync"] = (function() {
 	runtime_registerPoolCleanup = function(cleanup) {
 		var cleanup;
 	};
-	runtime_Semacquire = function(s) {
-		var _entry, _key, _r, ch, s, $s, $r;
-		/* */ $s = 0; var $f, $c = false; if (this !== undefined && this.$blk !== undefined) { $f = this; $c = true; _entry = $f._entry; _key = $f._key; _r = $f._r; ch = $f.ch; s = $f.s; $s = $f.$s; $r = $f.$r; } s: while (true) { switch ($s) { case 0:
-		/* */ if (s.$get() === 0) { $s = 1; continue; }
+	runtime_SemacquireMutex = function(s, lifo) {
+		var _entry, _entry$1, _entry$2, _entry$3, _entry$4, _key, _key$1, _key$2, _r, ch, lifo, s, $s, $r;
+		/* */ $s = 0; var $f, $c = false; if (this !== undefined && this.$blk !== undefined) { $f = this; $c = true; _entry = $f._entry; _entry$1 = $f._entry$1; _entry$2 = $f._entry$2; _entry$3 = $f._entry$3; _entry$4 = $f._entry$4; _key = $f._key; _key$1 = $f._key$1; _key$2 = $f._key$2; _r = $f._r; ch = $f.ch; lifo = $f.lifo; s = $f.s; $s = $f.$s; $r = $f.$r; } s: while (true) { switch ($s) { case 0:
+		/* */ if (((s.$get() - (_entry = semAwoken[ptrType$1.keyFor(s)], _entry !== undefined ? _entry.v : 0) >>> 0)) === 0) { $s = 1; continue; }
 		/* */ $s = 2; continue;
-		/* if (s.$get() === 0) { */ case 1:
+		/* if (((s.$get() - (_entry = semAwoken[ptrType$1.keyFor(s)], _entry !== undefined ? _entry.v : 0) >>> 0)) === 0) { */ case 1:
 			ch = new $Chan($Bool, 0);
-			_key = s; (semWaiters || $throwRuntimeError("assignment to entry in nil map"))[ptrType$1.keyFor(_key)] = { k: _key, v: $append((_entry = semWaiters[ptrType$1.keyFor(s)], _entry !== undefined ? _entry.v : sliceType$1.nil), ch) };
+			if (lifo) {
+				_key = s; (semWaiters || $throwRuntimeError("assignment to entry in nil map"))[ptrType$1.keyFor(_key)] = { k: _key, v: $appendSlice(new sliceType$1([ch]), (_entry$1 = semWaiters[ptrType$1.keyFor(s)], _entry$1 !== undefined ? _entry$1.v : sliceType$1.nil)) };
+			} else {
+				_key$1 = s; (semWaiters || $throwRuntimeError("assignment to entry in nil map"))[ptrType$1.keyFor(_key$1)] = { k: _key$1, v: $append((_entry$2 = semWaiters[ptrType$1.keyFor(s)], _entry$2 !== undefined ? _entry$2.v : sliceType$1.nil), ch) };
+			}
 			_r = $recv(ch); /* */ $s = 3; case 3: if($c) { $c = false; _r = _r.$blk(); } if (_r && _r.$blk !== undefined) { break s; }
 			_r[0];
+			_key$2 = s; (semAwoken || $throwRuntimeError("assignment to entry in nil map"))[ptrType$1.keyFor(_key$2)] = { k: _key$2, v: (_entry$3 = semAwoken[ptrType$1.keyFor(s)], _entry$3 !== undefined ? _entry$3.v : 0) - (1) >>> 0 };
+			if ((_entry$4 = semAwoken[ptrType$1.keyFor(s)], _entry$4 !== undefined ? _entry$4.v : 0) === 0) {
+				delete semAwoken[ptrType$1.keyFor(s)];
+			}
 		/* } */ case 2:
 		s.$set(s.$get() - (1) >>> 0);
 		$s = -1; return;
-		/* */ } return; } if ($f === undefined) { $f = { $blk: runtime_Semacquire }; } $f._entry = _entry; $f._key = _key; $f._r = _r; $f.ch = ch; $f.s = s; $f.$s = $s; $f.$r = $r; return $f;
-	};
-	runtime_SemacquireMutex = function(s, lifo) {
-		var lifo, s, $s, $r;
-		/* */ $s = 0; var $f, $c = false; if (this !== undefined && this.$blk !== undefined) { $f = this; $c = true; lifo = $f.lifo; s = $f.s; $s = $f.$s; $r = $f.$r; } s: while (true) { switch ($s) { case 0:
-		$r = runtime_Semacquire(s); /* */ $s = 1; case 1: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$s = -1; return;
-		/* */ } return; } if ($f === undefined) { $f = { $blk: runtime_SemacquireMutex }; } $f.lifo = lifo; $f.s = s; $f.$s = $s; $f.$r = $r; return $f;
+		/* */ } return; } if ($f === undefined) { $f = { $blk: runtime_SemacquireMutex }; } $f._entry = _entry; $f._entry$1 = _entry$1; $f._entry$2 = _entry$2; $f._entry$3 = _entry$3; $f._entry$4 = _entry$4; $f._key = _key; $f._key$1 = _key$1; $f._key$2 = _key$2; $f._r = _r; $f.ch = ch; $f.lifo = lifo; $f.s = s; $f.$s = $s; $f.$r = $r; return $f;
 	};
 	runtime_Semrelease = function(s, handoff) {
-		var _entry, _key, ch, handoff, s, w, $s, $r;
-		/* */ $s = 0; var $f, $c = false; if (this !== undefined && this.$blk !== undefined) { $f = this; $c = true; _entry = $f._entry; _key = $f._key; ch = $f.ch; handoff = $f.handoff; s = $f.s; w = $f.w; $s = $f.$s; $r = $f.$r; } s: while (true) { switch ($s) { case 0:
+		var _entry, _entry$1, _key, _key$1, ch, handoff, s, w, $s, $r;
+		/* */ $s = 0; var $f, $c = false; if (this !== undefined && this.$blk !== undefined) { $f = this; $c = true; _entry = $f._entry; _entry$1 = $f._entry$1; _key = $f._key; _key$1 = $f._key$1; ch = $f.ch; handoff = $f.handoff; s = $f.s; w = $f.w; $s = $f.$s; $r = $f.$r; } s: while (true) { switch ($s) { case 0:
 		s.$set(s.$get() + (1) >>> 0);
 		w = (_entry = semWaiters[ptrType$1.keyFor(s)], _entry !== undefined ? _entry.v : sliceType$1.nil);
 		if (w.$length === 0) {
@@ -2740,9 +2735,10 @@ $packages["sync"] = (function() {
 		if (w.$length === 0) {
 			delete semWaiters[ptrType$1.keyFor(s)];
 		}
+		_key$1 = s; (semAwoken || $throwRuntimeError("assignment to entry in nil map"))[ptrType$1.keyFor(_key$1)] = { k: _key$1, v: (_entry$1 = semAwoken[ptrType$1.keyFor(s)], _entry$1 !== undefined ? _entry$1.v : 0) + (1) >>> 0 };
 		$r = $send(ch, true); /* */ $s = 1; case 1: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
 		$s = -1; return;
-		/* */ } return; } if ($f === undefined) { $f = { $blk: runtime_Semrelease }; } $f._entry = _entry; $f._key = _key; $f.ch = ch; $f.handoff = handoff; $f.s = s; $f.w = w; $f.$s = $s; $f.$r = $r; return $f;
+		/* */ } return; } if ($f === undefined) { $f = { $blk: runtime_Semrelease }; } $f._entry = _entry; $f._entry$1 = _entry$1; $f._key = _key; $f._key$1 = _key$1; $f.ch = ch; $f.handoff = handoff; $f.s = s; $f.w = w; $f.$s = $s; $f.$r = $r; return $f;
 	};
 	runtime_notifyListCheck = function(size) {
 		var size;
@@ -3363,6 +3359,7 @@ $packages["sync"] = (function() {
 		$r = atomic.$init(); /* */ $s = 4; case 4: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
 		allPools = sliceType.nil;
 		semWaiters = {};
+		semAwoken = {};
 		expunged = (new Uint8Array(8));
 		init();
 		init$1();
@@ -21332,938 +21329,6 @@ $packages["fmt"] = (function() {
 	$pkg.$init = $init;
 	return $pkg;
 })();
-$packages["github.com/gopherjs/jquery"] = (function() {
-	var $pkg = {}, $init, js, JQuery, Event, JQueryCoordinates, sliceType, funcType$1, mapType, sliceType$1, funcType$2, funcType$3, ptrType, sliceType$2, ptrType$1, NewJQuery;
-	js = $packages["github.com/gopherjs/gopherjs/js"];
-	JQuery = $pkg.JQuery = $newType(0, $kindStruct, "jquery.JQuery", true, "github.com/gopherjs/jquery", true, function(o_, Jquery_, Selector_, Length_, Context_) {
-		this.$val = this;
-		if (arguments.length === 0) {
-			this.o = null;
-			this.Jquery = "";
-			this.Selector = "";
-			this.Length = 0;
-			this.Context = "";
-			return;
-		}
-		this.o = o_;
-		this.Jquery = Jquery_;
-		this.Selector = Selector_;
-		this.Length = Length_;
-		this.Context = Context_;
-	});
-	Event = $pkg.Event = $newType(0, $kindStruct, "jquery.Event", true, "github.com/gopherjs/jquery", true, function(Object_, KeyCode_, Target_, CurrentTarget_, DelegateTarget_, RelatedTarget_, Data_, Result_, Which_, Namespace_, MetaKey_, ShiftKey_, CtrlKey_, PageX_, PageY_, Type_) {
-		this.$val = this;
-		if (arguments.length === 0) {
-			this.Object = null;
-			this.KeyCode = 0;
-			this.Target = null;
-			this.CurrentTarget = null;
-			this.DelegateTarget = null;
-			this.RelatedTarget = null;
-			this.Data = null;
-			this.Result = null;
-			this.Which = 0;
-			this.Namespace = "";
-			this.MetaKey = false;
-			this.ShiftKey = false;
-			this.CtrlKey = false;
-			this.PageX = 0;
-			this.PageY = 0;
-			this.Type = "";
-			return;
-		}
-		this.Object = Object_;
-		this.KeyCode = KeyCode_;
-		this.Target = Target_;
-		this.CurrentTarget = CurrentTarget_;
-		this.DelegateTarget = DelegateTarget_;
-		this.RelatedTarget = RelatedTarget_;
-		this.Data = Data_;
-		this.Result = Result_;
-		this.Which = Which_;
-		this.Namespace = Namespace_;
-		this.MetaKey = MetaKey_;
-		this.ShiftKey = ShiftKey_;
-		this.CtrlKey = CtrlKey_;
-		this.PageX = PageX_;
-		this.PageY = PageY_;
-		this.Type = Type_;
-	});
-	JQueryCoordinates = $pkg.JQueryCoordinates = $newType(0, $kindStruct, "jquery.JQueryCoordinates", true, "github.com/gopherjs/jquery", true, function(Left_, Top_) {
-		this.$val = this;
-		if (arguments.length === 0) {
-			this.Left = 0;
-			this.Top = 0;
-			return;
-		}
-		this.Left = Left_;
-		this.Top = Top_;
-	});
-	sliceType = $sliceType($emptyInterface);
-	funcType$1 = $funcType([$Int, $emptyInterface], [], false);
-	mapType = $mapType($String, $emptyInterface);
-	sliceType$1 = $sliceType($String);
-	funcType$2 = $funcType([$Int, $String], [$String], false);
-	funcType$3 = $funcType([], [], false);
-	ptrType = $ptrType(js.Object);
-	sliceType$2 = $sliceType($Bool);
-	ptrType$1 = $ptrType(Event);
-	Event.ptr.prototype.PreventDefault = function() {
-		var event;
-		event = this;
-		event.Object.preventDefault();
-	};
-	Event.prototype.PreventDefault = function() { return this.$val.PreventDefault(); };
-	Event.ptr.prototype.IsDefaultPrevented = function() {
-		var event;
-		event = this;
-		return !!(event.Object.isDefaultPrevented());
-	};
-	Event.prototype.IsDefaultPrevented = function() { return this.$val.IsDefaultPrevented(); };
-	Event.ptr.prototype.IsImmediatePropogationStopped = function() {
-		var event;
-		event = this;
-		return !!(event.Object.isImmediatePropogationStopped());
-	};
-	Event.prototype.IsImmediatePropogationStopped = function() { return this.$val.IsImmediatePropogationStopped(); };
-	Event.ptr.prototype.IsPropagationStopped = function() {
-		var event;
-		event = this;
-		return !!(event.Object.isPropagationStopped());
-	};
-	Event.prototype.IsPropagationStopped = function() { return this.$val.IsPropagationStopped(); };
-	Event.ptr.prototype.StopImmediatePropagation = function() {
-		var event;
-		event = this;
-		event.Object.stopImmediatePropagation();
-	};
-	Event.prototype.StopImmediatePropagation = function() { return this.$val.StopImmediatePropagation(); };
-	Event.ptr.prototype.StopPropagation = function() {
-		var event;
-		event = this;
-		event.Object.stopPropagation();
-	};
-	Event.prototype.StopPropagation = function() { return this.$val.StopPropagation(); };
-	NewJQuery = function(args) {
-		var args;
-		return new JQuery.ptr(new ($global.Function.prototype.bind.apply($global.jQuery, [undefined].concat($externalize(args, sliceType)))), "", "", 0, "");
-	};
-	$pkg.NewJQuery = NewJQuery;
-	JQuery.ptr.prototype.Each = function(fn) {
-		var fn, j;
-		j = this;
-		j.o = j.o.each($externalize(fn, funcType$1));
-		return j;
-	};
-	JQuery.prototype.Each = function(fn) { return this.$val.Each(fn); };
-	JQuery.ptr.prototype.Call = function(name, args) {
-		var args, j, name, obj;
-		j = this;
-		return NewJQuery(new sliceType([new $jsObjectPtr((obj = j.o, obj[$externalize(name, $String)].apply(obj, $externalize(args, sliceType))))]));
-	};
-	JQuery.prototype.Call = function(name, args) { return this.$val.Call(name, args); };
-	JQuery.ptr.prototype.Underlying = function() {
-		var j;
-		j = this;
-		return j.o;
-	};
-	JQuery.prototype.Underlying = function() { return this.$val.Underlying(); };
-	JQuery.ptr.prototype.Get = function(i) {
-		var i, j, obj;
-		j = this;
-		return (obj = j.o, obj.get.apply(obj, $externalize(i, sliceType)));
-	};
-	JQuery.prototype.Get = function(i) { return this.$val.Get(i); };
-	JQuery.ptr.prototype.Append = function(i) {
-		var i, j, obj;
-		j = this;
-		j.o = (obj = j.o, obj.append.apply(obj, $externalize(i, sliceType)));
-		return j;
-	};
-	JQuery.prototype.Append = function(i) { return this.$val.Append(i); };
-	JQuery.ptr.prototype.Empty = function() {
-		var j;
-		j = this;
-		j.o = j.o.empty();
-		return j;
-	};
-	JQuery.prototype.Empty = function() { return this.$val.Empty(); };
-	JQuery.ptr.prototype.Detach = function(i) {
-		var i, j, obj;
-		j = this;
-		j.o = (obj = j.o, obj.detach.apply(obj, $externalize(i, sliceType)));
-		return j;
-	};
-	JQuery.prototype.Detach = function(i) { return this.$val.Detach(i); };
-	JQuery.ptr.prototype.Eq = function(idx) {
-		var idx, j;
-		j = this;
-		j.o = j.o.eq(idx);
-		return j;
-	};
-	JQuery.prototype.Eq = function(idx) { return this.$val.Eq(idx); };
-	JQuery.ptr.prototype.FadeIn = function(i) {
-		var i, j, obj;
-		j = this;
-		j.o = (obj = j.o, obj.fadeIn.apply(obj, $externalize(i, sliceType)));
-		return j;
-	};
-	JQuery.prototype.FadeIn = function(i) { return this.$val.FadeIn(i); };
-	JQuery.ptr.prototype.Delay = function(i) {
-		var i, j, obj;
-		j = this;
-		j.o = (obj = j.o, obj.delay.apply(obj, $externalize(i, sliceType)));
-		return j;
-	};
-	JQuery.prototype.Delay = function(i) { return this.$val.Delay(i); };
-	JQuery.ptr.prototype.ToArray = function() {
-		var j;
-		j = this;
-		return $assertType($internalize(j.o.toArray(), $emptyInterface), sliceType);
-	};
-	JQuery.prototype.ToArray = function() { return this.$val.ToArray(); };
-	JQuery.ptr.prototype.Remove = function(i) {
-		var i, j, obj;
-		j = this;
-		j.o = (obj = j.o, obj.remove.apply(obj, $externalize(i, sliceType)));
-		return j;
-	};
-	JQuery.prototype.Remove = function(i) { return this.$val.Remove(i); };
-	JQuery.ptr.prototype.Stop = function(i) {
-		var i, j, obj;
-		j = this;
-		j.o = (obj = j.o, obj.stop.apply(obj, $externalize(i, sliceType)));
-		return j;
-	};
-	JQuery.prototype.Stop = function(i) { return this.$val.Stop(i); };
-	JQuery.ptr.prototype.AddBack = function(i) {
-		var i, j, obj;
-		j = this;
-		j.o = (obj = j.o, obj.addBack.apply(obj, $externalize(i, sliceType)));
-		return j;
-	};
-	JQuery.prototype.AddBack = function(i) { return this.$val.AddBack(i); };
-	JQuery.ptr.prototype.Css = function(name) {
-		var j, name;
-		j = this;
-		return $internalize(j.o.css($externalize(name, $String)), $String);
-	};
-	JQuery.prototype.Css = function(name) { return this.$val.Css(name); };
-	JQuery.ptr.prototype.CssArray = function(arr) {
-		var arr, j;
-		j = this;
-		return $assertType($internalize(j.o.css($externalize(arr, sliceType$1)), $emptyInterface), mapType);
-	};
-	JQuery.prototype.CssArray = function(arr) { return this.$val.CssArray(arr); };
-	JQuery.ptr.prototype.SetCss = function(i) {
-		var i, j, obj;
-		j = this;
-		j.o = (obj = j.o, obj.css.apply(obj, $externalize(i, sliceType)));
-		return j;
-	};
-	JQuery.prototype.SetCss = function(i) { return this.$val.SetCss(i); };
-	JQuery.ptr.prototype.Text = function() {
-		var j;
-		j = this;
-		return $internalize(j.o.text(), $String);
-	};
-	JQuery.prototype.Text = function() { return this.$val.Text(); };
-	JQuery.ptr.prototype.SetText = function(i) {
-		var _ref, i, j;
-		j = this;
-		_ref = i;
-		if ($assertType(_ref, funcType$2, true)[1] || $assertType(_ref, $String, true)[1]) {
-		} else {
-			console.log("SetText Argument should be 'string' or 'func(int, string) string'");
-		}
-		j.o = j.o.text($externalize(i, $emptyInterface));
-		return j;
-	};
-	JQuery.prototype.SetText = function(i) { return this.$val.SetText(i); };
-	JQuery.ptr.prototype.Val = function() {
-		var j;
-		j = this;
-		return $internalize(j.o.val(), $String);
-	};
-	JQuery.prototype.Val = function() { return this.$val.Val(); };
-	JQuery.ptr.prototype.SetVal = function(i) {
-		var i, j;
-		j = this;
-		j.o.val($externalize(i, $emptyInterface));
-		return j;
-	};
-	JQuery.prototype.SetVal = function(i) { return this.$val.SetVal(i); };
-	JQuery.ptr.prototype.Prop = function(property) {
-		var j, property;
-		j = this;
-		return $internalize(j.o.prop($externalize(property, $String)), $emptyInterface);
-	};
-	JQuery.prototype.Prop = function(property) { return this.$val.Prop(property); };
-	JQuery.ptr.prototype.SetProp = function(i) {
-		var i, j, obj;
-		j = this;
-		j.o = (obj = j.o, obj.prop.apply(obj, $externalize(i, sliceType)));
-		return j;
-	};
-	JQuery.prototype.SetProp = function(i) { return this.$val.SetProp(i); };
-	JQuery.ptr.prototype.RemoveProp = function(property) {
-		var j, property;
-		j = this;
-		j.o = j.o.removeProp($externalize(property, $String));
-		return j;
-	};
-	JQuery.prototype.RemoveProp = function(property) { return this.$val.RemoveProp(property); };
-	JQuery.ptr.prototype.Attr = function(property) {
-		var attr, j, property;
-		j = this;
-		attr = j.o.attr($externalize(property, $String));
-		if (attr === undefined) {
-			return "";
-		}
-		return $internalize(attr, $String);
-	};
-	JQuery.prototype.Attr = function(property) { return this.$val.Attr(property); };
-	JQuery.ptr.prototype.SetAttr = function(i) {
-		var i, j, obj;
-		j = this;
-		j.o = (obj = j.o, obj.attr.apply(obj, $externalize(i, sliceType)));
-		return j;
-	};
-	JQuery.prototype.SetAttr = function(i) { return this.$val.SetAttr(i); };
-	JQuery.ptr.prototype.RemoveAttr = function(property) {
-		var j, property;
-		j = this;
-		j.o = j.o.removeAttr($externalize(property, $String));
-		return j;
-	};
-	JQuery.prototype.RemoveAttr = function(property) { return this.$val.RemoveAttr(property); };
-	JQuery.ptr.prototype.HasClass = function(class$1) {
-		var class$1, j;
-		j = this;
-		return !!(j.o.hasClass($externalize(class$1, $String)));
-	};
-	JQuery.prototype.HasClass = function(class$1) { return this.$val.HasClass(class$1); };
-	JQuery.ptr.prototype.AddClass = function(i) {
-		var _ref, i, j;
-		j = this;
-		_ref = i;
-		if ($assertType(_ref, funcType$2, true)[1] || $assertType(_ref, $String, true)[1]) {
-		} else {
-			console.log("addClass Argument should be 'string' or 'func(int, string) string'");
-		}
-		j.o = j.o.addClass($externalize(i, $emptyInterface));
-		return j;
-	};
-	JQuery.prototype.AddClass = function(i) { return this.$val.AddClass(i); };
-	JQuery.ptr.prototype.RemoveClass = function(property) {
-		var j, property;
-		j = this;
-		j.o = j.o.removeClass($externalize(property, $String));
-		return j;
-	};
-	JQuery.prototype.RemoveClass = function(property) { return this.$val.RemoveClass(property); };
-	JQuery.ptr.prototype.ToggleClass = function(i) {
-		var i, j, obj;
-		j = this;
-		j.o = (obj = j.o, obj.toggleClass.apply(obj, $externalize(i, sliceType)));
-		return j;
-	};
-	JQuery.prototype.ToggleClass = function(i) { return this.$val.ToggleClass(i); };
-	JQuery.ptr.prototype.Focus = function() {
-		var j;
-		j = this;
-		j.o = j.o.focus();
-		return j;
-	};
-	JQuery.prototype.Focus = function() { return this.$val.Focus(); };
-	JQuery.ptr.prototype.Blur = function() {
-		var j;
-		j = this;
-		j.o = j.o.blur();
-		return j;
-	};
-	JQuery.prototype.Blur = function() { return this.$val.Blur(); };
-	JQuery.ptr.prototype.ReplaceAll = function(i) {
-		var i, j;
-		j = this;
-		j.o = j.o.replaceAll($externalize(i, $emptyInterface));
-		return j;
-	};
-	JQuery.prototype.ReplaceAll = function(i) { return this.$val.ReplaceAll(i); };
-	JQuery.ptr.prototype.ReplaceWith = function(i) {
-		var i, j;
-		j = this;
-		j.o = j.o.replaceWith($externalize(i, $emptyInterface));
-		return j;
-	};
-	JQuery.prototype.ReplaceWith = function(i) { return this.$val.ReplaceWith(i); };
-	JQuery.ptr.prototype.After = function(i) {
-		var i, j;
-		j = this;
-		j.o = j.o.after($externalize(i, sliceType));
-		return j;
-	};
-	JQuery.prototype.After = function(i) { return this.$val.After(i); };
-	JQuery.ptr.prototype.Before = function(i) {
-		var i, j, obj;
-		j = this;
-		j.o = (obj = j.o, obj.before.apply(obj, $externalize(i, sliceType)));
-		return j;
-	};
-	JQuery.prototype.Before = function(i) { return this.$val.Before(i); };
-	JQuery.ptr.prototype.Prepend = function(i) {
-		var i, j, obj;
-		j = this;
-		j.o = (obj = j.o, obj.prepend.apply(obj, $externalize(i, sliceType)));
-		return j;
-	};
-	JQuery.prototype.Prepend = function(i) { return this.$val.Prepend(i); };
-	JQuery.ptr.prototype.PrependTo = function(i) {
-		var i, j;
-		j = this;
-		j.o = j.o.prependTo($externalize(i, $emptyInterface));
-		return j;
-	};
-	JQuery.prototype.PrependTo = function(i) { return this.$val.PrependTo(i); };
-	JQuery.ptr.prototype.AppendTo = function(i) {
-		var i, j;
-		j = this;
-		j.o = j.o.appendTo($externalize(i, $emptyInterface));
-		return j;
-	};
-	JQuery.prototype.AppendTo = function(i) { return this.$val.AppendTo(i); };
-	JQuery.ptr.prototype.InsertAfter = function(i) {
-		var i, j;
-		j = this;
-		j.o = j.o.insertAfter($externalize(i, $emptyInterface));
-		return j;
-	};
-	JQuery.prototype.InsertAfter = function(i) { return this.$val.InsertAfter(i); };
-	JQuery.ptr.prototype.InsertBefore = function(i) {
-		var i, j;
-		j = this;
-		j.o = j.o.insertBefore($externalize(i, $emptyInterface));
-		return j;
-	};
-	JQuery.prototype.InsertBefore = function(i) { return this.$val.InsertBefore(i); };
-	JQuery.ptr.prototype.Show = function(i) {
-		var i, j, obj;
-		j = this;
-		j.o = (obj = j.o, obj.show.apply(obj, $externalize(i, sliceType)));
-		return j;
-	};
-	JQuery.prototype.Show = function(i) { return this.$val.Show(i); };
-	JQuery.ptr.prototype.Hide = function(i) {
-		var i, j, obj;
-		j = this;
-		(obj = j.o, obj.hide.apply(obj, $externalize(i, sliceType)));
-		return j;
-	};
-	JQuery.prototype.Hide = function(i) { return this.$val.Hide(i); };
-	JQuery.ptr.prototype.Toggle = function(i) {
-		var i, j, obj;
-		j = this;
-		j.o = (obj = j.o, obj.toggle.apply(obj, $externalize(i, sliceType)));
-		return j;
-	};
-	JQuery.prototype.Toggle = function(i) { return this.$val.Toggle(i); };
-	JQuery.ptr.prototype.Contents = function() {
-		var j;
-		j = this;
-		j.o = j.o.contents();
-		return j;
-	};
-	JQuery.prototype.Contents = function() { return this.$val.Contents(); };
-	JQuery.ptr.prototype.Html = function() {
-		var j;
-		j = this;
-		return $internalize(j.o.html(), $String);
-	};
-	JQuery.prototype.Html = function() { return this.$val.Html(); };
-	JQuery.ptr.prototype.SetHtml = function(i) {
-		var _ref, i, j;
-		j = this;
-		_ref = i;
-		if ($assertType(_ref, funcType$2, true)[1] || $assertType(_ref, $String, true)[1]) {
-		} else {
-			console.log("SetHtml Argument should be 'string' or 'func(int, string) string'");
-		}
-		j.o = j.o.html($externalize(i, $emptyInterface));
-		return j;
-	};
-	JQuery.prototype.SetHtml = function(i) { return this.$val.SetHtml(i); };
-	JQuery.ptr.prototype.Closest = function(i) {
-		var i, j, obj;
-		j = this;
-		j.o = (obj = j.o, obj.closest.apply(obj, $externalize(i, sliceType)));
-		return j;
-	};
-	JQuery.prototype.Closest = function(i) { return this.$val.Closest(i); };
-	JQuery.ptr.prototype.End = function() {
-		var j;
-		j = this;
-		j.o = j.o.end();
-		return j;
-	};
-	JQuery.prototype.End = function() { return this.$val.End(); };
-	JQuery.ptr.prototype.Add = function(i) {
-		var i, j, obj;
-		j = this;
-		j.o = (obj = j.o, obj.add.apply(obj, $externalize(i, sliceType)));
-		return j;
-	};
-	JQuery.prototype.Add = function(i) { return this.$val.Add(i); };
-	JQuery.ptr.prototype.Clone = function(b) {
-		var b, j, obj;
-		j = this;
-		j.o = (obj = j.o, obj.clone.apply(obj, $externalize(b, sliceType)));
-		return j;
-	};
-	JQuery.prototype.Clone = function(b) { return this.$val.Clone(b); };
-	JQuery.ptr.prototype.Height = function() {
-		var j;
-		j = this;
-		return $parseInt(j.o.height()) >> 0;
-	};
-	JQuery.prototype.Height = function() { return this.$val.Height(); };
-	JQuery.ptr.prototype.SetHeight = function(value) {
-		var j, value;
-		j = this;
-		j.o = j.o.height($externalize(value, $String));
-		return j;
-	};
-	JQuery.prototype.SetHeight = function(value) { return this.$val.SetHeight(value); };
-	JQuery.ptr.prototype.Width = function() {
-		var j;
-		j = this;
-		return $parseInt(j.o.width()) >> 0;
-	};
-	JQuery.prototype.Width = function() { return this.$val.Width(); };
-	JQuery.ptr.prototype.SetWidth = function(i) {
-		var _ref, i, j;
-		j = this;
-		_ref = i;
-		if ($assertType(_ref, funcType$2, true)[1] || $assertType(_ref, $String, true)[1]) {
-		} else {
-			console.log("SetWidth Argument should be 'string' or 'func(int, string) string'");
-		}
-		j.o = j.o.width($externalize(i, $emptyInterface));
-		return j;
-	};
-	JQuery.prototype.SetWidth = function(i) { return this.$val.SetWidth(i); };
-	JQuery.ptr.prototype.InnerHeight = function() {
-		var j;
-		j = this;
-		return $parseInt(j.o.innerHeight()) >> 0;
-	};
-	JQuery.prototype.InnerHeight = function() { return this.$val.InnerHeight(); };
-	JQuery.ptr.prototype.InnerWidth = function() {
-		var j;
-		j = this;
-		return $parseInt(j.o.innerWidth()) >> 0;
-	};
-	JQuery.prototype.InnerWidth = function() { return this.$val.InnerWidth(); };
-	JQuery.ptr.prototype.Offset = function() {
-		var j, obj;
-		j = this;
-		obj = j.o.offset();
-		return new JQueryCoordinates.ptr($parseInt(obj.left) >> 0, $parseInt(obj.top) >> 0);
-	};
-	JQuery.prototype.Offset = function() { return this.$val.Offset(); };
-	JQuery.ptr.prototype.SetOffset = function(jc) {
-		var j, jc;
-		j = this;
-		j.o = j.o.offset($externalize(jc, JQueryCoordinates));
-		return j;
-	};
-	JQuery.prototype.SetOffset = function(jc) { return this.$val.SetOffset(jc); };
-	JQuery.ptr.prototype.OuterHeight = function(includeMargin) {
-		var includeMargin, j;
-		j = this;
-		if (includeMargin.$length === 0) {
-			return $parseInt(j.o.outerHeight()) >> 0;
-		}
-		return $parseInt(j.o.outerHeight($externalize((0 >= includeMargin.$length ? ($throwRuntimeError("index out of range"), undefined) : includeMargin.$array[includeMargin.$offset + 0]), $Bool))) >> 0;
-	};
-	JQuery.prototype.OuterHeight = function(includeMargin) { return this.$val.OuterHeight(includeMargin); };
-	JQuery.ptr.prototype.OuterWidth = function(includeMargin) {
-		var includeMargin, j;
-		j = this;
-		if (includeMargin.$length === 0) {
-			return $parseInt(j.o.outerWidth()) >> 0;
-		}
-		return $parseInt(j.o.outerWidth($externalize((0 >= includeMargin.$length ? ($throwRuntimeError("index out of range"), undefined) : includeMargin.$array[includeMargin.$offset + 0]), $Bool))) >> 0;
-	};
-	JQuery.prototype.OuterWidth = function(includeMargin) { return this.$val.OuterWidth(includeMargin); };
-	JQuery.ptr.prototype.Position = function() {
-		var j, obj;
-		j = this;
-		obj = j.o.position();
-		return new JQueryCoordinates.ptr($parseInt(obj.left) >> 0, $parseInt(obj.top) >> 0);
-	};
-	JQuery.prototype.Position = function() { return this.$val.Position(); };
-	JQuery.ptr.prototype.ScrollLeft = function() {
-		var j;
-		j = this;
-		return $parseInt(j.o.scrollLeft()) >> 0;
-	};
-	JQuery.prototype.ScrollLeft = function() { return this.$val.ScrollLeft(); };
-	JQuery.ptr.prototype.SetScrollLeft = function(value) {
-		var j, value;
-		j = this;
-		j.o = j.o.scrollLeft(value);
-		return j;
-	};
-	JQuery.prototype.SetScrollLeft = function(value) { return this.$val.SetScrollLeft(value); };
-	JQuery.ptr.prototype.ScrollTop = function() {
-		var j;
-		j = this;
-		return $parseInt(j.o.scrollTop()) >> 0;
-	};
-	JQuery.prototype.ScrollTop = function() { return this.$val.ScrollTop(); };
-	JQuery.ptr.prototype.SetScrollTop = function(value) {
-		var j, value;
-		j = this;
-		j.o = j.o.scrollTop(value);
-		return j;
-	};
-	JQuery.prototype.SetScrollTop = function(value) { return this.$val.SetScrollTop(value); };
-	JQuery.ptr.prototype.ClearQueue = function(queueName) {
-		var j, queueName;
-		j = this;
-		j.o = j.o.clearQueue($externalize(queueName, $String));
-		return j;
-	};
-	JQuery.prototype.ClearQueue = function(queueName) { return this.$val.ClearQueue(queueName); };
-	JQuery.ptr.prototype.SetData = function(key, value) {
-		var j, key, value;
-		j = this;
-		j.o = j.o.data($externalize(key, $String), $externalize(value, $emptyInterface));
-		return j;
-	};
-	JQuery.prototype.SetData = function(key, value) { return this.$val.SetData(key, value); };
-	JQuery.ptr.prototype.Data = function(key) {
-		var j, key, result;
-		j = this;
-		result = j.o.data($externalize(key, $String));
-		if (result === undefined) {
-			return $ifaceNil;
-		}
-		return $internalize(result, $emptyInterface);
-	};
-	JQuery.prototype.Data = function(key) { return this.$val.Data(key); };
-	JQuery.ptr.prototype.Dequeue = function(queueName) {
-		var j, queueName;
-		j = this;
-		j.o = j.o.dequeue($externalize(queueName, $String));
-		return j;
-	};
-	JQuery.prototype.Dequeue = function(queueName) { return this.$val.Dequeue(queueName); };
-	JQuery.ptr.prototype.RemoveData = function(name) {
-		var j, name;
-		j = this;
-		j.o = j.o.removeData($externalize(name, $String));
-		return j;
-	};
-	JQuery.prototype.RemoveData = function(name) { return this.$val.RemoveData(name); };
-	JQuery.ptr.prototype.OffsetParent = function() {
-		var j;
-		j = this;
-		j.o = j.o.offsetParent();
-		return j;
-	};
-	JQuery.prototype.OffsetParent = function() { return this.$val.OffsetParent(); };
-	JQuery.ptr.prototype.Parent = function(i) {
-		var i, j, obj;
-		j = this;
-		j.o = (obj = j.o, obj.parent.apply(obj, $externalize(i, sliceType)));
-		return j;
-	};
-	JQuery.prototype.Parent = function(i) { return this.$val.Parent(i); };
-	JQuery.ptr.prototype.Parents = function(i) {
-		var i, j, obj;
-		j = this;
-		j.o = (obj = j.o, obj.parents.apply(obj, $externalize(i, sliceType)));
-		return j;
-	};
-	JQuery.prototype.Parents = function(i) { return this.$val.Parents(i); };
-	JQuery.ptr.prototype.ParentsUntil = function(i) {
-		var i, j, obj;
-		j = this;
-		j.o = (obj = j.o, obj.parentsUntil.apply(obj, $externalize(i, sliceType)));
-		return j;
-	};
-	JQuery.prototype.ParentsUntil = function(i) { return this.$val.ParentsUntil(i); };
-	JQuery.ptr.prototype.Prev = function(i) {
-		var i, j, obj;
-		j = this;
-		j.o = (obj = j.o, obj.prev.apply(obj, $externalize(i, sliceType)));
-		return j;
-	};
-	JQuery.prototype.Prev = function(i) { return this.$val.Prev(i); };
-	JQuery.ptr.prototype.PrevAll = function(i) {
-		var i, j, obj;
-		j = this;
-		j.o = (obj = j.o, obj.prevAll.apply(obj, $externalize(i, sliceType)));
-		return j;
-	};
-	JQuery.prototype.PrevAll = function(i) { return this.$val.PrevAll(i); };
-	JQuery.ptr.prototype.PrevUntil = function(i) {
-		var i, j, obj;
-		j = this;
-		j.o = (obj = j.o, obj.prevUntil.apply(obj, $externalize(i, sliceType)));
-		return j;
-	};
-	JQuery.prototype.PrevUntil = function(i) { return this.$val.PrevUntil(i); };
-	JQuery.ptr.prototype.Siblings = function(i) {
-		var i, j, obj;
-		j = this;
-		j.o = (obj = j.o, obj.siblings.apply(obj, $externalize(i, sliceType)));
-		return j;
-	};
-	JQuery.prototype.Siblings = function(i) { return this.$val.Siblings(i); };
-	JQuery.ptr.prototype.Slice = function(i) {
-		var i, j, obj;
-		j = this;
-		j.o = (obj = j.o, obj.slice.apply(obj, $externalize(i, sliceType)));
-		return j;
-	};
-	JQuery.prototype.Slice = function(i) { return this.$val.Slice(i); };
-	JQuery.ptr.prototype.Children = function(selector) {
-		var j, selector;
-		j = this;
-		j.o = j.o.children($externalize(selector, $emptyInterface));
-		return j;
-	};
-	JQuery.prototype.Children = function(selector) { return this.$val.Children(selector); };
-	JQuery.ptr.prototype.Unwrap = function() {
-		var j;
-		j = this;
-		j.o = j.o.unwrap();
-		return j;
-	};
-	JQuery.prototype.Unwrap = function() { return this.$val.Unwrap(); };
-	JQuery.ptr.prototype.Wrap = function(obj) {
-		var j, obj;
-		j = this;
-		j.o = j.o.wrap($externalize(obj, $emptyInterface));
-		return j;
-	};
-	JQuery.prototype.Wrap = function(obj) { return this.$val.Wrap(obj); };
-	JQuery.ptr.prototype.WrapAll = function(i) {
-		var i, j;
-		j = this;
-		j.o = j.o.wrapAll($externalize(i, $emptyInterface));
-		return j;
-	};
-	JQuery.prototype.WrapAll = function(i) { return this.$val.WrapAll(i); };
-	JQuery.ptr.prototype.WrapInner = function(i) {
-		var i, j;
-		j = this;
-		j.o = j.o.wrapInner($externalize(i, $emptyInterface));
-		return j;
-	};
-	JQuery.prototype.WrapInner = function(i) { return this.$val.WrapInner(i); };
-	JQuery.ptr.prototype.Next = function(i) {
-		var i, j, obj;
-		j = this;
-		j.o = (obj = j.o, obj.next.apply(obj, $externalize(i, sliceType)));
-		return j;
-	};
-	JQuery.prototype.Next = function(i) { return this.$val.Next(i); };
-	JQuery.ptr.prototype.NextAll = function(i) {
-		var i, j, obj;
-		j = this;
-		j.o = (obj = j.o, obj.nextAll.apply(obj, $externalize(i, sliceType)));
-		return j;
-	};
-	JQuery.prototype.NextAll = function(i) { return this.$val.NextAll(i); };
-	JQuery.ptr.prototype.NextUntil = function(i) {
-		var i, j, obj;
-		j = this;
-		j.o = (obj = j.o, obj.nextUntil.apply(obj, $externalize(i, sliceType)));
-		return j;
-	};
-	JQuery.prototype.NextUntil = function(i) { return this.$val.NextUntil(i); };
-	JQuery.ptr.prototype.Not = function(i) {
-		var i, j, obj;
-		j = this;
-		j.o = (obj = j.o, obj.not.apply(obj, $externalize(i, sliceType)));
-		return j;
-	};
-	JQuery.prototype.Not = function(i) { return this.$val.Not(i); };
-	JQuery.ptr.prototype.Filter = function(i) {
-		var i, j, obj;
-		j = this;
-		j.o = (obj = j.o, obj.filter.apply(obj, $externalize(i, sliceType)));
-		return j;
-	};
-	JQuery.prototype.Filter = function(i) { return this.$val.Filter(i); };
-	JQuery.ptr.prototype.Find = function(i) {
-		var i, j, obj;
-		j = this;
-		j.o = (obj = j.o, obj.find.apply(obj, $externalize(i, sliceType)));
-		return j;
-	};
-	JQuery.prototype.Find = function(i) { return this.$val.Find(i); };
-	JQuery.ptr.prototype.First = function() {
-		var j;
-		j = this;
-		j.o = j.o.first();
-		return j;
-	};
-	JQuery.prototype.First = function() { return this.$val.First(); };
-	JQuery.ptr.prototype.Has = function(selector) {
-		var j, selector;
-		j = this;
-		j.o = j.o.has($externalize(selector, $String));
-		return j;
-	};
-	JQuery.prototype.Has = function(selector) { return this.$val.Has(selector); };
-	JQuery.ptr.prototype.Is = function(i) {
-		var i, j, obj;
-		j = this;
-		return !!((obj = j.o, obj.is.apply(obj, $externalize(i, sliceType))));
-	};
-	JQuery.prototype.Is = function(i) { return this.$val.Is(i); };
-	JQuery.ptr.prototype.Last = function() {
-		var j;
-		j = this;
-		j.o = j.o.last();
-		return j;
-	};
-	JQuery.prototype.Last = function() { return this.$val.Last(); };
-	JQuery.ptr.prototype.Ready = function(handler) {
-		var handler, j;
-		j = this;
-		j.o = j.o.ready($externalize(handler, funcType$3));
-		return j;
-	};
-	JQuery.prototype.Ready = function(handler) { return this.$val.Ready(handler); };
-	JQuery.ptr.prototype.Resize = function(i) {
-		var i, j, obj;
-		j = this;
-		j.o = (obj = j.o, obj.resize.apply(obj, $externalize(i, sliceType)));
-		return j;
-	};
-	JQuery.prototype.Resize = function(i) { return this.$val.Resize(i); };
-	JQuery.ptr.prototype.Scroll = function(i) {
-		var i, j, obj;
-		j = this;
-		j.o = (obj = j.o, obj.scroll.apply(obj, $externalize(i, sliceType)));
-		return j;
-	};
-	JQuery.prototype.Scroll = function(i) { return this.$val.Scroll(i); };
-	JQuery.ptr.prototype.FadeOut = function(i) {
-		var i, j, obj;
-		j = this;
-		j.o = (obj = j.o, obj.fadeOut.apply(obj, $externalize(i, sliceType)));
-		return j;
-	};
-	JQuery.prototype.FadeOut = function(i) { return this.$val.FadeOut(i); };
-	JQuery.ptr.prototype.FadeToggle = function(i) {
-		var i, j, obj;
-		j = this;
-		j.o = (obj = j.o, obj.fadeToggle.apply(obj, $externalize(i, sliceType)));
-		return j;
-	};
-	JQuery.prototype.FadeToggle = function(i) { return this.$val.FadeToggle(i); };
-	JQuery.ptr.prototype.SlideDown = function(i) {
-		var i, j, obj;
-		j = this;
-		j.o = (obj = j.o, obj.slideDown.apply(obj, $externalize(i, sliceType)));
-		return j;
-	};
-	JQuery.prototype.SlideDown = function(i) { return this.$val.SlideDown(i); };
-	JQuery.ptr.prototype.SlideToggle = function(i) {
-		var i, j, obj;
-		j = this;
-		j.o = (obj = j.o, obj.slideToggle.apply(obj, $externalize(i, sliceType)));
-		return j;
-	};
-	JQuery.prototype.SlideToggle = function(i) { return this.$val.SlideToggle(i); };
-	JQuery.ptr.prototype.SlideUp = function(i) {
-		var i, j, obj;
-		j = this;
-		j.o = (obj = j.o, obj.slideUp.apply(obj, $externalize(i, sliceType)));
-		return j;
-	};
-	JQuery.prototype.SlideUp = function(i) { return this.$val.SlideUp(i); };
-	JQuery.ptr.prototype.Select = function(i) {
-		var i, j, obj;
-		j = this;
-		j.o = (obj = j.o, obj.select.apply(obj, $externalize(i, sliceType)));
-		return j;
-	};
-	JQuery.prototype.Select = function(i) { return this.$val.Select(i); };
-	JQuery.ptr.prototype.Submit = function(i) {
-		var i, j, obj;
-		j = this;
-		j.o = (obj = j.o, obj.submit.apply(obj, $externalize(i, sliceType)));
-		return j;
-	};
-	JQuery.prototype.Submit = function(i) { return this.$val.Submit(i); };
-	JQuery.ptr.prototype.Trigger = function(i) {
-		var i, j, obj;
-		j = this;
-		j.o = (obj = j.o, obj.trigger.apply(obj, $externalize(i, sliceType)));
-		return j;
-	};
-	JQuery.prototype.Trigger = function(i) { return this.$val.Trigger(i); };
-	JQuery.ptr.prototype.On = function(i) {
-		var i, j, obj;
-		j = this;
-		j.o = (obj = j.o, obj.on.apply(obj, $externalize(i, sliceType)));
-		return j;
-	};
-	JQuery.prototype.On = function(i) { return this.$val.On(i); };
-	JQuery.ptr.prototype.One = function(i) {
-		var i, j, obj;
-		j = this;
-		j.o = (obj = j.o, obj.one.apply(obj, $externalize(i, sliceType)));
-		return j;
-	};
-	JQuery.prototype.One = function(i) { return this.$val.One(i); };
-	JQuery.ptr.prototype.Off = function(i) {
-		var i, j, obj;
-		j = this;
-		j.o = (obj = j.o, obj.off.apply(obj, $externalize(i, sliceType)));
-		return j;
-	};
-	JQuery.prototype.Off = function(i) { return this.$val.Off(i); };
-	JQuery.ptr.prototype.Load = function(i) {
-		var i, j, obj;
-		j = this;
-		j.o = (obj = j.o, obj.load.apply(obj, $externalize(i, sliceType)));
-		return j;
-	};
-	JQuery.prototype.Load = function(i) { return this.$val.Load(i); };
-	JQuery.ptr.prototype.Serialize = function() {
-		var j;
-		j = this;
-		return $internalize(j.o.serialize(), $String);
-	};
-	JQuery.prototype.Serialize = function() { return this.$val.Serialize(); };
-	JQuery.ptr.prototype.SerializeArray = function() {
-		var j;
-		j = this;
-		return j.o.serializeArray();
-	};
-	JQuery.prototype.SerializeArray = function() { return this.$val.SerializeArray(); };
-	JQuery.methods = [{prop: "Each", name: "Each", pkg: "", typ: $funcType([funcType$1], [JQuery], false)}, {prop: "Call", name: "Call", pkg: "", typ: $funcType([$String, sliceType], [JQuery], true)}, {prop: "Underlying", name: "Underlying", pkg: "", typ: $funcType([], [ptrType], false)}, {prop: "Get", name: "Get", pkg: "", typ: $funcType([sliceType], [ptrType], true)}, {prop: "Append", name: "Append", pkg: "", typ: $funcType([sliceType], [JQuery], true)}, {prop: "Empty", name: "Empty", pkg: "", typ: $funcType([], [JQuery], false)}, {prop: "Detach", name: "Detach", pkg: "", typ: $funcType([sliceType], [JQuery], true)}, {prop: "Eq", name: "Eq", pkg: "", typ: $funcType([$Int], [JQuery], false)}, {prop: "FadeIn", name: "FadeIn", pkg: "", typ: $funcType([sliceType], [JQuery], true)}, {prop: "Delay", name: "Delay", pkg: "", typ: $funcType([sliceType], [JQuery], true)}, {prop: "ToArray", name: "ToArray", pkg: "", typ: $funcType([], [sliceType], false)}, {prop: "Remove", name: "Remove", pkg: "", typ: $funcType([sliceType], [JQuery], true)}, {prop: "Stop", name: "Stop", pkg: "", typ: $funcType([sliceType], [JQuery], true)}, {prop: "AddBack", name: "AddBack", pkg: "", typ: $funcType([sliceType], [JQuery], true)}, {prop: "Css", name: "Css", pkg: "", typ: $funcType([$String], [$String], false)}, {prop: "CssArray", name: "CssArray", pkg: "", typ: $funcType([sliceType$1], [mapType], true)}, {prop: "SetCss", name: "SetCss", pkg: "", typ: $funcType([sliceType], [JQuery], true)}, {prop: "Text", name: "Text", pkg: "", typ: $funcType([], [$String], false)}, {prop: "SetText", name: "SetText", pkg: "", typ: $funcType([$emptyInterface], [JQuery], false)}, {prop: "Val", name: "Val", pkg: "", typ: $funcType([], [$String], false)}, {prop: "SetVal", name: "SetVal", pkg: "", typ: $funcType([$emptyInterface], [JQuery], false)}, {prop: "Prop", name: "Prop", pkg: "", typ: $funcType([$String], [$emptyInterface], false)}, {prop: "SetProp", name: "SetProp", pkg: "", typ: $funcType([sliceType], [JQuery], true)}, {prop: "RemoveProp", name: "RemoveProp", pkg: "", typ: $funcType([$String], [JQuery], false)}, {prop: "Attr", name: "Attr", pkg: "", typ: $funcType([$String], [$String], false)}, {prop: "SetAttr", name: "SetAttr", pkg: "", typ: $funcType([sliceType], [JQuery], true)}, {prop: "RemoveAttr", name: "RemoveAttr", pkg: "", typ: $funcType([$String], [JQuery], false)}, {prop: "HasClass", name: "HasClass", pkg: "", typ: $funcType([$String], [$Bool], false)}, {prop: "AddClass", name: "AddClass", pkg: "", typ: $funcType([$emptyInterface], [JQuery], false)}, {prop: "RemoveClass", name: "RemoveClass", pkg: "", typ: $funcType([$String], [JQuery], false)}, {prop: "ToggleClass", name: "ToggleClass", pkg: "", typ: $funcType([sliceType], [JQuery], true)}, {prop: "Focus", name: "Focus", pkg: "", typ: $funcType([], [JQuery], false)}, {prop: "Blur", name: "Blur", pkg: "", typ: $funcType([], [JQuery], false)}, {prop: "ReplaceAll", name: "ReplaceAll", pkg: "", typ: $funcType([$emptyInterface], [JQuery], false)}, {prop: "ReplaceWith", name: "ReplaceWith", pkg: "", typ: $funcType([$emptyInterface], [JQuery], false)}, {prop: "After", name: "After", pkg: "", typ: $funcType([sliceType], [JQuery], true)}, {prop: "Before", name: "Before", pkg: "", typ: $funcType([sliceType], [JQuery], true)}, {prop: "Prepend", name: "Prepend", pkg: "", typ: $funcType([sliceType], [JQuery], true)}, {prop: "PrependTo", name: "PrependTo", pkg: "", typ: $funcType([$emptyInterface], [JQuery], false)}, {prop: "AppendTo", name: "AppendTo", pkg: "", typ: $funcType([$emptyInterface], [JQuery], false)}, {prop: "InsertAfter", name: "InsertAfter", pkg: "", typ: $funcType([$emptyInterface], [JQuery], false)}, {prop: "InsertBefore", name: "InsertBefore", pkg: "", typ: $funcType([$emptyInterface], [JQuery], false)}, {prop: "Show", name: "Show", pkg: "", typ: $funcType([sliceType], [JQuery], true)}, {prop: "Hide", name: "Hide", pkg: "", typ: $funcType([sliceType], [JQuery], true)}, {prop: "Toggle", name: "Toggle", pkg: "", typ: $funcType([sliceType], [JQuery], true)}, {prop: "Contents", name: "Contents", pkg: "", typ: $funcType([], [JQuery], false)}, {prop: "Html", name: "Html", pkg: "", typ: $funcType([], [$String], false)}, {prop: "SetHtml", name: "SetHtml", pkg: "", typ: $funcType([$emptyInterface], [JQuery], false)}, {prop: "Closest", name: "Closest", pkg: "", typ: $funcType([sliceType], [JQuery], true)}, {prop: "End", name: "End", pkg: "", typ: $funcType([], [JQuery], false)}, {prop: "Add", name: "Add", pkg: "", typ: $funcType([sliceType], [JQuery], true)}, {prop: "Clone", name: "Clone", pkg: "", typ: $funcType([sliceType], [JQuery], true)}, {prop: "Height", name: "Height", pkg: "", typ: $funcType([], [$Int], false)}, {prop: "SetHeight", name: "SetHeight", pkg: "", typ: $funcType([$String], [JQuery], false)}, {prop: "Width", name: "Width", pkg: "", typ: $funcType([], [$Int], false)}, {prop: "SetWidth", name: "SetWidth", pkg: "", typ: $funcType([$emptyInterface], [JQuery], false)}, {prop: "InnerHeight", name: "InnerHeight", pkg: "", typ: $funcType([], [$Int], false)}, {prop: "InnerWidth", name: "InnerWidth", pkg: "", typ: $funcType([], [$Int], false)}, {prop: "Offset", name: "Offset", pkg: "", typ: $funcType([], [JQueryCoordinates], false)}, {prop: "SetOffset", name: "SetOffset", pkg: "", typ: $funcType([JQueryCoordinates], [JQuery], false)}, {prop: "OuterHeight", name: "OuterHeight", pkg: "", typ: $funcType([sliceType$2], [$Int], true)}, {prop: "OuterWidth", name: "OuterWidth", pkg: "", typ: $funcType([sliceType$2], [$Int], true)}, {prop: "Position", name: "Position", pkg: "", typ: $funcType([], [JQueryCoordinates], false)}, {prop: "ScrollLeft", name: "ScrollLeft", pkg: "", typ: $funcType([], [$Int], false)}, {prop: "SetScrollLeft", name: "SetScrollLeft", pkg: "", typ: $funcType([$Int], [JQuery], false)}, {prop: "ScrollTop", name: "ScrollTop", pkg: "", typ: $funcType([], [$Int], false)}, {prop: "SetScrollTop", name: "SetScrollTop", pkg: "", typ: $funcType([$Int], [JQuery], false)}, {prop: "ClearQueue", name: "ClearQueue", pkg: "", typ: $funcType([$String], [JQuery], false)}, {prop: "SetData", name: "SetData", pkg: "", typ: $funcType([$String, $emptyInterface], [JQuery], false)}, {prop: "Data", name: "Data", pkg: "", typ: $funcType([$String], [$emptyInterface], false)}, {prop: "Dequeue", name: "Dequeue", pkg: "", typ: $funcType([$String], [JQuery], false)}, {prop: "RemoveData", name: "RemoveData", pkg: "", typ: $funcType([$String], [JQuery], false)}, {prop: "OffsetParent", name: "OffsetParent", pkg: "", typ: $funcType([], [JQuery], false)}, {prop: "Parent", name: "Parent", pkg: "", typ: $funcType([sliceType], [JQuery], true)}, {prop: "Parents", name: "Parents", pkg: "", typ: $funcType([sliceType], [JQuery], true)}, {prop: "ParentsUntil", name: "ParentsUntil", pkg: "", typ: $funcType([sliceType], [JQuery], true)}, {prop: "Prev", name: "Prev", pkg: "", typ: $funcType([sliceType], [JQuery], true)}, {prop: "PrevAll", name: "PrevAll", pkg: "", typ: $funcType([sliceType], [JQuery], true)}, {prop: "PrevUntil", name: "PrevUntil", pkg: "", typ: $funcType([sliceType], [JQuery], true)}, {prop: "Siblings", name: "Siblings", pkg: "", typ: $funcType([sliceType], [JQuery], true)}, {prop: "Slice", name: "Slice", pkg: "", typ: $funcType([sliceType], [JQuery], true)}, {prop: "Children", name: "Children", pkg: "", typ: $funcType([$emptyInterface], [JQuery], false)}, {prop: "Unwrap", name: "Unwrap", pkg: "", typ: $funcType([], [JQuery], false)}, {prop: "Wrap", name: "Wrap", pkg: "", typ: $funcType([$emptyInterface], [JQuery], false)}, {prop: "WrapAll", name: "WrapAll", pkg: "", typ: $funcType([$emptyInterface], [JQuery], false)}, {prop: "WrapInner", name: "WrapInner", pkg: "", typ: $funcType([$emptyInterface], [JQuery], false)}, {prop: "Next", name: "Next", pkg: "", typ: $funcType([sliceType], [JQuery], true)}, {prop: "NextAll", name: "NextAll", pkg: "", typ: $funcType([sliceType], [JQuery], true)}, {prop: "NextUntil", name: "NextUntil", pkg: "", typ: $funcType([sliceType], [JQuery], true)}, {prop: "Not", name: "Not", pkg: "", typ: $funcType([sliceType], [JQuery], true)}, {prop: "Filter", name: "Filter", pkg: "", typ: $funcType([sliceType], [JQuery], true)}, {prop: "Find", name: "Find", pkg: "", typ: $funcType([sliceType], [JQuery], true)}, {prop: "First", name: "First", pkg: "", typ: $funcType([], [JQuery], false)}, {prop: "Has", name: "Has", pkg: "", typ: $funcType([$String], [JQuery], false)}, {prop: "Is", name: "Is", pkg: "", typ: $funcType([sliceType], [$Bool], true)}, {prop: "Last", name: "Last", pkg: "", typ: $funcType([], [JQuery], false)}, {prop: "Ready", name: "Ready", pkg: "", typ: $funcType([funcType$3], [JQuery], false)}, {prop: "Resize", name: "Resize", pkg: "", typ: $funcType([sliceType], [JQuery], true)}, {prop: "Scroll", name: "Scroll", pkg: "", typ: $funcType([sliceType], [JQuery], true)}, {prop: "FadeOut", name: "FadeOut", pkg: "", typ: $funcType([sliceType], [JQuery], true)}, {prop: "FadeToggle", name: "FadeToggle", pkg: "", typ: $funcType([sliceType], [JQuery], true)}, {prop: "SlideDown", name: "SlideDown", pkg: "", typ: $funcType([sliceType], [JQuery], true)}, {prop: "SlideToggle", name: "SlideToggle", pkg: "", typ: $funcType([sliceType], [JQuery], true)}, {prop: "SlideUp", name: "SlideUp", pkg: "", typ: $funcType([sliceType], [JQuery], true)}, {prop: "Select", name: "Select", pkg: "", typ: $funcType([sliceType], [JQuery], true)}, {prop: "Submit", name: "Submit", pkg: "", typ: $funcType([sliceType], [JQuery], true)}, {prop: "Trigger", name: "Trigger", pkg: "", typ: $funcType([sliceType], [JQuery], true)}, {prop: "On", name: "On", pkg: "", typ: $funcType([sliceType], [JQuery], true)}, {prop: "One", name: "One", pkg: "", typ: $funcType([sliceType], [JQuery], true)}, {prop: "Off", name: "Off", pkg: "", typ: $funcType([sliceType], [JQuery], true)}, {prop: "Load", name: "Load", pkg: "", typ: $funcType([sliceType], [JQuery], true)}, {prop: "Serialize", name: "Serialize", pkg: "", typ: $funcType([], [$String], false)}, {prop: "SerializeArray", name: "SerializeArray", pkg: "", typ: $funcType([], [ptrType], false)}];
-	ptrType$1.methods = [{prop: "PreventDefault", name: "PreventDefault", pkg: "", typ: $funcType([], [], false)}, {prop: "IsDefaultPrevented", name: "IsDefaultPrevented", pkg: "", typ: $funcType([], [$Bool], false)}, {prop: "IsImmediatePropogationStopped", name: "IsImmediatePropogationStopped", pkg: "", typ: $funcType([], [$Bool], false)}, {prop: "IsPropagationStopped", name: "IsPropagationStopped", pkg: "", typ: $funcType([], [$Bool], false)}, {prop: "StopImmediatePropagation", name: "StopImmediatePropagation", pkg: "", typ: $funcType([], [], false)}, {prop: "StopPropagation", name: "StopPropagation", pkg: "", typ: $funcType([], [], false)}];
-	JQuery.init("github.com/gopherjs/jquery", [{prop: "o", name: "o", anonymous: false, exported: false, typ: ptrType, tag: ""}, {prop: "Jquery", name: "Jquery", anonymous: false, exported: true, typ: $String, tag: "js:\"jquery\""}, {prop: "Selector", name: "Selector", anonymous: false, exported: true, typ: $String, tag: "js:\"selector\""}, {prop: "Length", name: "Length", anonymous: false, exported: true, typ: $Int, tag: "js:\"length\""}, {prop: "Context", name: "Context", anonymous: false, exported: true, typ: $String, tag: "js:\"context\""}]);
-	Event.init("", [{prop: "Object", name: "Object", anonymous: true, exported: true, typ: ptrType, tag: ""}, {prop: "KeyCode", name: "KeyCode", anonymous: false, exported: true, typ: $Int, tag: "js:\"keyCode\""}, {prop: "Target", name: "Target", anonymous: false, exported: true, typ: ptrType, tag: "js:\"target\""}, {prop: "CurrentTarget", name: "CurrentTarget", anonymous: false, exported: true, typ: ptrType, tag: "js:\"currentTarget\""}, {prop: "DelegateTarget", name: "DelegateTarget", anonymous: false, exported: true, typ: ptrType, tag: "js:\"delegateTarget\""}, {prop: "RelatedTarget", name: "RelatedTarget", anonymous: false, exported: true, typ: ptrType, tag: "js:\"relatedTarget\""}, {prop: "Data", name: "Data", anonymous: false, exported: true, typ: ptrType, tag: "js:\"data\""}, {prop: "Result", name: "Result", anonymous: false, exported: true, typ: ptrType, tag: "js:\"result\""}, {prop: "Which", name: "Which", anonymous: false, exported: true, typ: $Int, tag: "js:\"which\""}, {prop: "Namespace", name: "Namespace", anonymous: false, exported: true, typ: $String, tag: "js:\"namespace\""}, {prop: "MetaKey", name: "MetaKey", anonymous: false, exported: true, typ: $Bool, tag: "js:\"metaKey\""}, {prop: "ShiftKey", name: "ShiftKey", anonymous: false, exported: true, typ: $Bool, tag: "js:\"shiftKey\""}, {prop: "CtrlKey", name: "CtrlKey", anonymous: false, exported: true, typ: $Bool, tag: "js:\"ctrlKey\""}, {prop: "PageX", name: "PageX", anonymous: false, exported: true, typ: $Int, tag: "js:\"pageX\""}, {prop: "PageY", name: "PageY", anonymous: false, exported: true, typ: $Int, tag: "js:\"pageY\""}, {prop: "Type", name: "Type", anonymous: false, exported: true, typ: $String, tag: "js:\"type\""}]);
-	JQueryCoordinates.init("", [{prop: "Left", name: "Left", anonymous: false, exported: true, typ: $Int, tag: ""}, {prop: "Top", name: "Top", anonymous: false, exported: true, typ: $Int, tag: ""}]);
-	$init = function() {
-		$pkg.$init = function() {};
-		/* */ var $f, $c = false, $s = 0, $r; if (this !== undefined && this.$blk !== undefined) { $f = this; $c = true; $s = $f.$s; $r = $f.$r; } s: while (true) { switch ($s) { case 0:
-		$r = js.$init(); /* */ $s = 1; case 1: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		/* */ } return; } if ($f === undefined) { $f = { $blk: $init }; } $f.$s = $s; $f.$r = $r; return $f;
-	};
-	$pkg.$init = $init;
-	return $pkg;
-})();
 $packages["bytes"] = (function() {
 	var $pkg = {}, $init, errors, io, unicode, utf8, Buffer, readOp, ptrType, sliceType, arrayType, IndexByte, Equal, makeSlice, HasPrefix, Index;
 	errors = $packages["errors"];
@@ -31734,7 +30799,7 @@ $packages["github.com/asciian/iris/runtime/ilos"] = (function() {
 	return $pkg;
 })();
 $packages["github.com/asciian/iris/runtime/env"] = (function() {
-	var $pkg = {}, $init, ilos, Environment, map2, stack, mapType, sliceType, arrayType, ptrType, NewEnvironment, NewMap2, NewStack;
+	var $pkg = {}, $init, ilos, Environment, map2, stack, arrayType, mapType, sliceType, ptrType, NewEnvironment, NewMap2, NewStack;
 	ilos = $packages["github.com/asciian/iris/runtime/ilos"];
 	Environment = $pkg.Environment = $newType(0, $kindStruct, "env.Environment", true, "github.com/asciian/iris/runtime/env", true, function(BlockTag_, TagbodyTag_, Function_, Variable_, Class_, Macro_, Special_, Property_, Constant_, CatchTag_, DynamicVariable_, StandardInput_, StandardOutput_, ErrorOutput_, Handler_) {
 		this.$val = this;
@@ -31774,9 +30839,9 @@ $packages["github.com/asciian/iris/runtime/env"] = (function() {
 	});
 	map2 = $pkg.map2 = $newType(4, $kindMap, "env.map2", true, "github.com/asciian/iris/runtime/env", false, null);
 	stack = $pkg.stack = $newType(12, $kindSlice, "env.stack", true, "github.com/asciian/iris/runtime/env", false, null);
+	arrayType = $arrayType(ilos.Instance, 2);
 	mapType = $mapType(ilos.Instance, ilos.Instance);
 	sliceType = $sliceType(mapType);
-	arrayType = $arrayType(ilos.Instance, 2);
 	ptrType = $ptrType(Environment);
 	NewEnvironment = function(stdin, stdout, stderr, handler) {
 		var e, handler, stderr, stdin, stdout;
@@ -31800,60 +30865,40 @@ $packages["github.com/asciian/iris/runtime/env"] = (function() {
 	};
 	$pkg.NewEnvironment = NewEnvironment;
 	Environment.ptr.prototype.MergeLexical = function(before) {
-		var before, e, x, x$1, x$2, x$3, x$4, x$5, x$6, x$7, x$8, x$9;
+		var before, e;
 		e = this;
-		e.BlockTag = $appendSlice(before.BlockTag, (x = $subslice(e.BlockTag, 1), $subslice(new sliceType(x.$array), x.$offset, x.$offset + x.$length)));
-		e.TagbodyTag = $appendSlice(before.TagbodyTag, (x$1 = $subslice(e.TagbodyTag, 1), $subslice(new sliceType(x$1.$array), x$1.$offset, x$1.$offset + x$1.$length)));
-		e.Variable = $appendSlice(before.Variable, (x$2 = $subslice(e.Variable, 1), $subslice(new sliceType(x$2.$array), x$2.$offset, x$2.$offset + x$2.$length)));
-		e.Function = $appendSlice(before.Function, (x$3 = $subslice(e.Function, 1), $subslice(new sliceType(x$3.$array), x$3.$offset, x$3.$offset + x$3.$length)));
-		e.Macro = $appendSlice(before.Macro, (x$4 = $subslice(e.Macro, 1), $subslice(new sliceType(x$4.$array), x$4.$offset, x$4.$offset + x$4.$length)));
-		e.Class = $appendSlice(before.Class, (x$5 = $subslice(e.Class, 1), $subslice(new sliceType(x$5.$array), x$5.$offset, x$5.$offset + x$5.$length)));
-		e.Special = $appendSlice(before.Special, (x$6 = $subslice(e.Special, 1), $subslice(new sliceType(x$6.$array), x$6.$offset, x$6.$offset + x$6.$length)));
-		e.Constant = $appendSlice(before.Constant, (x$7 = $subslice(e.Constant, 1), $subslice(new sliceType(x$7.$array), x$7.$offset, x$7.$offset + x$7.$length)));
+		e.BlockTag = before.BlockTag.Append($subslice(e.BlockTag, 1));
+		e.TagbodyTag = before.TagbodyTag.Append($subslice(e.TagbodyTag, 1));
+		e.Variable = before.Variable.Append($subslice(e.Variable, 1));
+		e.Function = before.Function.Append($subslice(e.Function, 1));
+		e.Macro = before.Macro.Append($subslice(e.Macro, 1));
+		e.Class = before.Class.Append($subslice(e.Class, 1));
+		e.Special = before.Special.Append($subslice(e.Special, 1));
+		e.Constant = before.Constant.Append($subslice(e.Constant, 1));
 		e.Property = before.Property;
-		e.CatchTag = $appendSlice(before.CatchTag, (x$8 = $subslice(e.CatchTag, 1), $subslice(new sliceType(x$8.$array), x$8.$offset, x$8.$offset + x$8.$length)));
-		e.DynamicVariable = $appendSlice(before.DynamicVariable, (x$9 = $subslice(e.DynamicVariable, 1), $subslice(new sliceType(x$9.$array), x$9.$offset, x$9.$offset + x$9.$length)));
+		e.CatchTag = before.CatchTag.Append($subslice(e.CatchTag, 1));
+		e.DynamicVariable = before.DynamicVariable.Append($subslice(e.DynamicVariable, 1));
 		e.StandardInput = before.StandardInput;
 		e.StandardOutput = before.StandardOutput;
 		e.ErrorOutput = before.ErrorOutput;
 		e.Handler = before.Handler;
 	};
 	Environment.prototype.MergeLexical = function(before) { return this.$val.MergeLexical(before); };
-	Environment.ptr.prototype.MergeDynamic = function(before) {
-		var before, e, x, x$1, x$10, x$11, x$12, x$13, x$14, x$15, x$16, x$17, x$2, x$3, x$4, x$5, x$6, x$7, x$8, x$9;
-		e = this;
-		e.BlockTag = $appendSlice(new stack([(x = before.BlockTag, (0 >= x.$length ? ($throwRuntimeError("index out of range"), undefined) : x.$array[x.$offset + 0]))]), (x$1 = $subslice(e.BlockTag, 1), $subslice(new sliceType(x$1.$array), x$1.$offset, x$1.$offset + x$1.$length)));
-		e.TagbodyTag = $appendSlice(new stack([(x$2 = before.TagbodyTag, (0 >= x$2.$length ? ($throwRuntimeError("index out of range"), undefined) : x$2.$array[x$2.$offset + 0]))]), (x$3 = $subslice(e.TagbodyTag, 1), $subslice(new sliceType(x$3.$array), x$3.$offset, x$3.$offset + x$3.$length)));
-		e.Variable = $appendSlice(new stack([(x$4 = before.Variable, (0 >= x$4.$length ? ($throwRuntimeError("index out of range"), undefined) : x$4.$array[x$4.$offset + 0]))]), (x$5 = $subslice(e.Variable, 1), $subslice(new sliceType(x$5.$array), x$5.$offset, x$5.$offset + x$5.$length)));
-		e.Function = $appendSlice(new stack([(x$6 = before.Function, (0 >= x$6.$length ? ($throwRuntimeError("index out of range"), undefined) : x$6.$array[x$6.$offset + 0]))]), (x$7 = $subslice(e.Function, 1), $subslice(new sliceType(x$7.$array), x$7.$offset, x$7.$offset + x$7.$length)));
-		e.Macro = $appendSlice(new stack([(x$8 = before.Macro, (0 >= x$8.$length ? ($throwRuntimeError("index out of range"), undefined) : x$8.$array[x$8.$offset + 0]))]), (x$9 = $subslice(e.Macro, 1), $subslice(new sliceType(x$9.$array), x$9.$offset, x$9.$offset + x$9.$length)));
-		e.Class = $appendSlice(new stack([(x$10 = before.Class, (0 >= x$10.$length ? ($throwRuntimeError("index out of range"), undefined) : x$10.$array[x$10.$offset + 0]))]), (x$11 = $subslice(e.Class, 1), $subslice(new sliceType(x$11.$array), x$11.$offset, x$11.$offset + x$11.$length)));
-		e.Special = $appendSlice(new stack([(x$12 = before.Special, (0 >= x$12.$length ? ($throwRuntimeError("index out of range"), undefined) : x$12.$array[x$12.$offset + 0]))]), (x$13 = $subslice(e.Special, 1), $subslice(new sliceType(x$13.$array), x$13.$offset, x$13.$offset + x$13.$length)));
-		e.Constant = $appendSlice(new stack([(x$14 = before.Constant, (0 >= x$14.$length ? ($throwRuntimeError("index out of range"), undefined) : x$14.$array[x$14.$offset + 0]))]), (x$15 = $subslice(e.Constant, 1), $subslice(new sliceType(x$15.$array), x$15.$offset, x$15.$offset + x$15.$length)));
-		e.Property = before.Property;
-		e.CatchTag = $appendSlice(before.CatchTag, (x$16 = $subslice(e.CatchTag, 1), $subslice(new sliceType(x$16.$array), x$16.$offset, x$16.$offset + x$16.$length)));
-		e.DynamicVariable = $appendSlice(before.DynamicVariable, (x$17 = $subslice(e.DynamicVariable, 1), $subslice(new sliceType(x$17.$array), x$17.$offset, x$17.$offset + x$17.$length)));
-		e.StandardInput = before.StandardInput;
-		e.StandardOutput = before.StandardOutput;
-		e.ErrorOutput = before.ErrorOutput;
-		e.Handler = before.Handler;
-	};
-	Environment.prototype.MergeDynamic = function(before) { return this.$val.MergeDynamic(before); };
 	Environment.ptr.prototype.NewLexical = function() {
-		var before, e, x, x$1, x$2, x$3, x$4, x$5, x$6, x$7, x$8, x$9;
+		var before, e;
 		before = this;
 		e = $clone(NewEnvironment(before.StandardInput, before.StandardOutput, before.ErrorOutput, before.Handler), Environment);
-		e.BlockTag = $append(before.BlockTag, (x = e.BlockTag, (0 >= x.$length ? ($throwRuntimeError("index out of range"), undefined) : x.$array[x.$offset + 0])));
-		e.TagbodyTag = $append(before.TagbodyTag, (x$1 = e.TagbodyTag, (0 >= x$1.$length ? ($throwRuntimeError("index out of range"), undefined) : x$1.$array[x$1.$offset + 0])));
-		e.Variable = $append(before.Variable, (x$2 = e.Variable, (0 >= x$2.$length ? ($throwRuntimeError("index out of range"), undefined) : x$2.$array[x$2.$offset + 0])));
-		e.Function = $append(before.Function, (x$3 = e.Function, (0 >= x$3.$length ? ($throwRuntimeError("index out of range"), undefined) : x$3.$array[x$3.$offset + 0])));
-		e.Macro = $append(before.Macro, (x$4 = e.Macro, (0 >= x$4.$length ? ($throwRuntimeError("index out of range"), undefined) : x$4.$array[x$4.$offset + 0])));
-		e.Class = $append(before.Class, (x$5 = e.Class, (0 >= x$5.$length ? ($throwRuntimeError("index out of range"), undefined) : x$5.$array[x$5.$offset + 0])));
-		e.Special = $append(before.Special, (x$6 = e.Special, (0 >= x$6.$length ? ($throwRuntimeError("index out of range"), undefined) : x$6.$array[x$6.$offset + 0])));
-		e.Constant = $append(before.Constant, (x$7 = e.Constant, (0 >= x$7.$length ? ($throwRuntimeError("index out of range"), undefined) : x$7.$array[x$7.$offset + 0])));
+		e.BlockTag = before.BlockTag.Append(e.BlockTag);
+		e.TagbodyTag = before.TagbodyTag.Append(e.TagbodyTag);
+		e.Variable = before.Variable.Append(e.Variable);
+		e.Function = before.Function.Append(e.Function);
+		e.Macro = before.Macro.Append(e.Macro);
+		e.Class = before.Class.Append(e.Class);
+		e.Special = before.Special.Append(e.Special);
+		e.Constant = before.Constant.Append(e.Constant);
 		e.Property = before.Property;
-		e.CatchTag = $append(before.CatchTag, (x$8 = e.CatchTag, (0 >= x$8.$length ? ($throwRuntimeError("index out of range"), undefined) : x$8.$array[x$8.$offset + 0])));
-		e.DynamicVariable = $append(before.DynamicVariable, (x$9 = e.DynamicVariable, (0 >= x$9.$length ? ($throwRuntimeError("index out of range"), undefined) : x$9.$array[x$9.$offset + 0])));
+		e.CatchTag = before.CatchTag.Append(e.CatchTag);
+		e.DynamicVariable = before.DynamicVariable.Append(e.DynamicVariable);
 		e.StandardInput = before.StandardInput;
 		e.StandardOutput = before.StandardOutput;
 		e.ErrorOutput = before.ErrorOutput;
@@ -31862,20 +30907,20 @@ $packages["github.com/asciian/iris/runtime/env"] = (function() {
 	};
 	Environment.prototype.NewLexical = function() { return this.$val.NewLexical(); };
 	Environment.ptr.prototype.NewDynamic = function() {
-		var before, e, x, x$1, x$10, x$11, x$12, x$13, x$14, x$15, x$16, x$17, x$2, x$3, x$4, x$5, x$6, x$7, x$8, x$9;
+		var before, e, x, x$1, x$2, x$3, x$4, x$5, x$6, x$7;
 		before = this;
 		e = $clone(NewEnvironment(before.StandardInput, before.StandardOutput, before.ErrorOutput, before.Handler), Environment);
-		e.BlockTag = $append(new stack([(x$1 = before.BlockTag, (0 >= x$1.$length ? ($throwRuntimeError("index out of range"), undefined) : x$1.$array[x$1.$offset + 0]))]), (x = e.BlockTag, (0 >= x.$length ? ($throwRuntimeError("index out of range"), undefined) : x.$array[x.$offset + 0])));
-		e.TagbodyTag = $append(new stack([(x$3 = before.TagbodyTag, (0 >= x$3.$length ? ($throwRuntimeError("index out of range"), undefined) : x$3.$array[x$3.$offset + 0]))]), (x$2 = e.TagbodyTag, (0 >= x$2.$length ? ($throwRuntimeError("index out of range"), undefined) : x$2.$array[x$2.$offset + 0])));
-		e.Variable = $append(new stack([(x$5 = before.Variable, (0 >= x$5.$length ? ($throwRuntimeError("index out of range"), undefined) : x$5.$array[x$5.$offset + 0]))]), (x$4 = e.Variable, (0 >= x$4.$length ? ($throwRuntimeError("index out of range"), undefined) : x$4.$array[x$4.$offset + 0])));
-		e.Function = $append(new stack([(x$7 = before.Function, (0 >= x$7.$length ? ($throwRuntimeError("index out of range"), undefined) : x$7.$array[x$7.$offset + 0]))]), (x$6 = e.Function, (0 >= x$6.$length ? ($throwRuntimeError("index out of range"), undefined) : x$6.$array[x$6.$offset + 0])));
-		e.Macro = $append(new stack([(x$9 = before.Macro, (0 >= x$9.$length ? ($throwRuntimeError("index out of range"), undefined) : x$9.$array[x$9.$offset + 0]))]), (x$8 = e.Macro, (0 >= x$8.$length ? ($throwRuntimeError("index out of range"), undefined) : x$8.$array[x$8.$offset + 0])));
-		e.Class = $append(new stack([(x$11 = before.Class, (0 >= x$11.$length ? ($throwRuntimeError("index out of range"), undefined) : x$11.$array[x$11.$offset + 0]))]), (x$10 = e.Class, (0 >= x$10.$length ? ($throwRuntimeError("index out of range"), undefined) : x$10.$array[x$10.$offset + 0])));
-		e.Special = $append(new stack([(x$13 = before.Special, (0 >= x$13.$length ? ($throwRuntimeError("index out of range"), undefined) : x$13.$array[x$13.$offset + 0]))]), (x$12 = e.Special, (0 >= x$12.$length ? ($throwRuntimeError("index out of range"), undefined) : x$12.$array[x$12.$offset + 0])));
-		e.Constant = $append(new stack([(x$15 = before.Constant, (0 >= x$15.$length ? ($throwRuntimeError("index out of range"), undefined) : x$15.$array[x$15.$offset + 0]))]), (x$14 = e.Constant, (0 >= x$14.$length ? ($throwRuntimeError("index out of range"), undefined) : x$14.$array[x$14.$offset + 0])));
+		e.BlockTag = new stack([(x = before.BlockTag, (0 >= x.$length ? ($throwRuntimeError("index out of range"), undefined) : x.$array[x.$offset + 0]))]).Append(e.BlockTag);
+		e.TagbodyTag = new stack([(x$1 = before.TagbodyTag, (0 >= x$1.$length ? ($throwRuntimeError("index out of range"), undefined) : x$1.$array[x$1.$offset + 0]))]).Append(e.TagbodyTag);
+		e.Variable = new stack([(x$2 = before.Variable, (0 >= x$2.$length ? ($throwRuntimeError("index out of range"), undefined) : x$2.$array[x$2.$offset + 0]))]).Append(e.Variable);
+		e.Function = new stack([(x$3 = before.Function, (0 >= x$3.$length ? ($throwRuntimeError("index out of range"), undefined) : x$3.$array[x$3.$offset + 0]))]).Append(e.Function);
+		e.Macro = new stack([(x$4 = before.Macro, (0 >= x$4.$length ? ($throwRuntimeError("index out of range"), undefined) : x$4.$array[x$4.$offset + 0]))]).Append(e.Macro);
+		e.Class = new stack([(x$5 = before.Class, (0 >= x$5.$length ? ($throwRuntimeError("index out of range"), undefined) : x$5.$array[x$5.$offset + 0]))]).Append(e.Class);
+		e.Special = new stack([(x$6 = before.Special, (0 >= x$6.$length ? ($throwRuntimeError("index out of range"), undefined) : x$6.$array[x$6.$offset + 0]))]).Append(e.Special);
+		e.Constant = new stack([(x$7 = before.Constant, (0 >= x$7.$length ? ($throwRuntimeError("index out of range"), undefined) : x$7.$array[x$7.$offset + 0]))]).Append(e.Constant);
 		e.Property = before.Property;
-		e.CatchTag = $append(before.CatchTag, (x$16 = e.CatchTag, (0 >= x$16.$length ? ($throwRuntimeError("index out of range"), undefined) : x$16.$array[x$16.$offset + 0])));
-		e.DynamicVariable = $append(before.DynamicVariable, (x$17 = e.DynamicVariable, (0 >= x$17.$length ? ($throwRuntimeError("index out of range"), undefined) : x$17.$array[x$17.$offset + 0])));
+		e.CatchTag = before.CatchTag.Append(e.CatchTag);
+		e.DynamicVariable = before.DynamicVariable.Append(e.DynamicVariable);
 		e.StandardInput = before.StandardInput;
 		e.StandardOutput = before.StandardOutput;
 		e.ErrorOutput = before.ErrorOutput;
@@ -31970,9 +31015,18 @@ $packages["github.com/asciian/iris/runtime/env"] = (function() {
 		return false;
 	};
 	$ptrType(stack).prototype.Define = function(key, value) { return this.$get().Define(key, value); };
-	ptrType.methods = [{prop: "MergeLexical", name: "MergeLexical", pkg: "", typ: $funcType([Environment], [], false)}, {prop: "MergeDynamic", name: "MergeDynamic", pkg: "", typ: $funcType([Environment], [], false)}, {prop: "NewLexical", name: "NewLexical", pkg: "", typ: $funcType([], [Environment], false)}, {prop: "NewDynamic", name: "NewDynamic", pkg: "", typ: $funcType([], [Environment], false)}];
+	stack.prototype.Append = function(t) {
+		var s, t, u;
+		s = this;
+		u = new stack([]);
+		u = $appendSlice(u, $subslice(new sliceType(s.$array), s.$offset, s.$offset + s.$length));
+		u = $appendSlice(u, $subslice(new sliceType(t.$array), t.$offset, t.$offset + t.$length));
+		return u;
+	};
+	$ptrType(stack).prototype.Append = function(t) { return this.$get().Append(t); };
+	ptrType.methods = [{prop: "MergeLexical", name: "MergeLexical", pkg: "", typ: $funcType([Environment], [], false)}, {prop: "NewLexical", name: "NewLexical", pkg: "", typ: $funcType([], [Environment], false)}, {prop: "NewDynamic", name: "NewDynamic", pkg: "", typ: $funcType([], [Environment], false)}];
 	map2.methods = [{prop: "Get", name: "Get", pkg: "", typ: $funcType([ilos.Instance, ilos.Instance], [ilos.Instance, $Bool], false)}, {prop: "Set", name: "Set", pkg: "", typ: $funcType([ilos.Instance, ilos.Instance, ilos.Instance], [], false)}, {prop: "Delete", name: "Delete", pkg: "", typ: $funcType([ilos.Instance, ilos.Instance], [ilos.Instance, $Bool], false)}];
-	stack.methods = [{prop: "Get", name: "Get", pkg: "", typ: $funcType([ilos.Instance], [ilos.Instance, $Bool], false)}, {prop: "Set", name: "Set", pkg: "", typ: $funcType([ilos.Instance, ilos.Instance], [$Bool], false)}, {prop: "Define", name: "Define", pkg: "", typ: $funcType([ilos.Instance, ilos.Instance], [$Bool], false)}];
+	stack.methods = [{prop: "Get", name: "Get", pkg: "", typ: $funcType([ilos.Instance], [ilos.Instance, $Bool], false)}, {prop: "Set", name: "Set", pkg: "", typ: $funcType([ilos.Instance, ilos.Instance], [$Bool], false)}, {prop: "Define", name: "Define", pkg: "", typ: $funcType([ilos.Instance, ilos.Instance], [$Bool], false)}, {prop: "Append", name: "Append", pkg: "", typ: $funcType([stack], [stack], false)}];
 	Environment.init("", [{prop: "BlockTag", name: "BlockTag", anonymous: false, exported: true, typ: stack, tag: ""}, {prop: "TagbodyTag", name: "TagbodyTag", anonymous: false, exported: true, typ: stack, tag: ""}, {prop: "Function", name: "Function", anonymous: false, exported: true, typ: stack, tag: ""}, {prop: "Variable", name: "Variable", anonymous: false, exported: true, typ: stack, tag: ""}, {prop: "Class", name: "Class", anonymous: false, exported: true, typ: stack, tag: ""}, {prop: "Macro", name: "Macro", anonymous: false, exported: true, typ: stack, tag: ""}, {prop: "Special", name: "Special", anonymous: false, exported: true, typ: stack, tag: ""}, {prop: "Property", name: "Property", anonymous: false, exported: true, typ: map2, tag: ""}, {prop: "Constant", name: "Constant", anonymous: false, exported: true, typ: stack, tag: ""}, {prop: "CatchTag", name: "CatchTag", anonymous: false, exported: true, typ: stack, tag: ""}, {prop: "DynamicVariable", name: "DynamicVariable", anonymous: false, exported: true, typ: stack, tag: ""}, {prop: "StandardInput", name: "StandardInput", anonymous: false, exported: true, typ: ilos.Instance, tag: ""}, {prop: "StandardOutput", name: "StandardOutput", anonymous: false, exported: true, typ: ilos.Instance, tag: ""}, {prop: "ErrorOutput", name: "ErrorOutput", anonymous: false, exported: true, typ: ilos.Instance, tag: ""}, {prop: "Handler", name: "Handler", anonymous: false, exported: true, typ: ilos.Instance, tag: ""}]);
 	map2.init(arrayType, ilos.Instance);
 	stack.init(mapType);
@@ -36827,153 +35881,215 @@ $packages["github.com/asciian/iris/runtime"] = (function() {
 	};
 	$pkg.Quote = Quote;
 	Convert = function(e, object, class1) {
-		var _1, _2, _3, _4, _5, _6, _7, _8, _arg, _arg$1, _arg$2, _i, _r, _r$1, _r$10, _r$11, _r$12, _r$13, _r$2, _r$3, _r$4, _r$5, _r$6, _r$7, _r$8, _r$9, _ref, _tmp, _tmp$1, _tmp$2, _tmp$3, _tmp$4, _tmp$5, c, car, cdr, class1, e, i, i$1, i$2, l, object, s, v, v$1, x, x$1, $s, $r;
-		/* */ $s = 0; var $f, $c = false; if (this !== undefined && this.$blk !== undefined) { $f = this; $c = true; _1 = $f._1; _2 = $f._2; _3 = $f._3; _4 = $f._4; _5 = $f._5; _6 = $f._6; _7 = $f._7; _8 = $f._8; _arg = $f._arg; _arg$1 = $f._arg$1; _arg$2 = $f._arg$2; _i = $f._i; _r = $f._r; _r$1 = $f._r$1; _r$10 = $f._r$10; _r$11 = $f._r$11; _r$12 = $f._r$12; _r$13 = $f._r$13; _r$2 = $f._r$2; _r$3 = $f._r$3; _r$4 = $f._r$4; _r$5 = $f._r$5; _r$6 = $f._r$6; _r$7 = $f._r$7; _r$8 = $f._r$8; _r$9 = $f._r$9; _ref = $f._ref; _tmp = $f._tmp; _tmp$1 = $f._tmp$1; _tmp$2 = $f._tmp$2; _tmp$3 = $f._tmp$3; _tmp$4 = $f._tmp$4; _tmp$5 = $f._tmp$5; c = $f.c; car = $f.car; cdr = $f.cdr; class1 = $f.class1; e = $f.e; i = $f.i; i$1 = $f.i$1; i$2 = $f.i$2; l = $f.l; object = $f.object; s = $f.s; v = $f.v; v$1 = $f.v$1; x = $f.x; x$1 = $f.x$1; $s = $f.$s; $r = $f.$r; } s: while (true) { switch ($s) { case 0:
-			_r = object.Class(); /* */ $s = 2; case 2: if($c) { $c = false; _r = _r.$blk(); } if (_r && _r.$blk !== undefined) { break s; }
-			_1 = _r;
-			/* */ if ($interfaceIsEqual(_1, (class$1.Character))) { $s = 3; continue; }
-			/* */ if ($interfaceIsEqual(_1, (class$1.Integer))) { $s = 4; continue; }
-			/* */ if ($interfaceIsEqual(_1, (class$1.Float))) { $s = 5; continue; }
-			/* */ if ($interfaceIsEqual(_1, (class$1.Symbol))) { $s = 6; continue; }
-			/* */ if ($interfaceIsEqual(_1, (class$1.String))) { $s = 7; continue; }
-			/* */ if ($interfaceIsEqual(_1, (class$1.GeneralVector))) { $s = 8; continue; }
-			/* */ if ($interfaceIsEqual(_1, (class$1.List))) { $s = 9; continue; }
-			/* */ $s = 10; continue;
-			/* if ($interfaceIsEqual(_1, (class$1.Character))) { */ case 3:
-					_2 = class1;
-					/* */ if ($interfaceIsEqual(_2, (instance.NewSymbol("<CHARACTER>")))) { $s = 12; continue; }
-					/* */ if ($interfaceIsEqual(_2, (instance.NewSymbol("<INTEGER>")))) { $s = 13; continue; }
-					/* */ if ($interfaceIsEqual(_2, (instance.NewSymbol("<FLOAT>")))) { $s = 14; continue; }
-					/* */ if ($interfaceIsEqual(_2, (instance.NewSymbol("<SYMBOL>")))) { $s = 15; continue; }
-					/* */ if ($interfaceIsEqual(_2, (instance.NewSymbol("<STRING>")))) { $s = 16; continue; }
-					/* */ if ($interfaceIsEqual(_2, (instance.NewSymbol("<GENERAL-VECTOR>")))) { $s = 17; continue; }
-					/* */ if ($interfaceIsEqual(_2, (instance.NewSymbol("<LIST>")))) { $s = 18; continue; }
-					/* */ $s = 19; continue;
-					/* if ($interfaceIsEqual(_2, (instance.NewSymbol("<CHARACTER>")))) { */ case 12:
-						$s = -1; return [object, $ifaceNil];
-					/* } else if ($interfaceIsEqual(_2, (instance.NewSymbol("<INTEGER>")))) { */ case 13:
-						$s = -1; return [instance.NewInteger((((($assertType(object, instance.Character) >> 0)) >> 0))), $ifaceNil];
-					/* } else if ($interfaceIsEqual(_2, (instance.NewSymbol("<FLOAT>")))) { */ case 14:
-						$s = 19; continue;
-					/* } else if ($interfaceIsEqual(_2, (instance.NewSymbol("<SYMBOL>")))) { */ case 15:
-						$s = 19; continue;
-					/* } else if ($interfaceIsEqual(_2, (instance.NewSymbol("<STRING>")))) { */ case 16:
-						_r$1 = object.String(); /* */ $s = 20; case 20: if($c) { $c = false; _r$1 = _r$1.$blk(); } if (_r$1 && _r$1.$blk !== undefined) { break s; }
-						_r$2 = instance.NewString((new sliceType$4($stringToRunes($substring(_r$1, 2))))); /* */ $s = 21; case 21: if($c) { $c = false; _r$2 = _r$2.$blk(); } if (_r$2 && _r$2.$blk !== undefined) { break s; }
-						$s = -1; return [_r$2, $ifaceNil];
-					/* } else if ($interfaceIsEqual(_2, (instance.NewSymbol("<GENERAL-VECTOR>")))) { */ case 17:
-						$s = 19; continue;
-					/* } else if ($interfaceIsEqual(_2, (instance.NewSymbol("<LIST>")))) { */ case 18:
-					/* } */ case 19:
-				case 11:
-				$s = 10; continue;
-			/* } else if ($interfaceIsEqual(_1, (class$1.Integer))) { */ case 4:
-					_3 = class1;
-					/* */ if ($interfaceIsEqual(_3, (instance.NewSymbol("<CHARACTER>")))) { $s = 23; continue; }
-					/* */ if ($interfaceIsEqual(_3, (instance.NewSymbol("<INTEGER>")))) { $s = 24; continue; }
-					/* */ if ($interfaceIsEqual(_3, (instance.NewSymbol("<FLOAT>")))) { $s = 25; continue; }
-					/* */ if ($interfaceIsEqual(_3, (instance.NewSymbol("<SYMBOL>")))) { $s = 26; continue; }
-					/* */ if ($interfaceIsEqual(_3, (instance.NewSymbol("<STRING>")))) { $s = 27; continue; }
-					/* */ if ($interfaceIsEqual(_3, (instance.NewSymbol("<GENERAL-VECTOR>")))) { $s = 28; continue; }
-					/* */ if ($interfaceIsEqual(_3, (instance.NewSymbol("<LIST>")))) { $s = 29; continue; }
+		var _1, _2, _3, _4, _5, _6, _7, _8, _arg, _arg$1, _arg$2, _i, _r, _r$1, _r$10, _r$11, _r$12, _r$13, _r$14, _r$15, _r$16, _r$17, _r$18, _r$19, _r$2, _r$20, _r$21, _r$22, _r$23, _r$24, _r$25, _r$26, _r$27, _r$28, _r$29, _r$3, _r$30, _r$31, _r$32, _r$33, _r$34, _r$35, _r$36, _r$37, _r$38, _r$39, _r$4, _r$40, _r$41, _r$42, _r$43, _r$44, _r$45, _r$46, _r$47, _r$48, _r$49, _r$5, _r$50, _r$51, _r$52, _r$53, _r$54, _r$55, _r$56, _r$57, _r$58, _r$59, _r$6, _r$60, _r$61, _r$62, _r$63, _r$64, _r$65, _r$66, _r$67, _r$68, _r$69, _r$7, _r$70, _r$71, _r$72, _r$73, _r$74, _r$75, _r$76, _r$77, _r$78, _r$79, _r$8, _r$9, _ref, _tmp, _tmp$1, _tmp$2, _tmp$3, _tmp$4, _tmp$5, _tuple, _tuple$1, c, car, cdr, class1, e, err, i, i$1, i$2, l, object, s, v, v$1, x, x$1, $s, $r;
+		/* */ $s = 0; var $f, $c = false; if (this !== undefined && this.$blk !== undefined) { $f = this; $c = true; _1 = $f._1; _2 = $f._2; _3 = $f._3; _4 = $f._4; _5 = $f._5; _6 = $f._6; _7 = $f._7; _8 = $f._8; _arg = $f._arg; _arg$1 = $f._arg$1; _arg$2 = $f._arg$2; _i = $f._i; _r = $f._r; _r$1 = $f._r$1; _r$10 = $f._r$10; _r$11 = $f._r$11; _r$12 = $f._r$12; _r$13 = $f._r$13; _r$14 = $f._r$14; _r$15 = $f._r$15; _r$16 = $f._r$16; _r$17 = $f._r$17; _r$18 = $f._r$18; _r$19 = $f._r$19; _r$2 = $f._r$2; _r$20 = $f._r$20; _r$21 = $f._r$21; _r$22 = $f._r$22; _r$23 = $f._r$23; _r$24 = $f._r$24; _r$25 = $f._r$25; _r$26 = $f._r$26; _r$27 = $f._r$27; _r$28 = $f._r$28; _r$29 = $f._r$29; _r$3 = $f._r$3; _r$30 = $f._r$30; _r$31 = $f._r$31; _r$32 = $f._r$32; _r$33 = $f._r$33; _r$34 = $f._r$34; _r$35 = $f._r$35; _r$36 = $f._r$36; _r$37 = $f._r$37; _r$38 = $f._r$38; _r$39 = $f._r$39; _r$4 = $f._r$4; _r$40 = $f._r$40; _r$41 = $f._r$41; _r$42 = $f._r$42; _r$43 = $f._r$43; _r$44 = $f._r$44; _r$45 = $f._r$45; _r$46 = $f._r$46; _r$47 = $f._r$47; _r$48 = $f._r$48; _r$49 = $f._r$49; _r$5 = $f._r$5; _r$50 = $f._r$50; _r$51 = $f._r$51; _r$52 = $f._r$52; _r$53 = $f._r$53; _r$54 = $f._r$54; _r$55 = $f._r$55; _r$56 = $f._r$56; _r$57 = $f._r$57; _r$58 = $f._r$58; _r$59 = $f._r$59; _r$6 = $f._r$6; _r$60 = $f._r$60; _r$61 = $f._r$61; _r$62 = $f._r$62; _r$63 = $f._r$63; _r$64 = $f._r$64; _r$65 = $f._r$65; _r$66 = $f._r$66; _r$67 = $f._r$67; _r$68 = $f._r$68; _r$69 = $f._r$69; _r$7 = $f._r$7; _r$70 = $f._r$70; _r$71 = $f._r$71; _r$72 = $f._r$72; _r$73 = $f._r$73; _r$74 = $f._r$74; _r$75 = $f._r$75; _r$76 = $f._r$76; _r$77 = $f._r$77; _r$78 = $f._r$78; _r$79 = $f._r$79; _r$8 = $f._r$8; _r$9 = $f._r$9; _ref = $f._ref; _tmp = $f._tmp; _tmp$1 = $f._tmp$1; _tmp$2 = $f._tmp$2; _tmp$3 = $f._tmp$3; _tmp$4 = $f._tmp$4; _tmp$5 = $f._tmp$5; _tuple = $f._tuple; _tuple$1 = $f._tuple$1; c = $f.c; car = $f.car; cdr = $f.cdr; class1 = $f.class1; e = $f.e; err = $f.err; i = $f.i; i$1 = $f.i$1; i$2 = $f.i$2; l = $f.l; object = $f.object; s = $f.s; v = $f.v; v$1 = $f.v$1; x = $f.x; x$1 = $f.x$1; $s = $f.$s; $r = $f.$r; } s: while (true) { switch ($s) { case 0:
+		_r = Eval($clone(e, env.Environment), object); /* */ $s = 1; case 1: if($c) { $c = false; _r = _r.$blk(); } if (_r && _r.$blk !== undefined) { break s; }
+		_tuple = _r;
+		object = _tuple[0];
+		err = _tuple[1];
+		if (!($interfaceIsEqual(err, $ifaceNil))) {
+			$s = -1; return [$ifaceNil, err];
+		}
+		_r$1 = Class($clone(e, env.Environment), class1); /* */ $s = 2; case 2: if($c) { $c = false; _r$1 = _r$1.$blk(); } if (_r$1 && _r$1.$blk !== undefined) { break s; }
+		_tuple$1 = _r$1;
+		class1 = _tuple$1[0];
+		err = _tuple$1[1];
+		if (!($interfaceIsEqual(err, $ifaceNil))) {
+			$s = -1; return [$ifaceNil, err];
+		}
+			_r$2 = object.Class(); /* */ $s = 4; case 4: if($c) { $c = false; _r$2 = _r$2.$blk(); } if (_r$2 && _r$2.$blk !== undefined) { break s; }
+			_r$3 = _r$2.String(); /* */ $s = 5; case 5: if($c) { $c = false; _r$3 = _r$3.$blk(); } if (_r$3 && _r$3.$blk !== undefined) { break s; }
+			_1 = _r$3;
+			_r$4 = class$1.Character.String(); /* */ $s = 14; case 14: if($c) { $c = false; _r$4 = _r$4.$blk(); } if (_r$4 && _r$4.$blk !== undefined) { break s; }
+			/* */ if (_1 === (_r$4)) { $s = 6; continue; }
+			_r$5 = class$1.Integer.String(); /* */ $s = 15; case 15: if($c) { $c = false; _r$5 = _r$5.$blk(); } if (_r$5 && _r$5.$blk !== undefined) { break s; }
+			/* */ if (_1 === (_r$5)) { $s = 7; continue; }
+			_r$6 = class$1.Float.String(); /* */ $s = 16; case 16: if($c) { $c = false; _r$6 = _r$6.$blk(); } if (_r$6 && _r$6.$blk !== undefined) { break s; }
+			/* */ if (_1 === (_r$6)) { $s = 8; continue; }
+			_r$7 = class$1.Symbol.String(); /* */ $s = 17; case 17: if($c) { $c = false; _r$7 = _r$7.$blk(); } if (_r$7 && _r$7.$blk !== undefined) { break s; }
+			/* */ if (_1 === (_r$7)) { $s = 9; continue; }
+			_r$8 = class$1.String.String(); /* */ $s = 18; case 18: if($c) { $c = false; _r$8 = _r$8.$blk(); } if (_r$8 && _r$8.$blk !== undefined) { break s; }
+			/* */ if (_1 === (_r$8)) { $s = 10; continue; }
+			_r$9 = class$1.GeneralVector.String(); /* */ $s = 19; case 19: if($c) { $c = false; _r$9 = _r$9.$blk(); } if (_r$9 && _r$9.$blk !== undefined) { break s; }
+			/* */ if (_1 === (_r$9)) { $s = 11; continue; }
+			_r$10 = class$1.List.String(); /* */ $s = 20; case 20: if($c) { $c = false; _r$10 = _r$10.$blk(); } if (_r$10 && _r$10.$blk !== undefined) { break s; }
+			/* */ if (_1 === (_r$10)) { $s = 12; continue; }
+			/* */ $s = 13; continue;
+			/* if (_1 === (_r$4)) { */ case 6:
+					_r$11 = $clone($assertType(class1, instance.BuiltInClass), instance.BuiltInClass).String(); /* */ $s = 22; case 22: if($c) { $c = false; _r$11 = _r$11.$blk(); } if (_r$11 && _r$11.$blk !== undefined) { break s; }
+					_2 = _r$11;
+					_r$12 = class$1.Character.String(); /* */ $s = 31; case 31: if($c) { $c = false; _r$12 = _r$12.$blk(); } if (_r$12 && _r$12.$blk !== undefined) { break s; }
+					/* */ if (_2 === (_r$12)) { $s = 23; continue; }
+					_r$13 = class$1.Integer.String(); /* */ $s = 32; case 32: if($c) { $c = false; _r$13 = _r$13.$blk(); } if (_r$13 && _r$13.$blk !== undefined) { break s; }
+					/* */ if (_2 === (_r$13)) { $s = 24; continue; }
+					_r$14 = class$1.Float.String(); /* */ $s = 33; case 33: if($c) { $c = false; _r$14 = _r$14.$blk(); } if (_r$14 && _r$14.$blk !== undefined) { break s; }
+					/* */ if (_2 === (_r$14)) { $s = 25; continue; }
+					_r$15 = class$1.Symbol.String(); /* */ $s = 34; case 34: if($c) { $c = false; _r$15 = _r$15.$blk(); } if (_r$15 && _r$15.$blk !== undefined) { break s; }
+					/* */ if (_2 === (_r$15)) { $s = 26; continue; }
+					_r$16 = class$1.String.String(); /* */ $s = 35; case 35: if($c) { $c = false; _r$16 = _r$16.$blk(); } if (_r$16 && _r$16.$blk !== undefined) { break s; }
+					/* */ if (_2 === (_r$16)) { $s = 27; continue; }
+					_r$17 = class$1.GeneralVector.String(); /* */ $s = 36; case 36: if($c) { $c = false; _r$17 = _r$17.$blk(); } if (_r$17 && _r$17.$blk !== undefined) { break s; }
+					/* */ if (_2 === (_r$17)) { $s = 28; continue; }
+					_r$18 = class$1.List.String(); /* */ $s = 37; case 37: if($c) { $c = false; _r$18 = _r$18.$blk(); } if (_r$18 && _r$18.$blk !== undefined) { break s; }
+					/* */ if (_2 === (_r$18)) { $s = 29; continue; }
 					/* */ $s = 30; continue;
-					/* if ($interfaceIsEqual(_3, (instance.NewSymbol("<CHARACTER>")))) { */ case 23:
-						$s = -1; return [instance.NewCharacter((((($assertType(object, instance.Integer) >> 0)) >> 0))), $ifaceNil];
-					/* } else if ($interfaceIsEqual(_3, (instance.NewSymbol("<INTEGER>")))) { */ case 24:
+					/* if (_2 === (_r$12)) { */ case 23:
 						$s = -1; return [object, $ifaceNil];
-					/* } else if ($interfaceIsEqual(_3, (instance.NewSymbol("<FLOAT>")))) { */ case 25:
-						$s = -1; return [instance.NewFloat(((($assertType(object, instance.Integer) >> 0)))), $ifaceNil];
-					/* } else if ($interfaceIsEqual(_3, (instance.NewSymbol("<SYMBOL>")))) { */ case 26:
+					/* } else if (_2 === (_r$13)) { */ case 24:
+						$s = -1; return [instance.NewInteger((((($assertType(object, instance.Character) >> 0)) >> 0))), $ifaceNil];
+					/* } else if (_2 === (_r$14)) { */ case 25:
 						$s = 30; continue;
-					/* } else if ($interfaceIsEqual(_3, (instance.NewSymbol("<STRING>")))) { */ case 27:
-						_r$3 = object.String(); /* */ $s = 31; case 31: if($c) { $c = false; _r$3 = _r$3.$blk(); } if (_r$3 && _r$3.$blk !== undefined) { break s; }
-						_r$4 = instance.NewString((new sliceType$4($stringToRunes(_r$3)))); /* */ $s = 32; case 32: if($c) { $c = false; _r$4 = _r$4.$blk(); } if (_r$4 && _r$4.$blk !== undefined) { break s; }
-						$s = -1; return [_r$4, $ifaceNil];
-					/* } else if ($interfaceIsEqual(_3, (instance.NewSymbol("<GENERAL-VECTOR>")))) { */ case 28:
+					/* } else if (_2 === (_r$15)) { */ case 26:
 						$s = 30; continue;
-					/* } else if ($interfaceIsEqual(_3, (instance.NewSymbol("<LIST>")))) { */ case 29:
+					/* } else if (_2 === (_r$16)) { */ case 27:
+						_r$19 = object.String(); /* */ $s = 38; case 38: if($c) { $c = false; _r$19 = _r$19.$blk(); } if (_r$19 && _r$19.$blk !== undefined) { break s; }
+						_r$20 = instance.NewString((new sliceType$4($stringToRunes($substring(_r$19, 2))))); /* */ $s = 39; case 39: if($c) { $c = false; _r$20 = _r$20.$blk(); } if (_r$20 && _r$20.$blk !== undefined) { break s; }
+						$s = -1; return [_r$20, $ifaceNil];
+					/* } else if (_2 === (_r$17)) { */ case 28:
+						$s = 30; continue;
+					/* } else if (_2 === (_r$18)) { */ case 29:
 					/* } */ case 30:
-				case 22:
-				$s = 10; continue;
-			/* } else if ($interfaceIsEqual(_1, (class$1.Float))) { */ case 5:
-					_4 = class1;
-					/* */ if ($interfaceIsEqual(_4, (instance.NewSymbol("<CHARACTER>")))) { $s = 34; continue; }
-					/* */ if ($interfaceIsEqual(_4, (instance.NewSymbol("<INTEGER>")))) { $s = 35; continue; }
-					/* */ if ($interfaceIsEqual(_4, (instance.NewSymbol("<FLOAT>")))) { $s = 36; continue; }
-					/* */ if ($interfaceIsEqual(_4, (instance.NewSymbol("<SYMBOL>")))) { $s = 37; continue; }
-					/* */ if ($interfaceIsEqual(_4, (instance.NewSymbol("<STRING>")))) { $s = 38; continue; }
-					/* */ if ($interfaceIsEqual(_4, (instance.NewSymbol("<GENERAL-VECTOR>")))) { $s = 39; continue; }
-					/* */ if ($interfaceIsEqual(_4, (instance.NewSymbol("<LIST>")))) { $s = 40; continue; }
-					/* */ $s = 41; continue;
-					/* if ($interfaceIsEqual(_4, (instance.NewSymbol("<CHARACTER>")))) { */ case 34:
-						$s = 41; continue;
-					/* } else if ($interfaceIsEqual(_4, (instance.NewSymbol("<INTEGER>")))) { */ case 35:
-						$s = 41; continue;
-					/* } else if ($interfaceIsEqual(_4, (instance.NewSymbol("<FLOAT>")))) { */ case 36:
+				case 21:
+				$s = 13; continue;
+			/* } else if (_1 === (_r$5)) { */ case 7:
+					_r$21 = class1.String(); /* */ $s = 41; case 41: if($c) { $c = false; _r$21 = _r$21.$blk(); } if (_r$21 && _r$21.$blk !== undefined) { break s; }
+					_3 = _r$21;
+					_r$22 = class$1.Character.String(); /* */ $s = 50; case 50: if($c) { $c = false; _r$22 = _r$22.$blk(); } if (_r$22 && _r$22.$blk !== undefined) { break s; }
+					/* */ if (_3 === (_r$22)) { $s = 42; continue; }
+					_r$23 = class$1.Integer.String(); /* */ $s = 51; case 51: if($c) { $c = false; _r$23 = _r$23.$blk(); } if (_r$23 && _r$23.$blk !== undefined) { break s; }
+					/* */ if (_3 === (_r$23)) { $s = 43; continue; }
+					_r$24 = class$1.Float.String(); /* */ $s = 52; case 52: if($c) { $c = false; _r$24 = _r$24.$blk(); } if (_r$24 && _r$24.$blk !== undefined) { break s; }
+					/* */ if (_3 === (_r$24)) { $s = 44; continue; }
+					_r$25 = class$1.Symbol.String(); /* */ $s = 53; case 53: if($c) { $c = false; _r$25 = _r$25.$blk(); } if (_r$25 && _r$25.$blk !== undefined) { break s; }
+					/* */ if (_3 === (_r$25)) { $s = 45; continue; }
+					_r$26 = class$1.String.String(); /* */ $s = 54; case 54: if($c) { $c = false; _r$26 = _r$26.$blk(); } if (_r$26 && _r$26.$blk !== undefined) { break s; }
+					/* */ if (_3 === (_r$26)) { $s = 46; continue; }
+					_r$27 = class$1.GeneralVector.String(); /* */ $s = 55; case 55: if($c) { $c = false; _r$27 = _r$27.$blk(); } if (_r$27 && _r$27.$blk !== undefined) { break s; }
+					/* */ if (_3 === (_r$27)) { $s = 47; continue; }
+					_r$28 = class$1.List.String(); /* */ $s = 56; case 56: if($c) { $c = false; _r$28 = _r$28.$blk(); } if (_r$28 && _r$28.$blk !== undefined) { break s; }
+					/* */ if (_3 === (_r$28)) { $s = 48; continue; }
+					/* */ $s = 49; continue;
+					/* if (_3 === (_r$22)) { */ case 42:
+						$s = -1; return [instance.NewCharacter((((($assertType(object, instance.Integer) >> 0)) >> 0))), $ifaceNil];
+					/* } else if (_3 === (_r$23)) { */ case 43:
 						$s = -1; return [object, $ifaceNil];
-					/* } else if ($interfaceIsEqual(_4, (instance.NewSymbol("<SYMBOL>")))) { */ case 37:
-						$s = 41; continue;
-					/* } else if ($interfaceIsEqual(_4, (instance.NewSymbol("<STRING>")))) { */ case 38:
-						_r$5 = object.String(); /* */ $s = 42; case 42: if($c) { $c = false; _r$5 = _r$5.$blk(); } if (_r$5 && _r$5.$blk !== undefined) { break s; }
-						_r$6 = instance.NewString((new sliceType$4($stringToRunes(_r$5)))); /* */ $s = 43; case 43: if($c) { $c = false; _r$6 = _r$6.$blk(); } if (_r$6 && _r$6.$blk !== undefined) { break s; }
-						$s = -1; return [_r$6, $ifaceNil];
-					/* } else if ($interfaceIsEqual(_4, (instance.NewSymbol("<GENERAL-VECTOR>")))) { */ case 39:
-						$s = 41; continue;
-					/* } else if ($interfaceIsEqual(_4, (instance.NewSymbol("<LIST>")))) { */ case 40:
-					/* } */ case 41:
-				case 33:
-				$s = 10; continue;
-			/* } else if ($interfaceIsEqual(_1, (class$1.Symbol))) { */ case 6:
-					_5 = class1;
-					/* */ if ($interfaceIsEqual(_5, (instance.NewSymbol("<CHARACTER>")))) { $s = 45; continue; }
-					/* */ if ($interfaceIsEqual(_5, (instance.NewSymbol("<INTEGER>")))) { $s = 46; continue; }
-					/* */ if ($interfaceIsEqual(_5, (instance.NewSymbol("<FLOAT>")))) { $s = 47; continue; }
-					/* */ if ($interfaceIsEqual(_5, (instance.NewSymbol("<SYMBOL>")))) { $s = 48; continue; }
-					/* */ if ($interfaceIsEqual(_5, (instance.NewSymbol("<STRING>")))) { $s = 49; continue; }
-					/* */ if ($interfaceIsEqual(_5, (instance.NewSymbol("<GENERAL-VECTOR>")))) { $s = 50; continue; }
-					/* */ if ($interfaceIsEqual(_5, (instance.NewSymbol("<LIST>")))) { $s = 51; continue; }
-					/* */ $s = 52; continue;
-					/* if ($interfaceIsEqual(_5, (instance.NewSymbol("<CHARACTER>")))) { */ case 45:
-						$s = 52; continue;
-					/* } else if ($interfaceIsEqual(_5, (instance.NewSymbol("<INTEGER>")))) { */ case 46:
-						$s = 52; continue;
-					/* } else if ($interfaceIsEqual(_5, (instance.NewSymbol("<FLOAT>")))) { */ case 47:
-						$s = 52; continue;
-					/* } else if ($interfaceIsEqual(_5, (instance.NewSymbol("<SYMBOL>")))) { */ case 48:
+					/* } else if (_3 === (_r$24)) { */ case 44:
+						$s = -1; return [instance.NewFloat(((($assertType(object, instance.Integer) >> 0)))), $ifaceNil];
+					/* } else if (_3 === (_r$25)) { */ case 45:
+						$s = 49; continue;
+					/* } else if (_3 === (_r$26)) { */ case 46:
+						_r$29 = object.String(); /* */ $s = 57; case 57: if($c) { $c = false; _r$29 = _r$29.$blk(); } if (_r$29 && _r$29.$blk !== undefined) { break s; }
+						_r$30 = instance.NewString((new sliceType$4($stringToRunes(_r$29)))); /* */ $s = 58; case 58: if($c) { $c = false; _r$30 = _r$30.$blk(); } if (_r$30 && _r$30.$blk !== undefined) { break s; }
+						$s = -1; return [_r$30, $ifaceNil];
+					/* } else if (_3 === (_r$27)) { */ case 47:
+						$s = 49; continue;
+					/* } else if (_3 === (_r$28)) { */ case 48:
+					/* } */ case 49:
+				case 40:
+				$s = 13; continue;
+			/* } else if (_1 === (_r$6)) { */ case 8:
+					_r$31 = class1.String(); /* */ $s = 60; case 60: if($c) { $c = false; _r$31 = _r$31.$blk(); } if (_r$31 && _r$31.$blk !== undefined) { break s; }
+					_4 = _r$31;
+					_r$32 = class$1.Character.String(); /* */ $s = 69; case 69: if($c) { $c = false; _r$32 = _r$32.$blk(); } if (_r$32 && _r$32.$blk !== undefined) { break s; }
+					/* */ if (_4 === (_r$32)) { $s = 61; continue; }
+					_r$33 = class$1.Integer.String(); /* */ $s = 70; case 70: if($c) { $c = false; _r$33 = _r$33.$blk(); } if (_r$33 && _r$33.$blk !== undefined) { break s; }
+					/* */ if (_4 === (_r$33)) { $s = 62; continue; }
+					_r$34 = class$1.Float.String(); /* */ $s = 71; case 71: if($c) { $c = false; _r$34 = _r$34.$blk(); } if (_r$34 && _r$34.$blk !== undefined) { break s; }
+					/* */ if (_4 === (_r$34)) { $s = 63; continue; }
+					_r$35 = class$1.Symbol.String(); /* */ $s = 72; case 72: if($c) { $c = false; _r$35 = _r$35.$blk(); } if (_r$35 && _r$35.$blk !== undefined) { break s; }
+					/* */ if (_4 === (_r$35)) { $s = 64; continue; }
+					_r$36 = class$1.String.String(); /* */ $s = 73; case 73: if($c) { $c = false; _r$36 = _r$36.$blk(); } if (_r$36 && _r$36.$blk !== undefined) { break s; }
+					/* */ if (_4 === (_r$36)) { $s = 65; continue; }
+					_r$37 = class$1.GeneralVector.String(); /* */ $s = 74; case 74: if($c) { $c = false; _r$37 = _r$37.$blk(); } if (_r$37 && _r$37.$blk !== undefined) { break s; }
+					/* */ if (_4 === (_r$37)) { $s = 66; continue; }
+					_r$38 = class$1.List.String(); /* */ $s = 75; case 75: if($c) { $c = false; _r$38 = _r$38.$blk(); } if (_r$38 && _r$38.$blk !== undefined) { break s; }
+					/* */ if (_4 === (_r$38)) { $s = 67; continue; }
+					/* */ $s = 68; continue;
+					/* if (_4 === (_r$32)) { */ case 61:
+						$s = 68; continue;
+					/* } else if (_4 === (_r$33)) { */ case 62:
+						$s = -1; return [instance.NewInteger(((($assertType(object, instance.Float)) >> 0))), $ifaceNil];
+					/* } else if (_4 === (_r$34)) { */ case 63:
 						$s = -1; return [object, $ifaceNil];
-					/* } else if ($interfaceIsEqual(_5, (instance.NewSymbol("<STRING>")))) { */ case 49:
-						_r$7 = object.String(); /* */ $s = 53; case 53: if($c) { $c = false; _r$7 = _r$7.$blk(); } if (_r$7 && _r$7.$blk !== undefined) { break s; }
-						_r$8 = instance.NewString((new sliceType$4($stringToRunes(_r$7)))); /* */ $s = 54; case 54: if($c) { $c = false; _r$8 = _r$8.$blk(); } if (_r$8 && _r$8.$blk !== undefined) { break s; }
-						$s = -1; return [_r$8, $ifaceNil];
-					/* } else if ($interfaceIsEqual(_5, (instance.NewSymbol("<GENERAL-VECTOR>")))) { */ case 50:
-						$s = 52; continue;
-					/* } else if ($interfaceIsEqual(_5, (instance.NewSymbol("<LIST>")))) { */ case 51:
-					/* } */ case 52:
-				case 44:
-				$s = 10; continue;
-			/* } else if ($interfaceIsEqual(_1, (class$1.String))) { */ case 7:
-					_6 = class1;
-					/* */ if ($interfaceIsEqual(_6, (instance.NewSymbol("<CHARACTER>")))) { $s = 56; continue; }
-					/* */ if ($interfaceIsEqual(_6, (instance.NewSymbol("<INTEGER>")))) { $s = 57; continue; }
-					/* */ if ($interfaceIsEqual(_6, (instance.NewSymbol("<FLOAT>")))) { $s = 58; continue; }
-					/* */ if ($interfaceIsEqual(_6, (instance.NewSymbol("<SYMBOL>")))) { $s = 59; continue; }
-					/* */ if ($interfaceIsEqual(_6, (instance.NewSymbol("<STRING>")))) { $s = 60; continue; }
-					/* */ if ($interfaceIsEqual(_6, (instance.NewSymbol("<GENERAL-VECTOR>")))) { $s = 61; continue; }
-					/* */ if ($interfaceIsEqual(_6, (instance.NewSymbol("<LIST>")))) { $s = 62; continue; }
-					/* */ $s = 63; continue;
-					/* if ($interfaceIsEqual(_6, (instance.NewSymbol("<CHARACTER>")))) { */ case 56:
-						$s = 63; continue;
-					/* } else if ($interfaceIsEqual(_6, (instance.NewSymbol("<INTEGER>")))) { */ case 57:
-						_r$9 = ParseNumber($clone(e, env.Environment), object); /* */ $s = 64; case 64: if($c) { $c = false; _r$9 = _r$9.$blk(); } if (_r$9 && _r$9.$blk !== undefined) { break s; }
-						$s = -1; return _r$9;
-					/* } else if ($interfaceIsEqual(_6, (instance.NewSymbol("<FLOAT>")))) { */ case 58:
-						_r$10 = ParseNumber($clone(e, env.Environment), object); /* */ $s = 65; case 65: if($c) { $c = false; _r$10 = _r$10.$blk(); } if (_r$10 && _r$10.$blk !== undefined) { break s; }
-						$s = -1; return _r$10;
-					/* } else if ($interfaceIsEqual(_6, (instance.NewSymbol("<SYMBOL>")))) { */ case 59:
-						$s = 63; continue;
-					/* } else if ($interfaceIsEqual(_6, (instance.NewSymbol("<STRING>")))) { */ case 60:
+					/* } else if (_4 === (_r$35)) { */ case 64:
+						$s = 68; continue;
+					/* } else if (_4 === (_r$36)) { */ case 65:
+						_r$39 = object.String(); /* */ $s = 76; case 76: if($c) { $c = false; _r$39 = _r$39.$blk(); } if (_r$39 && _r$39.$blk !== undefined) { break s; }
+						_r$40 = instance.NewString((new sliceType$4($stringToRunes(_r$39)))); /* */ $s = 77; case 77: if($c) { $c = false; _r$40 = _r$40.$blk(); } if (_r$40 && _r$40.$blk !== undefined) { break s; }
+						$s = -1; return [_r$40, $ifaceNil];
+					/* } else if (_4 === (_r$37)) { */ case 66:
+						$s = 68; continue;
+					/* } else if (_4 === (_r$38)) { */ case 67:
+					/* } */ case 68:
+				case 59:
+				$s = 13; continue;
+			/* } else if (_1 === (_r$7)) { */ case 9:
+					_r$41 = class1.String(); /* */ $s = 79; case 79: if($c) { $c = false; _r$41 = _r$41.$blk(); } if (_r$41 && _r$41.$blk !== undefined) { break s; }
+					_5 = _r$41;
+					_r$42 = class$1.Character.String(); /* */ $s = 88; case 88: if($c) { $c = false; _r$42 = _r$42.$blk(); } if (_r$42 && _r$42.$blk !== undefined) { break s; }
+					/* */ if (_5 === (_r$42)) { $s = 80; continue; }
+					_r$43 = class$1.Integer.String(); /* */ $s = 89; case 89: if($c) { $c = false; _r$43 = _r$43.$blk(); } if (_r$43 && _r$43.$blk !== undefined) { break s; }
+					/* */ if (_5 === (_r$43)) { $s = 81; continue; }
+					_r$44 = class$1.Float.String(); /* */ $s = 90; case 90: if($c) { $c = false; _r$44 = _r$44.$blk(); } if (_r$44 && _r$44.$blk !== undefined) { break s; }
+					/* */ if (_5 === (_r$44)) { $s = 82; continue; }
+					_r$45 = class$1.Symbol.String(); /* */ $s = 91; case 91: if($c) { $c = false; _r$45 = _r$45.$blk(); } if (_r$45 && _r$45.$blk !== undefined) { break s; }
+					/* */ if (_5 === (_r$45)) { $s = 83; continue; }
+					_r$46 = class$1.String.String(); /* */ $s = 92; case 92: if($c) { $c = false; _r$46 = _r$46.$blk(); } if (_r$46 && _r$46.$blk !== undefined) { break s; }
+					/* */ if (_5 === (_r$46)) { $s = 84; continue; }
+					_r$47 = class$1.GeneralVector.String(); /* */ $s = 93; case 93: if($c) { $c = false; _r$47 = _r$47.$blk(); } if (_r$47 && _r$47.$blk !== undefined) { break s; }
+					/* */ if (_5 === (_r$47)) { $s = 85; continue; }
+					_r$48 = class$1.List.String(); /* */ $s = 94; case 94: if($c) { $c = false; _r$48 = _r$48.$blk(); } if (_r$48 && _r$48.$blk !== undefined) { break s; }
+					/* */ if (_5 === (_r$48)) { $s = 86; continue; }
+					/* */ $s = 87; continue;
+					/* if (_5 === (_r$42)) { */ case 80:
+						$s = 87; continue;
+					/* } else if (_5 === (_r$43)) { */ case 81:
+						$s = 87; continue;
+					/* } else if (_5 === (_r$44)) { */ case 82:
+						$s = 87; continue;
+					/* } else if (_5 === (_r$45)) { */ case 83:
 						$s = -1; return [object, $ifaceNil];
-					/* } else if ($interfaceIsEqual(_6, (instance.NewSymbol("<GENERAL-VECTOR>")))) { */ case 61:
+					/* } else if (_5 === (_r$46)) { */ case 84:
+						_r$49 = object.String(); /* */ $s = 95; case 95: if($c) { $c = false; _r$49 = _r$49.$blk(); } if (_r$49 && _r$49.$blk !== undefined) { break s; }
+						_r$50 = instance.NewString((new sliceType$4($stringToRunes(_r$49)))); /* */ $s = 96; case 96: if($c) { $c = false; _r$50 = _r$50.$blk(); } if (_r$50 && _r$50.$blk !== undefined) { break s; }
+						$s = -1; return [_r$50, $ifaceNil];
+					/* } else if (_5 === (_r$47)) { */ case 85:
+						$s = 87; continue;
+					/* } else if (_5 === (_r$48)) { */ case 86:
+					/* } */ case 87:
+				case 78:
+				$s = 13; continue;
+			/* } else if (_1 === (_r$8)) { */ case 10:
+					_r$51 = class1.String(); /* */ $s = 98; case 98: if($c) { $c = false; _r$51 = _r$51.$blk(); } if (_r$51 && _r$51.$blk !== undefined) { break s; }
+					_6 = _r$51;
+					_r$52 = class$1.Character.String(); /* */ $s = 107; case 107: if($c) { $c = false; _r$52 = _r$52.$blk(); } if (_r$52 && _r$52.$blk !== undefined) { break s; }
+					/* */ if (_6 === (_r$52)) { $s = 99; continue; }
+					_r$53 = class$1.Integer.String(); /* */ $s = 108; case 108: if($c) { $c = false; _r$53 = _r$53.$blk(); } if (_r$53 && _r$53.$blk !== undefined) { break s; }
+					/* */ if (_6 === (_r$53)) { $s = 100; continue; }
+					_r$54 = class$1.Float.String(); /* */ $s = 109; case 109: if($c) { $c = false; _r$54 = _r$54.$blk(); } if (_r$54 && _r$54.$blk !== undefined) { break s; }
+					/* */ if (_6 === (_r$54)) { $s = 101; continue; }
+					_r$55 = class$1.Symbol.String(); /* */ $s = 110; case 110: if($c) { $c = false; _r$55 = _r$55.$blk(); } if (_r$55 && _r$55.$blk !== undefined) { break s; }
+					/* */ if (_6 === (_r$55)) { $s = 102; continue; }
+					_r$56 = class$1.String.String(); /* */ $s = 111; case 111: if($c) { $c = false; _r$56 = _r$56.$blk(); } if (_r$56 && _r$56.$blk !== undefined) { break s; }
+					/* */ if (_6 === (_r$56)) { $s = 103; continue; }
+					_r$57 = class$1.GeneralVector.String(); /* */ $s = 112; case 112: if($c) { $c = false; _r$57 = _r$57.$blk(); } if (_r$57 && _r$57.$blk !== undefined) { break s; }
+					/* */ if (_6 === (_r$57)) { $s = 104; continue; }
+					_r$58 = class$1.List.String(); /* */ $s = 113; case 113: if($c) { $c = false; _r$58 = _r$58.$blk(); } if (_r$58 && _r$58.$blk !== undefined) { break s; }
+					/* */ if (_6 === (_r$58)) { $s = 105; continue; }
+					/* */ $s = 106; continue;
+					/* if (_6 === (_r$52)) { */ case 99:
+						$s = 106; continue;
+					/* } else if (_6 === (_r$53)) { */ case 100:
+						_r$59 = ParseNumber($clone(e, env.Environment), object); /* */ $s = 114; case 114: if($c) { $c = false; _r$59 = _r$59.$blk(); } if (_r$59 && _r$59.$blk !== undefined) { break s; }
+						$s = -1; return _r$59;
+					/* } else if (_6 === (_r$54)) { */ case 101:
+						_r$60 = ParseNumber($clone(e, env.Environment), object); /* */ $s = 115; case 115: if($c) { $c = false; _r$60 = _r$60.$blk(); } if (_r$60 && _r$60.$blk !== undefined) { break s; }
+						$s = -1; return _r$60;
+					/* } else if (_6 === (_r$55)) { */ case 102:
+						$s = 106; continue;
+					/* } else if (_6 === (_r$56)) { */ case 103:
+						$s = -1; return [object, $ifaceNil];
+					/* } else if (_6 === (_r$57)) { */ case 104:
 						v = $makeSlice(sliceType, $assertType(object, instance.String).$length);
 						_ref = $assertType(object, instance.String);
 						_i = 0;
@@ -36985,7 +36101,7 @@ $packages["github.com/asciian/iris/runtime"] = (function() {
 							_i++;
 						}
 						$s = -1; return [instance.NewGeneralVector(v), $ifaceNil];
-					/* } else if ($interfaceIsEqual(_6, (instance.NewSymbol("<LIST>")))) { */ case 62:
+					/* } else if (_6 === (_r$58)) { */ case 105:
 						l = $pkg.Nil;
 						s = $assertType(object, instance.String);
 						i$1 = s.$length - 1 >> 0;
@@ -36995,43 +36111,73 @@ $packages["github.com/asciian/iris/runtime"] = (function() {
 							i$1 = i$1 - (1) >> 0;
 						}
 						$s = -1; return [l, $ifaceNil];
-					/* } */ case 63:
-				case 55:
-				$s = 10; continue;
-			/* } else if ($interfaceIsEqual(_1, (class$1.GeneralVector))) { */ case 8:
-				_7 = class1;
-				if ($interfaceIsEqual(_7, (instance.NewSymbol("<CHARACTER>")))) {
-				} else if ($interfaceIsEqual(_7, (instance.NewSymbol("<INTEGER>")))) {
-				} else if ($interfaceIsEqual(_7, (instance.NewSymbol("<FLOAT>")))) {
-				} else if ($interfaceIsEqual(_7, (instance.NewSymbol("<SYMBOL>")))) {
-				} else if ($interfaceIsEqual(_7, (instance.NewSymbol("<STRING>")))) {
-				} else if ($interfaceIsEqual(_7, (instance.NewSymbol("<GENERAL-VECTOR>")))) {
-					$s = -1; return [object, $ifaceNil];
-				} else if ($interfaceIsEqual(_7, (instance.NewSymbol("<LIST>")))) {
-					$s = -1; return List($clone(e, env.Environment), (x = $assertType(object, instance.GeneralVector), $subslice(new sliceType(x.$array), x.$offset, x.$offset + x.$length)));
-				}
-				$s = 10; continue;
-			/* } else if ($interfaceIsEqual(_1, (class$1.List))) { */ case 9:
-					_8 = class1;
-					/* */ if ($interfaceIsEqual(_8, (instance.NewSymbol("<CHARACTER>")))) { $s = 67; continue; }
-					/* */ if ($interfaceIsEqual(_8, (instance.NewSymbol("<INTEGER>")))) { $s = 68; continue; }
-					/* */ if ($interfaceIsEqual(_8, (instance.NewSymbol("<FLOAT>")))) { $s = 69; continue; }
-					/* */ if ($interfaceIsEqual(_8, (instance.NewSymbol("<SYMBOL>")))) { $s = 70; continue; }
-					/* */ if ($interfaceIsEqual(_8, (instance.NewSymbol("<STRING>")))) { $s = 71; continue; }
-					/* */ if ($interfaceIsEqual(_8, (instance.NewSymbol("<GENERAL-VECTOR>")))) { $s = 72; continue; }
-					/* */ if ($interfaceIsEqual(_8, (instance.NewSymbol("<LIST>")))) { $s = 73; continue; }
-					/* */ $s = 74; continue;
-					/* if ($interfaceIsEqual(_8, (instance.NewSymbol("<CHARACTER>")))) { */ case 67:
-						$s = 74; continue;
-					/* } else if ($interfaceIsEqual(_8, (instance.NewSymbol("<INTEGER>")))) { */ case 68:
-						$s = 74; continue;
-					/* } else if ($interfaceIsEqual(_8, (instance.NewSymbol("<FLOAT>")))) { */ case 69:
-						$s = 74; continue;
-					/* } else if ($interfaceIsEqual(_8, (instance.NewSymbol("<SYMBOL>")))) { */ case 70:
-						$s = 74; continue;
-					/* } else if ($interfaceIsEqual(_8, (instance.NewSymbol("<STRING>")))) { */ case 71:
-						$s = 74; continue;
-					/* } else if ($interfaceIsEqual(_8, (instance.NewSymbol("<GENERAL-VECTOR>")))) { */ case 72:
+					/* } */ case 106:
+				case 97:
+				$s = 13; continue;
+			/* } else if (_1 === (_r$9)) { */ case 11:
+					_r$61 = class1.String(); /* */ $s = 117; case 117: if($c) { $c = false; _r$61 = _r$61.$blk(); } if (_r$61 && _r$61.$blk !== undefined) { break s; }
+					_7 = _r$61;
+					_r$62 = class$1.Character.String(); /* */ $s = 126; case 126: if($c) { $c = false; _r$62 = _r$62.$blk(); } if (_r$62 && _r$62.$blk !== undefined) { break s; }
+					/* */ if (_7 === (_r$62)) { $s = 118; continue; }
+					_r$63 = class$1.Integer.String(); /* */ $s = 127; case 127: if($c) { $c = false; _r$63 = _r$63.$blk(); } if (_r$63 && _r$63.$blk !== undefined) { break s; }
+					/* */ if (_7 === (_r$63)) { $s = 119; continue; }
+					_r$64 = class$1.Float.String(); /* */ $s = 128; case 128: if($c) { $c = false; _r$64 = _r$64.$blk(); } if (_r$64 && _r$64.$blk !== undefined) { break s; }
+					/* */ if (_7 === (_r$64)) { $s = 120; continue; }
+					_r$65 = class$1.Symbol.String(); /* */ $s = 129; case 129: if($c) { $c = false; _r$65 = _r$65.$blk(); } if (_r$65 && _r$65.$blk !== undefined) { break s; }
+					/* */ if (_7 === (_r$65)) { $s = 121; continue; }
+					_r$66 = class$1.String.String(); /* */ $s = 130; case 130: if($c) { $c = false; _r$66 = _r$66.$blk(); } if (_r$66 && _r$66.$blk !== undefined) { break s; }
+					/* */ if (_7 === (_r$66)) { $s = 122; continue; }
+					_r$67 = class$1.GeneralVector.String(); /* */ $s = 131; case 131: if($c) { $c = false; _r$67 = _r$67.$blk(); } if (_r$67 && _r$67.$blk !== undefined) { break s; }
+					/* */ if (_7 === (_r$67)) { $s = 123; continue; }
+					_r$68 = class$1.List.String(); /* */ $s = 132; case 132: if($c) { $c = false; _r$68 = _r$68.$blk(); } if (_r$68 && _r$68.$blk !== undefined) { break s; }
+					/* */ if (_7 === (_r$68)) { $s = 124; continue; }
+					/* */ $s = 125; continue;
+					/* if (_7 === (_r$62)) { */ case 118:
+						$s = 125; continue;
+					/* } else if (_7 === (_r$63)) { */ case 119:
+						$s = 125; continue;
+					/* } else if (_7 === (_r$64)) { */ case 120:
+						$s = 125; continue;
+					/* } else if (_7 === (_r$65)) { */ case 121:
+						$s = 125; continue;
+					/* } else if (_7 === (_r$66)) { */ case 122:
+						$s = 125; continue;
+					/* } else if (_7 === (_r$67)) { */ case 123:
+						$s = -1; return [object, $ifaceNil];
+					/* } else if (_7 === (_r$68)) { */ case 124:
+						$s = -1; return List($clone(e, env.Environment), (x = $assertType(object, instance.GeneralVector), $subslice(new sliceType(x.$array), x.$offset, x.$offset + x.$length)));
+					/* } */ case 125:
+				case 116:
+				$s = 13; continue;
+			/* } else if (_1 === (_r$10)) { */ case 12:
+					_r$69 = class1.String(); /* */ $s = 134; case 134: if($c) { $c = false; _r$69 = _r$69.$blk(); } if (_r$69 && _r$69.$blk !== undefined) { break s; }
+					_8 = _r$69;
+					_r$70 = class$1.Character.String(); /* */ $s = 143; case 143: if($c) { $c = false; _r$70 = _r$70.$blk(); } if (_r$70 && _r$70.$blk !== undefined) { break s; }
+					/* */ if (_8 === (_r$70)) { $s = 135; continue; }
+					_r$71 = class$1.Integer.String(); /* */ $s = 144; case 144: if($c) { $c = false; _r$71 = _r$71.$blk(); } if (_r$71 && _r$71.$blk !== undefined) { break s; }
+					/* */ if (_8 === (_r$71)) { $s = 136; continue; }
+					_r$72 = class$1.Float.String(); /* */ $s = 145; case 145: if($c) { $c = false; _r$72 = _r$72.$blk(); } if (_r$72 && _r$72.$blk !== undefined) { break s; }
+					/* */ if (_8 === (_r$72)) { $s = 137; continue; }
+					_r$73 = class$1.Symbol.String(); /* */ $s = 146; case 146: if($c) { $c = false; _r$73 = _r$73.$blk(); } if (_r$73 && _r$73.$blk !== undefined) { break s; }
+					/* */ if (_8 === (_r$73)) { $s = 138; continue; }
+					_r$74 = class$1.String.String(); /* */ $s = 147; case 147: if($c) { $c = false; _r$74 = _r$74.$blk(); } if (_r$74 && _r$74.$blk !== undefined) { break s; }
+					/* */ if (_8 === (_r$74)) { $s = 139; continue; }
+					_r$75 = class$1.GeneralVector.String(); /* */ $s = 148; case 148: if($c) { $c = false; _r$75 = _r$75.$blk(); } if (_r$75 && _r$75.$blk !== undefined) { break s; }
+					/* */ if (_8 === (_r$75)) { $s = 140; continue; }
+					_r$76 = class$1.List.String(); /* */ $s = 149; case 149: if($c) { $c = false; _r$76 = _r$76.$blk(); } if (_r$76 && _r$76.$blk !== undefined) { break s; }
+					/* */ if (_8 === (_r$76)) { $s = 141; continue; }
+					/* */ $s = 142; continue;
+					/* if (_8 === (_r$70)) { */ case 135:
+						$s = 142; continue;
+					/* } else if (_8 === (_r$71)) { */ case 136:
+						$s = 142; continue;
+					/* } else if (_8 === (_r$72)) { */ case 137:
+						$s = 142; continue;
+					/* } else if (_8 === (_r$73)) { */ case 138:
+						$s = 142; continue;
+					/* } else if (_8 === (_r$74)) { */ case 139:
+						$s = 142; continue;
+					/* } else if (_8 === (_r$75)) { */ case 140:
 						v$1 = instance.NewGeneralVector(new sliceType([]));
 						_tmp = $assertType(object, ptrType$1).Car;
 						_tmp$1 = $assertType(object, ptrType$1).Cdr;
@@ -37039,31 +36185,31 @@ $packages["github.com/asciian/iris/runtime"] = (function() {
 						car = _tmp;
 						cdr = _tmp$1;
 						i$2 = _tmp$2;
-						/* while (true) { */ case 75:
-							/* if (!(!($interfaceIsEqual(cdr, $pkg.Nil)))) { break; } */ if(!(!($interfaceIsEqual(cdr, $pkg.Nil)))) { $s = 76; continue; }
-							_r$11 = SetElt($clone(e, env.Environment), car, v$1, instance.NewInteger(i$2)); /* */ $s = 77; case 77: if($c) { $c = false; _r$11 = _r$11.$blk(); } if (_r$11 && _r$11.$blk !== undefined) { break s; }
-							_r$11;
+						/* while (true) { */ case 150:
+							/* if (!(!($interfaceIsEqual(cdr, $pkg.Nil)))) { break; } */ if(!(!($interfaceIsEqual(cdr, $pkg.Nil)))) { $s = 151; continue; }
+							_r$77 = SetElt($clone(e, env.Environment), car, v$1, instance.NewInteger(i$2)); /* */ $s = 152; case 152: if($c) { $c = false; _r$77 = _r$77.$blk(); } if (_r$77 && _r$77.$blk !== undefined) { break s; }
+							_r$77;
 							_tmp$3 = $assertType(cdr, ptrType$1).Car;
 							_tmp$4 = $assertType(cdr, ptrType$1).Cdr;
 							_tmp$5 = i$2 + 1 >> 0;
 							car = _tmp$3;
 							cdr = _tmp$4;
 							i$2 = _tmp$5;
-						/* } */ $s = 75; continue; case 76:
+						/* } */ $s = 150; continue; case 151:
 						$s = -1; return [v$1, $ifaceNil];
-					/* } else if ($interfaceIsEqual(_8, (instance.NewSymbol("<LIST>")))) { */ case 73:
+					/* } else if (_8 === (_r$76)) { */ case 141:
 						$s = -1; return [object, $ifaceNil];
-					/* } */ case 74:
-				case 66:
-			/* } */ case 10:
-		case 1:
+					/* } */ case 142:
+				case 133:
+			/* } */ case 13:
+		case 3:
 		_arg = $clone(e, env.Environment);
-		_r$12 = instance.NewDomainError($clone(e, env.Environment), object, (x$1 = class$1.Object, new x$1.constructor.elem(x$1))); /* */ $s = 78; case 78: if($c) { $c = false; _r$12 = _r$12.$blk(); } if (_r$12 && _r$12.$blk !== undefined) { break s; }
-		_arg$1 = _r$12;
+		_r$78 = instance.NewDomainError($clone(e, env.Environment), object, (x$1 = class$1.Object, new x$1.constructor.elem(x$1))); /* */ $s = 153; case 153: if($c) { $c = false; _r$78 = _r$78.$blk(); } if (_r$78 && _r$78.$blk !== undefined) { break s; }
+		_arg$1 = _r$78;
 		_arg$2 = $pkg.Nil;
-		_r$13 = SignalCondition(_arg, _arg$1, _arg$2); /* */ $s = 79; case 79: if($c) { $c = false; _r$13 = _r$13.$blk(); } if (_r$13 && _r$13.$blk !== undefined) { break s; }
-		$s = -1; return _r$13;
-		/* */ } return; } if ($f === undefined) { $f = { $blk: Convert }; } $f._1 = _1; $f._2 = _2; $f._3 = _3; $f._4 = _4; $f._5 = _5; $f._6 = _6; $f._7 = _7; $f._8 = _8; $f._arg = _arg; $f._arg$1 = _arg$1; $f._arg$2 = _arg$2; $f._i = _i; $f._r = _r; $f._r$1 = _r$1; $f._r$10 = _r$10; $f._r$11 = _r$11; $f._r$12 = _r$12; $f._r$13 = _r$13; $f._r$2 = _r$2; $f._r$3 = _r$3; $f._r$4 = _r$4; $f._r$5 = _r$5; $f._r$6 = _r$6; $f._r$7 = _r$7; $f._r$8 = _r$8; $f._r$9 = _r$9; $f._ref = _ref; $f._tmp = _tmp; $f._tmp$1 = _tmp$1; $f._tmp$2 = _tmp$2; $f._tmp$3 = _tmp$3; $f._tmp$4 = _tmp$4; $f._tmp$5 = _tmp$5; $f.c = c; $f.car = car; $f.cdr = cdr; $f.class1 = class1; $f.e = e; $f.i = i; $f.i$1 = i$1; $f.i$2 = i$2; $f.l = l; $f.object = object; $f.s = s; $f.v = v; $f.v$1 = v$1; $f.x = x; $f.x$1 = x$1; $f.$s = $s; $f.$r = $r; return $f;
+		_r$79 = SignalCondition(_arg, _arg$1, _arg$2); /* */ $s = 154; case 154: if($c) { $c = false; _r$79 = _r$79.$blk(); } if (_r$79 && _r$79.$blk !== undefined) { break s; }
+		$s = -1; return _r$79;
+		/* */ } return; } if ($f === undefined) { $f = { $blk: Convert }; } $f._1 = _1; $f._2 = _2; $f._3 = _3; $f._4 = _4; $f._5 = _5; $f._6 = _6; $f._7 = _7; $f._8 = _8; $f._arg = _arg; $f._arg$1 = _arg$1; $f._arg$2 = _arg$2; $f._i = _i; $f._r = _r; $f._r$1 = _r$1; $f._r$10 = _r$10; $f._r$11 = _r$11; $f._r$12 = _r$12; $f._r$13 = _r$13; $f._r$14 = _r$14; $f._r$15 = _r$15; $f._r$16 = _r$16; $f._r$17 = _r$17; $f._r$18 = _r$18; $f._r$19 = _r$19; $f._r$2 = _r$2; $f._r$20 = _r$20; $f._r$21 = _r$21; $f._r$22 = _r$22; $f._r$23 = _r$23; $f._r$24 = _r$24; $f._r$25 = _r$25; $f._r$26 = _r$26; $f._r$27 = _r$27; $f._r$28 = _r$28; $f._r$29 = _r$29; $f._r$3 = _r$3; $f._r$30 = _r$30; $f._r$31 = _r$31; $f._r$32 = _r$32; $f._r$33 = _r$33; $f._r$34 = _r$34; $f._r$35 = _r$35; $f._r$36 = _r$36; $f._r$37 = _r$37; $f._r$38 = _r$38; $f._r$39 = _r$39; $f._r$4 = _r$4; $f._r$40 = _r$40; $f._r$41 = _r$41; $f._r$42 = _r$42; $f._r$43 = _r$43; $f._r$44 = _r$44; $f._r$45 = _r$45; $f._r$46 = _r$46; $f._r$47 = _r$47; $f._r$48 = _r$48; $f._r$49 = _r$49; $f._r$5 = _r$5; $f._r$50 = _r$50; $f._r$51 = _r$51; $f._r$52 = _r$52; $f._r$53 = _r$53; $f._r$54 = _r$54; $f._r$55 = _r$55; $f._r$56 = _r$56; $f._r$57 = _r$57; $f._r$58 = _r$58; $f._r$59 = _r$59; $f._r$6 = _r$6; $f._r$60 = _r$60; $f._r$61 = _r$61; $f._r$62 = _r$62; $f._r$63 = _r$63; $f._r$64 = _r$64; $f._r$65 = _r$65; $f._r$66 = _r$66; $f._r$67 = _r$67; $f._r$68 = _r$68; $f._r$69 = _r$69; $f._r$7 = _r$7; $f._r$70 = _r$70; $f._r$71 = _r$71; $f._r$72 = _r$72; $f._r$73 = _r$73; $f._r$74 = _r$74; $f._r$75 = _r$75; $f._r$76 = _r$76; $f._r$77 = _r$77; $f._r$78 = _r$78; $f._r$79 = _r$79; $f._r$8 = _r$8; $f._r$9 = _r$9; $f._ref = _ref; $f._tmp = _tmp; $f._tmp$1 = _tmp$1; $f._tmp$2 = _tmp$2; $f._tmp$3 = _tmp$3; $f._tmp$4 = _tmp$4; $f._tmp$5 = _tmp$5; $f._tuple = _tuple; $f._tuple$1 = _tuple$1; $f.c = c; $f.car = car; $f.cdr = cdr; $f.class1 = class1; $f.e = e; $f.err = err; $f.i = i; $f.i$1 = i$1; $f.i$2 = i$2; $f.l = l; $f.object = object; $f.s = s; $f.v = v; $f.v$1 = v$1; $f.x = x; $f.x$1 = x$1; $f.$s = $s; $f.$r = $r; return $f;
 	};
 	$pkg.Convert = Convert;
 	Defconstant = function(e, name, form) {
@@ -38498,8 +37644,8 @@ $packages["github.com/asciian/iris/runtime"] = (function() {
 	};
 	$pkg.Integerp = Integerp;
 	Div = function(e, z1, z2) {
-		var _arg, _arg$1, _arg$2, _q, _r, _r$1, _r$2, _r$3, _tuple, _tuple$1, _tuple$2, a, b, e, err, err$1, operands, operation, z1, z2, $s, $r;
-		/* */ $s = 0; var $f, $c = false; if (this !== undefined && this.$blk !== undefined) { $f = this; $c = true; _arg = $f._arg; _arg$1 = $f._arg$1; _arg$2 = $f._arg$2; _q = $f._q; _r = $f._r; _r$1 = $f._r$1; _r$2 = $f._r$2; _r$3 = $f._r$3; _tuple = $f._tuple; _tuple$1 = $f._tuple$1; _tuple$2 = $f._tuple$2; a = $f.a; b = $f.b; e = $f.e; err = $f.err; err$1 = $f.err$1; operands = $f.operands; operation = $f.operation; z1 = $f.z1; z2 = $f.z2; $s = $f.$s; $r = $f.$r; } s: while (true) { switch ($s) { case 0:
+		var _arg, _arg$1, _arg$2, _q, _q$1, _r, _r$1, _r$2, _r$3, _tuple, _tuple$1, _tuple$2, a, b, e, err, err$1, operands, operation, z1, z2, $s, $r;
+		/* */ $s = 0; var $f, $c = false; if (this !== undefined && this.$blk !== undefined) { $f = this; $c = true; _arg = $f._arg; _arg$1 = $f._arg$1; _arg$2 = $f._arg$2; _q = $f._q; _q$1 = $f._q$1; _r = $f._r; _r$1 = $f._r$1; _r$2 = $f._r$2; _r$3 = $f._r$3; _tuple = $f._tuple; _tuple$1 = $f._tuple$1; _tuple$2 = $f._tuple$2; a = $f.a; b = $f.b; e = $f.e; err = $f.err; err$1 = $f.err$1; operands = $f.operands; operation = $f.operation; z1 = $f.z1; z2 = $f.z2; $s = $f.$s; $r = $f.$r; } s: while (true) { switch ($s) { case 0:
 		_r = convInt($clone(e, env.Environment), z1); /* */ $s = 1; case 1: if($c) { $c = false; _r = _r.$blk(); } if (_r && _r.$blk !== undefined) { break s; }
 		_tuple = _r;
 		a = _tuple[0];
@@ -38531,46 +37677,33 @@ $packages["github.com/asciian/iris/runtime"] = (function() {
 			_r$3 = SignalCondition(_arg, _arg$1, _arg$2); /* */ $s = 6; case 6: if($c) { $c = false; _r$3 = _r$3.$blk(); } if (_r$3 && _r$3.$blk !== undefined) { break s; }
 			$s = -1; return _r$3;
 		/* } */ case 4:
-		$s = -1; return [instance.NewInteger((_q = a / b, (_q === _q && _q !== 1/0 && _q !== -1/0) ? _q >> 0 : $throwRuntimeError("integer divide by zero"))), $ifaceNil];
-		/* */ } return; } if ($f === undefined) { $f = { $blk: Div }; } $f._arg = _arg; $f._arg$1 = _arg$1; $f._arg$2 = _arg$2; $f._q = _q; $f._r = _r; $f._r$1 = _r$1; $f._r$2 = _r$2; $f._r$3 = _r$3; $f._tuple = _tuple; $f._tuple$1 = _tuple$1; $f._tuple$2 = _tuple$2; $f.a = a; $f.b = b; $f.e = e; $f.err = err; $f.err$1 = err$1; $f.operands = operands; $f.operation = operation; $f.z1 = z1; $f.z2 = z2; $f.$s = $s; $f.$r = $r; return $f;
+		if (($imul(a, b)) < 0) {
+			$s = -1; return [instance.NewInteger((_q = a / b, (_q === _q && _q !== 1/0 && _q !== -1/0) ? _q >> 0 : $throwRuntimeError("integer divide by zero")) - 1 >> 0), $ifaceNil];
+		}
+		$s = -1; return [instance.NewInteger((_q$1 = a / b, (_q$1 === _q$1 && _q$1 !== 1/0 && _q$1 !== -1/0) ? _q$1 >> 0 : $throwRuntimeError("integer divide by zero"))), $ifaceNil];
+		/* */ } return; } if ($f === undefined) { $f = { $blk: Div }; } $f._arg = _arg; $f._arg$1 = _arg$1; $f._arg$2 = _arg$2; $f._q = _q; $f._q$1 = _q$1; $f._r = _r; $f._r$1 = _r$1; $f._r$2 = _r$2; $f._r$3 = _r$3; $f._tuple = _tuple; $f._tuple$1 = _tuple$1; $f._tuple$2 = _tuple$2; $f.a = a; $f.b = b; $f.e = e; $f.err = err; $f.err$1 = err$1; $f.operands = operands; $f.operation = operation; $f.z1 = z1; $f.z2 = z2; $f.$s = $s; $f.$r = $r; return $f;
 	};
 	$pkg.Div = Div;
 	Mod = function(e, z1, z2) {
-		var _arg, _arg$1, _arg$2, _r, _r$1, _r$2, _r$3, _r$4, _tuple, _tuple$1, _tuple$2, a, b, e, err, err$1, operands, operation, z1, z2, $s, $r;
-		/* */ $s = 0; var $f, $c = false; if (this !== undefined && this.$blk !== undefined) { $f = this; $c = true; _arg = $f._arg; _arg$1 = $f._arg$1; _arg$2 = $f._arg$2; _r = $f._r; _r$1 = $f._r$1; _r$2 = $f._r$2; _r$3 = $f._r$3; _r$4 = $f._r$4; _tuple = $f._tuple; _tuple$1 = $f._tuple$1; _tuple$2 = $f._tuple$2; a = $f.a; b = $f.b; e = $f.e; err = $f.err; err$1 = $f.err$1; operands = $f.operands; operation = $f.operation; z1 = $f.z1; z2 = $f.z2; $s = $f.$s; $r = $f.$r; } s: while (true) { switch ($s) { case 0:
-		_r = convInt($clone(e, env.Environment), z1); /* */ $s = 1; case 1: if($c) { $c = false; _r = _r.$blk(); } if (_r && _r.$blk !== undefined) { break s; }
+		var _r, _r$1, _r$2, _tuple, _tuple$1, e, err, f, g, z1, z2, $s, $r;
+		/* */ $s = 0; var $f, $c = false; if (this !== undefined && this.$blk !== undefined) { $f = this; $c = true; _r = $f._r; _r$1 = $f._r$1; _r$2 = $f._r$2; _tuple = $f._tuple; _tuple$1 = $f._tuple$1; e = $f.e; err = $f.err; f = $f.f; g = $f.g; z1 = $f.z1; z2 = $f.z2; $s = $f.$s; $r = $f.$r; } s: while (true) { switch ($s) { case 0:
+		_r = Div($clone(e, env.Environment), z1, z2); /* */ $s = 1; case 1: if($c) { $c = false; _r = _r.$blk(); } if (_r && _r.$blk !== undefined) { break s; }
 		_tuple = _r;
-		a = _tuple[0];
+		f = _tuple[0];
 		err = _tuple[1];
 		if (!($interfaceIsEqual(err, $ifaceNil))) {
 			$s = -1; return [$ifaceNil, err];
 		}
-		_r$1 = convInt($clone(e, env.Environment), z2); /* */ $s = 2; case 2: if($c) { $c = false; _r$1 = _r$1.$blk(); } if (_r$1 && _r$1.$blk !== undefined) { break s; }
+		_r$1 = Multiply($clone(e, env.Environment), new sliceType([f, z2])); /* */ $s = 2; case 2: if($c) { $c = false; _r$1 = _r$1.$blk(); } if (_r$1 && _r$1.$blk !== undefined) { break s; }
 		_tuple$1 = _r$1;
-		b = _tuple$1[0];
+		g = _tuple$1[0];
 		err = _tuple$1[1];
 		if (!($interfaceIsEqual(err, $ifaceNil))) {
 			$s = -1; return [$ifaceNil, err];
 		}
-		/* */ if (b === 0) { $s = 3; continue; }
-		/* */ $s = 4; continue;
-		/* if (b === 0) { */ case 3:
-			operation = instance.NewSymbol("MOD");
-			_tuple$2 = List($clone(e, env.Environment), new sliceType([z1, z2]));
-			operands = _tuple$2[0];
-			err$1 = _tuple$2[1];
-			if (!($interfaceIsEqual(err$1, $ifaceNil))) {
-				$s = -1; return [$ifaceNil, err$1];
-			}
-			_arg = $clone(e, env.Environment);
-			_r$2 = instance.NewArithmeticError($clone(e, env.Environment), operation, operands); /* */ $s = 5; case 5: if($c) { $c = false; _r$2 = _r$2.$blk(); } if (_r$2 && _r$2.$blk !== undefined) { break s; }
-			_arg$1 = _r$2;
-			_arg$2 = $pkg.Nil;
-			_r$3 = SignalCondition(_arg, _arg$1, _arg$2); /* */ $s = 6; case 6: if($c) { $c = false; _r$3 = _r$3.$blk(); } if (_r$3 && _r$3.$blk !== undefined) { break s; }
-			$s = -1; return _r$3;
-		/* } */ case 4:
-		$s = -1; return [instance.NewInteger((_r$4 = a % b, _r$4 === _r$4 ? _r$4 : $throwRuntimeError("integer divide by zero"))), $ifaceNil];
-		/* */ } return; } if ($f === undefined) { $f = { $blk: Mod }; } $f._arg = _arg; $f._arg$1 = _arg$1; $f._arg$2 = _arg$2; $f._r = _r; $f._r$1 = _r$1; $f._r$2 = _r$2; $f._r$3 = _r$3; $f._r$4 = _r$4; $f._tuple = _tuple; $f._tuple$1 = _tuple$1; $f._tuple$2 = _tuple$2; $f.a = a; $f.b = b; $f.e = e; $f.err = err; $f.err$1 = err$1; $f.operands = operands; $f.operation = operation; $f.z1 = z1; $f.z2 = z2; $f.$s = $s; $f.$r = $r; return $f;
+		_r$2 = Substruct($clone(e, env.Environment), z1, new sliceType([g])); /* */ $s = 3; case 3: if($c) { $c = false; _r$2 = _r$2.$blk(); } if (_r$2 && _r$2.$blk !== undefined) { break s; }
+		$s = -1; return _r$2;
+		/* */ } return; } if ($f === undefined) { $f = { $blk: Mod }; } $f._r = _r; $f._r$1 = _r$1; $f._r$2 = _r$2; $f._tuple = _tuple; $f._tuple$1 = _tuple$1; $f.e = e; $f.err = err; $f.f = f; $f.g = g; $f.z1 = z1; $f.z2 = z2; $f.$s = $s; $f.$r = $r; return $f;
 	};
 	$pkg.Mod = Mod;
 	Gcd = function(e, z1, z2) {
@@ -40951,27 +40084,27 @@ $packages["github.com/asciian/iris/runtime"] = (function() {
 		defun("CONS", new funcType$1(Cons));
 		defun("CONSP", new funcType(Consp));
 		defun("CONTINUE-CONDITION", new funcType$3(ContinueCondition));
-		defun("CONVERT", new funcType$1(Convert));
+		$r = defspecial("CONVERT", new funcType$1(Convert)); /* */ $s = 9; case 9: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
 		defun("COS", new funcType(Cos));
 		defun("COSH", new funcType(Cosh));
-		$r = defgeneric("CREATE", new funcType$3(Create)); /* */ $s = 9; case 9: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = defgeneric("CREATE", new funcType$3(Create)); /* */ $s = 10; case 10: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
 		defun("CREATE-ARRAY", new funcType$3(CreateArray));
 		defun("CREATE-LIST", new funcType$3(CreateList));
 		defun("CREATE-STRING", new funcType$3(CreateString));
 		defun("CREATE-STRING-INPUT-STREAM", new funcType(CreateStringInputStream));
 		defun("CREATE-STRING-OUTPUT-STREAM", new funcType$6(CreateStringOutputStream));
 		defun("CREATE-VECTOR", new funcType$3(CreateVector));
-		$r = defspecial("DEFCLASS", new funcType$7(Defclass)); /* */ $s = 10; case 10: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = defspecial("DEFCONSTANT", new funcType$1(Defconstant)); /* */ $s = 11; case 11: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = defspecial("DEFDYNAMIC", new funcType$1(Defdynamic)); /* */ $s = 12; case 12: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = defspecial("DEFGENERIC", new funcType$4(Defgeneric)); /* */ $s = 13; case 13: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = defspecial("DEFMETHOD", new funcType$2(Defmethod)); /* */ $s = 14; case 14: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = defspecial("DEFGLOBAL", new funcType$1(Defglobal)); /* */ $s = 15; case 15: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = defspecial("DEFMACRO", new funcType$4(Defmacro)); /* */ $s = 16; case 16: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = defspecial("DEFUN", new funcType$4(Defun)); /* */ $s = 17; case 17: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = defspecial("DEFCLASS", new funcType$7(Defclass)); /* */ $s = 11; case 11: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = defspecial("DEFCONSTANT", new funcType$1(Defconstant)); /* */ $s = 12; case 12: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = defspecial("DEFDYNAMIC", new funcType$1(Defdynamic)); /* */ $s = 13; case 13: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = defspecial("DEFGENERIC", new funcType$4(Defgeneric)); /* */ $s = 14; case 14: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = defspecial("DEFMETHOD", new funcType$2(Defmethod)); /* */ $s = 15; case 15: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = defspecial("DEFGLOBAL", new funcType$1(Defglobal)); /* */ $s = 16; case 16: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = defspecial("DEFMACRO", new funcType$4(Defmacro)); /* */ $s = 17; case 17: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = defspecial("DEFUN", new funcType$4(Defun)); /* */ $s = 18; case 18: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
 		defun("DIV", new funcType$1(Div));
-		$r = defspecial("DYNAMIC", new funcType(Dynamic)); /* */ $s = 18; case 18: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = defspecial("DYNAMIC-LET", new funcType$3(DynamicLet)); /* */ $s = 19; case 19: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = defspecial("DYNAMIC", new funcType(Dynamic)); /* */ $s = 19; case 19: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = defspecial("DYNAMIC-LET", new funcType$3(DynamicLet)); /* */ $s = 20; case 20: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
 		defun("ELT", new funcType$1(Elt));
 		defun("EQ", new funcType$1(Eq));
 		defun("EQL", new funcType$1(Eql));
@@ -40980,11 +40113,11 @@ $packages["github.com/asciian/iris/runtime"] = (function() {
 		defun("ERROR-OUTPUT", new funcType$6(ErrorOutput));
 		defun("EXP", new funcType(Exp));
 		defun("EXPT", new funcType$1(Expt));
-		$r = defspecial("FLET", new funcType$3(Flet)); /* */ $s = 20; case 20: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = defspecial("FLET", new funcType$3(Flet)); /* */ $s = 21; case 21: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
 		defun("FLOAT", new funcType(Float));
 		defun("FLOATP", new funcType(Floatp));
 		defun("FLOOR", new funcType(Floor));
-		$r = defspecial("FOR", new funcType$4(For)); /* */ $s = 21; case 21: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = defspecial("FOR", new funcType$4(For)); /* */ $s = 22; case 22: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
 		defun("FORMAT", new funcType$4(Format));
 		defun("FORMAT-CHAR", new funcType$1(FormatChar));
 		defun("FORMAT-FLOAT", new funcType$1(FormatFloat));
@@ -40993,7 +40126,7 @@ $packages["github.com/asciian/iris/runtime"] = (function() {
 		defun("FORMAT-OBJECT", new funcType$8(FormatObject));
 		defun("FORMAT-TAB", new funcType$1(FormatTab));
 		defun("FUNCALL", new funcType$3(Funcall));
-		$r = defspecial("FUNCTION", new funcType(Function)); /* */ $s = 22; case 22: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = defspecial("FUNCTION", new funcType(Function)); /* */ $s = 23; case 23: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
 		defun("FUNCTIONP", new funcType(Functionp));
 		defun("GAREF", new funcType$3(Garef));
 		defun("GCD", new funcType$1(Gcd));
@@ -41001,19 +40134,19 @@ $packages["github.com/asciian/iris/runtime"] = (function() {
 		defun("GENERAL-VECTOR-P", new funcType(GeneralVectorP));
 		defun("GENSYM", new funcType$6(Gensym));
 		defun("GET-OUTPUT-STREAM-STRING", new funcType(GetOutputStreamString));
-		$r = defspecial("GO", new funcType(Go)); /* */ $s = 23; case 23: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = defspecial("IF", new funcType$4(If)); /* */ $s = 24; case 24: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = defgeneric("INITIALIZE-OBJECT", new funcType$3(InitializeObject)); /* */ $s = 25; case 25: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = defspecial("GO", new funcType(Go)); /* */ $s = 24; case 24: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = defspecial("IF", new funcType$4(If)); /* */ $s = 25; case 25: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = defgeneric("INITIALIZE-OBJECT", new funcType$3(InitializeObject)); /* */ $s = 26; case 26: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
 		defun("INPUT-STREAM-P", new funcType(InputStreamP));
 		defun("INSTANCEP", new funcType$9(Instancep));
 		defun("INTEGERP", new funcType(Integerp));
 		defun("ISQRT", new funcType(Isqrt));
-		$r = defspecial("LABELS", new funcType$3(Labels)); /* */ $s = 26; case 26: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = defspecial("LAMBDA", new funcType$3(Lambda)); /* */ $s = 27; case 27: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = defspecial("LABELS", new funcType$3(Labels)); /* */ $s = 27; case 27: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = defspecial("LAMBDA", new funcType$3(Lambda)); /* */ $s = 28; case 28: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
 		defun("LCM", new funcType$1(Lcm));
 		defun("LENGTH", new funcType(Length));
-		$r = defspecial("LET", new funcType$3(Let)); /* */ $s = 28; case 28: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = defspecial("LET*", new funcType$3(LetStar)); /* */ $s = 29; case 29: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = defspecial("LET", new funcType$3(Let)); /* */ $s = 29; case 29: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = defspecial("LET*", new funcType$3(LetStar)); /* */ $s = 30; case 30: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
 		defun("LIST", new funcType$2(List));
 		defun("LISTP", new funcType(Listp));
 		defun("LOG", new funcType(Log));
@@ -41037,20 +40170,20 @@ $packages["github.com/asciian/iris/runtime"] = (function() {
 		defun("OPEN-IO-FILE", new funcType$3(OpenIoFile));
 		defun("OPEN-OUTPUT-FILE", new funcType$3(OpenOutputFile));
 		defun("OPEN-STREAM-P", new funcType(OpenStreamP));
-		$r = defspecial("OR", new funcType$2(Or)); /* */ $s = 30; case 30: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = defspecial("OR", new funcType$2(Or)); /* */ $s = 31; case 31: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
 		defun("OUTPUT-STREAM-P", new funcType(OutputStreamP));
 		defun("PARSE-NUMBER", new funcType(ParseNumber));
-		$r = defspecial("PROGN", new funcType$2(Progn)); /* */ $s = 31; case 31: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = defspecial("PROGN", new funcType$2(Progn)); /* */ $s = 32; case 32: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
 		defun("PROPERTY", new funcType$4(Property));
-		$r = defspecial("QUASIQUOTE", new funcType(Quasiquote)); /* */ $s = 32; case 32: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = defspecial("QUOTE", new funcType(Quote)); /* */ $s = 33; case 33: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = defspecial("QUASIQUOTE", new funcType(Quasiquote)); /* */ $s = 33; case 33: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = defspecial("QUOTE", new funcType(Quote)); /* */ $s = 34; case 34: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
 		defun("QUOTIENT", new funcType$4(Quotient));
 		defun("READ", new funcType$2(Read));
 		defun("READ-CHAR", new funcType$2(ReadChar));
 		defun("READ-LINE", new funcType$2(ReadLine));
 		defun("REMOVE-PROPERTY", new funcType$1(RemoveProperty));
 		defun("REPORT-CONDITION", new funcType$1(ReportCondition));
-		$r = defspecial("RETURN-FROM", new funcType$1(ReturnFrom)); /* */ $s = 34; case 34: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = defspecial("RETURN-FROM", new funcType$1(ReturnFrom)); /* */ $s = 35; case 35: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
 		defun("REVERSE", new funcType(Reverse));
 		defun("ROUND", new funcType(Round));
 		defun("SET-AREF", new funcType$4(SetAref));
@@ -41067,8 +40200,8 @@ $packages["github.com/asciian/iris/runtime"] = (function() {
 		defun("(SETF GAREF)", new funcType$4(SetGaref));
 		defun("SET-PROPERTY", new funcType$8(SetProperty));
 		defun("(SETF PROPERTY)", new funcType$8(SetProperty));
-		$r = defspecial("SETF", new funcType$1(Setf)); /* */ $s = 35; case 35: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = defspecial("SETQ", new funcType$1(Setq)); /* */ $s = 36; case 36: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = defspecial("SETF", new funcType$1(Setf)); /* */ $s = 36; case 36: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = defspecial("SETQ", new funcType$1(Setq)); /* */ $s = 37; case 37: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
 		defun("SIGNAL-CONDITION", new funcType$1(SignalCondition));
 		defun("SIN", new funcType(Sin));
 		defun("SINH", new funcType(Sinh));
@@ -41090,20 +40223,20 @@ $packages["github.com/asciian/iris/runtime"] = (function() {
 		defun("SUBSEQ", new funcType$8(Subseq));
 		defun("SYMBOLP", new funcType(Symbolp));
 		defglobal("T", $pkg.T);
-		$r = defspecial("TAGBODY", new funcType$2(Tagbody)); /* */ $s = 37; case 37: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = defspecial("TAN", new funcType(Tan)); /* */ $s = 38; case 38: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = defspecial("TANH", new funcType(Tanh)); /* */ $s = 39; case 39: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = defspecial("THROW", new funcType$1(Throw)); /* */ $s = 40; case 40: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = defspecial("TAGBODY", new funcType$2(Tagbody)); /* */ $s = 38; case 38: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = defspecial("TAN", new funcType(Tan)); /* */ $s = 39; case 39: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = defspecial("TANH", new funcType(Tanh)); /* */ $s = 40; case 40: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = defspecial("THROW", new funcType$1(Throw)); /* */ $s = 41; case 41: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
 		defun("TRUNCATE", new funcType(Truncate));
-		$r = defspecial("UNWIND-PROTECT", new funcType$3(UnwindProtect)); /* */ $s = 41; case 41: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = defspecial("UNWIND-PROTECT", new funcType$3(UnwindProtect)); /* */ $s = 42; case 42: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
 		defun("VECTOR", new funcType$2(Vector));
-		$r = defspecial("WHILE", new funcType$3(While)); /* */ $s = 42; case 42: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = defspecial("WITH-ERROR-OUTPUT", new funcType$3(WithErrorOutput)); /* */ $s = 43; case 43: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = defspecial("WITH-HANDLER", new funcType$3(WithHandler)); /* */ $s = 44; case 44: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = defspecial("WITH-OPEN-INPUT-FILE", new funcType$3(WithOpenInputFile)); /* */ $s = 45; case 45: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = defspecial("WITH-OPEN-OUTPUT-FILE", new funcType$3(WithOpenOutputFile)); /* */ $s = 46; case 46: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = defspecial("WITH-STANDARD-INPUT", new funcType$3(WithStandardInput)); /* */ $s = 47; case 47: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = defspecial("WITH-STANDARD-OUTPUT", new funcType$3(WithStandardOutput)); /* */ $s = 48; case 48: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = defspecial("WHILE", new funcType$3(While)); /* */ $s = 43; case 43: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = defspecial("WITH-ERROR-OUTPUT", new funcType$3(WithErrorOutput)); /* */ $s = 44; case 44: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = defspecial("WITH-HANDLER", new funcType$3(WithHandler)); /* */ $s = 45; case 45: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = defspecial("WITH-OPEN-INPUT-FILE", new funcType$3(WithOpenInputFile)); /* */ $s = 46; case 46: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = defspecial("WITH-OPEN-OUTPUT-FILE", new funcType$3(WithOpenOutputFile)); /* */ $s = 47; case 47: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = defspecial("WITH-STANDARD-INPUT", new funcType$3(WithStandardInput)); /* */ $s = 48; case 48: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = defspecial("WITH-STANDARD-OUTPUT", new funcType$3(WithStandardOutput)); /* */ $s = 49; case 49: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
 		defclass("<OBJECT>", (x = class$1.Object, new x.constructor.elem(x)));
 		defclass("<BUILT-IN-CLASS>", class$1.BuiltInClass);
 		defclass("<STANDARD-CLASS>", class$1.StandardClass);
@@ -42737,6 +41870,938 @@ $packages["github.com/asciian/iris/runtime"] = (function() {
 	$pkg.$init = $init;
 	return $pkg;
 })();
+$packages["github.com/gopherjs/jquery"] = (function() {
+	var $pkg = {}, $init, js, JQuery, Event, JQueryCoordinates, sliceType, funcType$1, mapType, sliceType$1, funcType$2, funcType$3, ptrType, sliceType$2, ptrType$1, NewJQuery;
+	js = $packages["github.com/gopherjs/gopherjs/js"];
+	JQuery = $pkg.JQuery = $newType(0, $kindStruct, "jquery.JQuery", true, "github.com/gopherjs/jquery", true, function(o_, Jquery_, Selector_, Length_, Context_) {
+		this.$val = this;
+		if (arguments.length === 0) {
+			this.o = null;
+			this.Jquery = "";
+			this.Selector = "";
+			this.Length = 0;
+			this.Context = "";
+			return;
+		}
+		this.o = o_;
+		this.Jquery = Jquery_;
+		this.Selector = Selector_;
+		this.Length = Length_;
+		this.Context = Context_;
+	});
+	Event = $pkg.Event = $newType(0, $kindStruct, "jquery.Event", true, "github.com/gopherjs/jquery", true, function(Object_, KeyCode_, Target_, CurrentTarget_, DelegateTarget_, RelatedTarget_, Data_, Result_, Which_, Namespace_, MetaKey_, ShiftKey_, CtrlKey_, PageX_, PageY_, Type_) {
+		this.$val = this;
+		if (arguments.length === 0) {
+			this.Object = null;
+			this.KeyCode = 0;
+			this.Target = null;
+			this.CurrentTarget = null;
+			this.DelegateTarget = null;
+			this.RelatedTarget = null;
+			this.Data = null;
+			this.Result = null;
+			this.Which = 0;
+			this.Namespace = "";
+			this.MetaKey = false;
+			this.ShiftKey = false;
+			this.CtrlKey = false;
+			this.PageX = 0;
+			this.PageY = 0;
+			this.Type = "";
+			return;
+		}
+		this.Object = Object_;
+		this.KeyCode = KeyCode_;
+		this.Target = Target_;
+		this.CurrentTarget = CurrentTarget_;
+		this.DelegateTarget = DelegateTarget_;
+		this.RelatedTarget = RelatedTarget_;
+		this.Data = Data_;
+		this.Result = Result_;
+		this.Which = Which_;
+		this.Namespace = Namespace_;
+		this.MetaKey = MetaKey_;
+		this.ShiftKey = ShiftKey_;
+		this.CtrlKey = CtrlKey_;
+		this.PageX = PageX_;
+		this.PageY = PageY_;
+		this.Type = Type_;
+	});
+	JQueryCoordinates = $pkg.JQueryCoordinates = $newType(0, $kindStruct, "jquery.JQueryCoordinates", true, "github.com/gopherjs/jquery", true, function(Left_, Top_) {
+		this.$val = this;
+		if (arguments.length === 0) {
+			this.Left = 0;
+			this.Top = 0;
+			return;
+		}
+		this.Left = Left_;
+		this.Top = Top_;
+	});
+	sliceType = $sliceType($emptyInterface);
+	funcType$1 = $funcType([$Int, $emptyInterface], [], false);
+	mapType = $mapType($String, $emptyInterface);
+	sliceType$1 = $sliceType($String);
+	funcType$2 = $funcType([$Int, $String], [$String], false);
+	funcType$3 = $funcType([], [], false);
+	ptrType = $ptrType(js.Object);
+	sliceType$2 = $sliceType($Bool);
+	ptrType$1 = $ptrType(Event);
+	Event.ptr.prototype.PreventDefault = function() {
+		var event;
+		event = this;
+		event.Object.preventDefault();
+	};
+	Event.prototype.PreventDefault = function() { return this.$val.PreventDefault(); };
+	Event.ptr.prototype.IsDefaultPrevented = function() {
+		var event;
+		event = this;
+		return !!(event.Object.isDefaultPrevented());
+	};
+	Event.prototype.IsDefaultPrevented = function() { return this.$val.IsDefaultPrevented(); };
+	Event.ptr.prototype.IsImmediatePropogationStopped = function() {
+		var event;
+		event = this;
+		return !!(event.Object.isImmediatePropogationStopped());
+	};
+	Event.prototype.IsImmediatePropogationStopped = function() { return this.$val.IsImmediatePropogationStopped(); };
+	Event.ptr.prototype.IsPropagationStopped = function() {
+		var event;
+		event = this;
+		return !!(event.Object.isPropagationStopped());
+	};
+	Event.prototype.IsPropagationStopped = function() { return this.$val.IsPropagationStopped(); };
+	Event.ptr.prototype.StopImmediatePropagation = function() {
+		var event;
+		event = this;
+		event.Object.stopImmediatePropagation();
+	};
+	Event.prototype.StopImmediatePropagation = function() { return this.$val.StopImmediatePropagation(); };
+	Event.ptr.prototype.StopPropagation = function() {
+		var event;
+		event = this;
+		event.Object.stopPropagation();
+	};
+	Event.prototype.StopPropagation = function() { return this.$val.StopPropagation(); };
+	NewJQuery = function(args) {
+		var args;
+		return new JQuery.ptr(new ($global.Function.prototype.bind.apply($global.jQuery, [undefined].concat($externalize(args, sliceType)))), "", "", 0, "");
+	};
+	$pkg.NewJQuery = NewJQuery;
+	JQuery.ptr.prototype.Each = function(fn) {
+		var fn, j;
+		j = this;
+		j.o = j.o.each($externalize(fn, funcType$1));
+		return j;
+	};
+	JQuery.prototype.Each = function(fn) { return this.$val.Each(fn); };
+	JQuery.ptr.prototype.Call = function(name, args) {
+		var args, j, name, obj;
+		j = this;
+		return NewJQuery(new sliceType([new $jsObjectPtr((obj = j.o, obj[$externalize(name, $String)].apply(obj, $externalize(args, sliceType))))]));
+	};
+	JQuery.prototype.Call = function(name, args) { return this.$val.Call(name, args); };
+	JQuery.ptr.prototype.Underlying = function() {
+		var j;
+		j = this;
+		return j.o;
+	};
+	JQuery.prototype.Underlying = function() { return this.$val.Underlying(); };
+	JQuery.ptr.prototype.Get = function(i) {
+		var i, j, obj;
+		j = this;
+		return (obj = j.o, obj.get.apply(obj, $externalize(i, sliceType)));
+	};
+	JQuery.prototype.Get = function(i) { return this.$val.Get(i); };
+	JQuery.ptr.prototype.Append = function(i) {
+		var i, j, obj;
+		j = this;
+		j.o = (obj = j.o, obj.append.apply(obj, $externalize(i, sliceType)));
+		return j;
+	};
+	JQuery.prototype.Append = function(i) { return this.$val.Append(i); };
+	JQuery.ptr.prototype.Empty = function() {
+		var j;
+		j = this;
+		j.o = j.o.empty();
+		return j;
+	};
+	JQuery.prototype.Empty = function() { return this.$val.Empty(); };
+	JQuery.ptr.prototype.Detach = function(i) {
+		var i, j, obj;
+		j = this;
+		j.o = (obj = j.o, obj.detach.apply(obj, $externalize(i, sliceType)));
+		return j;
+	};
+	JQuery.prototype.Detach = function(i) { return this.$val.Detach(i); };
+	JQuery.ptr.prototype.Eq = function(idx) {
+		var idx, j;
+		j = this;
+		j.o = j.o.eq(idx);
+		return j;
+	};
+	JQuery.prototype.Eq = function(idx) { return this.$val.Eq(idx); };
+	JQuery.ptr.prototype.FadeIn = function(i) {
+		var i, j, obj;
+		j = this;
+		j.o = (obj = j.o, obj.fadeIn.apply(obj, $externalize(i, sliceType)));
+		return j;
+	};
+	JQuery.prototype.FadeIn = function(i) { return this.$val.FadeIn(i); };
+	JQuery.ptr.prototype.Delay = function(i) {
+		var i, j, obj;
+		j = this;
+		j.o = (obj = j.o, obj.delay.apply(obj, $externalize(i, sliceType)));
+		return j;
+	};
+	JQuery.prototype.Delay = function(i) { return this.$val.Delay(i); };
+	JQuery.ptr.prototype.ToArray = function() {
+		var j;
+		j = this;
+		return $assertType($internalize(j.o.toArray(), $emptyInterface), sliceType);
+	};
+	JQuery.prototype.ToArray = function() { return this.$val.ToArray(); };
+	JQuery.ptr.prototype.Remove = function(i) {
+		var i, j, obj;
+		j = this;
+		j.o = (obj = j.o, obj.remove.apply(obj, $externalize(i, sliceType)));
+		return j;
+	};
+	JQuery.prototype.Remove = function(i) { return this.$val.Remove(i); };
+	JQuery.ptr.prototype.Stop = function(i) {
+		var i, j, obj;
+		j = this;
+		j.o = (obj = j.o, obj.stop.apply(obj, $externalize(i, sliceType)));
+		return j;
+	};
+	JQuery.prototype.Stop = function(i) { return this.$val.Stop(i); };
+	JQuery.ptr.prototype.AddBack = function(i) {
+		var i, j, obj;
+		j = this;
+		j.o = (obj = j.o, obj.addBack.apply(obj, $externalize(i, sliceType)));
+		return j;
+	};
+	JQuery.prototype.AddBack = function(i) { return this.$val.AddBack(i); };
+	JQuery.ptr.prototype.Css = function(name) {
+		var j, name;
+		j = this;
+		return $internalize(j.o.css($externalize(name, $String)), $String);
+	};
+	JQuery.prototype.Css = function(name) { return this.$val.Css(name); };
+	JQuery.ptr.prototype.CssArray = function(arr) {
+		var arr, j;
+		j = this;
+		return $assertType($internalize(j.o.css($externalize(arr, sliceType$1)), $emptyInterface), mapType);
+	};
+	JQuery.prototype.CssArray = function(arr) { return this.$val.CssArray(arr); };
+	JQuery.ptr.prototype.SetCss = function(i) {
+		var i, j, obj;
+		j = this;
+		j.o = (obj = j.o, obj.css.apply(obj, $externalize(i, sliceType)));
+		return j;
+	};
+	JQuery.prototype.SetCss = function(i) { return this.$val.SetCss(i); };
+	JQuery.ptr.prototype.Text = function() {
+		var j;
+		j = this;
+		return $internalize(j.o.text(), $String);
+	};
+	JQuery.prototype.Text = function() { return this.$val.Text(); };
+	JQuery.ptr.prototype.SetText = function(i) {
+		var _ref, i, j;
+		j = this;
+		_ref = i;
+		if ($assertType(_ref, funcType$2, true)[1] || $assertType(_ref, $String, true)[1]) {
+		} else {
+			console.log("SetText Argument should be 'string' or 'func(int, string) string'");
+		}
+		j.o = j.o.text($externalize(i, $emptyInterface));
+		return j;
+	};
+	JQuery.prototype.SetText = function(i) { return this.$val.SetText(i); };
+	JQuery.ptr.prototype.Val = function() {
+		var j;
+		j = this;
+		return $internalize(j.o.val(), $String);
+	};
+	JQuery.prototype.Val = function() { return this.$val.Val(); };
+	JQuery.ptr.prototype.SetVal = function(i) {
+		var i, j;
+		j = this;
+		j.o.val($externalize(i, $emptyInterface));
+		return j;
+	};
+	JQuery.prototype.SetVal = function(i) { return this.$val.SetVal(i); };
+	JQuery.ptr.prototype.Prop = function(property) {
+		var j, property;
+		j = this;
+		return $internalize(j.o.prop($externalize(property, $String)), $emptyInterface);
+	};
+	JQuery.prototype.Prop = function(property) { return this.$val.Prop(property); };
+	JQuery.ptr.prototype.SetProp = function(i) {
+		var i, j, obj;
+		j = this;
+		j.o = (obj = j.o, obj.prop.apply(obj, $externalize(i, sliceType)));
+		return j;
+	};
+	JQuery.prototype.SetProp = function(i) { return this.$val.SetProp(i); };
+	JQuery.ptr.prototype.RemoveProp = function(property) {
+		var j, property;
+		j = this;
+		j.o = j.o.removeProp($externalize(property, $String));
+		return j;
+	};
+	JQuery.prototype.RemoveProp = function(property) { return this.$val.RemoveProp(property); };
+	JQuery.ptr.prototype.Attr = function(property) {
+		var attr, j, property;
+		j = this;
+		attr = j.o.attr($externalize(property, $String));
+		if (attr === undefined) {
+			return "";
+		}
+		return $internalize(attr, $String);
+	};
+	JQuery.prototype.Attr = function(property) { return this.$val.Attr(property); };
+	JQuery.ptr.prototype.SetAttr = function(i) {
+		var i, j, obj;
+		j = this;
+		j.o = (obj = j.o, obj.attr.apply(obj, $externalize(i, sliceType)));
+		return j;
+	};
+	JQuery.prototype.SetAttr = function(i) { return this.$val.SetAttr(i); };
+	JQuery.ptr.prototype.RemoveAttr = function(property) {
+		var j, property;
+		j = this;
+		j.o = j.o.removeAttr($externalize(property, $String));
+		return j;
+	};
+	JQuery.prototype.RemoveAttr = function(property) { return this.$val.RemoveAttr(property); };
+	JQuery.ptr.prototype.HasClass = function(class$1) {
+		var class$1, j;
+		j = this;
+		return !!(j.o.hasClass($externalize(class$1, $String)));
+	};
+	JQuery.prototype.HasClass = function(class$1) { return this.$val.HasClass(class$1); };
+	JQuery.ptr.prototype.AddClass = function(i) {
+		var _ref, i, j;
+		j = this;
+		_ref = i;
+		if ($assertType(_ref, funcType$2, true)[1] || $assertType(_ref, $String, true)[1]) {
+		} else {
+			console.log("addClass Argument should be 'string' or 'func(int, string) string'");
+		}
+		j.o = j.o.addClass($externalize(i, $emptyInterface));
+		return j;
+	};
+	JQuery.prototype.AddClass = function(i) { return this.$val.AddClass(i); };
+	JQuery.ptr.prototype.RemoveClass = function(property) {
+		var j, property;
+		j = this;
+		j.o = j.o.removeClass($externalize(property, $String));
+		return j;
+	};
+	JQuery.prototype.RemoveClass = function(property) { return this.$val.RemoveClass(property); };
+	JQuery.ptr.prototype.ToggleClass = function(i) {
+		var i, j, obj;
+		j = this;
+		j.o = (obj = j.o, obj.toggleClass.apply(obj, $externalize(i, sliceType)));
+		return j;
+	};
+	JQuery.prototype.ToggleClass = function(i) { return this.$val.ToggleClass(i); };
+	JQuery.ptr.prototype.Focus = function() {
+		var j;
+		j = this;
+		j.o = j.o.focus();
+		return j;
+	};
+	JQuery.prototype.Focus = function() { return this.$val.Focus(); };
+	JQuery.ptr.prototype.Blur = function() {
+		var j;
+		j = this;
+		j.o = j.o.blur();
+		return j;
+	};
+	JQuery.prototype.Blur = function() { return this.$val.Blur(); };
+	JQuery.ptr.prototype.ReplaceAll = function(i) {
+		var i, j;
+		j = this;
+		j.o = j.o.replaceAll($externalize(i, $emptyInterface));
+		return j;
+	};
+	JQuery.prototype.ReplaceAll = function(i) { return this.$val.ReplaceAll(i); };
+	JQuery.ptr.prototype.ReplaceWith = function(i) {
+		var i, j;
+		j = this;
+		j.o = j.o.replaceWith($externalize(i, $emptyInterface));
+		return j;
+	};
+	JQuery.prototype.ReplaceWith = function(i) { return this.$val.ReplaceWith(i); };
+	JQuery.ptr.prototype.After = function(i) {
+		var i, j;
+		j = this;
+		j.o = j.o.after($externalize(i, sliceType));
+		return j;
+	};
+	JQuery.prototype.After = function(i) { return this.$val.After(i); };
+	JQuery.ptr.prototype.Before = function(i) {
+		var i, j, obj;
+		j = this;
+		j.o = (obj = j.o, obj.before.apply(obj, $externalize(i, sliceType)));
+		return j;
+	};
+	JQuery.prototype.Before = function(i) { return this.$val.Before(i); };
+	JQuery.ptr.prototype.Prepend = function(i) {
+		var i, j, obj;
+		j = this;
+		j.o = (obj = j.o, obj.prepend.apply(obj, $externalize(i, sliceType)));
+		return j;
+	};
+	JQuery.prototype.Prepend = function(i) { return this.$val.Prepend(i); };
+	JQuery.ptr.prototype.PrependTo = function(i) {
+		var i, j;
+		j = this;
+		j.o = j.o.prependTo($externalize(i, $emptyInterface));
+		return j;
+	};
+	JQuery.prototype.PrependTo = function(i) { return this.$val.PrependTo(i); };
+	JQuery.ptr.prototype.AppendTo = function(i) {
+		var i, j;
+		j = this;
+		j.o = j.o.appendTo($externalize(i, $emptyInterface));
+		return j;
+	};
+	JQuery.prototype.AppendTo = function(i) { return this.$val.AppendTo(i); };
+	JQuery.ptr.prototype.InsertAfter = function(i) {
+		var i, j;
+		j = this;
+		j.o = j.o.insertAfter($externalize(i, $emptyInterface));
+		return j;
+	};
+	JQuery.prototype.InsertAfter = function(i) { return this.$val.InsertAfter(i); };
+	JQuery.ptr.prototype.InsertBefore = function(i) {
+		var i, j;
+		j = this;
+		j.o = j.o.insertBefore($externalize(i, $emptyInterface));
+		return j;
+	};
+	JQuery.prototype.InsertBefore = function(i) { return this.$val.InsertBefore(i); };
+	JQuery.ptr.prototype.Show = function(i) {
+		var i, j, obj;
+		j = this;
+		j.o = (obj = j.o, obj.show.apply(obj, $externalize(i, sliceType)));
+		return j;
+	};
+	JQuery.prototype.Show = function(i) { return this.$val.Show(i); };
+	JQuery.ptr.prototype.Hide = function(i) {
+		var i, j, obj;
+		j = this;
+		(obj = j.o, obj.hide.apply(obj, $externalize(i, sliceType)));
+		return j;
+	};
+	JQuery.prototype.Hide = function(i) { return this.$val.Hide(i); };
+	JQuery.ptr.prototype.Toggle = function(i) {
+		var i, j, obj;
+		j = this;
+		j.o = (obj = j.o, obj.toggle.apply(obj, $externalize(i, sliceType)));
+		return j;
+	};
+	JQuery.prototype.Toggle = function(i) { return this.$val.Toggle(i); };
+	JQuery.ptr.prototype.Contents = function() {
+		var j;
+		j = this;
+		j.o = j.o.contents();
+		return j;
+	};
+	JQuery.prototype.Contents = function() { return this.$val.Contents(); };
+	JQuery.ptr.prototype.Html = function() {
+		var j;
+		j = this;
+		return $internalize(j.o.html(), $String);
+	};
+	JQuery.prototype.Html = function() { return this.$val.Html(); };
+	JQuery.ptr.prototype.SetHtml = function(i) {
+		var _ref, i, j;
+		j = this;
+		_ref = i;
+		if ($assertType(_ref, funcType$2, true)[1] || $assertType(_ref, $String, true)[1]) {
+		} else {
+			console.log("SetHtml Argument should be 'string' or 'func(int, string) string'");
+		}
+		j.o = j.o.html($externalize(i, $emptyInterface));
+		return j;
+	};
+	JQuery.prototype.SetHtml = function(i) { return this.$val.SetHtml(i); };
+	JQuery.ptr.prototype.Closest = function(i) {
+		var i, j, obj;
+		j = this;
+		j.o = (obj = j.o, obj.closest.apply(obj, $externalize(i, sliceType)));
+		return j;
+	};
+	JQuery.prototype.Closest = function(i) { return this.$val.Closest(i); };
+	JQuery.ptr.prototype.End = function() {
+		var j;
+		j = this;
+		j.o = j.o.end();
+		return j;
+	};
+	JQuery.prototype.End = function() { return this.$val.End(); };
+	JQuery.ptr.prototype.Add = function(i) {
+		var i, j, obj;
+		j = this;
+		j.o = (obj = j.o, obj.add.apply(obj, $externalize(i, sliceType)));
+		return j;
+	};
+	JQuery.prototype.Add = function(i) { return this.$val.Add(i); };
+	JQuery.ptr.prototype.Clone = function(b) {
+		var b, j, obj;
+		j = this;
+		j.o = (obj = j.o, obj.clone.apply(obj, $externalize(b, sliceType)));
+		return j;
+	};
+	JQuery.prototype.Clone = function(b) { return this.$val.Clone(b); };
+	JQuery.ptr.prototype.Height = function() {
+		var j;
+		j = this;
+		return $parseInt(j.o.height()) >> 0;
+	};
+	JQuery.prototype.Height = function() { return this.$val.Height(); };
+	JQuery.ptr.prototype.SetHeight = function(value) {
+		var j, value;
+		j = this;
+		j.o = j.o.height($externalize(value, $String));
+		return j;
+	};
+	JQuery.prototype.SetHeight = function(value) { return this.$val.SetHeight(value); };
+	JQuery.ptr.prototype.Width = function() {
+		var j;
+		j = this;
+		return $parseInt(j.o.width()) >> 0;
+	};
+	JQuery.prototype.Width = function() { return this.$val.Width(); };
+	JQuery.ptr.prototype.SetWidth = function(i) {
+		var _ref, i, j;
+		j = this;
+		_ref = i;
+		if ($assertType(_ref, funcType$2, true)[1] || $assertType(_ref, $String, true)[1]) {
+		} else {
+			console.log("SetWidth Argument should be 'string' or 'func(int, string) string'");
+		}
+		j.o = j.o.width($externalize(i, $emptyInterface));
+		return j;
+	};
+	JQuery.prototype.SetWidth = function(i) { return this.$val.SetWidth(i); };
+	JQuery.ptr.prototype.InnerHeight = function() {
+		var j;
+		j = this;
+		return $parseInt(j.o.innerHeight()) >> 0;
+	};
+	JQuery.prototype.InnerHeight = function() { return this.$val.InnerHeight(); };
+	JQuery.ptr.prototype.InnerWidth = function() {
+		var j;
+		j = this;
+		return $parseInt(j.o.innerWidth()) >> 0;
+	};
+	JQuery.prototype.InnerWidth = function() { return this.$val.InnerWidth(); };
+	JQuery.ptr.prototype.Offset = function() {
+		var j, obj;
+		j = this;
+		obj = j.o.offset();
+		return new JQueryCoordinates.ptr($parseInt(obj.left) >> 0, $parseInt(obj.top) >> 0);
+	};
+	JQuery.prototype.Offset = function() { return this.$val.Offset(); };
+	JQuery.ptr.prototype.SetOffset = function(jc) {
+		var j, jc;
+		j = this;
+		j.o = j.o.offset($externalize(jc, JQueryCoordinates));
+		return j;
+	};
+	JQuery.prototype.SetOffset = function(jc) { return this.$val.SetOffset(jc); };
+	JQuery.ptr.prototype.OuterHeight = function(includeMargin) {
+		var includeMargin, j;
+		j = this;
+		if (includeMargin.$length === 0) {
+			return $parseInt(j.o.outerHeight()) >> 0;
+		}
+		return $parseInt(j.o.outerHeight($externalize((0 >= includeMargin.$length ? ($throwRuntimeError("index out of range"), undefined) : includeMargin.$array[includeMargin.$offset + 0]), $Bool))) >> 0;
+	};
+	JQuery.prototype.OuterHeight = function(includeMargin) { return this.$val.OuterHeight(includeMargin); };
+	JQuery.ptr.prototype.OuterWidth = function(includeMargin) {
+		var includeMargin, j;
+		j = this;
+		if (includeMargin.$length === 0) {
+			return $parseInt(j.o.outerWidth()) >> 0;
+		}
+		return $parseInt(j.o.outerWidth($externalize((0 >= includeMargin.$length ? ($throwRuntimeError("index out of range"), undefined) : includeMargin.$array[includeMargin.$offset + 0]), $Bool))) >> 0;
+	};
+	JQuery.prototype.OuterWidth = function(includeMargin) { return this.$val.OuterWidth(includeMargin); };
+	JQuery.ptr.prototype.Position = function() {
+		var j, obj;
+		j = this;
+		obj = j.o.position();
+		return new JQueryCoordinates.ptr($parseInt(obj.left) >> 0, $parseInt(obj.top) >> 0);
+	};
+	JQuery.prototype.Position = function() { return this.$val.Position(); };
+	JQuery.ptr.prototype.ScrollLeft = function() {
+		var j;
+		j = this;
+		return $parseInt(j.o.scrollLeft()) >> 0;
+	};
+	JQuery.prototype.ScrollLeft = function() { return this.$val.ScrollLeft(); };
+	JQuery.ptr.prototype.SetScrollLeft = function(value) {
+		var j, value;
+		j = this;
+		j.o = j.o.scrollLeft(value);
+		return j;
+	};
+	JQuery.prototype.SetScrollLeft = function(value) { return this.$val.SetScrollLeft(value); };
+	JQuery.ptr.prototype.ScrollTop = function() {
+		var j;
+		j = this;
+		return $parseInt(j.o.scrollTop()) >> 0;
+	};
+	JQuery.prototype.ScrollTop = function() { return this.$val.ScrollTop(); };
+	JQuery.ptr.prototype.SetScrollTop = function(value) {
+		var j, value;
+		j = this;
+		j.o = j.o.scrollTop(value);
+		return j;
+	};
+	JQuery.prototype.SetScrollTop = function(value) { return this.$val.SetScrollTop(value); };
+	JQuery.ptr.prototype.ClearQueue = function(queueName) {
+		var j, queueName;
+		j = this;
+		j.o = j.o.clearQueue($externalize(queueName, $String));
+		return j;
+	};
+	JQuery.prototype.ClearQueue = function(queueName) { return this.$val.ClearQueue(queueName); };
+	JQuery.ptr.prototype.SetData = function(key, value) {
+		var j, key, value;
+		j = this;
+		j.o = j.o.data($externalize(key, $String), $externalize(value, $emptyInterface));
+		return j;
+	};
+	JQuery.prototype.SetData = function(key, value) { return this.$val.SetData(key, value); };
+	JQuery.ptr.prototype.Data = function(key) {
+		var j, key, result;
+		j = this;
+		result = j.o.data($externalize(key, $String));
+		if (result === undefined) {
+			return $ifaceNil;
+		}
+		return $internalize(result, $emptyInterface);
+	};
+	JQuery.prototype.Data = function(key) { return this.$val.Data(key); };
+	JQuery.ptr.prototype.Dequeue = function(queueName) {
+		var j, queueName;
+		j = this;
+		j.o = j.o.dequeue($externalize(queueName, $String));
+		return j;
+	};
+	JQuery.prototype.Dequeue = function(queueName) { return this.$val.Dequeue(queueName); };
+	JQuery.ptr.prototype.RemoveData = function(name) {
+		var j, name;
+		j = this;
+		j.o = j.o.removeData($externalize(name, $String));
+		return j;
+	};
+	JQuery.prototype.RemoveData = function(name) { return this.$val.RemoveData(name); };
+	JQuery.ptr.prototype.OffsetParent = function() {
+		var j;
+		j = this;
+		j.o = j.o.offsetParent();
+		return j;
+	};
+	JQuery.prototype.OffsetParent = function() { return this.$val.OffsetParent(); };
+	JQuery.ptr.prototype.Parent = function(i) {
+		var i, j, obj;
+		j = this;
+		j.o = (obj = j.o, obj.parent.apply(obj, $externalize(i, sliceType)));
+		return j;
+	};
+	JQuery.prototype.Parent = function(i) { return this.$val.Parent(i); };
+	JQuery.ptr.prototype.Parents = function(i) {
+		var i, j, obj;
+		j = this;
+		j.o = (obj = j.o, obj.parents.apply(obj, $externalize(i, sliceType)));
+		return j;
+	};
+	JQuery.prototype.Parents = function(i) { return this.$val.Parents(i); };
+	JQuery.ptr.prototype.ParentsUntil = function(i) {
+		var i, j, obj;
+		j = this;
+		j.o = (obj = j.o, obj.parentsUntil.apply(obj, $externalize(i, sliceType)));
+		return j;
+	};
+	JQuery.prototype.ParentsUntil = function(i) { return this.$val.ParentsUntil(i); };
+	JQuery.ptr.prototype.Prev = function(i) {
+		var i, j, obj;
+		j = this;
+		j.o = (obj = j.o, obj.prev.apply(obj, $externalize(i, sliceType)));
+		return j;
+	};
+	JQuery.prototype.Prev = function(i) { return this.$val.Prev(i); };
+	JQuery.ptr.prototype.PrevAll = function(i) {
+		var i, j, obj;
+		j = this;
+		j.o = (obj = j.o, obj.prevAll.apply(obj, $externalize(i, sliceType)));
+		return j;
+	};
+	JQuery.prototype.PrevAll = function(i) { return this.$val.PrevAll(i); };
+	JQuery.ptr.prototype.PrevUntil = function(i) {
+		var i, j, obj;
+		j = this;
+		j.o = (obj = j.o, obj.prevUntil.apply(obj, $externalize(i, sliceType)));
+		return j;
+	};
+	JQuery.prototype.PrevUntil = function(i) { return this.$val.PrevUntil(i); };
+	JQuery.ptr.prototype.Siblings = function(i) {
+		var i, j, obj;
+		j = this;
+		j.o = (obj = j.o, obj.siblings.apply(obj, $externalize(i, sliceType)));
+		return j;
+	};
+	JQuery.prototype.Siblings = function(i) { return this.$val.Siblings(i); };
+	JQuery.ptr.prototype.Slice = function(i) {
+		var i, j, obj;
+		j = this;
+		j.o = (obj = j.o, obj.slice.apply(obj, $externalize(i, sliceType)));
+		return j;
+	};
+	JQuery.prototype.Slice = function(i) { return this.$val.Slice(i); };
+	JQuery.ptr.prototype.Children = function(selector) {
+		var j, selector;
+		j = this;
+		j.o = j.o.children($externalize(selector, $emptyInterface));
+		return j;
+	};
+	JQuery.prototype.Children = function(selector) { return this.$val.Children(selector); };
+	JQuery.ptr.prototype.Unwrap = function() {
+		var j;
+		j = this;
+		j.o = j.o.unwrap();
+		return j;
+	};
+	JQuery.prototype.Unwrap = function() { return this.$val.Unwrap(); };
+	JQuery.ptr.prototype.Wrap = function(obj) {
+		var j, obj;
+		j = this;
+		j.o = j.o.wrap($externalize(obj, $emptyInterface));
+		return j;
+	};
+	JQuery.prototype.Wrap = function(obj) { return this.$val.Wrap(obj); };
+	JQuery.ptr.prototype.WrapAll = function(i) {
+		var i, j;
+		j = this;
+		j.o = j.o.wrapAll($externalize(i, $emptyInterface));
+		return j;
+	};
+	JQuery.prototype.WrapAll = function(i) { return this.$val.WrapAll(i); };
+	JQuery.ptr.prototype.WrapInner = function(i) {
+		var i, j;
+		j = this;
+		j.o = j.o.wrapInner($externalize(i, $emptyInterface));
+		return j;
+	};
+	JQuery.prototype.WrapInner = function(i) { return this.$val.WrapInner(i); };
+	JQuery.ptr.prototype.Next = function(i) {
+		var i, j, obj;
+		j = this;
+		j.o = (obj = j.o, obj.next.apply(obj, $externalize(i, sliceType)));
+		return j;
+	};
+	JQuery.prototype.Next = function(i) { return this.$val.Next(i); };
+	JQuery.ptr.prototype.NextAll = function(i) {
+		var i, j, obj;
+		j = this;
+		j.o = (obj = j.o, obj.nextAll.apply(obj, $externalize(i, sliceType)));
+		return j;
+	};
+	JQuery.prototype.NextAll = function(i) { return this.$val.NextAll(i); };
+	JQuery.ptr.prototype.NextUntil = function(i) {
+		var i, j, obj;
+		j = this;
+		j.o = (obj = j.o, obj.nextUntil.apply(obj, $externalize(i, sliceType)));
+		return j;
+	};
+	JQuery.prototype.NextUntil = function(i) { return this.$val.NextUntil(i); };
+	JQuery.ptr.prototype.Not = function(i) {
+		var i, j, obj;
+		j = this;
+		j.o = (obj = j.o, obj.not.apply(obj, $externalize(i, sliceType)));
+		return j;
+	};
+	JQuery.prototype.Not = function(i) { return this.$val.Not(i); };
+	JQuery.ptr.prototype.Filter = function(i) {
+		var i, j, obj;
+		j = this;
+		j.o = (obj = j.o, obj.filter.apply(obj, $externalize(i, sliceType)));
+		return j;
+	};
+	JQuery.prototype.Filter = function(i) { return this.$val.Filter(i); };
+	JQuery.ptr.prototype.Find = function(i) {
+		var i, j, obj;
+		j = this;
+		j.o = (obj = j.o, obj.find.apply(obj, $externalize(i, sliceType)));
+		return j;
+	};
+	JQuery.prototype.Find = function(i) { return this.$val.Find(i); };
+	JQuery.ptr.prototype.First = function() {
+		var j;
+		j = this;
+		j.o = j.o.first();
+		return j;
+	};
+	JQuery.prototype.First = function() { return this.$val.First(); };
+	JQuery.ptr.prototype.Has = function(selector) {
+		var j, selector;
+		j = this;
+		j.o = j.o.has($externalize(selector, $String));
+		return j;
+	};
+	JQuery.prototype.Has = function(selector) { return this.$val.Has(selector); };
+	JQuery.ptr.prototype.Is = function(i) {
+		var i, j, obj;
+		j = this;
+		return !!((obj = j.o, obj.is.apply(obj, $externalize(i, sliceType))));
+	};
+	JQuery.prototype.Is = function(i) { return this.$val.Is(i); };
+	JQuery.ptr.prototype.Last = function() {
+		var j;
+		j = this;
+		j.o = j.o.last();
+		return j;
+	};
+	JQuery.prototype.Last = function() { return this.$val.Last(); };
+	JQuery.ptr.prototype.Ready = function(handler) {
+		var handler, j;
+		j = this;
+		j.o = j.o.ready($externalize(handler, funcType$3));
+		return j;
+	};
+	JQuery.prototype.Ready = function(handler) { return this.$val.Ready(handler); };
+	JQuery.ptr.prototype.Resize = function(i) {
+		var i, j, obj;
+		j = this;
+		j.o = (obj = j.o, obj.resize.apply(obj, $externalize(i, sliceType)));
+		return j;
+	};
+	JQuery.prototype.Resize = function(i) { return this.$val.Resize(i); };
+	JQuery.ptr.prototype.Scroll = function(i) {
+		var i, j, obj;
+		j = this;
+		j.o = (obj = j.o, obj.scroll.apply(obj, $externalize(i, sliceType)));
+		return j;
+	};
+	JQuery.prototype.Scroll = function(i) { return this.$val.Scroll(i); };
+	JQuery.ptr.prototype.FadeOut = function(i) {
+		var i, j, obj;
+		j = this;
+		j.o = (obj = j.o, obj.fadeOut.apply(obj, $externalize(i, sliceType)));
+		return j;
+	};
+	JQuery.prototype.FadeOut = function(i) { return this.$val.FadeOut(i); };
+	JQuery.ptr.prototype.FadeToggle = function(i) {
+		var i, j, obj;
+		j = this;
+		j.o = (obj = j.o, obj.fadeToggle.apply(obj, $externalize(i, sliceType)));
+		return j;
+	};
+	JQuery.prototype.FadeToggle = function(i) { return this.$val.FadeToggle(i); };
+	JQuery.ptr.prototype.SlideDown = function(i) {
+		var i, j, obj;
+		j = this;
+		j.o = (obj = j.o, obj.slideDown.apply(obj, $externalize(i, sliceType)));
+		return j;
+	};
+	JQuery.prototype.SlideDown = function(i) { return this.$val.SlideDown(i); };
+	JQuery.ptr.prototype.SlideToggle = function(i) {
+		var i, j, obj;
+		j = this;
+		j.o = (obj = j.o, obj.slideToggle.apply(obj, $externalize(i, sliceType)));
+		return j;
+	};
+	JQuery.prototype.SlideToggle = function(i) { return this.$val.SlideToggle(i); };
+	JQuery.ptr.prototype.SlideUp = function(i) {
+		var i, j, obj;
+		j = this;
+		j.o = (obj = j.o, obj.slideUp.apply(obj, $externalize(i, sliceType)));
+		return j;
+	};
+	JQuery.prototype.SlideUp = function(i) { return this.$val.SlideUp(i); };
+	JQuery.ptr.prototype.Select = function(i) {
+		var i, j, obj;
+		j = this;
+		j.o = (obj = j.o, obj.select.apply(obj, $externalize(i, sliceType)));
+		return j;
+	};
+	JQuery.prototype.Select = function(i) { return this.$val.Select(i); };
+	JQuery.ptr.prototype.Submit = function(i) {
+		var i, j, obj;
+		j = this;
+		j.o = (obj = j.o, obj.submit.apply(obj, $externalize(i, sliceType)));
+		return j;
+	};
+	JQuery.prototype.Submit = function(i) { return this.$val.Submit(i); };
+	JQuery.ptr.prototype.Trigger = function(i) {
+		var i, j, obj;
+		j = this;
+		j.o = (obj = j.o, obj.trigger.apply(obj, $externalize(i, sliceType)));
+		return j;
+	};
+	JQuery.prototype.Trigger = function(i) { return this.$val.Trigger(i); };
+	JQuery.ptr.prototype.On = function(i) {
+		var i, j, obj;
+		j = this;
+		j.o = (obj = j.o, obj.on.apply(obj, $externalize(i, sliceType)));
+		return j;
+	};
+	JQuery.prototype.On = function(i) { return this.$val.On(i); };
+	JQuery.ptr.prototype.One = function(i) {
+		var i, j, obj;
+		j = this;
+		j.o = (obj = j.o, obj.one.apply(obj, $externalize(i, sliceType)));
+		return j;
+	};
+	JQuery.prototype.One = function(i) { return this.$val.One(i); };
+	JQuery.ptr.prototype.Off = function(i) {
+		var i, j, obj;
+		j = this;
+		j.o = (obj = j.o, obj.off.apply(obj, $externalize(i, sliceType)));
+		return j;
+	};
+	JQuery.prototype.Off = function(i) { return this.$val.Off(i); };
+	JQuery.ptr.prototype.Load = function(i) {
+		var i, j, obj;
+		j = this;
+		j.o = (obj = j.o, obj.load.apply(obj, $externalize(i, sliceType)));
+		return j;
+	};
+	JQuery.prototype.Load = function(i) { return this.$val.Load(i); };
+	JQuery.ptr.prototype.Serialize = function() {
+		var j;
+		j = this;
+		return $internalize(j.o.serialize(), $String);
+	};
+	JQuery.prototype.Serialize = function() { return this.$val.Serialize(); };
+	JQuery.ptr.prototype.SerializeArray = function() {
+		var j;
+		j = this;
+		return j.o.serializeArray();
+	};
+	JQuery.prototype.SerializeArray = function() { return this.$val.SerializeArray(); };
+	JQuery.methods = [{prop: "Each", name: "Each", pkg: "", typ: $funcType([funcType$1], [JQuery], false)}, {prop: "Call", name: "Call", pkg: "", typ: $funcType([$String, sliceType], [JQuery], true)}, {prop: "Underlying", name: "Underlying", pkg: "", typ: $funcType([], [ptrType], false)}, {prop: "Get", name: "Get", pkg: "", typ: $funcType([sliceType], [ptrType], true)}, {prop: "Append", name: "Append", pkg: "", typ: $funcType([sliceType], [JQuery], true)}, {prop: "Empty", name: "Empty", pkg: "", typ: $funcType([], [JQuery], false)}, {prop: "Detach", name: "Detach", pkg: "", typ: $funcType([sliceType], [JQuery], true)}, {prop: "Eq", name: "Eq", pkg: "", typ: $funcType([$Int], [JQuery], false)}, {prop: "FadeIn", name: "FadeIn", pkg: "", typ: $funcType([sliceType], [JQuery], true)}, {prop: "Delay", name: "Delay", pkg: "", typ: $funcType([sliceType], [JQuery], true)}, {prop: "ToArray", name: "ToArray", pkg: "", typ: $funcType([], [sliceType], false)}, {prop: "Remove", name: "Remove", pkg: "", typ: $funcType([sliceType], [JQuery], true)}, {prop: "Stop", name: "Stop", pkg: "", typ: $funcType([sliceType], [JQuery], true)}, {prop: "AddBack", name: "AddBack", pkg: "", typ: $funcType([sliceType], [JQuery], true)}, {prop: "Css", name: "Css", pkg: "", typ: $funcType([$String], [$String], false)}, {prop: "CssArray", name: "CssArray", pkg: "", typ: $funcType([sliceType$1], [mapType], true)}, {prop: "SetCss", name: "SetCss", pkg: "", typ: $funcType([sliceType], [JQuery], true)}, {prop: "Text", name: "Text", pkg: "", typ: $funcType([], [$String], false)}, {prop: "SetText", name: "SetText", pkg: "", typ: $funcType([$emptyInterface], [JQuery], false)}, {prop: "Val", name: "Val", pkg: "", typ: $funcType([], [$String], false)}, {prop: "SetVal", name: "SetVal", pkg: "", typ: $funcType([$emptyInterface], [JQuery], false)}, {prop: "Prop", name: "Prop", pkg: "", typ: $funcType([$String], [$emptyInterface], false)}, {prop: "SetProp", name: "SetProp", pkg: "", typ: $funcType([sliceType], [JQuery], true)}, {prop: "RemoveProp", name: "RemoveProp", pkg: "", typ: $funcType([$String], [JQuery], false)}, {prop: "Attr", name: "Attr", pkg: "", typ: $funcType([$String], [$String], false)}, {prop: "SetAttr", name: "SetAttr", pkg: "", typ: $funcType([sliceType], [JQuery], true)}, {prop: "RemoveAttr", name: "RemoveAttr", pkg: "", typ: $funcType([$String], [JQuery], false)}, {prop: "HasClass", name: "HasClass", pkg: "", typ: $funcType([$String], [$Bool], false)}, {prop: "AddClass", name: "AddClass", pkg: "", typ: $funcType([$emptyInterface], [JQuery], false)}, {prop: "RemoveClass", name: "RemoveClass", pkg: "", typ: $funcType([$String], [JQuery], false)}, {prop: "ToggleClass", name: "ToggleClass", pkg: "", typ: $funcType([sliceType], [JQuery], true)}, {prop: "Focus", name: "Focus", pkg: "", typ: $funcType([], [JQuery], false)}, {prop: "Blur", name: "Blur", pkg: "", typ: $funcType([], [JQuery], false)}, {prop: "ReplaceAll", name: "ReplaceAll", pkg: "", typ: $funcType([$emptyInterface], [JQuery], false)}, {prop: "ReplaceWith", name: "ReplaceWith", pkg: "", typ: $funcType([$emptyInterface], [JQuery], false)}, {prop: "After", name: "After", pkg: "", typ: $funcType([sliceType], [JQuery], true)}, {prop: "Before", name: "Before", pkg: "", typ: $funcType([sliceType], [JQuery], true)}, {prop: "Prepend", name: "Prepend", pkg: "", typ: $funcType([sliceType], [JQuery], true)}, {prop: "PrependTo", name: "PrependTo", pkg: "", typ: $funcType([$emptyInterface], [JQuery], false)}, {prop: "AppendTo", name: "AppendTo", pkg: "", typ: $funcType([$emptyInterface], [JQuery], false)}, {prop: "InsertAfter", name: "InsertAfter", pkg: "", typ: $funcType([$emptyInterface], [JQuery], false)}, {prop: "InsertBefore", name: "InsertBefore", pkg: "", typ: $funcType([$emptyInterface], [JQuery], false)}, {prop: "Show", name: "Show", pkg: "", typ: $funcType([sliceType], [JQuery], true)}, {prop: "Hide", name: "Hide", pkg: "", typ: $funcType([sliceType], [JQuery], true)}, {prop: "Toggle", name: "Toggle", pkg: "", typ: $funcType([sliceType], [JQuery], true)}, {prop: "Contents", name: "Contents", pkg: "", typ: $funcType([], [JQuery], false)}, {prop: "Html", name: "Html", pkg: "", typ: $funcType([], [$String], false)}, {prop: "SetHtml", name: "SetHtml", pkg: "", typ: $funcType([$emptyInterface], [JQuery], false)}, {prop: "Closest", name: "Closest", pkg: "", typ: $funcType([sliceType], [JQuery], true)}, {prop: "End", name: "End", pkg: "", typ: $funcType([], [JQuery], false)}, {prop: "Add", name: "Add", pkg: "", typ: $funcType([sliceType], [JQuery], true)}, {prop: "Clone", name: "Clone", pkg: "", typ: $funcType([sliceType], [JQuery], true)}, {prop: "Height", name: "Height", pkg: "", typ: $funcType([], [$Int], false)}, {prop: "SetHeight", name: "SetHeight", pkg: "", typ: $funcType([$String], [JQuery], false)}, {prop: "Width", name: "Width", pkg: "", typ: $funcType([], [$Int], false)}, {prop: "SetWidth", name: "SetWidth", pkg: "", typ: $funcType([$emptyInterface], [JQuery], false)}, {prop: "InnerHeight", name: "InnerHeight", pkg: "", typ: $funcType([], [$Int], false)}, {prop: "InnerWidth", name: "InnerWidth", pkg: "", typ: $funcType([], [$Int], false)}, {prop: "Offset", name: "Offset", pkg: "", typ: $funcType([], [JQueryCoordinates], false)}, {prop: "SetOffset", name: "SetOffset", pkg: "", typ: $funcType([JQueryCoordinates], [JQuery], false)}, {prop: "OuterHeight", name: "OuterHeight", pkg: "", typ: $funcType([sliceType$2], [$Int], true)}, {prop: "OuterWidth", name: "OuterWidth", pkg: "", typ: $funcType([sliceType$2], [$Int], true)}, {prop: "Position", name: "Position", pkg: "", typ: $funcType([], [JQueryCoordinates], false)}, {prop: "ScrollLeft", name: "ScrollLeft", pkg: "", typ: $funcType([], [$Int], false)}, {prop: "SetScrollLeft", name: "SetScrollLeft", pkg: "", typ: $funcType([$Int], [JQuery], false)}, {prop: "ScrollTop", name: "ScrollTop", pkg: "", typ: $funcType([], [$Int], false)}, {prop: "SetScrollTop", name: "SetScrollTop", pkg: "", typ: $funcType([$Int], [JQuery], false)}, {prop: "ClearQueue", name: "ClearQueue", pkg: "", typ: $funcType([$String], [JQuery], false)}, {prop: "SetData", name: "SetData", pkg: "", typ: $funcType([$String, $emptyInterface], [JQuery], false)}, {prop: "Data", name: "Data", pkg: "", typ: $funcType([$String], [$emptyInterface], false)}, {prop: "Dequeue", name: "Dequeue", pkg: "", typ: $funcType([$String], [JQuery], false)}, {prop: "RemoveData", name: "RemoveData", pkg: "", typ: $funcType([$String], [JQuery], false)}, {prop: "OffsetParent", name: "OffsetParent", pkg: "", typ: $funcType([], [JQuery], false)}, {prop: "Parent", name: "Parent", pkg: "", typ: $funcType([sliceType], [JQuery], true)}, {prop: "Parents", name: "Parents", pkg: "", typ: $funcType([sliceType], [JQuery], true)}, {prop: "ParentsUntil", name: "ParentsUntil", pkg: "", typ: $funcType([sliceType], [JQuery], true)}, {prop: "Prev", name: "Prev", pkg: "", typ: $funcType([sliceType], [JQuery], true)}, {prop: "PrevAll", name: "PrevAll", pkg: "", typ: $funcType([sliceType], [JQuery], true)}, {prop: "PrevUntil", name: "PrevUntil", pkg: "", typ: $funcType([sliceType], [JQuery], true)}, {prop: "Siblings", name: "Siblings", pkg: "", typ: $funcType([sliceType], [JQuery], true)}, {prop: "Slice", name: "Slice", pkg: "", typ: $funcType([sliceType], [JQuery], true)}, {prop: "Children", name: "Children", pkg: "", typ: $funcType([$emptyInterface], [JQuery], false)}, {prop: "Unwrap", name: "Unwrap", pkg: "", typ: $funcType([], [JQuery], false)}, {prop: "Wrap", name: "Wrap", pkg: "", typ: $funcType([$emptyInterface], [JQuery], false)}, {prop: "WrapAll", name: "WrapAll", pkg: "", typ: $funcType([$emptyInterface], [JQuery], false)}, {prop: "WrapInner", name: "WrapInner", pkg: "", typ: $funcType([$emptyInterface], [JQuery], false)}, {prop: "Next", name: "Next", pkg: "", typ: $funcType([sliceType], [JQuery], true)}, {prop: "NextAll", name: "NextAll", pkg: "", typ: $funcType([sliceType], [JQuery], true)}, {prop: "NextUntil", name: "NextUntil", pkg: "", typ: $funcType([sliceType], [JQuery], true)}, {prop: "Not", name: "Not", pkg: "", typ: $funcType([sliceType], [JQuery], true)}, {prop: "Filter", name: "Filter", pkg: "", typ: $funcType([sliceType], [JQuery], true)}, {prop: "Find", name: "Find", pkg: "", typ: $funcType([sliceType], [JQuery], true)}, {prop: "First", name: "First", pkg: "", typ: $funcType([], [JQuery], false)}, {prop: "Has", name: "Has", pkg: "", typ: $funcType([$String], [JQuery], false)}, {prop: "Is", name: "Is", pkg: "", typ: $funcType([sliceType], [$Bool], true)}, {prop: "Last", name: "Last", pkg: "", typ: $funcType([], [JQuery], false)}, {prop: "Ready", name: "Ready", pkg: "", typ: $funcType([funcType$3], [JQuery], false)}, {prop: "Resize", name: "Resize", pkg: "", typ: $funcType([sliceType], [JQuery], true)}, {prop: "Scroll", name: "Scroll", pkg: "", typ: $funcType([sliceType], [JQuery], true)}, {prop: "FadeOut", name: "FadeOut", pkg: "", typ: $funcType([sliceType], [JQuery], true)}, {prop: "FadeToggle", name: "FadeToggle", pkg: "", typ: $funcType([sliceType], [JQuery], true)}, {prop: "SlideDown", name: "SlideDown", pkg: "", typ: $funcType([sliceType], [JQuery], true)}, {prop: "SlideToggle", name: "SlideToggle", pkg: "", typ: $funcType([sliceType], [JQuery], true)}, {prop: "SlideUp", name: "SlideUp", pkg: "", typ: $funcType([sliceType], [JQuery], true)}, {prop: "Select", name: "Select", pkg: "", typ: $funcType([sliceType], [JQuery], true)}, {prop: "Submit", name: "Submit", pkg: "", typ: $funcType([sliceType], [JQuery], true)}, {prop: "Trigger", name: "Trigger", pkg: "", typ: $funcType([sliceType], [JQuery], true)}, {prop: "On", name: "On", pkg: "", typ: $funcType([sliceType], [JQuery], true)}, {prop: "One", name: "One", pkg: "", typ: $funcType([sliceType], [JQuery], true)}, {prop: "Off", name: "Off", pkg: "", typ: $funcType([sliceType], [JQuery], true)}, {prop: "Load", name: "Load", pkg: "", typ: $funcType([sliceType], [JQuery], true)}, {prop: "Serialize", name: "Serialize", pkg: "", typ: $funcType([], [$String], false)}, {prop: "SerializeArray", name: "SerializeArray", pkg: "", typ: $funcType([], [ptrType], false)}];
+	ptrType$1.methods = [{prop: "PreventDefault", name: "PreventDefault", pkg: "", typ: $funcType([], [], false)}, {prop: "IsDefaultPrevented", name: "IsDefaultPrevented", pkg: "", typ: $funcType([], [$Bool], false)}, {prop: "IsImmediatePropogationStopped", name: "IsImmediatePropogationStopped", pkg: "", typ: $funcType([], [$Bool], false)}, {prop: "IsPropagationStopped", name: "IsPropagationStopped", pkg: "", typ: $funcType([], [$Bool], false)}, {prop: "StopImmediatePropagation", name: "StopImmediatePropagation", pkg: "", typ: $funcType([], [], false)}, {prop: "StopPropagation", name: "StopPropagation", pkg: "", typ: $funcType([], [], false)}];
+	JQuery.init("github.com/gopherjs/jquery", [{prop: "o", name: "o", anonymous: false, exported: false, typ: ptrType, tag: ""}, {prop: "Jquery", name: "Jquery", anonymous: false, exported: true, typ: $String, tag: "js:\"jquery\""}, {prop: "Selector", name: "Selector", anonymous: false, exported: true, typ: $String, tag: "js:\"selector\""}, {prop: "Length", name: "Length", anonymous: false, exported: true, typ: $Int, tag: "js:\"length\""}, {prop: "Context", name: "Context", anonymous: false, exported: true, typ: $String, tag: "js:\"context\""}]);
+	Event.init("", [{prop: "Object", name: "Object", anonymous: true, exported: true, typ: ptrType, tag: ""}, {prop: "KeyCode", name: "KeyCode", anonymous: false, exported: true, typ: $Int, tag: "js:\"keyCode\""}, {prop: "Target", name: "Target", anonymous: false, exported: true, typ: ptrType, tag: "js:\"target\""}, {prop: "CurrentTarget", name: "CurrentTarget", anonymous: false, exported: true, typ: ptrType, tag: "js:\"currentTarget\""}, {prop: "DelegateTarget", name: "DelegateTarget", anonymous: false, exported: true, typ: ptrType, tag: "js:\"delegateTarget\""}, {prop: "RelatedTarget", name: "RelatedTarget", anonymous: false, exported: true, typ: ptrType, tag: "js:\"relatedTarget\""}, {prop: "Data", name: "Data", anonymous: false, exported: true, typ: ptrType, tag: "js:\"data\""}, {prop: "Result", name: "Result", anonymous: false, exported: true, typ: ptrType, tag: "js:\"result\""}, {prop: "Which", name: "Which", anonymous: false, exported: true, typ: $Int, tag: "js:\"which\""}, {prop: "Namespace", name: "Namespace", anonymous: false, exported: true, typ: $String, tag: "js:\"namespace\""}, {prop: "MetaKey", name: "MetaKey", anonymous: false, exported: true, typ: $Bool, tag: "js:\"metaKey\""}, {prop: "ShiftKey", name: "ShiftKey", anonymous: false, exported: true, typ: $Bool, tag: "js:\"shiftKey\""}, {prop: "CtrlKey", name: "CtrlKey", anonymous: false, exported: true, typ: $Bool, tag: "js:\"ctrlKey\""}, {prop: "PageX", name: "PageX", anonymous: false, exported: true, typ: $Int, tag: "js:\"pageX\""}, {prop: "PageY", name: "PageY", anonymous: false, exported: true, typ: $Int, tag: "js:\"pageY\""}, {prop: "Type", name: "Type", anonymous: false, exported: true, typ: $String, tag: "js:\"type\""}]);
+	JQueryCoordinates.init("", [{prop: "Left", name: "Left", anonymous: false, exported: true, typ: $Int, tag: ""}, {prop: "Top", name: "Top", anonymous: false, exported: true, typ: $Int, tag: ""}]);
+	$init = function() {
+		$pkg.$init = function() {};
+		/* */ var $f, $c = false, $s = 0, $r; if (this !== undefined && this.$blk !== undefined) { $f = this; $c = true; $s = $f.$s; $r = $f.$r; } s: while (true) { switch ($s) { case 0:
+		$r = js.$init(); /* */ $s = 1; case 1: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		/* */ } return; } if ($f === undefined) { $f = { $blk: $init }; } $f.$s = $s; $f.$r = $r; return $f;
+	};
+	$pkg.$init = $init;
+	return $pkg;
+})();
 $packages["html"] = (function() {
 	var $pkg = {}, $init, strings, utf8, sliceType, htmlEscaper, EscapeString;
 	strings = $packages["strings"];
@@ -42762,13 +42827,13 @@ $packages["html"] = (function() {
 	return $pkg;
 })();
 $packages["main"] = (function() {
-	var $pkg = {}, $init, fmt, jquery, runtime, ilos, class$1, instance, html, Dom, sliceType, sliceType$1, funcType, sliceType$2, stream, jQuery, main;
+	var $pkg = {}, $init, fmt, runtime, ilos, class$1, instance, jquery, html, Dom, sliceType, sliceType$1, funcType, sliceType$2, stream, jQuery, main;
 	fmt = $packages["fmt"];
-	jquery = $packages["github.com/gopherjs/jquery"];
 	runtime = $packages["github.com/asciian/iris/runtime"];
 	ilos = $packages["github.com/asciian/iris/runtime/ilos"];
 	class$1 = $packages["github.com/asciian/iris/runtime/ilos/class"];
 	instance = $packages["github.com/asciian/iris/runtime/ilos/instance"];
+	jquery = $packages["github.com/gopherjs/jquery"];
 	html = $packages["html"];
 	Dom = $pkg.Dom = $newType(0, $kindStruct, "main.Dom", true, "main", true, function() {
 		this.$val = this;
@@ -42825,10 +42890,10 @@ $packages["main"] = (function() {
 		runtime.TopLevel.StandardInput = instance.NewStream(dom[0], $ifaceNil);
 		runtime.TopLevel.StandardOutput = instance.NewStream($ifaceNil, dom[0]);
 		runtime.TopLevel.ErrorOutput = instance.NewStream($ifaceNil, dom[0]);
-		_r = fmt.Fprintf(dom[0], "Welcome to Iris (%v). Iris is an ISLisp implementation on Go.\nThis REPL works on JavaScript with gopherjs.\n\nCopyright &copy; 2017 asciian All Rights Reserved.", new sliceType([new $String("526f28d")])); /* */ $s = 1; case 1: if($c) { $c = false; _r = _r.$blk(); } if (_r && _r.$blk !== undefined) { break s; }
+		_r = fmt.Fprintf(dom[0], "Welcome to Iris (%v). Iris is an ISLisp implementation on Go.\nThis REPL works on JavaScript with gopherjs.\n\nCopyright &copy; 2017 asciian All Rights Reserved.", new sliceType([new $String("c7badaa")])); /* */ $s = 1; case 1: if($c) { $c = false; _r = _r.$blk(); } if (_r && _r.$blk !== undefined) { break s; }
 		_r;
 		_r$1 = jQuery(new sliceType([new $String("#version")])); /* */ $s = 2; case 2: if($c) { $c = false; _r$1 = _r$1.$blk(); } if (_r$1 && _r$1.$blk !== undefined) { break s; }
-		_r$2 = $clone(_r$1, jquery.JQuery).SetHtml(new $String("526f28d")); /* */ $s = 3; case 3: if($c) { $c = false; _r$2 = _r$2.$blk(); } if (_r$2 && _r$2.$blk !== undefined) { break s; }
+		_r$2 = $clone(_r$1, jquery.JQuery).SetHtml(new $String("c7badaa")); /* */ $s = 3; case 3: if($c) { $c = false; _r$2 = _r$2.$blk(); } if (_r$2 && _r$2.$blk !== undefined) { break s; }
 		_r$2;
 		_r$3 = jQuery(new sliceType([new $String("#input")])); /* */ $s = 4; case 4: if($c) { $c = false; _r$3 = _r$3.$blk(); } if (_r$3 && _r$3.$blk !== undefined) { break s; }
 		_r$4 = $clone(_r$3, jquery.JQuery).On(new sliceType([new $String("keydown"), new funcType((function(dom, prompt) { return function $b(e) {
@@ -42924,11 +42989,11 @@ $packages["main"] = (function() {
 		$pkg.$init = function() {};
 		/* */ var $f, $c = false, $s = 0, $r; if (this !== undefined && this.$blk !== undefined) { $f = this; $c = true; $s = $f.$s; $r = $f.$r; } s: while (true) { switch ($s) { case 0:
 		$r = fmt.$init(); /* */ $s = 1; case 1: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = jquery.$init(); /* */ $s = 2; case 2: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = runtime.$init(); /* */ $s = 3; case 3: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = ilos.$init(); /* */ $s = 4; case 4: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = class$1.$init(); /* */ $s = 5; case 5: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = instance.$init(); /* */ $s = 6; case 6: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = runtime.$init(); /* */ $s = 2; case 2: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = ilos.$init(); /* */ $s = 3; case 3: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = class$1.$init(); /* */ $s = 4; case 4: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = instance.$init(); /* */ $s = 5; case 5: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = jquery.$init(); /* */ $s = 6; case 6: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
 		$r = html.$init(); /* */ $s = 7; case 7: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
 		stream = new $Chan($String, 0);
 		jQuery = jquery.NewJQuery;
